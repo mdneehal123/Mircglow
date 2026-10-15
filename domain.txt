@@ -1,37 +1,11 @@
-== mircglow.com
-A: 216.198.79.1 
-AAAA: 
-CNAME: 
-A via Google DNS: 216.198.79.1 
--- http://mircglow.com/
-HTTP/1.0 308 Permanent Redirect
-Location: https://mircglow.com/
-server: Vercel
-title: 
-new design: 0
--- https://mircglow.com/
-HTTP/2 200 
-server: Vercel
-x-vercel-cache: HIT
-x-vercel-id: sfo1::c94wd-1792096231369-cb17f2973c3b
-title: <title>Mirc Glow | Avocado Night Creams &amp; Korean-Inspired Skincare
-new design: 10
-== www.mircglow.com
-A: cb56e75e4536dbdd.vercel-dns-017.com. 64.29.17.1 216.198.79.1 
-AAAA: cb56e75e4536dbdd.vercel-dns-017.com. 
-CNAME: cb56e75e4536dbdd.vercel-dns-017.com. 
-A via Google DNS: cb56e75e4536dbdd.vercel-dns-017.com. 216.198.79.1 64.29.17.1 
--- http://www.mircglow.com/
-HTTP/1.0 308 Permanent Redirect
-Location: https://www.mircglow.com/
-server: Vercel
-title: 
-new design: 0
--- https://www.mircglow.com/
-HTTP/2 308 
-location: https://mircglow.com/
-server: Vercel
-x-vercel-id: sfo1::cxdkv-1792096231934-17fa0869739e
-title: 
-new design: 0
-== NS: ns31.domaincontrol.com. ns32.domaincontrol.com. 
+avocado-cream-for-oily-skin 200
+avocado-cream-kaise-lagaye 200
+how-to-choose-avocado-cream 200
+night-cream-vs-day-cream 200
+glutathione-cream-ke-fayde 200
+avocado-cream-for-acne-prone-skin 200
+avocado-cream-in-winter 200
+avocado-oil-vs-avocado-cream-for-face 200
+category/skincare-routines 200
+winter-skincare-routine-india 404
+sitemap urls: 69
