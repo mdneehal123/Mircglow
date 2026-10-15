@@ -1,11 +1,5 @@
-avocado-cream-for-oily-skin 200
-avocado-cream-kaise-lagaye 200
-how-to-choose-avocado-cream 200
-night-cream-vs-day-cream 200
-glutathione-cream-ke-fayde 200
-avocado-cream-for-acne-prone-skin 200
-avocado-cream-in-winter 200
-avocado-oil-vs-avocado-cream-for-face 200
-category/skincare-routines 200
-winter-skincare-routine-india 404
-sitemap urls: 69
+product/avocado-glow-cream-15g 200
+shop 200
+avocado-cream 200
+wp-content/uploads/2026/10/mirc-glow-avocado-glow-cream-15g.mg.webp 308
+sitemap urls: 70
