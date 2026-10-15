@@ -89,6 +89,21 @@
       "permanent": true
     },
     {
+      "source": "/blog/page/(.*)",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/page/(.*)",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/shop/page/(.*)",
+      "destination": "/shop/",
+      "permanent": true
+    },
+    {
       "source": "/post-sitemap.xml",
       "destination": "/sitemap.xml",
       "permanent": true

@@ -340,7 +340,23 @@ def lazy_imgs(body):
                     tag = tag.replace("<img ", f'<img width="{w}" height="{h}" ', 1)
                 except Exception: pass
         return tag
-    return re.sub(r"<img [^>]*>", rep, body)
+    body = re.sub(r"<img [^>]*>", rep, body)
+    # serve a light WebP copy of big PNG/JPG content images (creates it once, next to the original)
+    def pic(m):
+        pre, tag = m.group(1), m.group(2)
+        if pre.rstrip().endswith("<picture>"): return m.group(0)
+        src = re.search(r'src="(/wp-content/[^"]+\.(?:png|jpe?g))"', tag)
+        if not src: return m.group(0)
+        fp = os.path.join(ROOT, src.group(1).lstrip("/")); wp = re.sub(r"\.(png|jpe?g)$", ".mg.webp", fp)
+        if not os.path.exists(fp): return m.group(0)
+        if not os.path.exists(wp):
+            try:
+                from PIL import Image as _I
+                im = _I.open(fp); im.thumbnail((1200, 1200)); im.save(wp, "WEBP", quality=80, method=6)
+            except Exception: return m.group(0)
+        w = re.sub(r"\.(png|jpe?g)$", ".mg.webp", src.group(1))
+        return f'{pre}<picture><source srcset="{w}" type="image/webp">{tag}</picture>'
+    return re.sub(r"(.{0,12})(<img [^>]*>)", pic, body, flags=re.S)
 
 def faqs_from(body):
     """Pull Q&A pairs from <details>, FAQ-style h3 lists, and 'Short answers' blocks."""
@@ -1128,7 +1144,7 @@ def build_vercel():
         R("/cart(.*)", "/shop/"), R("/checkout(.*)", "/shop/"), R("/my-account(.*)", "/shop/"),
         R("/product-category/uncategorized/", "/shop/"), R("/category/uncategorized/", "/blog/"), R("/category/skincare-guides/", "/blog/"),
         R("/product-tag/(.*)", "/shop/"), R("/tag/(.*)", "/blog/"), R("/author/(.*)", "/about-the-author/"),
-        R("/home/", "/"), R("/sample-page/", "/"),
+        R("/home/", "/"), R("/sample-page/", "/"), R("/blog/page/(.*)", "/blog/"), R("/page/(.*)", "/blog/"), R("/shop/page/(.*)", "/shop/"),
         R("/post-sitemap.xml", "/sitemap.xml"), R("/page-sitemap.xml", "/sitemap.xml"), R("/product-sitemap.xml", "/sitemap.xml"),
         R("/product_cat-sitemap.xml", "/sitemap.xml"), R("/category-sitemap.xml", "/sitemap.xml"), R("/local-sitemap.xml", "/sitemap.xml"),
         R("/wp-sitemap.xml", "/sitemap.xml"),
