@@ -1,1 +1,5 @@
-fbt: 1 compare: 1
+crumb: 2 imgw: 0
+/ 200 0.109486s
+/shop/ 200 0.267544s
+/blog/ 200 0.211105s
+/product/glass-glow-cream/ 200 0.208470s
