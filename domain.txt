@@ -13,14 +13,14 @@ new design: 0
 HTTP/2 308 
 location: https://www.mircglow.com/
 server: Vercel
-x-vercel-id: cle1::gdskg-1792093637606-05643142e63f
+x-vercel-id: cle1::sm79f-1792093761424-0e5039ba4c6b
 title: 
 new design: 0
 == www.mircglow.com
-A: cb56e75e4536dbdd.vercel-dns-017.com. 64.29.17.65 216.198.79.65 
+A: cb56e75e4536dbdd.vercel-dns-017.com. 64.29.17.1 216.198.79.1 
 AAAA: cb56e75e4536dbdd.vercel-dns-017.com. 
 CNAME: cb56e75e4536dbdd.vercel-dns-017.com. 
-A via Google DNS: cb56e75e4536dbdd.vercel-dns-017.com. 216.198.79.1 64.29.17.1 
+A via Google DNS: cb56e75e4536dbdd.vercel-dns-017.com. 64.29.17.65 216.198.79.65 
 -- http://www.mircglow.com/
 HTTP/1.0 308 Permanent Redirect
 Location: https://www.mircglow.com/
@@ -30,8 +30,8 @@ new design: 0
 -- https://www.mircglow.com/
 HTTP/2 200 
 server: Vercel
-x-vercel-cache: MISS
-x-vercel-id: cle1::6dzdq-1792093638545-d6cdded0f9da
+x-vercel-cache: HIT
+x-vercel-id: cle1::tlbbk-1792093762092-9ed541b7ffe4
 title: <title>Mirc Glow | Avocado Night Creams &amp; Korean-Inspired Skincare
 new design: 10
 == NS: ns31.domaincontrol.com. ns32.domaincontrol.com. 
