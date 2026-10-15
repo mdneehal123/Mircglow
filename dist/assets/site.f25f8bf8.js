@@ -37,3 +37,29 @@
     if ("onscrollend" in window) s.addEventListener("scrollend", upd);
   });
 })();
+/* home: offer slider (auto-advance + dots) and search that jumps straight to the page */
+(function () {
+  var s = document.querySelector("[data-fk-slider]");
+  if (s) {
+    var dots = s.parentNode.querySelectorAll(".fk-dots i"), n = s.children.length, i = 0, t;
+    function cur() { return Math.round(s.scrollLeft / (s.children[0].offsetWidth + 10)); }
+    function mark() { i = cur(); dots.forEach(function (d, k) { d.classList.toggle("on", k === i); }); }
+    function next() { if (document.hidden) return; var w = s.children[0].offsetWidth + 10; var last = s.scrollLeft + s.clientWidth >= s.scrollWidth - 5; s.scrollTo({ left: last ? 0 : s.scrollLeft + w }); }
+    s.addEventListener("scroll", function () { requestAnimationFrame(mark); }, { passive: true });
+    function go() { clearInterval(t); t = setInterval(next, 4000); }
+    s.addEventListener("touchstart", function () { clearInterval(t); }, { passive: true });
+    s.addEventListener("touchend", go, { passive: true });
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) go();
+    mark();
+  }
+  var f = document.querySelector("[data-fk-search]");
+  if (f) f.addEventListener("submit", function (e) {
+    var q = f.q.value.trim().toLowerCase(); if (!q) { e.preventDefault(); return; }
+    var opts = f.querySelectorAll("option"), best = null;
+    opts.forEach(function (o) { var v = o.value.toLowerCase(); if (!best && (v === q || v.indexOf(q) > -1)) best = o; });
+    if (!best) { var w = q.split(/\s+/); opts.forEach(function (o) { var v = o.value.toLowerCase(); if (!best && w.every(function (x) { return v.indexOf(x) > -1; })) best = o; }); }
+    e.preventDefault(); location.href = best ? best.getAttribute("data-u") : "/shop/";
+  });
+  var q = document.getElementById("fk-q");
+  if (q) q.addEventListener("change", function () { var o = Array.prototype.find.call(q.list.options, function (o) { return o.value === q.value; }); if (o) location.href = o.getAttribute("data-u"); });
+})();

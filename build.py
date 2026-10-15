@@ -585,6 +585,77 @@ def buy_panel(p, hn="h2", eager=False):
             f'<a class="yb yb-line" href="{wa("Hi Mirc Glow, I have a question about the " + p["name"] + ".")}" target="_blank" rel="noopener">Ask a question first</a>'
             f'<a class="panel-more" href="/product/{p["slug"]}/">{esc(p["name"])}: full details →</a>{PAY_CHIPS}</div>')
 
+def fk_top():
+    """Marketplace-style top of the home page (search, category circles, offer slider, coupons, deals, grids)."""
+    P_ = PBY
+    # search: product + guide names; site.js sends the shopper straight to the matching page
+    opts = [(p["name"] + " " + p["size"], f"/product/{p['slug']}/") for p in PRODUCTS] + \
+           [("Avocado cream in kg (bulk)", "/avocado-cream-in-kg/"), ("Night cream in kg (bulk)", "/bulk-night-cream/"), ("Gift sets", "/skincare-gift-sets/"), ("Skin quiz", "/skin-quiz/")] + \
+           [(p["title"], f"/{p['slug']}/") for p in LIVE_POSTS[:40]]
+    dl = "".join(f'<option value="{esc(n)}" data-u="{u}"></option>' for n, u in opts)
+    search = (f'<form class="fk-search" action="/shop/" role="search" data-fk-search><label class="sr" for="fk-q">Search Mirc Glow</label>'
+              f'<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M10 3a7 7 0 0 1 5.6 11.2l4.6 4.6-1.4 1.4-4.6-4.6A7 7 0 1 1 10 3Zm0 2a5 5 0 1 0 0 10 5 5 0 0 0 0-10Z"/></svg>'
+              f'<input id="fk-q" name="q" list="fk-list" placeholder="Search avocado cream, glutathione, kg…" autocomplete="off"><datalist id="fk-list">{dl}</datalist></form>')
+    circ = [("Night creams", cat_url("night-creams"), P_["avocado-night-cream"]), ("Avocado", cat_url("avocado-night-creams"), P_["avocado-korean-night-cream"]),
+            ("Glass Glow", "/product/glass-glow-cream/", P_["glass-glow-cream"]), ("Glutathione", "/product/glutathione-cream/", P_["glutathione-cream"]),
+            ("Combos", cat_url("combos"), P_["night-cream-combo"]), ("Gift sets", "/skincare-gift-sets/", P_["korean-glass-skin-kit"]),
+            ("Bulk (kg)", "/avocado-cream-in-kg/", None), ("Guides", "/blog/", None)]
+    def circle(t, u, p):
+        if p: ph = photo(p, "fk-cph")
+        elif "kg" in u: ph = '<div class="ph fk-cph full"><picture><source srcset="/wp-content/uploads/2026/10/mirc-glow-avocado-cream-1kg-bulk-jar.mg.webp" type="image/webp"><img src="/wp-content/uploads/2026/10/mirc-glow-avocado-cream-1kg-bulk-jar.png" alt="" width="800" height="800" loading="lazy"></picture></div>'
+        else: ph = '<div class="ph fk-cph fk-cico" aria-hidden="true">📖</div>'
+        return f'<a class="fk-c" href="{u}">{ph}<span>{esc(t)}</span></a>'
+    circles = '<nav class="fk-cats" aria-label="Shop by category">' + "".join(circle(*c) for c in circ) + "</nav>"
+    gg, duo, a15, kit = P_["glass-glow-cream"], P_["glass-glow-night-duo"], P_["avocado-glow-cream-15g"], P_["korean-glass-skin-kit"]
+    pct = lambda p: round((p["mrp"] - p["price"]) * 100 / p["mrp"])
+    slides = [
+     ("fk-s1", "New launch", "Glass Glow Cream", f"Glutathione + alpha arbutin + niacinamide · {inr(gg['price'])} <s>{inr(gg['mrp'])}</s>", "Shop now", "/product/glass-glow-cream/", gg, True),
+     ("fk-s2", "Combo offer", "Save up to " + inr(max(p["mrp"] - p["price"] for p in SETS)), "Day & night, glow duos and the full glass skin kit", "See combos", cat_url("combos"), duo, False),
+     ("fk-s3", "Under ₹400", "Avocado Glow Cream 15g", f"Avocado + aloe vera · {inr(a15['price'])} <s>{inr(a15['mrp'])}</s> · {pct(a15)}% off", "Buy now", "/product/avocado-glow-cream-15g/", a15, False),
+     ("fk-s4", "For salons", "Avocado cream in kg", "From 1 kg · sample before bulk · all-India delivery", "Get price per kg", "/avocado-cream-in-kg/", None, False),
+    ]
+    def slide(cls, eb, h, sub, cta, u, p, first):
+        if p:
+            img = (f'<picture>{webp_src(p["img"])}<img src="{p["img"]}" alt="{esc(BRAND + " " + p["name"])}" width="800" height="800" '
+                   f'{"fetchpriority=\"high\"" if first else "loading=\"lazy\""} decoding="async"></picture>')
+        else:
+            img = '<picture><source srcset="/wp-content/uploads/2026/10/mirc-glow-avocado-cream-1kg-bulk-jar.mg.webp" type="image/webp"><img src="/wp-content/uploads/2026/10/mirc-glow-avocado-cream-1kg-bulk-jar.png" alt="Mirc Glow avocado cream 1 kg bulk tub" width="800" height="800" loading="lazy"></picture>'
+        return (f'<a class="fk-slide {cls}" href="{u}"><div class="fk-st"><span class="fk-eb">{eb}</span><b>{esc(h)}</b><span class="fk-sub">{sub}</span>'
+                f'<span class="fk-cta">{cta} ›</span></div><div class="fk-si">{img}</div></a>')
+    slider = (f'<section class="fk-hero" aria-label="Offers"><div class="fk-slides" data-fk-slider>{"".join(slide(*x) for x in slides)}</div>'
+              f'<div class="fk-dots" aria-hidden="true">{"".join("<i></i>" for _ in slides)}</div></section>')
+    coupons = ('<section class="fk-offers" aria-label="Offers for you"><h2 class="fk-h">Offers for you</h2><div class="fk-row">'
+               '<div class="fk-cp"><b>GLOW10</b><span>Extra 10% off your first order. Mention the code on WhatsApp.</span></div>'
+               '<div class="fk-cp"><b>FREE delivery</b><span>On every order, anywhere in India. Usually 3–7 days.</span></div>'
+               '<div class="fk-cp"><b>Cash on Delivery</b><span>Pay when it arrives, or ask for a UPI / card link.</span></div>'
+               '<div class="fk-cp"><b>7-day returns</b><span>On sealed jars. Damaged or wrong items replaced.</span></div></div></section>')
+    def deal(p):
+        return (f'<a class="fk-d" href="/product/{p["slug"]}/">{photo(p, "fk-dph")}<span class="fk-dn">{esc(p["name"])}</span>'
+                f'<span class="fk-dp"><em>{pct(p)}% off</em> <s>{inr(p["mrp"])}</s> <b>{inr(p["price"])}</b></span><span class="fk-free">Free delivery</span></a>')
+    deals = sorted(PRODUCTS, key=pct, reverse=True)
+    deals_html = (f'<section class="fk-deals" aria-labelledby="fk-deals-h"><div class="fk-dh"><h2 id="fk-deals-h" class="fk-h">Top deals</h2>'
+                  f'<span class="fk-pill">Up to {pct(deals[0])}% off</span><a href="/shop/">View all ›</a></div><div class="fk-row">{"".join(deal(p) for p in deals)}</div></section>')
+    def gcard(p):
+        return (f'<article class="fk-g"><a href="/product/{p["slug"]}/" class="fk-ga">{photo(p, "fk-gph")}'
+                f'{"<span class=\"fk-new\">NEW</span>" if p["tag"] in ("New","Premium") else ""}</a>'
+                f'<div class="fk-gb"><h3><a href="/product/{p["slug"]}/">{esc(p["name"])}</a></h3><p class="fk-gm">{esc(p["meta"])} · {p["size"]}</p>'
+                f'<p class="fk-dp"><em>{pct(p)}% off</em> <s>{inr(p["mrp"])}</s> <b>{inr(p["price"])}</b></p><p class="fk-free">Free delivery · COD</p>'
+                f'{buy_btn(p, "Buy now", "yb yb-fill yb-sm")}</div></article>')
+    grid = (f'<section class="fk-grid" aria-labelledby="h-prod"><div class="fk-dh"><h2 id="h-prod" class="fk-h">All creams</h2><a href="/shop/">View all ›</a></div>'
+            f'<div class="fk-gr">{"".join(gcard(p) for p in SINGLES)}</div></section>')
+    def price_tile(t, sub, u, p):
+        return f'<a class="fk-pt" href="{u}">{photo(p, "fk-ptph")}<b>{t}</b><span>{sub}</span></a>'
+    budget = ('<section class="fk-budget" aria-labelledby="fk-b-h"><h2 id="fk-b-h" class="fk-h">Shop by budget</h2><div class="fk-pts">'
+              + price_tile("Under ₹500", "Avocado Glow creams", "/product/avocado-glow-cream-15g/", a15)
+              + price_tile("Under ₹1,000", "Night creams & combo", "/product/avocado-night-cream/", P_["avocado-night-cream"])
+              + price_tile("Under ₹2,000", "Glutathione & kits", "/product/glutathione-cream/", P_["glutathione-cream"])
+              + price_tile("Premium", "Glass Glow range", "/product/glass-glow-cream/", gg) + "</div></section>")
+    sets_row = ('<section class="fk-deals" aria-labelledby="h-sets2"><div class="fk-dh"><h2 id="h-sets2" class="fk-h">Combos &amp; kits</h2>'
+                f'<a href="{cat_url("combos")}">View all ›</a></div><div class="fk-row">{"".join(deal(p) for p in SETS)}</div></section>')
+    intro = ('<section class="fk-intro"><h1 id="h-home">Mirc Glow avocado night creams &amp; Korean-inspired skincare</h1>'
+             '<p>Avocado, glutathione and glass-skin creams made in Karnataka, for smoother, brighter-looking skin. Order in one WhatsApp message: free shipping across India, Cash on Delivery and 7-day returns.</p></section>')
+    return f'<div class="fk">{search}{circles}{slider}{intro}{coupons}{deals_html}{grid}{budget}{sets_row}</div>'
+
 def build_home():
     url = "/"
     hero = [PBY[s] for s in ["avocado-korean-night-cream","glutathione-cream","korean-glass-skin-kit"]]
@@ -604,7 +675,7 @@ def build_home():
     itemlist = {"@type":"ItemList","name":"Mirc Glow creams","itemListElement":[{"@type":"ListItem","position":i+1,"url":SITE+f"/product/{p['slug']}/","name":p["name"]} for i,p in enumerate(PRODUCTS)]}
     body = head("Mirc Glow | Avocado Night Creams & Korean-Inspired Skincare",
         "Shop Mirc Glow avocado creams in India: avocado night creams and a daily avocado face cream with aloe vera, vitamin B3 and kojic acid. Free shipping and Cash on Delivery.",
-        url, extra=f'<link rel="preload" as="image" href="/wp-content/uploads/2026/10/mirc-glow-skincare-kit-wide.mg.webp" type="image/webp" fetchpriority="high"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap">' + ld(ORG, WEBSITE, itemlist, faq_ld(faqs)))
+        url, extra=f'<link rel="preload" as="image" href="/wp-content/uploads/2026/10/mirc-glow-glass-glow-cream-glutathione-30g.mg.webp" type="image/webp" fetchpriority="high"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap">' + ld(ORG, WEBSITE, itemlist, faq_ld(faqs)))
     body += header("/")
 
     def ticks(items):
@@ -633,50 +704,14 @@ def build_home():
     blog = "".join(post_card(p) for p in jposts)
 
     body += f'''<main id="main">
-<section class="lux" aria-labelledby="h-home"><div class="w lux-in">
-<div class="lux-copy">
-<span class="lux-eb"><span lang="ko">유리 피부</span> · Korean-inspired skincare, made in Karnataka</span>
-<h1 id="h-home" class="lux-h">Mirc Glow avocado night creams &amp; Korean-inspired skincare</h1>
-<p class="lux-p">Glutathione, kojic acid and avocado care for brighter-looking, smoother-looking skin. Most of our creams pair their hero ingredient with aloe vera, vitamin B3 and kojic acid.</p>
-<div class="lux-cta"><a class="lx lx-gold" href="/shop/">Shop best sellers</a><a class="lx lx-line" href="{WA_HELLO}" target="_blank" rel="noopener">{WA_SVG}<span>Order on WhatsApp</span></a></div>
-<ul class="lux-trust"><li><b>From {inr(349)}</b></li><li>Free shipping</li><li>Cash on Delivery</li><li>7-day returns</li></ul>
-</div>
-<div class="lux-art" aria-hidden="true"><div class="lux-arch"><picture><source srcset="/wp-content/uploads/2026/10/mirc-glow-skincare-kit-wide.mg.webp" type="image/webp"><img src="/wp-content/uploads/2026/10/mirc-glow-skincare-kit-wide.png" alt="" width="1100" height="500" fetchpriority="high" decoding="async"></picture></div>
-<span class="lux-chip c1">Glass-skin routine</span><span class="lux-chip c2">Glutathione · Avocado</span></div>
-</div>
-<div class="lux-band" aria-hidden="true"><div><span>Avocado</span><span>Glutathione</span><span>Kojic acid</span><span>Vitamin B3</span><span>Aloe vera</span><span>Vitamin C</span><span>Avocado</span><span>Glutathione</span><span>Kojic acid</span><span>Vitamin B3</span><span>Aloe vera</span><span>Vitamin C</span></div></div>
-</section>
-
-<section class="panels" aria-label="Best sellers"><div class="panels-in">{"".join(buy_panel(p) for i,p in enumerate(hero))}</div></section>
-
-
-
-{banner_strip([PBY[x] for x in ["avocado-korean-night-cream","glutathione-cream","avocado-night-cream","avocado-face-cream","korean-glass-skin-kit"]])}
-
-<section class="w bens" aria-label="Signature creams">{ben}</section>
-
-<section class="w icons3" aria-label="What our creams do">
-<div><span>💧</span><b>HYDRATES</b><p>Helps skin feel soft and comfortable.</p></div>
-<div><span>🎯</span><b>EVEN-LOOKING</b><p>Kojic acid and vitamin B3 for a more even look.</p></div>
-<div><span>✨</span><b>GLOW</b><p>For a smooth, radiant-looking finish.</p></div>
-</section>
-
-<section class="sec" aria-labelledby="h-prod"><div class="w">
-<span class="eyebrow c">What we offer</span><h2 id="h-prod" class="sh c">Our Products</h2>
-<div class="grid4">{"".join(card_html(p) for p in four)}</div>
-<p class="c" style="margin-top:22px"><a class="yb yb-dark" href="/shop/">View all products</a></p>
-</div></section>
+{fk_top()}
 
 <section class="sec" aria-labelledby="h-con"><div class="w">
 <span class="eyebrow">Personalized picks</span><h2 id="h-con" class="sh">Shop by Concern</h2>
 <div class="cons">{con}</div>
 </div></section>
 
-<section class="sec soft" aria-labelledby="h-sets"><div class="w">
-<span class="eyebrow">Bundle and save</span><h2 id="h-sets" class="sh">Combos and Kits</h2>
-<p class="sub2">Our creams paired into simple routines, for less than buying each jar alone.</p>
-<div class="sets3">{sets}</div>
-</div></section>
+
 
 <section class="sec" aria-labelledby="h-day"><div class="w">
 <span class="eyebrow">Morning ritual</span><h2 id="h-day" class="sh">Day Routine</h2><p class="sub2">Start your day with a simple 3-step routine.</p>
