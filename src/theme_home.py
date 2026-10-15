@@ -66,7 +66,7 @@ def build_home():
 <section class="intro"><div class="w">
 <span class="eyebrow">Mirc Glow · <span lang="ko">유리 피부</span></span>
 <h1>Mirc Glow avocado night creams &amp; Korean-inspired skincare</h1>
-<p>Premium skincare with glutathione, kojic acid and avocado care, thoughtfully formulated for brighter-looking, smoother-looking skin. Every cream contains aloe vera, vitamin B3 and kojic acid. From {inr(349)} · Free shipping · Cash on Delivery.</p>
+<p>Premium skincare with glutathione, kojic acid and avocado care, thoughtfully formulated for brighter-looking, smoother-looking skin. Most of our creams contain aloe vera, vitamin B3 and kojic acid. From {inr(349)} · Free shipping · Cash on Delivery.</p>
 <div class="row"><a class="yb yb-dark" href="/shop/">Shop best sellers</a><a class="yb yb-line" href="/skin-quiz/">Take the skin quiz</a></div>
 </div></section>
 
