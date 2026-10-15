@@ -705,6 +705,7 @@ def build_home():
 
     body += f'''<main id="main">
 {fk_top()}
+{RECENT_HTML}
 
 <section class="sec" aria-labelledby="h-con"><div class="w">
 <span class="eyebrow">Personalized picks</span><h2 id="h-con" class="sh">Shop by Concern</h2>
@@ -874,6 +875,39 @@ def build_blog():
         out += footer()
         write(url, out)
 
+FBT = {"glass-glow-cream":"avocado-night-cream","avocado-night-cream":"avocado-face-cream","glutathione-cream":"avocado-night-cream",
+       "avocado-korean-night-cream":"avocado-glow-cream-15g","avocado-face-cream":"avocado-night-cream","avocado-glow-cream-15g":"avocado-korean-night-cream"}
+
+def fbt_html(p):
+    """Amazon-style 'Frequently bought together': this cream + its natural partner, one WhatsApp message for both."""
+    if p["slug"] not in FBT: return ""
+    q = PBY[FBT[p["slug"]]]; total = p["price"] + q["price"]
+    msg = (f"Hi Mirc Glow, I'd like to order:\n• {p['name']} ({p['size']}) – {inr(p['price'])}\n• {q['name']} ({q['size']}) – {inr(q['price'])}\n"
+           f"Total: {inr(total)}\n\nName:\nFull address with pincode:\nPayment: Cash on Delivery / pay online")
+    combo = next((c for c in SETS if set(c["parts"]) == {p["slug"], q["slug"]}), None)
+    alt = (f'<p class="az-alt">Or get both as the <a href="/product/{combo["slug"]}/">{esc(combo["name"])}</a> for <b>{inr(combo["price"])}</b> '
+           f'and save {inr(total - combo["price"])}.</p>') if combo else ""
+    item = lambda x, this: (f'<a class="az-fi" href="/product/{x["slug"]}/">{photo(x, "az-fph")}<span>{"<b>This item:</b> " if this else ""}{esc(x["name"])} '
+                            f'<small>{x["size"]}</small></span><b class="az-fp">{inr(x["price"])}</b></a>')
+    return (f'<section class="w az-fbt" aria-labelledby="h-fbt"><h2 id="h-fbt" class="az-h">Frequently bought together</h2>'
+            f'<div class="az-fbox"><div class="az-fitems">{item(p, True)}<span class="az-plus" aria-hidden="true">+</span>{item(q, False)}</div>'
+            f'<div class="az-ftot"><p>Total price: <b>{inr(total)}</b></p><a class="yb yb-fill" href="{wa(msg)}" target="_blank" rel="noopener">{WA_SVG}<span>Buy both on WhatsApp</span></a>{alt}</div></div></section>')
+
+def compare_html(p):
+    """Amazon-style 'Compare with similar items' table."""
+    pool = SINGLES if "parts" not in p else SETS
+    items = [p] + [q for q in pool if q["slug"] != p["slug"]][:3]
+    pct = lambda x: round((x["mrp"] - x["price"]) * 100 / x["mrp"])
+    head = "".join(f'<th scope="col"><a href="/product/{x["slug"]}/">{photo(x, "az-cph")}<span>{"This item: " if x is p else ""}{esc(x["name"])}</span></a></th>' for x in items)
+    rows = [("Price", lambda x: f'<b>{inr(x["price"])}</b> <s>{inr(x["mrp"])}</s> <em>{pct(x)}% off</em>'), ("Size", lambda x: x["size"]),
+            ("Key ingredients", lambda x: esc(", ".join(x["ing"][:5]))), ("Best for", lambda x: esc(x["best"])), ("When to use", lambda x: esc(x["when"])),
+            ("", lambda x: buy_btn(x, "Buy", "yb yb-fill yb-sm") if x is not p else '<span class="az-cur">You are viewing this</span>')]
+    body = "".join(f'<tr><th scope="row">{t}</th>' + "".join(f"<td>{f(x)}</td>" for x in items) + "</tr>" for t, f in rows)
+    return (f'<section class="w az-cmp" aria-labelledby="h-cmp"><h2 id="h-cmp" class="az-h">Compare with similar items</h2>'
+            f'<div class="az-cwrap"><table><thead><tr><td></td>{head}</tr></thead><tbody>{body}</tbody></table></div></section>')
+
+RECENT_HTML = '<section class="w az-recent" data-recent hidden aria-labelledby="h-recent"><h2 id="h-recent" class="az-h">Your recently viewed items</h2><div class="az-rrow"></div></section>'
+
 def build_product(p):
     url = f"/product/{p['slug']}/"
     raw = read(os.path.join(SRC, "products", p["slug"] + ".html"))
@@ -905,6 +939,7 @@ def build_product(p):
 <h1 class="pdp-t">{esc(p["h1"])}</h1>
 <p class="panel-pr"><s>{inr(p["mrp"])}</s> <b>{inr(p["price"])}</b> <span class="save">Save {inr(sv)}</span></p>
 <p class="panel-tax">Taxes included. You save {inr(sv)} {save_note}. Free shipping across India.</p>
+<p class="az-del" data-del><b>FREE delivery</b> in 3–7 days across India · Cash on Delivery available</p>
 <p class="lead2">{esc(p["lead"])}</p>
 {qty_box(p["slug"])}
 {buy_btn(p, "Buy Now on WhatsApp")}
@@ -918,9 +953,13 @@ def build_product(p):
 </div>
 </div>
 <section class="w" aria-label="Benefits">{banner(p)}</section>
+{fbt_html(p)}
 <section class="w details">{toc_html}<div class="prose">{body_html}</div></section>
+{compare_html(p)}
+{RECENT_HTML}
 <section class="sec soft" aria-labelledby="h-more"><div class="w"><span class="eyebrow">Pairs well with</span><h2 class="sh" id="h-more">You may also like</h2><div class="grid4">{"".join(card_html(q) for q in others)}</div></div></section>
 </main>
+<script type="application/json" id="rv-item">{json.dumps({"u": url, "n": p["name"], "i": p["img"][:-4] + ".mg.webp" if p["img"].endswith(".png") else p["img"], "p": inr(p["price"]), "m": inr(p["mrp"])}, ensure_ascii=False)}</script>
 <div class="pbar" id="pbar" hidden><div><b>{esc(p["name"])}</b><span>{inr(p["price"])}</span></div>{buy_btn(p, "Buy Now", "yb yb-fill yb-sm")}</div>
 '''
     out += footer()

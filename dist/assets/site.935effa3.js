@@ -63,3 +63,30 @@
   var q = document.getElementById("fk-q");
   if (q) q.addEventListener("change", function () { var o = Array.prototype.find.call(q.list.options, function (o) { return o.value === q.value; }); if (o) location.href = o.getAttribute("data-u"); });
 })();
+/* Amazon-style: delivery date estimate and recently viewed items (stored only in this browser) */
+(function () {
+  var d = document.querySelector("[data-del]");
+  if (d) {
+    var f = function (n) { var t = new Date(); t.setDate(t.getDate() + n); return t.toLocaleDateString("en-IN", { weekday: "short", day: "numeric", month: "short" }); };
+    d.innerHTML = "<b>FREE delivery</b> between <b>" + f(3) + "</b> and <b>" + f(7) + "</b> · Cash on Delivery available";
+  }
+  var K = "mg_recent", list = [];
+  try { list = JSON.parse(localStorage.getItem(K) || "[]"); } catch (e) {}
+  var me = document.getElementById("rv-item"), cur = null;
+  if (me) { try { cur = JSON.parse(me.textContent); } catch (e) {} }
+  var box = document.querySelector("[data-recent]");
+  if (box) {
+    var show = list.filter(function (x) { return !cur || x.u !== cur.u; }).slice(0, 8);
+    if (show.length) {
+      box.querySelector(".az-rrow").innerHTML = show.map(function (x) {
+        var e = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
+        return '<a class="az-rv" href="' + e(x.u) + '"><img src="' + e(x.i) + '" alt="" loading="lazy">' + e(x.n) + '<b>' + e(x.p) + ' <s>' + e(x.m) + '</s></b></a>';
+      }).join("");
+      box.hidden = false;
+    }
+  }
+  if (cur) {
+    list = [cur].concat(list.filter(function (x) { return x.u !== cur.u; })).slice(0, 10);
+    try { localStorage.setItem(K, JSON.stringify(list)); } catch (e) {}
+  }
+})();
