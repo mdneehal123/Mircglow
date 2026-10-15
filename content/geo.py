@@ -4,6 +4,9 @@
 # Keep cosmetic wording: no cure/whitening/fairness/permanent/"results in X days".
 
 QUICK = {
+ "avocado-day-cream": (
+  "Yes, you can use avocado cream in the day. Choose a light avocado cream, apply a layer smaller than a pea on clean, slightly damp skin, wait two minutes, and always finish with sunscreen. An avocado night cream is richer and is meant for the hours you sleep.",
+  ["Amount: smaller than a pea", "Order: cleanser → avocado day cream → sunscreen", "Best for: dry, normal and combination skin", "Oily skin: a very thin layer, or skip it"]),
  "how-to-apply-night-cream": (
   "Apply night cream 20 to 30 minutes before bed, on clean, slightly damp skin. Use a pea-sized amount for the face and a little more for the neck, warm it between your fingertips, then press and smooth it upward and outward. Keep it away from the eyelids.",
   ["Amount: about a pea-sized drop for the face", "When: 20–30 minutes before lying down", "Order: cleanser → toner → serum → night cream (last)", "Morning: wash off and use sunscreen"]),

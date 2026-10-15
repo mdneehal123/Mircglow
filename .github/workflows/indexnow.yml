@@ -1,0 +1,24 @@
+name: Tell search engines about updates (IndexNow)
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for Vercel to publish
+        run: sleep 120
+      - name: Submit all sitemap URLs to IndexNow (Bing, Yandex, Seznam, Naver)
+        run: |
+          python3 - <<'PY'
+          import re, json, urllib.request
+          sm = urllib.request.urlopen("https://mircglow.com/sitemap.xml", timeout=40).read().decode()
+          urls = re.findall(r"<loc>(.*?)</loc>", sm)
+          body = json.dumps({"host": "mircglow.com", "key": "74d314fcd13a092ae512fe4c12566f9f", "keyLocation": "https://mircglow.com/74d314fcd13a092ae512fe4c12566f9f.txt", "urlList": urls}).encode()
+          req = urllib.request.Request("https://api.indexnow.org/indexnow", data=body, headers={"Content-Type": "application/json; charset=utf-8"})
+          try:
+              r = urllib.request.urlopen(req, timeout=40); print("IndexNow:", r.status, len(urls), "URLs")
+          except urllib.error.HTTPError as e:
+              print("IndexNow:", e.code, e.read()[:200]); raise
+          PY
