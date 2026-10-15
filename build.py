@@ -937,6 +937,9 @@ def build_vercel():
                       {"source":"/feed.xml","headers":[{"key":"Content-Type","value":"application/rss+xml; charset=utf-8"}]},
                       {"source":"/llms.txt","headers":[{"key":"Content-Type","value":"text/plain; charset=utf-8"}]}]}
     with open(os.path.join(DIST, "vercel.json"), "w") as f: json.dump(cfg, f, indent=2)
+    # project settings for Vercel (repo root): serve the ready-built dist/ folder, no build step needed
+    root_cfg = {"$schema": cfg["$schema"], "framework": None, "buildCommand": "", "installCommand": "", "outputDirectory": "dist", **{k: v for k, v in cfg.items() if k != "$schema"}}
+    with open(os.path.join(ROOT, "vercel.json"), "w") as f: json.dump(root_cfg, f, indent=2)
 
 def build_assets():
     up = os.path.join(ROOT, "wp-content")

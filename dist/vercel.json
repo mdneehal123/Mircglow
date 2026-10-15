@@ -1,0 +1,206 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": false,
+  "trailingSlash": true,
+  "redirects": [
+    {
+      "source": "/product/mirc-glow-avocado-korean-night-cream-with-aloe-vera-vitamin-b3-kojic-acid-glutathione-inspired-brightening-night-cream-for-women-men-30-g/",
+      "destination": "/product/avocado-korean-night-cream/",
+      "permanent": true
+    },
+    {
+      "source": "/product/glutathione-kojic-acid-cream/",
+      "destination": "/product/avocado-korean-night-cream/",
+      "permanent": true
+    },
+    {
+      "source": "/product/luminous-barrier-cream/",
+      "destination": "/product/glutathione-cream/",
+      "permanent": true
+    },
+    {
+      "source": "/product/radiance-renewal-serum/",
+      "destination": "/product/avocado-night-cream/",
+      "permanent": true
+    },
+    {
+      "source": "/product/glow-clarifying-cleanser/",
+      "destination": "/product/avocado-face-cream/",
+      "permanent": true
+    },
+    {
+      "source": "/is-avocado-face-cream-good-for-glowing-skinis-avocado-cream-good-for-your-skin/",
+      "destination": "/is-avocado-cream-good-for-your-skin/",
+      "permanent": true
+    },
+    {
+      "source": "/cart/:path*",
+      "destination": "/shop/",
+      "permanent": true
+    },
+    {
+      "source": "/checkout/:path*",
+      "destination": "/shop/",
+      "permanent": true
+    },
+    {
+      "source": "/my-account/:path*",
+      "destination": "/shop/",
+      "permanent": true
+    },
+    {
+      "source": "/product-category/uncategorized/",
+      "destination": "/shop/",
+      "permanent": true
+    },
+    {
+      "source": "/category/uncategorized/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/category/skincare-guides/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/product-tag/:slug*",
+      "destination": "/shop/",
+      "permanent": true
+    },
+    {
+      "source": "/tag/:slug*",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/author/:slug*",
+      "destination": "/about/",
+      "permanent": true
+    },
+    {
+      "source": "/home/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/sample-page/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/post-sitemap.xml",
+      "destination": "/sitemap.xml",
+      "permanent": true
+    },
+    {
+      "source": "/page-sitemap.xml",
+      "destination": "/sitemap.xml",
+      "permanent": true
+    },
+    {
+      "source": "/product-sitemap.xml",
+      "destination": "/sitemap.xml",
+      "permanent": true
+    },
+    {
+      "source": "/product_cat-sitemap.xml",
+      "destination": "/sitemap.xml",
+      "permanent": true
+    },
+    {
+      "source": "/category-sitemap.xml",
+      "destination": "/sitemap.xml",
+      "permanent": true
+    },
+    {
+      "source": "/local-sitemap.xml",
+      "destination": "/sitemap.xml",
+      "permanent": true
+    },
+    {
+      "source": "/wp-sitemap.xml",
+      "destination": "/sitemap.xml",
+      "permanent": true
+    },
+    {
+      "source": "/feed/:path+",
+      "destination": "/feed/",
+      "permanent": true
+    },
+    {
+      "source": "/comments/feed/",
+      "destination": "/feed/",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/feed/",
+      "destination": "/feed.xml"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains; preload"
+        }
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/wp-content/uploads/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=2592000, stale-while-revalidate=86400"
+        }
+      ]
+    },
+    {
+      "source": "/feed.xml",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/rss+xml; charset=utf-8"
+        }
+      ]
+    },
+    {
+      "source": "/llms.txt",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/plain; charset=utf-8"
+        }
+      ]
+    }
+  ]
+}
