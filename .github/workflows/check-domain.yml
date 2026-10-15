@@ -10,9 +10,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: |
-          sleep 5
+          sleep 90
           {
-          for p in avocado-cream-for-oily-skin avocado-cream-kaise-lagaye how-to-choose-avocado-cream night-cream-vs-day-cream glutathione-cream-ke-fayde avocado-cream-for-acne-prone-skin avocado-cream-in-winter avocado-oil-vs-avocado-cream-for-face category/skincare-routines winter-skincare-routine-india; do
+          for p in product/avocado-glow-cream-15g shop avocado-cream wp-content/uploads/2026/10/mirc-glow-avocado-glow-cream-15g.mg.webp; do
             echo "$p $(curl -s -o /dev/null -w '%{http_code}' https://mircglow.com/$p/)"
           done
           echo "sitemap urls: $(curl -s https://mircglow.com/sitemap.xml | grep -c '<loc>')"
