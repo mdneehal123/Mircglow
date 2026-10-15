@@ -9,9 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: |
-          sleep 90
-          { curl -s https://mircglow.com/avocado-cream-in-winter/ -o /tmp/h; echo "crumb: $(grep -c 'category/avocado-skincare' /tmp/h) imgw: $(grep -c 'img width=' /tmp/h)"; for p in / /shop/ /blog/ /product/glass-glow-cream/; do echo "$p $(curl -s -o /dev/null -w '%{http_code} %{time_total}s' https://mircglow.com$p)"; done; } > domain.txt; cat domain.txt
+      - uses: actions/setup-node@v4
+        with: { node-version: "20" }
+      - run: bash audit.sh > domain.txt 2>&1; cat domain.txt
       - run: |
           git config user.name "github-actions[bot]"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add domain.txt && git commit -m "Domain check" && git pull --rebase -q && git push
+          git add domain.txt && git commit -m "Technical audit" && git pull --rebase -q && git push
