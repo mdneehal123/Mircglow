@@ -82,7 +82,7 @@ PRODUCTS = [
       pts=["Soft, comfortable skin without a heavy feel","Small jar that is easy to carry","The easiest way to try Mirc Glow for the first time"]),
  dict(id=262, slug="day-and-night-cream-combo", name="Day & Night Combo", size="10 g + 30 g", grams=40,
       h1="Day and Night Cream Combo – Mirc Glow Avocado Glow 10g + Avocado Night Cream 30g",
-      price=849, mrp=998, img=UP+"04BCBF62-EE16-4594-B65C-BDA805C264CB-1.png", jars=["Day","Night"],
+      price=849, mrp=998, img="/wp-content/uploads/2026/10/mirc-glow-day-and-night-cream-combo.png", jars=["Day","Night"],
       ko="데이 & 나이트", tag="Set", topic="avocado", when="Morning and night",
       meta="Avocado Glow 10 g and Avocado Night Cream 30 g", best="A complete, simple moisturising routine",
       bg="linear-gradient(150deg,#FFF6F1,#FBE3D8)", cats=["combos"],
@@ -95,7 +95,7 @@ PRODUCTS = [
       parts=["avocado-face-cream","avocado-night-cream"]),
  dict(id=263, slug="night-cream-combo", name="Night Cream Combo", size="30 g + 30 g", grams=60,
       h1="Night Cream Combo – Mirc Glow Glutathione Cream 30g + Avocado Night Cream 30g",
-      price=1799, mrp=2148, img=UP+"5D782746-D1F2-496B-8449-5B8149C43004-1.png", jars=["Glutathione","Avocado"],
+      price=1799, mrp=2148, img="/wp-content/uploads/2026/10/mirc-glow-night-cream-combo.png", jars=["Glutathione","Avocado"],
       ko="나이트 듀오", tag="Set", topic="glutathione", when="Night (alternate or layer)",
       meta="Glutathione Cream and Avocado Night Cream", best="Radiance and deep nourishment in one evening routine",
       bg="linear-gradient(150deg,#FBF4FF,#EADFF3)", cats=["combos"],
@@ -108,7 +108,7 @@ PRODUCTS = [
       parts=["glutathione-cream","avocado-night-cream"]),
  dict(id=264, slug="korean-glass-skin-kit", name="Korean Glass Skin Kit", size="30 g + 25 g + 10 g", grams=65,
       h1="Korean Glass Skin Kit – 3 Mirc Glow Korean-Inspired Creams",
-      price=1999, mrp=2497, img=UP+"4ED0DC3B-11FA-4903-87CC-21E1887C89E5.png", jars=["Glow","Night","Day"],
+      price=1999, mrp=2497, img="/wp-content/uploads/2026/10/mirc-glow-korean-glass-skin-kit.png", jars=["Glow","Night","Day"],
       ko="유리 피부 키트", tag="Full ritual", topic="routine", when="Morning and night",
       meta="Three creams for a complete routine", best="Beginners who want the full morning and night routine",
       bg="linear-gradient(150deg,#FFF5F7,#F3D3DB)", cats=["combos"],
@@ -313,6 +313,39 @@ def buy_btn(p, label="Buy on WhatsApp", cls="yb yb-fill"):
 
 PAY_CHIPS = ('<div class="chips-pay" aria-label="Payment options"><span>💵 Cash on Delivery</span><span>📱 UPI</span>'
              '<span>💳 Cards</span><span>🚚 Free shipping</span></div>')
+
+
+# ---------------------------------------------------------------- benefit banners (photo + benefits)
+BANNERS = {
+ "avocado-korean-night-cream": dict(tone="avo", eb="Avocado · Vitamin B3 · Kojic acid", h="Wake up to softer, smoother-looking skin",
+     c=[("💧","Overnight hydration"),("✨","More even-looking glow"),("🌙","Glass-skin night step")]),
+ "glutathione-cream": dict(tone="gold", eb="Glutathione · Vitamin C · Kojic acid", h="For dull, tired-looking skin",
+     c=[("✨","Radiant-looking finish"),("🎯","More even-looking tone"),("🌙","A pea-sized amount at night")]),
+ "avocado-night-cream": dict(tone="cream", eb="Avocado · Aloe vera · Kojic acid", h="Rich comfort for dry, tight skin",
+     c=[("🥑","Nourishing, cushioned feel"),("💧","Soft and comfortable by morning"),("🌿","With soothing aloe vera")]),
+ "avocado-face-cream": dict(tone="peach", eb="Light daily cream · 10 g", h="The easiest way to try Mirc Glow",
+     c=[("☀️","Light enough for daytime"),("👜","Handy travel-size jar"),("🥑","Avocado, aloe vera and B3")]),
+ "day-and-night-cream-combo": dict(tone="avo", eb="Day + night routine", h="One simple routine, morning to night",
+     c=[("☀️","Avocado Glow for the day"),("🌙","Avocado Night Cream for the night"),("₹","Costs less than buying both")]),
+ "night-cream-combo": dict(tone="gold", eb="Treat + seal", h="Glow treatment and deep comfort, together",
+     c=[("✨","Glutathione Cream to treat"),("🥑","Avocado Night Cream to seal"),("₹","Costs less than buying both")]),
+ "korean-glass-skin-kit": dict(tone="lilac", eb="3 creams · full routine", h="Your complete Korean glass-skin kit",
+     c=[("✨","Glutathione Cream"),("🥑","Avocado Korean Night Cream"),("☀️","Avocado Glow for mornings")]),
+}
+
+def banner(p, h="p"):
+    b = BANNERS[p["slug"]]
+    img = p["img"]; ws = webp_src(img)
+    chips = "".join(f'<li><span aria-hidden="true">{i}</span>{esc(t)}</li>' for i, t in b["c"])
+    return (f'<a class="bn bn-{b["tone"]}" href="/product/{p["slug"]}/">'
+            f'<div class="bn-t"><span class="bn-e">{esc(b["eb"])}</span><{h} class="bn-h">{esc(b["h"])}</{h}><ul class="bn-c">{chips}</ul>'
+            f'<span class="bn-p"><b>{inr(p["price"])}</b> <s>{inr(p["mrp"])}</s><em>Shop now →</em></span></div>'
+            f'<div class="bn-ph"><picture>{ws}<img src="{img}" alt="{esc(BRAND + " " + p["name"])}" width="600" height="600" loading="lazy" decoding="async"></picture></div></a>')
+
+def banner_strip(items, title="Why you'll love them", eyebrow="Benefits at a glance"):
+    return (f'<section class="sec" aria-label="{esc(title)}"><div class="w"><span class="eyebrow">{esc(eyebrow)}</span><h2 class="sh">{esc(title)}</h2>'
+            f'<div class="bns" data-slider>{"".join(banner(p) for p in items)}</div>'
+            f'<div class="slider-nav"><button type="button" data-prev aria-label="Previous">‹</button><span data-count>1 / {len(items)}</span><button type="button" data-next aria-label="Next">›</button></div></div></section>')
 
 def card_html(p, h="h3"):
     sv = p["mrp"] - p["price"]; pct = round(sv * 100 / p["mrp"])
@@ -526,6 +559,8 @@ def build_home():
 <div class="row"><a class="yb yb-dark" href="/shop/">Shop best sellers</a><a class="yb yb-line" href="/skin-quiz/">Take the skin quiz</a></div>
 </div></section>
 
+{banner_strip([PBY[x] for x in ["avocado-korean-night-cream","glutathione-cream","avocado-night-cream","avocado-face-cream","korean-glass-skin-kit"]])}
+
 <section class="w bens" aria-label="Signature creams">{ben}</section>
 
 <section class="w icons3" aria-label="What our creams do">
@@ -595,6 +630,7 @@ def listing(url, title, desc, h1, ko, intro, items, crumbs, active_chip, extra_h
     body += header("/shop/")
     body += f'<main id="main">{crumbs_html(crumbs)}<div class="w ptop"><span class="lab">{ko}</span><h1 class="dsp">{esc(h1)}</h1><p>{esc(intro)}</p><nav class="chips" aria-label="Categories">{chip_html}</nav></div>'
     body += f'<section class="w" style="padding-bottom:clamp(48px,6vw,90px)"><div class="grid4">{"".join(card_html(p, "h2") for p in items)}</div></section>'
+    body += banner_strip(items, "Benefits at a glance", "Why you'll love them")
     singles = [p for p in items]
     body += f'<section class="w" style="padding-bottom:clamp(56px,8vw,110px)" aria-labelledby="h-cmp"><div class="head"><span class="lab">Compare</span><h2 class="dsp" id="h-cmp" style="font-size:clamp(2rem,4vw,3rem)">Side by <em>side</em></h2><p>Price per gram, best time of day and who each one suits.</p></div>{compare_table(singles)}</section>'
     body += extra_html
@@ -746,6 +782,7 @@ def build_product(p):
 <p class="fine">Cosmetic product. Patch test before first use. Results vary from person to person. Does not change your natural skin tone.</p>
 </div>
 </div>
+<section class="w" aria-label="Benefits">{banner(p)}</section>
 <section class="w details">{toc_html}<div class="prose">{body_html}</div></section>
 <section class="sec soft" aria-labelledby="h-more"><div class="w"><span class="eyebrow">Pairs well with</span><h2 class="sh" id="h-more">You may also like</h2><div class="grid4">{"".join(card_html(q) for q in others)}</div></div></section>
 </main>

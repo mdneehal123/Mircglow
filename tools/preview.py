@@ -10,7 +10,7 @@ def rel(t0, depth):
     if not (t.startswith("/assets/") or t.startswith("/wp-content/")) and not os.path.exists(os.path.join(D,t.lstrip("/"))): return None
     return "../"*depth+t.lstrip("/")+frag
 def fix_all(s,depth):
-    return re.sub(r'(href|src)="(/[^"]*)"',lambda m: m.group(0) if m.group(2).startswith("//") else (f'{m.group(1)}="{rel(m.group(2),depth)}"' if rel(m.group(2),depth) else m.group(0)),s)
+    return re.sub(r'(href|src|srcset)="(/[^"]*)"',lambda m: m.group(0) if m.group(2).startswith("//") else (f'{m.group(1)}="{rel(m.group(2),depth)}"' if rel(m.group(2),depth) else m.group(0)),s)
 files={}
 for p in pages:
     out="home/index.html" if p=="index.html" else p
