@@ -177,7 +177,7 @@ CATS = {
      intro="Korean-inspired creams for the last step of your evening routine. Most contain aloe vera, vitamin B3 and kojic acid, and each has its own job."),
  "avocado-night-creams": dict(name="Avocado Night Creams", h1="Avocado night creams", ko="아보카도 · AVOCADO CARE", parent="night-creams",
      rt="Avocado Night Creams for Nourishing Evening Care | Mirc Glow",
-     rd="Shop Mirc Glow avocado night creams for a nourishing and comfortable evening skincare routine.",
+     rd="Shop Mirc Glow avocado night creams and avocado face creams in India, from ₹349. Avocado with aloe vera, vitamin B3 and kojic acid. Free shipping and COD.",
      intro="Rich, cushioned avocado creams for skin that feels dry or tight after washing. Pick by jar size and the time of day you want to use it."),
  "combos": dict(name="Combos and Kits", h1="Combos and kits", ko="세트 · SETS", parent=None,
      rt="Combos and Kits - Mirc Glow",
@@ -263,7 +263,7 @@ PAGES = [
  G("ingredients","Ingredients","Our Ingredients: Glutathione, Kojic Acid and Avocado | Mirc Glow","The ingredients in Mirc Glow creams, glutathione, kojic acid, vitamin C, vitamin B3, avocado and aloe vera, and what each one does for how skin looks and feels.","legacy"),
  G("faq","FAQ","FAQ: Orders, Delivery, Returns and Using Our Creams | Mirc Glow","Answers to common questions about Mirc Glow: Cash on Delivery, free shipping, 7-day returns, which cream to choose and how to use it safely.","legacy"),
  G("contact","Contact","Contact Mirc Glow | WhatsApp +91 99808 81230","Contact Mirc Glow for order help, product advice or bulk orders. WhatsApp or call +91 99808 81230. Azad Nagar, Bhatkal, Karnataka.","legacy"),
- G("about-the-author","About the Author","About the Author: Mohammed Nihal, Founder | Mirc Glow","Mohammed Nihal runs Mirc Glow from Bhatkal, Karnataka, and writes our guides on night creams, avocado skincare, glutathione and kojic acid. How the guides are written.","plain",crumb="About the author"),
+ G("about-the-author","About the Author","About the Author: Mohammed Nihal, Founder | Mirc Glow","Mohammed Nihal runs Mirc Glow from Bhatkal, Karnataka, and writes our guides on night creams, avocado skincare, glutathione and kojic acid, and how they are made.","plain",crumb="About the author"),
  G("editorial-policy","Editorial Policy","Editorial Policy: How We Write Our Skincare Guides | Mirc Glow","How Mirc Glow writes, fact-checks and updates its skincare guides, who writes them, and the claims we will never make about our creams.","plain"),
  G("track-order","Track Your Order","Track Your Order | Mirc Glow","Track your Mirc Glow order. Find your tracking number, check your delivery status, and get help on WhatsApp if your parcel is delayed.","plain"),
  G("shipping-policy","Shipping Policy","Shipping Policy | Mirc Glow","Mirc Glow offers free shipping across India with delivery in 3 to 7 days. Cash on Delivery and secure online payment are available.","plain"),
@@ -330,6 +330,15 @@ def lazy_imgs(body):
         tag = m.group(0)
         if "loading=" not in tag and "fetchpriority" not in tag: tag = tag.replace("<img ", '<img loading="lazy" ', 1)
         if "decoding=" not in tag: tag = tag.replace("<img ", '<img decoding="async" ', 1)
+        if "width=" not in tag:
+            src = re.search(r'src="(/[^"]+)"', tag)
+            fp = src and os.path.join(ROOT, src.group(1).lstrip("/"))
+            if fp and os.path.exists(fp):
+                try:
+                    from PIL import Image as _I
+                    w, h = _I.open(fp).size
+                    tag = tag.replace("<img ", f'<img width="{w}" height="{h}" ', 1)
+                except Exception: pass
         return tag
     return re.sub(r"<img [^>]*>", rep, body)
 
@@ -674,7 +683,7 @@ def build_home():
     faq_html = faq_html.replace("The skin quiz", '<a href="/skin-quiz/">The skin quiz</a>')
     itemlist = {"@type":"ItemList","name":"Mirc Glow creams","itemListElement":[{"@type":"ListItem","position":i+1,"url":SITE+f"/product/{p['slug']}/","name":p["name"]} for i,p in enumerate(PRODUCTS)]}
     body = head("Mirc Glow | Avocado Night Creams & Korean-Inspired Skincare",
-        "Shop Mirc Glow avocado creams in India: avocado night creams and a daily avocado face cream with aloe vera, vitamin B3 and kojic acid. Free shipping and Cash on Delivery.",
+        "Shop Mirc Glow avocado night creams, glutathione and Glass Glow creams in India. Avocado, kojic acid and niacinamide care. Free shipping and Cash on Delivery.",
         url, extra=f'<link rel="preload" as="image" href="/wp-content/uploads/2026/10/mirc-glow-glass-glow-cream-glutathione-30g.mg.webp" type="image/webp" fetchpriority="high"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap">' + ld(ORG, WEBSITE, itemlist, faq_ld(faqs)))
     body += header("/")
 
@@ -790,7 +799,10 @@ def build_shop():
         listing(cat_url(c), d["rt"], d["rd"], d["h1"], d["ko"], d["intro"], items, cr, cat_url(c))
 
 def related_posts(p, n=3):
-    same = [q for q in LIVE_POSTS if q["topic"] == p["topic"] and q["slug"] != p["slug"]]
+    pool = [q for q in LIVE_POSTS if q["topic"] == p["topic"]]
+    if p in pool:
+        i = pool.index(p); pool = pool[i+1:] + pool[:i]
+    same = [q for q in pool if q["slug"] != p["slug"]]
     other = [q for q in LIVE_POSTS if q["topic"] != p["topic"] and q["slug"] != p["slug"]]
     return (same + other)[:n]
 
@@ -818,7 +830,10 @@ def build_post(p):
     canonical = SITE + f"/{hub}/" if hub else None
     topic_name, prod_slug = TOPICS[p["topic"]]
     prod = PBY[prod_slug]
-    crumbs = [("Home","/"),("Journal","/blog/"),(p["title"], url)]
+    crumbs = [("Home","/"),("Journal","/blog/")]
+    pc = next((c for c, v in WPCATS.items() if p["slug"] in v[2] and len(v[2]) > 1), None)
+    if pc: crumbs.append((WPCATS[pc][0], f"/category/{pc}/"))
+    crumbs.append((p["title"], url))
     art = {"@type":"BlogPosting","@id":SITE+url+"#article","headline":p["title"],"description":p["rd"],"datePublished":p["date"]+"T09:00:00+05:30","dateModified":TODAY+"T09:00:00+05:30",
            "author":{"@type":"Person","name":"Mohammed Nihal","url":SITE+"/about-the-author/","jobTitle":"Founder, Mirc Glow"},"publisher":{"@id":ORG_ID},"mainEntityOfPage":SITE+url,
            "image":SITE+prod["img"],"inLanguage":"en-IN","articleSection":topic_name,"wordCount":words(raw),"isPartOf":{"@id":SITE+"/#website"},
