@@ -12,7 +12,7 @@ jobs:
       - run: |
           sleep 90
           {
-          for p in product/glass-glow-cream shop; do
+          for p in alpha-arbutin-cream glutathione-vs-alpha-arbutin centella-cream-for-indian-skin hyaluronic-acid-night-cream glass-glow-cream-ke-fayde best-avocado-cream-in-india night-cream-in-kg-jaipur night-cream-in-kg-lucknow night-cream-in-kg-surat night-cream-in-kg-kochi night-cream-in-kg-indore product/glass-glow-night-duo; do
             echo "$p $(curl -s -o /dev/null -w '%{http_code}' https://mircglow.com/$p/)"
           done
           echo "sitemap urls: $(curl -s https://mircglow.com/sitemap.xml | grep -c '<loc>')"
