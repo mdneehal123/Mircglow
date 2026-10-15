@@ -1,5 +1,4 @@
+avocado-cream-in-kg 200
+bulk-night-cream 200
 product/avocado-glow-cream-15g 200
-shop 200
-avocado-cream 200
-wp-content/uploads/2026/10/mirc-glow-avocado-glow-cream-15g.mg.webp 308
-sitemap urls: 70
+sitemap urls: 71
