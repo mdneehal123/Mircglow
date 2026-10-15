@@ -777,4 +777,5 @@ body:has(.lux) .icons3 span{background:#F7F1E4;border:1px solid #E6CF9A}
 .kg-jar figcaption{font-size:.78rem;color:var(--muted);text-align:center;margin-top:6px}
 @media(max-width:760px){.kg-hero{grid-template-columns:1fr}.kg-jar{order:-1;max-width:420px;margin:0 auto}}
 .prose ul.kg-facts{display:flex;flex-direction:row;flex-wrap:wrap}.prose ul.kg-facts li{display:inline-block;width:auto}
+.kg-sub{display:block;font-size:.42em;letter-spacing:.01em;margin-top:.35em;color:var(--green)}
 .sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
