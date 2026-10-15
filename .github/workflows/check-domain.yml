@@ -12,7 +12,7 @@ jobs:
       - run: |
           sleep 90
           {
-          for p in avocado-cream-in-kg avocado-cream-in-kg-hindi; do
+          for p in product/glass-glow-cream shop; do
             echo "$p $(curl -s -o /dev/null -w '%{http_code}' https://mircglow.com/$p/)"
           done
           echo "sitemap urls: $(curl -s https://mircglow.com/sitemap.xml | grep -c '<loc>')"
