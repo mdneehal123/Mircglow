@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: |
-          sleep 60
+          sleep 5
           {
           for p in avocado-cream-for-oily-skin avocado-cream-kaise-lagaye how-to-choose-avocado-cream night-cream-vs-day-cream glutathione-cream-ke-fayde avocado-cream-for-acne-prone-skin avocado-cream-in-winter avocado-oil-vs-avocado-cream-for-face category/skincare-routines winter-skincare-routine-india; do
             echo "$p $(curl -s -o /dev/null -w '%{http_code}' https://mircglow.com/$p/)"
@@ -19,4 +19,4 @@ jobs:
           } > domain.txt 2>&1; cat domain.txt
       - run: |
           git config user.name "github-actions[bot]"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add domain.txt && git commit -m "Domain check" && git push
+          git add domain.txt && git commit -m "Domain check" && git pull --rebase -q && git push
