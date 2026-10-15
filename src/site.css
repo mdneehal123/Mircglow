@@ -844,3 +844,8 @@ body:has(.lux) .icons3 span{background:#F7F1E4;border:1px solid #E6CF9A}
 .glance dt{font-weight:800;color:#13362A}
 .glance dd{margin:0;color:#333;min-width:0}
 @media (max-width:520px){.glance dl{grid-template-columns:1fr;gap:2px}.glance dd{margin-bottom:8px}}
+/* real photos (not cut-outs) fill the frame */
+.ph.full:not(.noimg)>picture{width:100%;height:100%}
+.ph.full>picture>img{object-fit:cover}
+.gal-more{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.gal-more img{width:100%;height:auto;aspect-ratio:1;object-fit:cover;border-radius:16px}

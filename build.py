@@ -90,6 +90,18 @@ PRODUCTS = [
       rd="Buy Mirc Glow Avocado Face Cream 10g online in India. A nourishing avocado moisturiser for soft, smooth, radiant-looking skin. Cash on Delivery available.",
       lead="A light daily avocado cream with aloe vera, vitamin B3 and kojic acid, in a 10 g jar.",
       pts=["Soft, comfortable skin without a heavy feel","Small jar that is easy to carry","The easiest way to try Mirc Glow for the first time"]),
+ dict(id=301, slug="avocado-glow-cream-15g", name="Avocado Glow Cream 15g", size="15 g", grams=15,
+      h1="Mirc Glow Avocado Glow Cream with Aloe Vera – 15g",
+      price=399, mrp=599, img="/wp-content/uploads/2026/10/mirc-glow-avocado-glow-cream-15g.png", jars=["Avocado Glow"],
+      ko="아보카도 글로우", tag="New", topic="avocado", when="Day or night",
+      meta="Avocado and aloe vera, nothing more", best="A simple, gentle daily moisturiser",
+      bg="linear-gradient(160deg,#F7FBF2,#DCEBCF)", cats=["night-creams","avocado-night-creams"], full=True,
+      ing=["Avocado","Aloe vera"], lasts="About 3 to 4 weeks of daily use",
+      skin="All skin types; a thin layer for oily skin", use="Morning under sunscreen, or at night",
+      rt="Avocado Glow Cream 15g with Aloe Vera: Gentle Daily Cream | Mirc Glow",
+      rd="Buy Mirc Glow Avocado Glow Cream 15g online in India. A whipped avocado and aloe vera moisturiser for soft, fresh-looking skin. Free shipping and COD.",
+      lead="Our simplest avocado cream: whipped avocado and aloe vera, with no kojic acid or niacinamide, in a 15 g jar.",
+      pts=["Soft, smooth-feeling skin, morning or night","Light, cooling feel from aloe vera","Simple two-ingredient focus"]),
  dict(id=262, slug="day-and-night-cream-combo", name="Day & Night Combo", size="10 g + 30 g", grams=40,
       h1="Day and Night Cream Combo – Mirc Glow Avocado Glow 10g + Avocado Night Cream 30g",
       price=849, mrp=998, img="/wp-content/uploads/2026/10/mirc-glow-day-and-night-cream-combo.png", jars=["Day","Night"],
@@ -137,7 +149,7 @@ CATS = {
  "night-creams": dict(name="Night Creams", h1="Night creams", ko="나이트 크림 · NIGHT CREAMS", parent=None,
      rt="Night Creams for Nourished, Radiant-Looking Skin | Mirc Glow",
      rd="Explore Mirc Glow night creams for a comforting evening skincare ritual. Discover avocado, glutathione, Vitamin C and Kojic Acid formulas.",
-     intro="Korean-inspired creams for the last step of your evening routine. Each one contains aloe vera, vitamin B3 and kojic acid, and each has its own job."),
+     intro="Korean-inspired creams for the last step of your evening routine. Each one contains aloe vera, most also have vitamin B3 and kojic acid, and each has its own job."),
  "avocado-night-creams": dict(name="Avocado Night Creams", h1="Avocado night creams", ko="아보카도 · AVOCADO CARE", parent="night-creams",
      rt="Avocado Night Creams for Nourishing Evening Care | Mirc Glow",
      rd="Shop Mirc Glow avocado night creams for a nourishing and comfortable evening skincare routine.",
@@ -206,7 +218,7 @@ TOPICS = {
 # ---------------------------------------------------------------- pages
 G = lambda slug, title, rt, rd, kind, crumb=None, img=None, lang="en", alt=None: dict(slug=slug, title=title, rt=rt, rd=rd, kind=kind, crumb=crumb or title, img=img, lang=lang, alt=alt)
 PAGES = [
- G("avocado-cream","Avocado Cream","Avocado Cream: 3 Best Picks for Soft, Nourished Skin | Mirc Glow","Shop avocado cream by Mirc Glow in India. Compare 3 avocado creams with aloe vera, vitamin B3 and kojic acid, from ₹349, and find the right one for your skin.","legacy",img=UP+"04BCBF62-EE16-4594-B65C-BDA805C264CB.png",alt="avocado-cream-hindi"),
+ G("avocado-cream","Avocado Cream","Avocado Cream: 4 Best Picks for Soft, Nourished Skin | Mirc Glow","Shop avocado cream by Mirc Glow in India. Compare 4 avocado creams with aloe vera, vitamin B3 and kojic acid, from ₹349, and find the right one for your skin.","legacy",img=UP+"04BCBF62-EE16-4594-B65C-BDA805C264CB.png",alt="avocado-cream-hindi"),
  G("korean-night-cream","Korean Night Cream","Korean Night Cream: 3 Best Picks for a Glass Skin Glow | Mirc Glow","Shop Korean night cream by Mirc Glow in India. Compare 3 Korean-inspired night creams with avocado, vitamin B3 and kojic acid, from ₹649, and learn how to use them.","legacy",img=UP+"4ED0DC3B-11FA-4903-87CC-21E1887C89E5.png",alt="korean-night-cream-hindi"),
  G("avocado-cream-hindi","एवोकाडो क्रीम (Avocado Cream in Hindi)","एवोकाडो क्रीम के फायदे और इस्तेमाल का तरीका | Mirc Glow","एवोकाडो क्रीम क्या है, चेहरे के लिए इसके फायदे क्या हैं और इसे कैसे लगाएं? आसान हिंदी में जानकारी, साथ में Mirc Glow की 3 एवोकाडो क्रीम की तुलना।","plain",crumb="एवोकाडो क्रीम",lang="hi",alt="avocado-cream",img=UP+"04BCBF62-EE16-4594-B65C-BDA805C264CB.png"),
  G("avocado-night-cream-benefits-hindi","एवोकाडो नाइट क्रीम के फायदे (Avocado Night Cream Ke Fayde)","Avocado Night Cream Ke Fayde: एवोकाडो नाइट क्रीम के 7 फायदे | Mirc Glow","एवोकाडो नाइट क्रीम के फायदे (avocado night cream ke fayde) आसान हिंदी में: रात भर नमी, मुलायम त्वचा, कैसे लगाएं, किस स्किन के लिए सही है और FAQ।","plain",crumb="एवोकाडो नाइट क्रीम के फायदे",lang="hi",img=UP+"04BCBF62-EE16-4594-B65C-BDA805C264CB-1.png"),
@@ -326,6 +338,7 @@ def photo(p, cls="tile", eager=False, alt=None):
     fb = jar(p["jars"][0]) if len(p["jars"]) == 1 else '<div class="jars">' + "".join(jar(j) for j in p["jars"]) + "</div>"
     load = 'fetchpriority="high"' if eager else 'loading="lazy"'
     a = esc(alt or f'{BRAND} {p["name"]} {p["size"]}')
+    cls = (cls + " full") if p.get("full") else cls
     return (f'<div class="ph {cls}" style="background:{p["bg"]}">'
             f'<picture>{webp_src(p["img"])}<img src="{p["img"]}" alt="{a}" width="800" height="800" {load} decoding="async" onerror="this.closest(\'.ph\').classList.add(\'noimg\');this.parentNode.remove()"></picture>{fb}</div>')
 
@@ -353,6 +366,8 @@ PAY_CHIPS = ('<div class="chips-pay" aria-label="Payment options"><span>💵 Cas
 BANNERS = {
  "avocado-korean-night-cream": dict(tone="avo", eb="Avocado · Vitamin B3 · Kojic acid", h="Wake up to softer, smoother-looking skin",
      c=[("💧","Overnight hydration"),("✨","More even-looking glow"),("🌙","Glass-skin night step")]),
+ "avocado-glow-cream-15g": dict(tone="avo", eb="Avocado · Aloe vera", h="Simple, gentle daily moisture",
+     c=[("🥑","Whipped avocado cream"),("🌿","Cooling aloe vera"),("☀️","Day or night")]),
  "glutathione-cream": dict(tone="gold", eb="Glutathione · Vitamin C · Kojic acid", h="For dull, tired-looking skin",
      c=[("✨","Radiant-looking finish"),("🎯","More even-looking tone"),("🌙","A pea-sized amount at night")]),
  "avocado-night-cream": dict(tone="cream", eb="Avocado · Aloe vera · Kojic acid", h="Rich comfort for dry, tight skin",
@@ -591,7 +606,7 @@ def build_home():
 <div class="lux-copy">
 <span class="lux-eb"><span lang="ko">유리 피부</span> · Korean-inspired skincare, made in Karnataka</span>
 <h1 id="h-home" class="lux-h">Mirc Glow avocado night creams &amp; Korean-inspired skincare</h1>
-<p class="lux-p">Glutathione, kojic acid and avocado care for brighter-looking, smoother-looking skin. Every cream contains aloe vera, vitamin B3 and kojic acid.</p>
+<p class="lux-p">Glutathione, kojic acid and avocado care for brighter-looking, smoother-looking skin. Every cream contains aloe vera, and all but one also contain vitamin B3 and kojic acid.</p>
 <div class="lux-cta"><a class="lx lx-gold" href="/shop/">Shop best sellers</a><a class="lx lx-line" href="{WA_HELLO}" target="_blank" rel="noopener">{WA_SVG}<span>Order on WhatsApp</span></a></div>
 <ul class="lux-trust"><li><b>From {inr(349)}</b></li><li>Free shipping</li><li>Cash on Delivery</li><li>7-day returns</li></ul>
 </div>
@@ -698,7 +713,7 @@ def build_shop():
     listing("/shop/","Shop Avocado Night Cream and Glutathione Cream | Mirc Glow",
             "Shop all Mirc Glow creams and combos from ₹349: avocado night creams, glutathione cream and glass skin kits. Free shipping and Cash on Delivery across India.",
             "Shop all creams", '<span lang="ko">컬렉션</span> · THE COLLECTION',
-            "Four Korean-inspired creams and three sets. Free shipping across India, Cash on Delivery, and 7-day returns on sealed jars.",
+            "Five Korean-inspired creams and three sets. Free shipping across India, Cash on Delivery, and 7-day returns on sealed jars.",
             PRODUCTS, [("Home","/"),("Shop","/shop/")], "/shop/", help_html)
     for c, d in CATS.items():
         items = [p for p in PRODUCTS if c in p["cats"]]
@@ -946,7 +961,7 @@ def build_robots():
 
 def build_llms():
     L = [f"# {BRAND}", "",
-         "> Korean-inspired skincare brand from Bhatkal, Karnataka, India. Four creams and three sets built around avocado, glutathione and kojic acid; every cream also contains aloe vera and vitamin B3. Sold directly across India with free shipping, Cash on Delivery and 7-day returns on sealed jars. Orders are placed on WhatsApp (+91 99808 81230).", "",
+         "> Korean-inspired skincare brand from Bhatkal, Karnataka, India. Five creams and three sets built around avocado, glutathione and kojic acid; every cream contains aloe vera, and all except Avocado Glow Cream 15g (avocado and aloe vera only) also contain vitamin B3 and kojic acid. Sold directly across India with free shipping, Cash on Delivery and 7-day returns on sealed jars. Orders are placed on WhatsApp (+91 99808 81230).", "",
          "Important: Mirc Glow creams are cosmetics. They help skin feel softer and look smoother and more even. They do not change natural skin tone and are not intended to treat skin conditions. They are Korean-inspired; manufacturing details are printed on each pack.", "",
          "## Products (prices in INR, October 2026)"]
     for p in PRODUCTS:
