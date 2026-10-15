@@ -293,7 +293,13 @@ def photo(p, cls="tile", eager=False, alt=None):
     load = 'fetchpriority="high"' if eager else 'loading="lazy"'
     a = esc(alt or f'{BRAND} {p["name"]} {p["size"]}')
     return (f'<div class="ph {cls}" style="background:{p["bg"]}">'
-            f'<img src="{p["img"]}" alt="{a}" width="800" height="800" {load} decoding="async" onerror="this.parentNode.classList.add(\'noimg\');this.remove()">{fb}</div>')
+            f'<picture>{webp_src(p["img"])}<img src="{p["img"]}" alt="{a}" width="800" height="800" {load} decoding="async" onerror="this.closest(\'.ph\').classList.add(\'noimg\');this.parentNode.remove()"></picture>{fb}</div>')
+
+def webp_src(img):
+    """Light WebP copy for browsers; the original file stays at its WordPress address."""
+    if img.endswith(".png") and os.path.exists(os.path.join(ROOT, img.lstrip("/")[:-4] + ".mg.webp")):
+        return f'<source srcset="{img[:-4]}.mg.webp" type="image/webp">'
+    return ""
 
 def order_msg(p, qty=1):
     q = f"{qty} x " if qty != 1 else ""
@@ -482,7 +488,7 @@ def build_home():
     itemlist = {"@type":"ItemList","name":"Mirc Glow creams","itemListElement":[{"@type":"ListItem","position":i+1,"url":SITE+f"/product/{p['slug']}/","name":p["name"]} for i,p in enumerate(PRODUCTS)]}
     body = head("Mirc Glow | Avocado Night Creams & Korean-Inspired Skincare",
         "Shop Mirc Glow avocado creams in India: avocado night creams and a daily avocado face cream with aloe vera, vitamin B3 and kojic acid. Free shipping and Cash on Delivery.",
-        url, extra=f'<link rel="preload" as="image" href="{hero[0]["img"]}" fetchpriority="high">' + ld(ORG, WEBSITE, itemlist, faq_ld(faqs)))
+        url, extra=f'<link rel="preload" as="image" href="{hero[0]["img"][:-4]}.mg.webp" type="image/webp" fetchpriority="high">' + ld(ORG, WEBSITE, itemlist, faq_ld(faqs)))
     body += header("/")
 
     def ticks(items):
@@ -718,7 +724,7 @@ def build_product(p):
     nodes = [ORG, product_ld(p, url), crumbs_ld(crumbs)]
     if faqs: nodes.append(faq_ld(faqs))
     out = head(p["rt"], p["rd"], url, og_type="product", image=p["img"],
-               extra=f'<meta property="product:price:amount" content="{p["price"]}"><meta property="product:price:currency" content="INR"><meta property="product:availability" content="in stock"><link rel="preload" as="image" href="{p["img"]}" fetchpriority="high">' + ld(*nodes))
+               extra=f'<meta property="product:price:amount" content="{p["price"]}"><meta property="product:price:currency" content="INR"><meta property="product:availability" content="in stock"><link rel="preload" as="image" href="{p["img"][:-4]}.mg.webp" type="image/webp" fetchpriority="high">' + ld(*nodes))
     out += header("/shop/")
     out += f'''<main id="main">{crumbs_html(crumbs)}
 <div class="w pdp">
@@ -897,6 +903,8 @@ def build_vercel():
     with open(os.path.join(DIST, "vercel.json"), "w") as f: json.dump(cfg, f, indent=2)
 
 def build_assets():
+    up = os.path.join(ROOT, "wp-content")
+    if os.path.isdir(up): shutil.copytree(up, os.path.join(DIST, "wp-content"))
     global CSS_HREF, JS_HREF
     css = read(os.path.join(ROOT, "src", "site.css"))
     css += "\n.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}\n"

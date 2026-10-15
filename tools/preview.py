@@ -22,7 +22,7 @@ h=fix_all(open(os.path.join(D,"index.html")).read(),0)
 head=re.search(r"<head>(.*?)</head>",h,re.S).group(1); body=re.search(r"<body>(.*)</body>",h,re.S).group(1)
 head=re.sub(r'<meta charset[^>]*>|<meta name="viewport"[^>]*>','',head)
 head=re.sub(r"<title>.*?</title>","<title>Mirc Glow Website Preview</title>",head)
-note='<div style="background:#fff7d6;color:#5a4500;font:600 13px/1.4 system-ui;padding:8px 16px;text-align:center">Preview of the new mircglow.com. Real product photos appear once your images are copied; the pink jars are stand-ins.</div>'
+note='<div style="background:#fff7d6;color:#5a4500;font:600 13px/1.4 system-ui;padding:8px 16px;text-align:center">Preview of the new mircglow.com with your real product photos. Not live yet.</div>'
 open(os.path.join(O,"main.html"),"w").write(head+note+body)
 json.dump(files,open(os.path.join(O,"files.json"),"w"),indent=0)
 print(len(files),"files")
