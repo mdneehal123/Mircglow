@@ -1,0 +1,56 @@
+# Existing pages you may link to (use exact paths)
+- /how-to-apply-night-cream/ : How to Apply Night Cream the Right Way
+- /avocado-day-cream/ : Avocado Day Cream: How to Use It in the Morning
+- /avocado-cream-for-dry-skin/ : Avocado Cream for Dry Skin: Why It Works and How to Use It
+- /night-cream-for-men/ : Night Cream for Men: A Simple Guide to Getting Started
+- /night-cream-for-oily-skin/ : Night Cream for Oily Skin: How to Choose and Use One
+- /best-night-cream-for-glowing-skin/ : Best Night Cream for Glowing Skin in India: How to Choose
+- /kojic-acid-cream-for-dark-spots/ : Kojic Acid Cream for Dark Spots: How to Use It and What to Expect
+- /glass-skin-routine-for-indian-skin/ : Glass Skin Routine for Indian Skin: 6 Simple Steps
+- /kojic-acid-vs-glutathione/ : Kojic Acid vs Glutathione: Which Is Right for Your Skin?
+- /how-to-use-glutathione-cream/ : How to Use Glutathione Cream: A Step-by-Step Routine
+- /how-long-does-glutathione-cream-take-to-work/ : How Long Does Glutathione Cream Take to Work?
+- /glutathione-cream-side-effects/ : Glutathione Cream Side Effects: What Is Known and How to Stay Safe
+- /glutathione-cream-benefits/ : Glutathione Cream Benefits: A Simple Guide for Beginners
+- /avocado-night-cream-side-effects/ : Avocado Night Cream Side Effects: What to Know Before You Start
+- /is-avocado-cream-good-for-your-skin/ : Is Avocado Cream Good for Your Skin and Face?
+- /which-is-the-no-1-night-cream-in-india/ : Which Is the No. 1 Night Cream in India?
+- /is-avocado-night-cream-good/ : Is Avocado Night Cream Good?
+- /how-to-make-avocado-night-cream-at-home/ : How to Make Avocado Night Cream at Home?
+- /can-i-use-avocado-night-cream-every-night/ : Can I Use Avocado Night Cream Every Night?
+- /how-to-build-a-simple-night-skincare-routine/ : How to Build a Simple Night Skincare Routine
+- /avocado-cream/ : Avocado Cream
+- /korean-night-cream/ : Korean Night Cream
+- /avocado-cream-hindi/ : एवोकाडो क्रीम (Avocado Cream in Hindi)
+- /avocado-night-cream-benefits-hindi/ : एवोकाडो नाइट क्रीम के फायदे (Avocado Night Cream Ke Fayde)
+- /korean-night-cream-hindi/ : कोरियन नाइट क्रीम (Korean Night Cream in Hindi)
+- /skin-quiz/ : Skin Quiz
+- /skincare-routine-builder/ : Skincare Routine Builder
+- /skincare-ingredient-glossary/ : Skincare Ingredient Glossary
+- /skincare-gift-sets/ : Diwali Skincare Gift Sets
+- /bulk-night-cream/ : Bulk Night Cream in Kg
+- /night-cream-in-kg-mumbai/ : Night Cream in Kg in Mumbai
+- /night-cream-in-kg-delhi/ : Night Cream in Kg in Delhi
+- /night-cream-in-kg-bangalore/ : Night Cream in Kg in Bangalore
+- /night-cream-in-kg-hyderabad/ : Night Cream in Kg in Hyderabad
+- /about/ : About
+- /ingredients/ : Ingredients
+- /faq/ : FAQ
+- /contact/ : Contact
+- /about-the-author/ : About the Author
+- /editorial-policy/ : Editorial Policy
+- /track-order/ : Track Your Order
+- /shipping-policy/ : Shipping Policy
+- /returns-refunds/ : Returns and Refunds
+- /privacy/ : Privacy Policy
+- /terms/ : Terms and Conditions
+- /product/avocado-korean-night-cream/ : Avocado Korean Night Cream 25 g – ₹649 (MRP ₹899); ingredients: Avocado, Aloe vera, Vitamin B3 (niacinamide), Kojic acid; best for: Most skin types; a softer, more even-looking complexion
+- /product/glutathione-cream/ : Glutathione Cream 30 g – ₹1499 (MRP ₹1999); ingredients: Glutathione, Vitamin C, Kojic acid, Aloe vera, Vitamin B3 (niacinamide); best for: Dull or uneven-looking skin; a radiant-looking finish
+- /product/avocado-night-cream/ : Avocado Night Cream 30 g – ₹649 (MRP ₹949); ingredients: Avocado, Aloe vera, Vitamin B3 (niacinamide), Kojic acid; best for: Dry or tight-feeling skin; the best value per gram
+- /product/avocado-face-cream/ : Avocado Glow Cream 10 g – ₹349 (MRP ₹449); ingredients: Avocado, Aloe vera, Vitamin B3 (niacinamide), Kojic acid; best for: First-time buyers, travel, and daytime under sunscreen
+- /product/day-and-night-cream-combo/ : Day & Night Combo 10 g + 30 g – ₹849 (MRP ₹998); ingredients: Avocado, Aloe vera, Vitamin B3 (niacinamide), Kojic acid; best for: A complete, simple moisturising routine
+- /product/night-cream-combo/ : Night Cream Combo 30 g + 30 g – ₹1799 (MRP ₹2148); ingredients: Glutathione, Vitamin C, Avocado, Kojic acid, Aloe vera, Vitamin B3 (niacinamide); best for: Radiance and deep nourishment in one evening routine
+- /product/korean-glass-skin-kit/ : Korean Glass Skin Kit 30 g + 25 g + 10 g – ₹1999 (MRP ₹2497); ingredients: Glutathione, Vitamin C, Avocado, Kojic acid, Aloe vera, Vitamin B3 (niacinamide); best for: Beginners who want the full morning and night routine
+- /shop/ : all products
+- /product-category/night-creams/avocado-night-creams/ : avocado creams
+- /skin-quiz/ , /skincare-routine-builder/ , /skincare-ingredient-glossary/ , /bulk-night-cream/ , /shipping-policy/ , /returns-refunds/

@@ -234,11 +234,33 @@ PAGES = [
 ]
 CITY = {"night-cream-in-kg-mumbai","night-cream-in-kg-delhi","night-cream-in-kg-bangalore","night-cream-in-kg-hyderabad"}
 
+# ---------------------------------------------------------------- scheduled content (content/plan/schedule.json)
+# Each item goes live on its date (India time). A daily GitHub Action rebuilds the site and notifies search engines.
+import datetime as _dt
+NOW_IST = os.environ.get("MG_DATE") or (_dt.datetime.now(_dt.timezone.utc) + _dt.timedelta(hours=5, minutes=30)).date().isoformat()
+PLAN = json.load(open(os.path.join(SRC, "plan", "schedule.json"), encoding="utf-8"))
+UNPUBLISHED = {m["slug"] for m in PLAN if m["date"] > NOW_IST}
+for _m in PLAN:
+    if _m["slug"] in UNPUBLISHED: continue
+    if _m["kind"] == "post":
+        POSTS.append(P(_m["slug"], _m["title"], _m["ex"], _m["rt"], _m["rd"], _m["date"], _m["topic"]))
+        if _m.get("quick"): GEO.QUICK[_m["slug"]] = (_m["quick"], _m.get("facts", []))
+    elif _m["kind"] == "hindi":
+        PAGES.append(G(_m["slug"], _m["title"], _m["rt"], _m["rd"], "plain", crumb=_m["title"].split("(")[0].strip(), lang="hi"))
+    elif _m["kind"] == "city":
+        PAGES.append(G(_m["slug"], _m["title"], _m["rt"], _m["rd"], "legacy", crumb=_m["title"].replace("Night Cream in Kg in ", ""), img="/wp-content/uploads/2026/10/mirc-glow-bulk-night-cream-in-kg.webp"))
+        CITY.add(_m["slug"])
+POST_BY = {p["slug"]: p for p in POSTS}
+LIVE_POSTS = [p for p in POSTS if p["slug"] not in HUB]
+
 # ---------------------------------------------------------------- helpers
 def read(path):
     with open(path, encoding="utf-8") as f: return f.read()
 
 def write(urlpath, content):
+    if UNPUBLISHED and isinstance(content, str) and "<a " in content:
+        # links to scheduled pages that are not out yet show as plain text until their release day
+        content = re.sub(r'<a [^>]*href="(?:https://mircglow\.com)?/(%s)/"[^>]*>(.*?)</a>' % "|".join(map(re.escape, UNPUBLISHED)), r"\2", content, flags=re.S)
     rel = urlpath.strip("/")
     out = os.path.join(DIST, rel, "index.html") if not rel.endswith((".xml",".txt",".html",".json")) else os.path.join(DIST, rel)
     os.makedirs(os.path.dirname(out), exist_ok=True)
@@ -828,6 +850,9 @@ def build_page(g):
     raw = read(os.path.join(SRC, "pages", g["slug"] + ".html"))
     if g["slug"] in GEO.PAGE_ANSWERS: raw += qa_html(GEO.PAGE_ANSWERS[g["slug"]])
     if g["slug"] in GEO.HINDI_FAQ: raw += "<h2>अक्सर पूछे जाने वाले सवाल (FAQ)</h2>" + "".join(f"<h3>{html.escape(q)}</h3><p>{html.escape(a)}</p>" for q, a in GEO.HINDI_FAQ[g["slug"]])
+    if g["lang"] == "hi":
+        others = [x for x in PAGES if x["lang"] == "hi" and x["slug"] != g["slug"]]
+        raw += "<h2>और हिंदी गाइड</h2><ul>" + "".join(f'<li><a href="/{x["slug"]}/">{esc(x["title"])}</a></li>' for x in others) + "</ul>"
     raw = lazy_imgs(raw)
     faqs = faqs_from(raw)
     if g["slug"] in CITY: cr = [("Home","/"),("Bulk orders","/bulk-night-cream/"),(g["crumb"], url)]
@@ -860,6 +885,12 @@ WPCATS = {  # WordPress post categories (same URLs as on WordPress)
  "korean-skincare-glass-skin": ("Korean Skincare and Glass Skin","Korean skincare made simple for Indian skin: glass skin routines adapted for heat, humidity and strong sun.",
    ["glass-skin-routine-for-indian-skin"]),
 }
+
+WPCATS["skincare-routines"] = ("Skincare Routines", "Simple skincare routines for Indian weather: winter, summer, monsoon, oily skin and busy working days, plus how to layer serums and creams.", [])
+_TOPIC_CAT = {"avocado": "avocado-skincare", "glutathione": "glutathione-kojic-acid", "kojic": "glutathione-kojic-acid", "night": "night-cream-guides", "routine": "skincare-routines"}
+for _m in PLAN:
+    if _m["kind"] == "post" and _m["slug"] not in UNPUBLISHED:
+        WPCATS[_TOPIC_CAT[_m["topic"]]][2].insert(0, _m["slug"])
 
 def build_wpcats():
     for slug,(name,desc,posts) in WPCATS.items():
