@@ -10,11 +10,13 @@
   document.addEventListener("click", function (e) {
     var a = e.target.closest("a[data-wa-order]"); if (!a) return;
     var box = a.closest(".panel, .buy"); var q = box && box.querySelector(".qty input");
-    var n = q ? parseInt(q.value, 10) || 1 : 1; if (n < 2) return;
+    var n = q ? parseInt(q.value, 10) || 1 : 1;
+    var base = a.getAttribute("data-base") || a.href; a.setAttribute("data-base", base);
+    if (n < 2) { a.href = base; return; }
     try {
-      var u = new URL(a.href); var t = u.searchParams.get("text") || "";
+      var u = new URL(base); var t = u.searchParams.get("text") || "";
       t = t.replace("• ", "• " + n + " x ");
-      u.searchParams.set("text", t); a.href = u.toString();
+      a.href = u.origin + u.pathname + "?text=" + encodeURIComponent(t); // %20 for spaces: WhatsApp shows them correctly
     } catch (x) {}
   }, true);
   // sticky buy bar on product pages, once the main buy button is off screen
@@ -29,7 +31,9 @@
     function step() { return s.children[0].getBoundingClientRect().width + 16; }
     function upd() { c.textContent = Math.min(n, Math.round(s.scrollLeft / step()) + 1) + " / " + n; }
     s.addEventListener("scroll", function () { requestAnimationFrame(upd); }, { passive: true });
-    nav.querySelector("[data-prev]").onclick = function () { s.scrollBy({ left: -step(), behavior: "smooth" }); };
-    nav.querySelector("[data-next]").onclick = function () { s.scrollBy({ left: step(), behavior: "smooth" }); };
+    function go(d) { s.scrollBy({ left: d * step(), behavior: "smooth" }); setTimeout(upd, 450); setTimeout(upd, 900); }
+    nav.querySelector("[data-prev]").onclick = function () { go(-1); };
+    nav.querySelector("[data-next]").onclick = function () { go(1); };
+    if ("onscrollend" in window) s.addEventListener("scrollend", upd);
   });
 })();

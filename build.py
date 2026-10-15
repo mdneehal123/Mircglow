@@ -125,16 +125,16 @@ SINGLES = [p for p in PRODUCTS if "parts" not in p]
 SETS = [p for p in PRODUCTS if "parts" in p]
 CATS = {
  "night-creams": dict(name="Night Creams", h1="Night creams", ko="나이트 크림 · NIGHT CREAMS", parent=None,
-     rt="Night Creams: Avocado and Glutathione Night Cream | Mirc Glow",
-     rd="Shop Mirc Glow night creams in India: avocado night creams and glutathione cream with aloe vera, vitamin B3 and kojic acid, from ₹349. Free shipping and COD.",
+     rt="Night Creams for Nourished, Radiant-Looking Skin | Mirc Glow",
+     rd="Explore Mirc Glow night creams for a comforting evening skincare ritual. Discover avocado, glutathione, Vitamin C and Kojic Acid formulas.",
      intro="Korean-inspired creams for the last step of your evening routine. Each one contains aloe vera, vitamin B3 and kojic acid, and each has its own job."),
  "avocado-night-creams": dict(name="Avocado Night Creams", h1="Avocado night creams", ko="아보카도 · AVOCADO CARE", parent="night-creams",
-     rt="Avocado Night Creams: Compare 3 Avocado Creams | Mirc Glow",
-     rd="Shop Mirc Glow avocado night creams and avocado face cream in India, from ₹349. Avocado, aloe vera, vitamin B3 and kojic acid. Free shipping and Cash on Delivery.",
+     rt="Avocado Night Creams for Nourishing Evening Care | Mirc Glow",
+     rd="Shop Mirc Glow avocado night creams for a nourishing and comfortable evening skincare routine.",
      intro="Rich, cushioned avocado creams for skin that feels dry or tight after washing. Pick by jar size and the time of day you want to use it."),
  "combos": dict(name="Combos and Kits", h1="Combos and kits", ko="세트 · SETS", parent=None,
-     rt="Skincare Combos and Kits: Save on Mirc Glow Sets | Mirc Glow",
-     rd="Mirc Glow combos and kits: day and night combo, night cream combo and Korean glass skin kit, from ₹849. Each set costs less than buying the creams separately.",
+     rt="Combos and Kits - Mirc Glow",
+     rd="Mirc Glow skincare combos and kits: our creams paired into simple routines at a lower price than buying them separately.",
      intro="Our creams paired into simple routines. Every set costs less than buying the same jars one by one."),
 }
 def cat_url(c):
@@ -727,7 +727,6 @@ def build_blog():
 <a class="post" href="/skincare-ingredient-glossary/"><div class="art t-kojic"><em>Glossary</em></div><h3>Ingredient glossary</h3><p>15 skincare ingredients in plain English.</p></a></div></div></section>'''
     for url, title, desc, h1, crumbs in [
         ("/blog/","Skincare Blog: Night Cream, Glutathione and Glass Skin Guides | Mirc Glow","Plain-English skincare guides from Mirc Glow on night creams, glutathione, kojic acid, avocado care and glass skin routines for Indian skin.","The journal",[("Home","/"),("Journal","/blog/")]),
-        ("/category/skincare-guides/","Skincare Guides | Mirc Glow","Mirc Glow skincare guides: how to choose and use night creams, glutathione and kojic acid creams, and simple glass skin routines for Indian skin.","Skincare guides",[("Home","/"),("Journal","/blog/"),("Skincare guides","/category/skincare-guides/")]),
     ]:
         il = {"@type":"ItemList","itemListElement":[{"@type":"ListItem","position":i+1,"url":SITE+f"/{p['slug']}/"} for i,p in enumerate(LIVE_POSTS)]}
         cp = {"@type":"CollectionPage","@id":SITE+url,"url":SITE+url,"name":h1,"description":desc}
@@ -848,7 +847,7 @@ def build_404():
 
 # ---------------------------------------------------------------- machine-readable files
 def indexable_urls():
-    u = [("/", "1.0", TODAY), ("/shop/", "0.9", TODAY), ("/blog/", "0.7", TODAY), ("/category/skincare-guides/", "0.4", TODAY)]
+    u = [("/", "1.0", TODAY), ("/shop/", "0.9", TODAY), ("/blog/", "0.7", TODAY)]
     u += [(cat_url(c), "0.8", TODAY) for c in CATS]
     u += [(f"/product/{p['slug']}/", "0.9", TODAY) for p in PRODUCTS]
     u += [(f"/{g['slug']}/", "0.6", TODAY) for g in PAGES]
@@ -919,7 +918,7 @@ def build_vercel():
         R("/product/glow-clarifying-cleanser/", "/product/avocado-face-cream/"),
         R("/is-avocado-face-cream-good-for-glowing-skinis-avocado-cream-good-for-your-skin/", "/is-avocado-cream-good-for-your-skin/"),
         R("/cart/:path*", "/shop/"), R("/checkout/:path*", "/shop/"), R("/my-account/:path*", "/shop/"),
-        R("/product-category/uncategorized/", "/shop/"), R("/category/uncategorized/", "/blog/"),
+        R("/product-category/uncategorized/", "/shop/"), R("/category/uncategorized/", "/blog/"), R("/category/skincare-guides/", "/blog/"),
         R("/product-tag/:slug*", "/shop/"), R("/tag/:slug*", "/blog/"), R("/author/:slug*", "/about/"),
         R("/home/", "/"), R("/sample-page/", "/"),
         R("/post-sitemap.xml", "/sitemap.xml"), R("/page-sitemap.xml", "/sitemap.xml"), R("/product-sitemap.xml", "/sitemap.xml"),
