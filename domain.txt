@@ -1,3 +1,13 @@
-product/glass-glow-cream 200
-shop 200
-sitemap urls: 73
+alpha-arbutin-cream 200
+glutathione-vs-alpha-arbutin 200
+centella-cream-for-indian-skin 200
+hyaluronic-acid-night-cream 200
+glass-glow-cream-ke-fayde 200
+best-avocado-cream-in-india 200
+night-cream-in-kg-jaipur 200
+night-cream-in-kg-lucknow 200
+night-cream-in-kg-surat 200
+night-cream-in-kg-kochi 200
+night-cream-in-kg-indore 200
+product/glass-glow-night-duo 200
+sitemap urls: 85
