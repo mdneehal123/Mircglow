@@ -2,13 +2,13 @@
 count: 85
 non-200: 0
 slowest:
-200 0 27849 0.320677 https://mircglow.com/korean-night-cream-hindi/
-200 0 18214 0.308690 https://mircglow.com/ingredients/
-200 0 33184 0.308088 https://mircglow.com/product-category/night-creams/
+200 0 24206 0.450628 https://mircglow.com/avocado-cream-in-kg-hindi/
+200 0 30197 0.343088 https://mircglow.com/blog/
+200 0 48314 0.335485 https://mircglow.com/product/glass-glow-cream/
 largest html:
-200 0 69715 0.218774 https://mircglow.com/
-200 0 50782 0.269889 https://mircglow.com/product/avocado-night-cream/
-200 0 49795 0.161556 https://mircglow.com/product/glutathione-cream/
+200 0 69715 0.298807 https://mircglow.com/
+200 0 50782 0.301881 https://mircglow.com/product/avocado-night-cream/
+200 0 49795 0.259915 https://mircglow.com/product/glutathione-cream/
 == Redirect tests
 http://mircglow.com/ -> 308 https://mircglow.com/
 https://www.mircglow.com/ -> 308 https://mircglow.com/
@@ -23,14 +23,15 @@ https://mircglow.com/wp-admin/ -> 403
 https://mircglow.com/wp-login.php -> 403 
 https://mircglow.com/sitemap_index.xml -> 200 
 https://mircglow.com/product-sitemap.xml -> 308 https://mircglow.com/sitemap.xml
-https://mircglow.com/index.html -> 200 
-https://mircglow.com/blog/page/2/ -> 404 
+https://mircglow.com/blog/page/2/ -> 308 https://mircglow.com/blog/
+https://mircglow.com/page/3/ -> 308 https://mircglow.com/blog/
+https://mircglow.com/blog/page/2/ -> 308 https://mircglow.com/blog/
 https://mircglow.com/product/radiance-renewal-serum/ -> 308 https://mircglow.com/product/avocado-night-cream/
 https://mircglow.com/does-not-exist-xyz/ -> 404 
 == Headers
 -- /
 HTTP/2 200 
-age: 310
+age: 18
 cache-control: public, max-age=0, must-revalidate
 content-encoding: br
 content-type: text/html; charset=utf-8
@@ -39,30 +40,30 @@ x-content-type-options: nosniff
 x-vercel-cache: HIT
 -- /product/glass-glow-cream/
 HTTP/2 200 
-age: 215
+age: 16
 cache-control: public, max-age=0, must-revalidate
 content-encoding: br
 content-type: text/html; charset=utf-8
 strict-transport-security: max-age=63072000; includeSubDomains; preload
 x-content-type-options: nosniff
 x-vercel-cache: HIT
--- /assets/site.638ae7db.css
+-- /assets/site.007a32ad.css
 HTTP/2 200 
-age: 310
+age: 0
 cache-control: public, max-age=31536000, immutable
 content-encoding: br
 content-type: text/css; charset=utf-8
 strict-transport-security: max-age=63072000; includeSubDomains; preload
 x-content-type-options: nosniff
-x-vercel-cache: HIT
+x-vercel-cache: MISS
 -- /wp-content/uploads/2026/10/mirc-glow-glass-glow-cream-glutathione-30g.mg.webp
 HTTP/2 200 
-age: 310
+age: 0
 cache-control: public, max-age=2592000, stale-while-revalidate=86400
 content-type: image/webp
 strict-transport-security: max-age=63072000; includeSubDomains; preload
 x-content-type-options: nosniff
-x-vercel-cache: HIT
+x-vercel-cache: MISS
 content-length: 79036
 == robots/llms/feed
 /robots.txt 200 text/plain; charset=utf-8
@@ -70,12 +71,11 @@ content-length: 79036
 /feed.xml 200 application/rss+xml; charset=utf-8
 /74d314fcd13a092ae512fe4c12566f9f.txt 200 text/plain; charset=utf-8
 == Lighthouse (mobile)
--- / performance:98 accessibility:97 best-practices:100 seo:100 | LCP 2.0 s CLS 0 TBT 20 ms FCP 1.7 s
-   [accessibility] color-contrast: Background and foreground colors do not have a sufficient contrast ratio.
--- /product/glass-glow-cream/ performance:100 accessibility:96 best-practices:100 seo:100 | LCP 1.5 s CLS 0 TBT 50 ms FCP 0.9 s
-   [accessibility] color-contrast: Background and foreground colors do not have a sufficient contrast ratio.
--- /avocado-cream/ performance:75 accessibility:96 best-practices:100 seo:100 | LCP 9.8 s CLS 0 TBT 0 ms FCP 1.1 s
-   [accessibility] color-contrast: Background and foreground colors do not have a sufficient contrast ratio.
-   [performance] largest-contentful-paint: Largest Contentful Paint (9.8 s)
--- /avocado-cream-for-oily-skin/ performance:100 accessibility:96 best-practices:100 seo:100 | LCP 0.9 s CLS 0 TBT 0 ms FCP 0.9 s
-   [accessibility] color-contrast: Background and foreground colors do not have a sufficient contrast ratio.
+-- / performance:99 accessibility:100 best-practices:100 seo:100 | LCP 1.9 s CLS 0 TBT 0 ms FCP 1.6 s
+-- /product/glass-glow-cream/ performance:99 accessibility:100 best-practices:100 seo:100 | LCP 1.5 s CLS 0 TBT 120 ms FCP 0.9 s
+-- /avocado-cream/ performance:100 accessibility:100 best-practices:100 seo:100 | LCP 1.4 s CLS 0 TBT 0 ms FCP 0.9 s
+-- /avocado-cream-for-oily-skin/ performance:100 accessibility:100 best-practices:100 seo:100 | LCP 0.9 s CLS 0 TBT 0 ms FCP 0.9 s
+-- /shop/ performance:100 accessibility:100 best-practices:100 seo:100 | LCP 1.6 s CLS 0.002 TBT 0 ms FCP 1.0 s
+-- /blog/ performance:100 accessibility:100 best-practices:100 seo:100 | LCP 0.9 s CLS 0 TBT 0 ms FCP 0.9 s
+-- /korean-night-cream/ performance:100 accessibility:100 best-practices:100 seo:100 | LCP 1.2 s CLS 0 TBT 0 ms FCP 0.9 s
+-- /avocado-cream-in-kg/ performance:100 accessibility:100 best-practices:100 seo:100 | LCP 1.1 s CLS 0 TBT 0 ms FCP 0.9 s
