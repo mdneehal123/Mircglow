@@ -54,3 +54,9 @@
 - /shop/ : all products
 - /product-category/night-creams/avocado-night-creams/ : avocado creams
 - /skin-quiz/ , /skincare-routine-builder/ , /skincare-ingredient-glossary/ , /bulk-night-cream/ , /shipping-policy/ , /returns-refunds/
+
+## Added Oct 2026
+- /product/avocado-glow-cream-15g/ — Avocado Glow Cream 15g, ₹399 (MRP ₹599): avocado + aloe vera only, light whipped cream, day or night
+- /product/glass-glow-cream/ — Glass Glow Cream 30g, ₹2,499 (MRP ₹2,999): glutathione, niacinamide, hyaluronic acid, centella asiatica, alpha arbutin; night (day only with sunscreen)
+- /avocado-cream-in-kg/ — avocado cream / avocado night cream 1 kg bulk; /avocado-cream-in-kg-hindi/ (Hindi)
+- Live guides: /avocado-day-cream/, /avocado-cream-for-oily-skin/, /how-to-choose-avocado-cream/, /night-cream-vs-day-cream/, /avocado-cream-for-acne-prone-skin/, /avocado-cream-in-winter/, /avocado-oil-vs-avocado-cream-for-face/, /avocado-cream-kaise-lagaye/, /glutathione-cream-ke-fayde/

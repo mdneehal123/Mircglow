@@ -3,7 +3,8 @@ import os
 from PIL import Image, ImageChops, ImageFilter
 U = "wp-content/uploads/2026/09/"
 SRC = {"korean": U+"4ED0DC3B-11FA-4903-87CC-21E1887C89E5.png", "gluta": U+"5D782746-D1F2-496B-8449-5B8149C43004-1.png",
-       "night": U+"04BCBF62-EE16-4594-B65C-BDA805C264CB-1.png", "glow": U+"2DFA2551-B14E-43F6-8929-E39538EC9628-1.png"}
+       "night": U+"04BCBF62-EE16-4594-B65C-BDA805C264CB-1.png", "glow": U+"2DFA2551-B14E-43F6-8929-E39538EC9628-1.png",
+       "glass": "wp-content/uploads/2026/10/mirc-glow-glass-glow-cream-glutathione-30g.png", "glow15": "wp-content/uploads/2026/10/mirc-glow-avocado-glow-cream-15g-jars.png"}
 
 def whiten(path, soft=(18, 46)):
     """Turns the photo's plain background white, keeping the jar untouched."""
@@ -38,6 +39,7 @@ COMBOS = {
  "mirc-glow-day-and-night-cream-combo": [("night", 1.0), ("glow", .55)],
  "mirc-glow-night-cream-combo": [("gluta", .85), ("night", 1.0)],
  "mirc-glow-korean-glass-skin-kit": [("gluta", .8), ("korean", 1.0), ("glow", .55)],
+ "mirc-glow-glass-glow-night-duo": [("glass", 1.25), ("night", .8)],
 }
 if __name__ == "__main__":
     os.makedirs("wp-content/uploads/2026/10", exist_ok=True)

@@ -98,7 +98,7 @@ PRODUCTS = [
       bg="linear-gradient(160deg,#F8FCFA,#DDECE4)", cats=["night-creams","avocado-night-creams"],
       ing=["Avocado","Aloe vera","Vitamin B3 (niacinamide)","Kojic acid"], lasts="About 2 to 3 weeks of daily use",
       skin="All skin types; very little for oily skin", use="Morning under sunscreen, or at night",
-      rt="Avocado Face Cream 10g: Best Gentle Daily Moisturiser | Mirc Glow",
+      rt="Avocado Face Cream 10g – ₹349, Free Shipping & COD | Mirc Glow",
       rd="Buy Mirc Glow Avocado Face Cream 10g online in India. A nourishing avocado moisturiser for soft, smooth, radiant-looking skin. Cash on Delivery available.",
       lead="A light daily avocado cream with aloe vera, vitamin B3 and kojic acid, in a 10 g jar.",
       pts=["Soft, comfortable skin without a heavy feel","Small jar that is easy to carry","The easiest way to try Mirc Glow for the first time"]),
@@ -140,6 +140,19 @@ PRODUCTS = [
       lead="Our Glutathione Cream with vitamin C and kojic acid, paired with the rich Avocado Night Cream. Radiance-focused care and deep nourishment for your evenings.",
       pts=["Glutathione Cream with Vitamin C and Kojic Acid, 30 g","Avocado Night Cream with Kojic Acid, 30 g","Costs less than buying the two jars separately"],
       parts=["glutathione-cream","avocado-night-cream"]),
+ dict(id=303, slug="glass-glow-night-duo", name="Glass Glow Night Duo", size="30 g + 30 g", grams=60,
+      h1="Glass Glow Night Duo – Mirc Glow Glass Glow Cream 30g + Avocado Night Cream 30g",
+      price=2699, mrp=3148, img="/wp-content/uploads/2026/10/mirc-glow-glass-glow-night-duo.png", jars=["Glass Glow","Avocado"],
+      ko="글래스 듀오", tag="Set", topic="glutathione", when="Night (alternate or layer)",
+      meta="Glass Glow Cream and Avocado Night Cream", best="A radiant glass-skin look plus rich overnight comfort",
+      bg="linear-gradient(150deg,#F8FBF3,#E1EBD5)", cats=["combos"],
+      ing=["Glutathione","Niacinamide","Hyaluronic acid","Centella asiatica","Alpha arbutin","Avocado","Aloe vera","Kojic acid"], lasts="About two months when you alternate the jars",
+      skin="Dull, dry or uneven-looking skin", use="Alternate nights at first, then layer",
+      rt="Glass Glow Night Duo: Glass Glow + Avocado Night Cream | Mirc Glow",
+      rd="Buy the Mirc Glow Glass Glow Night Duo: Glass Glow Cream 30g with glutathione and alpha arbutin plus Avocado Night Cream 30g. Free shipping and COD in India.",
+      lead="Our premium Glass Glow Cream paired with the rich Avocado Night Cream: a radiant, even-looking glass-skin look and soft, comfortable skin by morning.",
+      pts=["Glass Glow Cream, 30 g","Avocado Night Cream with Kojic Acid, 30 g","Costs less than buying the two jars separately"],
+      parts=["glass-glow-cream","avocado-night-cream"]),
  dict(id=264, slug="korean-glass-skin-kit", name="Korean Glass Skin Kit", size="30 g + 25 g + 10 g", grams=65,
       h1="Korean Glass Skin Kit – 3 Mirc Glow Korean-Inspired Creams",
       price=1999, mrp=2497, img="/wp-content/uploads/2026/10/mirc-glow-korean-glass-skin-kit.png", jars=["Glow","Night","Day"],
@@ -192,8 +205,8 @@ POSTS = [
  P("avocado-day-cream","Avocado Day Cream: How to Use It in the Morning","Can you use avocado cream in the day? Yes. How an avocado day cream differs from a night cream, how to use it under sunscreen, and which skin types need one.","Avocado Day Cream: How to Use It and Day vs Night Cream | Mirc Glow","Avocado day cream explained: how to use avocado cream in the morning under sunscreen, avocado day vs night cream, and which skin types need one.","2026-10-16","avocado"),
  P("avocado-cream-for-dry-skin","Avocado Cream for Dry Skin: Why It Works and How to Use It","Dry, tight skin after washing? Here is why avocado cream for dry skin makes sense, how to apply it so it actually helps, and what to change in winter.","Avocado Cream for Dry Skin: 5 Simple Ways to Use It | Mirc Glow","Dry, tight skin after washing? See why avocado cream for dry skin makes sense, 5 simple ways to use it so it really helps, and what to change in winter.",D4,"avocado"),
  P("night-cream-for-men","Night Cream for Men: A Simple Guide to Getting Started","A no-fuss guide to night cream for men: why it helps, how to choose one, and a two-minute evening routine.","Night Cream for Men: 5 Easy Steps to Better-Looking Skin | Mirc Glow","A no-fuss guide to night cream for men in India: why it helps, how to choose one, and 5 easy steps for a two-minute evening routine.",D4,"night"),
- P("night-cream-for-oily-skin","Night Cream for Oily Skin: How to Choose and Use One","Yes, oily skin needs a night cream. Learn how to choose a night cream for oily skin, how much to use, and the mistakes that cause shine and breakouts.","Night Cream for Oily Skin: 6 Simple Rules That Work | Mirc Glow","Does oily skin need a night cream? Yes. Learn 6 simple rules for choosing and using a night cream for oily skin without shine, heaviness or breakouts.",D4,"night"),
- P("best-night-cream-for-glowing-skin","Best Night Cream for Glowing Skin in India: How to Choose","How to find the best night cream for glowing skin in India: the ingredients to look for, how to choose by skin type, and our three picks.","Best Night Cream for Glowing Skin in India: 7 Things to Check | Mirc Glow","Looking for the best night cream for glowing skin in India? Learn the 7 things to check, the ingredients that matter, and how to choose by skin type.",D3,"night"),
+ P("night-cream-for-oily-skin","Night Cream for Oily Skin: How to Choose and Use One","Yes, oily skin needs a night cream. Learn how to choose a night cream for oily skin, how much to use, and the mistakes that cause shine and breakouts.","Night Cream for Oily Skin (2026): 6 Rules and Best Picks | Mirc Glow","Does oily skin need a night cream? Yes. Learn 6 simple rules for choosing and using a night cream for oily skin without shine, heaviness or breakouts.",D4,"night"),
+ P("best-night-cream-for-glowing-skin","Best Night Cream for Glowing Skin in India: How to Choose","How to find the best night cream for glowing skin in India: the ingredients to look for, how to choose by skin type, and our three picks.","Best Night Cream for Glowing Skin in India (2026 Guide) | Mirc Glow","Looking for the best night cream for glowing skin in India? Learn the 7 things to check, the ingredients that matter, and how to choose by skin type.",D3,"night"),
  P("kojic-acid-cream-for-dark-spots","Kojic Acid Cream for Dark Spots: How to Use It and What to Expect","Kojic acid cream for dark spots: what it is, how to use it, how long it takes, and how to avoid irritation.","Kojic Acid Cream for Dark Spots: 7 Tips for Best Results | Mirc Glow","Using kojic acid cream for dark spots? Learn what it is, how to apply it, how long it takes, and 7 simple tips to get better results without irritation.",D3,"kojic"),
  P("glass-skin-routine-for-indian-skin","Glass Skin Routine for Indian Skin: 6 Simple Steps","A glass skin routine for Indian skin, adapted for heat, humidity and strong sun. Six simple steps for morning and night.","Glass Skin Routine for Indian Skin: 6 Simple Steps That Work | Mirc Glow","Follow this glass skin routine for Indian skin: 6 simple steps adapted for heat, humidity and strong sun, with morning and night routines for every skin type.",D3,"routine"),
  P("kojic-acid-vs-glutathione","Kojic Acid vs Glutathione: Which Is Right for Your Skin?","Kojic acid vs glutathione: what each ingredient is, how they differ, whether you can use them together, and which one suits your skin.","Kojic Acid vs Glutathione: 5 Key Differences Explained | Mirc Glow","Kojic acid vs glutathione: learn the 5 key differences, which ingredient suits your skin goal, and whether you can safely use both together.",D3,"kojic"),
@@ -384,6 +397,8 @@ BANNERS = {
      c=[("🥑","Whipped avocado cream"),("🌿","Cooling aloe vera"),("☀️","Day or night")]),
  "glass-glow-cream": dict(tone="avo", eb="Glutathione · Niacinamide · Alpha arbutin", h="Your one-step glass skin glow",
      c=[("✨","Radiant, even-looking tone"),("💧","Hyaluronic acid hydration"),("🌿","Calming centella")]),
+ "glass-glow-night-duo": dict(tone="gold", eb="Glass Glow · Avocado Night", h="Glow and comfort, two steps",
+     c=[("✨","Radiant, even-looking tone"),("🥑","Rich overnight comfort"),("🌙","Alternate or layer")]),
  "glutathione-cream": dict(tone="gold", eb="Glutathione · Vitamin C · Kojic acid", h="For dull, tired-looking skin",
      c=[("✨","Radiant-looking finish"),("🎯","More even-looking tone"),("🌙","A pea-sized amount at night")]),
  "avocado-night-cream": dict(tone="cream", eb="Avocado · Aloe vera · Kojic acid", h="Rich comfort for dry, tight skin",
@@ -729,7 +744,7 @@ def build_shop():
     listing("/shop/","Shop Avocado Night Cream and Glutathione Cream | Mirc Glow",
             "Shop all Mirc Glow creams and combos from ₹349: avocado night creams, glutathione cream and glass skin kits. Free shipping and Cash on Delivery across India.",
             "Shop all creams", '<span lang="ko">컬렉션</span> · THE COLLECTION',
-            "Six Korean-inspired creams and three sets. Free shipping across India, Cash on Delivery, and 7-day returns on sealed jars.",
+            "Six Korean-inspired creams and four sets. Free shipping across India, Cash on Delivery, and 7-day returns on sealed jars.",
             PRODUCTS, [("Home","/"),("Shop","/shop/")], "/shop/", help_html)
     for c, d in CATS.items():
         items = [p for p in PRODUCTS if c in p["cats"]]
@@ -977,7 +992,7 @@ def build_robots():
 
 def build_llms():
     L = [f"# {BRAND}", "",
-         "> Korean-inspired skincare brand from Bhatkal, Karnataka, India. Six creams and three sets built around avocado, glutathione and kojic acid. The four original creams contain aloe vera, vitamin B3 and kojic acid; Avocado Glow Cream 15g is avocado and aloe vera only; Glass Glow Cream 30g has glutathione, niacinamide, hyaluronic acid, centella asiatica and alpha arbutin. Sold directly across India with free shipping, Cash on Delivery and 7-day returns on sealed jars. Orders are placed on WhatsApp (+91 99808 81230).", "",
+         "> Korean-inspired skincare brand from Bhatkal, Karnataka, India. Six creams and four sets built around avocado, glutathione and kojic acid. The four original creams contain aloe vera, vitamin B3 and kojic acid; Avocado Glow Cream 15g is avocado and aloe vera only; Glass Glow Cream 30g has glutathione, niacinamide, hyaluronic acid, centella asiatica and alpha arbutin. Sold directly across India with free shipping, Cash on Delivery and 7-day returns on sealed jars. Orders are placed on WhatsApp (+91 99808 81230).", "",
          "Important: Mirc Glow creams are cosmetics. They help skin feel softer and look smoother and more even. They do not change natural skin tone and are not intended to treat skin conditions. They are Korean-inspired; manufacturing details are printed on each pack.", "",
          "## Products (prices in INR, October 2026)"]
     for p in PRODUCTS:
