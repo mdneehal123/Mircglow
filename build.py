@@ -16,7 +16,17 @@ SITE = "https://mircglow.com"
 BRAND = "Mirc Glow"
 PHONE = "+91 99808 81230"
 WA_NUM = "919980881230"
-TODAY = "2026-10-14"
+TODAY = "2026-10-16"
+import importlib.util as _ilu
+_gs = _ilu.spec_from_file_location("geo", os.path.join(os.path.dirname(os.path.abspath(__file__)), "content", "geo.py")); GEO = _ilu.module_from_spec(_gs); _gs.loader.exec_module(GEO)
+
+def qa_html(question_answers, heading="Short answers"):
+    return f"<h2>{heading}</h2>" + "".join(f"<p><strong>{html.escape(q)}</strong> {html.escape(a)}</p>" for q, a in question_answers)
+
+def at_glance_html():
+    rows = "".join(f"<dt>{html.escape(k)}</dt><dd>{html.escape(v)}</dd>" for k, v in GEO.AT_A_GLANCE)
+    return f'<section class="sec" aria-labelledby="h-glance"><div class="w"><div class="glance"><span class="eyebrow">Mirc Glow at a glance</span><h2 class="sh" id="h-glance">Quick facts about Mirc Glow</h2><dl>{rows}</dl></div></div></section>'
+
 UP = "/wp-content/uploads/2026/09/"
 
 # Razorpay payment links. Paste each product's link here when ready, e.g.
@@ -372,7 +382,10 @@ ORG = {"@type":"OnlineStore","@id":ORG_ID,"name":BRAND,"url":SITE+"/","logo":SIT
        "telephone":PHONE.replace(" ",""),"address":{"@type":"PostalAddress","streetAddress":"Azad Nagar 4th Cross","addressLocality":"Bhatkal","addressRegion":"Karnataka","postalCode":"581320","addressCountry":"IN"},
        "areaServed":{"@type":"Country","name":"India"},"currenciesAccepted":"INR","paymentAccepted":"Cash on Delivery, UPI, card",
        "contactPoint":{"@type":"ContactPoint","telephone":PHONE.replace(" ",""),"contactType":"customer service","areaServed":"IN","availableLanguage":["English","Hindi"]},
-       "hasMerchantReturnPolicy":RETURN_POLICY}
+       "hasMerchantReturnPolicy":RETURN_POLICY,"foundingLocation":{"@type":"Place","name":"Bhatkal, Karnataka, India"},
+       "founder":{"@type":"Person","name":"Mohammed Nihal","url":SITE+"/about-the-author/"},
+       "knowsAbout":["Night cream","Avocado cream","Glutathione cream","Kojic acid","Niacinamide","Korean skincare","Glass skin routine"],
+       "brand":{"@type":"Brand","name":BRAND}}
 WEBSITE = {"@type":"WebSite","@id":SITE+"/#website","url":SITE+"/","name":BRAND,"inLanguage":"en-IN","publisher":{"@id":ORG_ID}}
 
 def crumbs_ld(items):
@@ -615,6 +628,8 @@ def build_home():
 <p class="c" style="margin-top:18px"><a class="yb yb-line" href="/faq/">View all FAQs</a></p>
 </div></section>
 
+{at_glance_html()}
+
 <section class="sec"><div class="w"><div class="closer">
 <h2 class="sh">Your glow starts here</h2>
 <p>Korean-inspired essentials for hydration, radiance and a smooth, glass-skin-inspired finish. Order in one WhatsApp message.</p>
@@ -680,9 +695,16 @@ def product_cta(p):
     return (f'<aside class="pcta" aria-label="Featured cream">{photo(p, "", alt=p["name"])}<div><span class="lab">From this guide</span><h2>{esc(p["name"])} · {p["size"]}</h2><p>{esc(p["lead"])}</p>'
             f'<div class="row"><span class="price">{inr(p["price"])} <s>{inr(p["mrp"])}</s></span><a class="order" href="{wa(order_msg(p))}" target="_blank" rel="noopener">Order on WhatsApp</a><a class="link" href="/product/{p["slug"]}/">Details</a></div></div></aside>')
 
+def quick_box(p):
+    q = GEO.QUICK.get(p["slug"])
+    if not q: return f'<div class="short"><p>{esc(p["ex"])}</p></div>'
+    facts = "".join(f"<li>{esc(x)}</li>" for x in q[1])
+    return f'<aside class="quick" aria-label="Quick answer"><span class="quick-l">Quick answer</span><p>{esc(q[0])}</p><ul>{facts}</ul></aside>'
+
 def build_post(p):
     url = f"/{p['slug']}/"
     raw = read(os.path.join(SRC, "posts", p["slug"] + ".html"))
+    if p["slug"] in GEO.SHORT_ANSWERS: raw += qa_html(GEO.SHORT_ANSWERS[p["slug"]])
     body_html, toc = add_h2_ids(lazy_imgs(raw))
     faqs = faqs_from(raw)
     mins = max(2, round(words(raw) / 200))
@@ -712,7 +734,7 @@ def build_post(p):
 <header class="w art-top"><span class="lab">{esc(topic_name)}</span><h1 class="dsp">{esc(p["title"])}</h1>
 <div class="byline"><span>By <a href="/about-the-author/"><b>Mohammed Nihal</b></a>, founder</span><span>Published <time datetime="{p["date"]}">{fmt_date(p["date"])}</time></span><span>Updated <time datetime="{TODAY}">{fmt_date(TODAY)}</time></span><span>{mins} min read</span></div>
 {merged}
-<div class="short"><p>{esc(p["ex"])}</p></div>
+{quick_box(p)}
 </header>
 <div class="w layout">{toc_html}<div><div class="prose">{body_html}</div>{product_cta(prod)}{guide_note()}</div></div>
 </article>
@@ -802,6 +824,8 @@ def build_product(p):
 def build_page(g):
     url = f"/{g['slug']}/"
     raw = read(os.path.join(SRC, "pages", g["slug"] + ".html"))
+    if g["slug"] in GEO.PAGE_ANSWERS: raw += qa_html(GEO.PAGE_ANSWERS[g["slug"]])
+    if g["slug"] in GEO.HINDI_FAQ: raw += "<h2>अक्सर पूछे जाने वाले सवाल (FAQ)</h2>" + "".join(f"<h3>{html.escape(q)}</h3><p>{html.escape(a)}</p>" for q, a in GEO.HINDI_FAQ[g["slug"]])
     raw = lazy_imgs(raw)
     faqs = faqs_from(raw)
     if g["slug"] in CITY: cr = [("Home","/"),("Bulk orders","/bulk-night-cream/"),(g["crumb"], url)]
@@ -817,7 +841,7 @@ def build_page(g):
     out = head(g["rt"], g["rd"], url, lang=g["lang"], image=g["img"], alts=alts, extra=ld(*nodes))
     out += header()
     if g["kind"] == "legacy":
-        out += f'<main id="main" class="lg">{crumbs_html(cr)}{raw}</main>'
+        out += f'<main id="main" class="lg">{crumbs_html(cr)}{raw}{at_glance_html() if g["slug"]=="about" else ""}</main>'
     else:
         out += f'<main id="main" class="plain">{crumbs_html(cr)}<div class="w"><article class="prose">{raw}<p style="margin-top:3em;font-size:.85rem;color:var(--muted)">{"अंतिम अपडेट" if g["lang"]=="hi" else "Last reviewed"}: {fmt_date(TODAY)}</p></article></div></main>'
     out += footer()
@@ -906,7 +930,13 @@ def build_llms():
           f"- [Skin quiz]({SITE}/skin-quiz/)", f"- [Skincare routine builder]({SITE}/skincare-routine-builder/)", f"- [Skincare ingredient glossary]({SITE}/skincare-ingredient-glossary/)",
           f"- [Our ingredients]({SITE}/ingredients/)", f"- [FAQ]({SITE}/faq/)", f"- [About Mirc Glow]({SITE}/about/)",
           "", "## Skincare guides"]
-    for p in LIVE_POSTS: L.append(f"- [{p['title']}]({SITE}/{p['slug']}/): {p['ex']}")
+    for p in LIVE_POSTS:
+        q = GEO.QUICK.get(p["slug"])
+        L.append(f"- [{p['title']}]({SITE}/{p['slug']}/): " + (q[0] if q else p['ex']))
+    L += ["", "## Brand facts"] + [f"- {k}: {v}" for k, v in GEO.AT_A_GLANCE]
+    L += ["", "## About the content", f"- [About the author]({SITE}/about-the-author/): guides are written by founder Mohammed Nihal.",
+          f"- [Editorial policy]({SITE}/editorial-policy/): how guides are fact-checked and updated; no medical or skin-colour claims."]
+    L += ["", "## Common questions"] + [f"- {q} {a}" for k in ("shipping-policy", "returns-refunds") for q, a in GEO.PAGE_ANSWERS[k]]
     write("/llms.txt", "\n".join(L) + "\n")
 
 def build_feed():
