@@ -7,6 +7,7 @@ redirect_src = [r["source"] for r in cfg["redirects"]]
 
 def redirected(u):
     for s in redirect_src:
+        if "(" in s and re.match("^" + s + "$", u): return True
         pat = "^" + re.sub(r":\w+[*+]?", ".*", s.replace(".", r"\.")) + "$"
         if re.match(pat, u): return True
     return False

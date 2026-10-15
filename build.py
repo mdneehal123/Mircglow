@@ -521,7 +521,7 @@ def build_home():
     itemlist = {"@type":"ItemList","name":"Mirc Glow creams","itemListElement":[{"@type":"ListItem","position":i+1,"url":SITE+f"/product/{p['slug']}/","name":p["name"]} for i,p in enumerate(PRODUCTS)]}
     body = head("Mirc Glow | Avocado Night Creams & Korean-Inspired Skincare",
         "Shop Mirc Glow avocado creams in India: avocado night creams and a daily avocado face cream with aloe vera, vitamin B3 and kojic acid. Free shipping and Cash on Delivery.",
-        url, extra=f'<link rel="preload" as="image" href="{hero[0]["img"][:-4]}.mg.webp" type="image/webp" fetchpriority="high">' + ld(ORG, WEBSITE, itemlist, faq_ld(faqs)))
+        url, extra=f'<link rel="preload" as="image" href="/wp-content/uploads/2026/10/mirc-glow-skincare-kit-wide.mg.webp" type="image/webp" fetchpriority="high"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap">' + ld(ORG, WEBSITE, itemlist, faq_ld(faqs)))
     body += header("/")
 
     def ticks(items):
@@ -550,14 +550,23 @@ def build_home():
     blog = "".join(post_card(p) for p in jposts)
 
     body += f'''<main id="main">
-<section class="panels" aria-label="Best sellers"><div class="panels-in">{"".join(buy_panel(p, eager=(i==0)) for i,p in enumerate(hero))}</div></section>
+<section class="lux" aria-labelledby="h-home"><div class="w lux-in">
+<div class="lux-copy">
+<span class="lux-eb"><span lang="ko">유리 피부</span> · Korean-inspired skincare, made in Karnataka</span>
+<h1 id="h-home" class="lux-h">Mirc Glow avocado night creams &amp; Korean-inspired skincare</h1>
+<p class="lux-p">Glutathione, kojic acid and avocado care for brighter-looking, smoother-looking skin. Every cream contains aloe vera, vitamin B3 and kojic acid.</p>
+<div class="lux-cta"><a class="lx lx-gold" href="/shop/">Shop best sellers</a><a class="lx lx-line" href="{WA_HELLO}" target="_blank" rel="noopener">{WA_SVG}<span>Order on WhatsApp</span></a></div>
+<ul class="lux-trust"><li><b>From {inr(349)}</b></li><li>Free shipping</li><li>Cash on Delivery</li><li>7-day returns</li></ul>
+</div>
+<div class="lux-art" aria-hidden="true"><div class="lux-arch"><picture><source srcset="/wp-content/uploads/2026/10/mirc-glow-skincare-kit-wide.mg.webp" type="image/webp"><img src="/wp-content/uploads/2026/10/mirc-glow-skincare-kit-wide.png" alt="" width="1100" height="500" fetchpriority="high" decoding="async"></picture></div>
+<span class="lux-chip c1">Glass-skin routine</span><span class="lux-chip c2">Glutathione · Avocado</span></div>
+</div>
+<div class="lux-band" aria-hidden="true"><div><span>Avocado</span><span>Glutathione</span><span>Kojic acid</span><span>Vitamin B3</span><span>Aloe vera</span><span>Vitamin C</span><span>Avocado</span><span>Glutathione</span><span>Kojic acid</span><span>Vitamin B3</span><span>Aloe vera</span><span>Vitamin C</span></div></div>
+</section>
 
-<section class="intro"><div class="w">
-<span class="eyebrow">Mirc Glow · <span lang="ko">유리 피부</span></span>
-<h1>Mirc Glow avocado night creams &amp; Korean-inspired skincare</h1>
-<p>Premium skincare with glutathione, kojic acid and avocado care, thoughtfully formulated for brighter-looking, smoother-looking skin. Every cream contains aloe vera, vitamin B3 and kojic acid. From {inr(349)} · Free shipping · Cash on Delivery.</p>
-<div class="row"><a class="yb yb-dark" href="/shop/">Shop best sellers</a><a class="yb yb-line" href="/skin-quiz/">Take the skin quiz</a></div>
-</div></section>
+<section class="panels" aria-label="Best sellers"><div class="panels-in">{"".join(buy_panel(p) for i,p in enumerate(hero))}</div></section>
+
+
 
 {banner_strip([PBY[x] for x in ["avocado-korean-night-cream","glutathione-cream","avocado-night-cream","avocado-face-cream","korean-glass-skin-kit"]])}
 
