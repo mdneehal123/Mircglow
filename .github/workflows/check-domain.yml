@@ -12,7 +12,7 @@ jobs:
       - run: |
           sleep 90
           {
-          for p in product/avocado-glow-cream-15g shop avocado-cream wp-content/uploads/2026/10/mirc-glow-avocado-glow-cream-15g.mg.webp; do
+          for p in avocado-cream-in-kg bulk-night-cream product/avocado-glow-cream-15g; do
             echo "$p $(curl -s -o /dev/null -w '%{http_code}' https://mircglow.com/$p/)"
           done
           echo "sitemap urls: $(curl -s https://mircglow.com/sitemap.xml | grep -c '<loc>')"
