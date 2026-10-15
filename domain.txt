@@ -1,4 +1,3 @@
 avocado-cream-in-kg 200
-bulk-night-cream 200
-product/avocado-glow-cream-15g 200
-sitemap urls: 71
+avocado-cream-in-kg-hindi 200
+sitemap urls: 72
