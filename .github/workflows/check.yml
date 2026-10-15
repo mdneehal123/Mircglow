@@ -1,0 +1,49 @@
+name: Check live Vercel site
+on:
+  push:
+    branches: [site-check]
+permissions:
+  contents: write
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check every page
+        run: |
+          python3 - <<'PY'
+          import re, json, urllib.request, html
+          H = {"User-Agent": "Mozilla/5.0 (compatible; MircGlowLaunchCheck)"}
+          class NoRedir(urllib.request.HTTPRedirectHandler):
+              def redirect_request(self, *a, **k): return None
+          op = urllib.request.build_opener(NoRedir)
+          def get(u, follow=True):
+              try:
+                  r = (urllib.request.urlopen if follow else op.open)(urllib.request.Request(u, headers=H), timeout=40)
+                  return r.status, r.headers.get("Location"), r.read()
+              except urllib.error.HTTPError as e: return e.code, e.headers.get("Location"), b""
+              except Exception as e: return 0, None, str(e).encode()
+          out = {"hosts": {}}
+          for host in ["https://mircglow.vercel.app", "https://mircglow-mdneehal.vercel.app", "https://mircglow-ff4zybdry-mdneehal.vercel.app"]:
+              out["hosts"][host] = get(host + "/")[0]
+          base = next((h for h, s in out["hosts"].items() if s == 200), None)
+          out["base"] = base
+          if base:
+              st, _, sm = get(base + "/sitemap.xml")
+              urls = [u.replace("https://mircglow.com", base) for u in re.findall(r"<loc>(.*?)</loc>", sm.decode())]
+              pages, imgs = [], set()
+              for u in urls:
+                  s, _, b = get(u); t = b.decode("utf-8", "replace")
+                  g = lambda p: (lambda m: html.unescape(m.group(1)) if m else None)(re.search(p, t, re.S))
+                  pages.append({"url": u.replace(base, ""), "status": s, "title": g(r"<title>(.*?)</title>"), "canonical": g(r'<link rel="canonical" href="([^"]*)"')})
+                  imgs |= set(re.findall(r'(?:src|srcset)="(/(?:wp-content|assets)/[^"\s]+)"', t))
+              out["pages"] = pages
+              out["images"] = {i: get(base + i)[0] for i in sorted(imgs)}
+              tests = ["/cart/", "/checkout/", "/my-account/", "/product/luminous-barrier-cream/", "/category/skincare-guides/", "/tag/x/", "/feed/", "/robots.txt", "/sitemap_index.xml", "/no-such-page/"]
+              out["redirects"] = {t: get(base + t, follow=False)[:2] for t in tests}
+              out["headers"] = dict(urllib.request.urlopen(urllib.request.Request(base + "/", headers=H)).headers)
+          json.dump(out, open("check.json", "w"), indent=1, ensure_ascii=False)
+          PY
+      - run: |
+          git config user.name "github-actions[bot]"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add check.json && git commit -m "Launch check results" && git push
