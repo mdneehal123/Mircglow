@@ -38,17 +38,17 @@
       "permanent": true
     },
     {
-      "source": "/cart/:path*",
+      "source": "/cart(.*)",
       "destination": "/shop/",
       "permanent": true
     },
     {
-      "source": "/checkout/:path*",
+      "source": "/checkout(.*)",
       "destination": "/shop/",
       "permanent": true
     },
     {
-      "source": "/my-account/:path*",
+      "source": "/my-account(.*)",
       "destination": "/shop/",
       "permanent": true
     },
@@ -68,18 +68,18 @@
       "permanent": true
     },
     {
-      "source": "/product-tag/:slug*",
+      "source": "/product-tag/(.*)",
       "destination": "/shop/",
       "permanent": true
     },
     {
-      "source": "/tag/:slug*",
+      "source": "/tag/(.*)",
       "destination": "/blog/",
       "permanent": true
     },
     {
-      "source": "/author/:slug*",
-      "destination": "/about/",
+      "source": "/author/(.*)",
+      "destination": "/about-the-author/",
       "permanent": true
     },
     {
@@ -128,7 +128,7 @@
       "permanent": true
     },
     {
-      "source": "/feed/:path+",
+      "source": "/feed/(.+)",
       "destination": "/feed/",
       "permanent": true
     },
