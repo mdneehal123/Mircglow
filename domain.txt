@@ -1,6 +1,8 @@
-sitemap: 121
-non-200: 0
-winter-skincare-routine-india 200
-night-cream-in-kg-ahmedabad 200
-kojic-acid-side-effects 200
-glass-skin-kaise-paye 200
+avocado-night-cream-for-pigmentation-prone-skin 200
+avocado-night-cream-for-men 200
+avocado-night-cream-in-your-20s 200
+avocado-and-kojic-acid-explained 200
+avocado-cream-for-sensitive-skin-in-summer 200
+how-to-spot-fake-avocado-whitening-creams 200
+product: reviews-box 1 hindi 1 compare 2
+sitemap: 127
