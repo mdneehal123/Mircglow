@@ -1,2 +1,5 @@
-avocado-korean-night-cream amazon-block:1 rating-line:1 ext-link:0
-avocado-night-cream amazon-block:1 rating-line:1 ext-link:0
+/avocado-night-cream-original/ 200 text/html; charset=utf-8
+/avocado-night-cream-review/ 200 text/html; charset=utf-8
+/product/avocado-night-cream/ 200 text/html; charset=utf-8
+/wp-content/uploads/2026/10/mirc-glow-avocado-night-cream-benefits-how-to-use.mp4 200 video/mp4
+video entries in sitemap: 3
