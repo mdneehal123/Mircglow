@@ -1,5 +1,6 @@
-/product/glass-glow-cream/ 200 quick:1 strike:1 service:0 hindi-in-llms:0
-/night-cream-in-kg-mumbai/ 200 quick:1 strike:0 service:1 hindi-in-llms:0
-/product-category/night-creams/ 200 quick:1 strike:0 service:0 hindi-in-llms:0
-/avocado-cream/ 200 quick:1 strike:0 service:0 hindi-in-llms:0
-/llms.txt 200 quick:0 strike:0 service:0 hindi-in-llms:1
+sitemap: 121
+non-200: 0
+winter-skincare-routine-india 200
+night-cream-in-kg-ahmedabad 200
+kojic-acid-side-effects 200
+glass-skin-kaise-paye 200
