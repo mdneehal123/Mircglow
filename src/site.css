@@ -974,3 +974,5 @@ body:has(.lux) .icons3 span{background:#F7F1E4;border:1px solid #E6CF9A}
 .rl-b{background:#157A36;color:#fff;border-radius:6px;padding:2px 7px;font-size:.82rem;font-weight:800}
 .rv-note{font-size:.9rem;color:#374151;margin:0 0 12px}.rv-t{display:block;margin-top:4px}
 .rl-amz{margin-left:12px;color:#0F5F28;font-weight:600}
+.vid{margin:20px auto;max-width:360px}.vid video{width:100%;height:auto;aspect-ratio:9/16;border-radius:18px;background:#000;display:block}
+.vid figcaption{font-size:.82rem;color:#5F5F5F;text-align:center;margin-top:6px}

@@ -203,7 +203,7 @@ P = lambda slug, title, ex, rt, rd, d, topic: dict(slug=slug, title=title, ex=ex
 POSTS = [
  P("how-to-apply-night-cream","How to Apply Night Cream the Right Way","Most people use too much night cream and apply it at the wrong moment. Here is how to apply night cream properly, in about a minute.","How to Apply Night Cream: 6 Easy Steps Most People Skip | Mirc Glow","Most people use too much and apply it at the wrong time. Learn how to apply night cream in 6 easy steps, how much to use, and what order to follow.",D4,"night"),
  P("avocado-day-cream","Avocado Day Cream: How to Use It in the Morning","Can you use avocado cream in the day? Yes. How an avocado day cream differs from a night cream, how to use it under sunscreen, and which skin types need one.","Avocado Day Cream: How to Use It and Day vs Night Cream | Mirc Glow","Avocado day cream explained: how to use avocado cream in the morning under sunscreen, avocado day vs night cream, and which skin types need one.","2026-10-16","avocado"),
- P("avocado-cream-for-dry-skin","Avocado Cream for Dry Skin: Why It Works and How to Use It","Dry, tight skin after washing? Here is why avocado cream for dry skin makes sense, how to apply it so it actually helps, and what to change in winter.","Avocado Cream for Dry Skin: 5 Simple Ways to Use It | Mirc Glow","Dry, tight skin after washing? See why avocado cream for dry skin makes sense, 5 simple ways to use it so it really helps, and what to change in winter.",D4,"avocado"),
+ P("avocado-cream-for-dry-skin","Avocado Cream for Dry Skin: Why It Works and How to Use It","Dry, tight skin after washing? Here is why avocado cream for dry skin makes sense, how to apply it so it actually helps, and what to change in winter.","Avocado Night Cream for Dry Skin: 5 Ways to Use It | Mirc Glow","Dry, tight skin after washing? See why avocado cream for dry skin makes sense, 5 simple ways to use it so it really helps, and what to change in winter.",D4,"avocado"),
  P("night-cream-for-men","Night Cream for Men: A Simple Guide to Getting Started","A no-fuss guide to night cream for men: why it helps, how to choose one, and a two-minute evening routine.","Night Cream for Men: 5 Easy Steps to Better-Looking Skin | Mirc Glow","A no-fuss guide to night cream for men in India: why it helps, how to choose one, and 5 easy steps for a two-minute evening routine.",D4,"night"),
  P("night-cream-for-oily-skin","Night Cream for Oily Skin: How to Choose and Use One","Yes, oily skin needs a night cream. Learn how to choose a night cream for oily skin, how much to use, and the mistakes that cause shine and breakouts.","Night Cream for Oily Skin (2026): 6 Rules and Best Picks | Mirc Glow","Does oily skin need a night cream? Yes. Learn 6 simple rules for choosing and using a night cream for oily skin without shine, heaviness or breakouts.",D4,"night"),
  P("best-night-cream-for-glowing-skin","Best Night Cream for Glowing Skin in India: How to Choose","How to find the best night cream for glowing skin in India: the ingredients to look for, how to choose by skin type, and our three picks.","Best Night Cream for Glowing Skin in India (2026 Guide) | Mirc Glow","Looking for the best night cream for glowing skin in India? Learn the 7 things to check, the ingredients that matter, and how to choose by skin type.",D3,"night"),
@@ -218,7 +218,7 @@ POSTS = [
  P("is-avocado-cream-good-for-your-skin","Is Avocado Cream Good for Your Skin and Face?","Is avocado cream good for your skin and face? What it can and cannot do, who it suits, whether it helps skin look brighter, and how to use it morning and night.","Is Avocado Cream Good for Your Skin and Face? Honest Guide | Mirc Glow","Is avocado cream good for your skin and face? What it can and cannot do, which skin types it suits, whether it helps skin look brighter, and how to use it.",D2,"avocado"),
  P("which-is-the-no-1-night-cream-in-india","Which Is the No. 1 Night Cream in India?","A practical guide to choosing a night cream that suits your skin type, comfort preferences, and glow-focused routine.","Which Is the No. 1 Night Cream in India? How to Choose | Mirc Glow","Which is the no. 1 night cream in India? Learn what to consider when choosing a night cream based on ingredients, skin needs, texture and routine.",D2,"night"),
  P("is-avocado-cream-good-for-the-face","Is Avocado Cream Good for the Face?","Learn how avocado cream can support a comfortable, moisturized-looking complexion and how to choose a formula that fits your routine.","Is Avocado Cream Good for the Face? | Mirc Glow","Is avocado cream good for the face? Learn how avocado-based creams can fit into a simple skincare routine and what to consider when choosing one.",D2,"avocado"),
- P("is-avocado-night-cream-good","Is Avocado Night Cream Good?","Learn how avocado night cream can support a comfortable, moisturized-looking complexion and how to choose a formula for your evening routine.","Is Avocado Night Cream Good? | Mirc Glow","Is avocado night cream good for your skincare routine? Learn about its potential benefits, how to use it, and what to consider when choosing a formula.",D2,"avocado"),
+ P("is-avocado-night-cream-good","Is Avocado Night Cream Good?","Learn how avocado night cream can support a comfortable, moisturized-looking complexion and how to choose a formula for your evening routine.","Avocado Night Cream Benefits: Is It Good for Skin? | Mirc Glow","Is avocado night cream good for your skincare routine? Learn about its potential benefits, how to use it, and what to consider when choosing a formula.",D2,"avocado"),
  P("is-avocado-good-for-skin-brightening","Is Avocado Good for Skin Brightening?","Learn how avocado cream can support a comfortable, moisturized-looking complexion and fit into a simple glow-focused skincare routine.","Is Avocado Good for Skin Brightening? | Mirc Glow","Is avocado good for skin brightening? Learn what avocado can offer in a skincare routine and what to consider when choosing an avocado-based formula.",D2,"avocado"),
  P("how-to-make-avocado-night-cream-at-home","How to Make Avocado Night Cream at Home?","Learn how to make a simple fresh avocado night cream at home, how to use it safely, and when a ready-made formula may be more practical.","How to Make Avocado Night Cream at Home? | Mirc Glow","Learn how to make avocado night cream at home, explore simple ingredients and skincare considerations, and discover what to know before using homemade formulas.",D2,"avocado"),
  P("can-i-use-avocado-night-cream-every-night","Can I Use Avocado Night Cream Every Night?","Can you use avocado night cream every night? Learn how to introduce it into your evening routine, when to adjust use, and how to choose a comfortable finish.","Can I Use Avocado Night Cream Every Night? | Mirc Glow","Can you use avocado night cream every night? Learn how to use night cream comfortably and what to consider for your evening skincare routine.",D2,"avocado"),
@@ -858,6 +858,9 @@ def build_post(p):
     url = f"/{p['slug']}/"
     raw = read(os.path.join(SRC, "posts", p["slug"] + ".html"))
     if p["slug"] in GEO.SHORT_ANSWERS: raw += qa_html(GEO.SHORT_ANSWERS[p["slug"]])
+    if url in VIDEO_ON:
+        k = raw.find("<h2")
+        raw = (raw[:k] + video_html(url) + raw[k:]) if k > 0 else video_html(url) + raw
     body_html, toc = add_h2_ids(lazy_imgs(raw))
     faqs = faqs_from(raw)
     mins = max(2, round(words(raw) / 200))
@@ -873,7 +876,7 @@ def build_post(p):
            "author":{"@type":"Person","name":"Mohammed Nihal","url":SITE+"/about-the-author/","jobTitle":"Founder, Mirc Glow"},"publisher":{"@id":ORG_ID},"mainEntityOfPage":SITE+url,
            "image":SITE+prod["img"],"inLanguage":"en-IN","articleSection":topic_name,"wordCount":words(raw),"isPartOf":{"@id":SITE+"/#website"},
            "about":[{"@type":"Thing","name":topic_name}]}
-    nodes = [ORG, art, crumbs_ld(crumbs)]
+    nodes = [ORG, art, crumbs_ld(crumbs)] + ([video_ld(url)] if url in VIDEO_ON else [])
     if faqs: nodes.append(faq_ld(faqs))
     out = head(p["rt"], p["rd"], url, og_type="article", image=prod["img"], canonical=canonical,
                extra=f'<meta property="article:published_time" content="{p["date"]}T09:00:00+05:30"><meta property="article:modified_time" content="{TODAY}T09:00:00+05:30">' + ld(*nodes))
@@ -1045,6 +1048,23 @@ def amazon_reviews_html(p):
             f'Below is a selection of recent verified-purchase reviews from there, including a critical one, copied word for word. Results vary from person to person.</p>'
             f'<div class="rv-list">{items}</div></section>')
 
+VIDEO = {"name":"Avocado Night Cream: Benefits and How to Use",
+ "description":"A 30-second guide to Mirc Glow Avocado Night Cream: three benefits (overnight moisture, smoother-looking skin, a more even-looking tone with sunscreen) and how to apply it in five steps.",
+ "src":"/wp-content/uploads/2026/10/mirc-glow-avocado-night-cream-benefits-how-to-use.mp4",
+ "thumb":"/wp-content/uploads/2026/10/mirc-glow-avocado-night-cream-video-thumb.jpg","date":"2026-10-16T16:30:00+05:30","dur":"PT30S"}
+VIDEO_ON = {"/product/avocado-night-cream/", "/is-avocado-night-cream-good/", "/product/avocado-korean-night-cream/"}
+
+def video_html(url):
+    if url not in VIDEO_ON: return ""
+    v = VIDEO
+    return (f'<figure class="vid"><video controls preload="none" playsinline width="720" height="1280" poster="{v["thumb"]}">'
+            f'<source src="{v["src"]}" type="video/mp4"></video><figcaption>{esc(v["name"])} (30 seconds)</figcaption></figure>')
+
+def video_ld(url):
+    v = VIDEO
+    return {"@type":"VideoObject","@id":SITE+url+"#video","name":v["name"],"description":v["description"],"thumbnailUrl":[SITE+v["thumb"]],
+            "uploadDate":v["date"],"duration":v["dur"],"contentUrl":SITE+v["src"],"publisher":{"@id":ORG_ID},"inLanguage":"en-IN"}
+
 def rating_line(p):
     rs = reviews_for(p)
     if not rs:
@@ -1071,7 +1091,7 @@ def build_product(p):
     if "parts" in p: others = [PBY[s] for s in p["parts"]] + [q for q in SETS if q["slug"] != p["slug"]]
     else: others = [q for q in SINGLES if q["slug"] != p["slug"]] + [s for s in SETS if p["slug"] in s["parts"]]
     others = others[:4]
-    nodes = [ORG, reviews_ld(p, product_ld(p, url)), crumbs_ld(crumbs)]
+    nodes = [ORG, reviews_ld(p, product_ld(p, url)), crumbs_ld(crumbs)] + ([video_ld(url)] if url in VIDEO_ON else [])
     if faqs: nodes.append(faq_ld(faqs))
     out = head(p["rt"], p["rd"], url, og_type="product", image=p["img"],
                extra=f'<meta property="product:price:amount" content="{p["price"]}"><meta property="product:price:currency" content="INR"><meta property="product:availability" content="in stock"><link rel="preload" as="image" href="{p["img"][:-4]}.mg.webp" type="image/webp" fetchpriority="high">' + ld(*nodes))
@@ -1100,6 +1120,7 @@ def build_product(p):
 </div>
 <section class="w" aria-label="Benefits">{banner(p)}</section>
 {fbt_html(p)}
+<section class="w" aria-label="Video">{video_html(url)}</section>
 <section class="w details">{toc_html}<div class="prose">{product_quick(p)}{body_html}</div></section>
 {compare_html(p)}
 {reviews_html(p)}
@@ -1212,8 +1233,12 @@ def build_sitemaps():
             x += f'<xhtml:link rel="alternate" hreflang="en-IN" href="{SITE}/{en}/"/><xhtml:link rel="alternate" hreflang="hi-IN" href="{SITE}/{hi}/"/><xhtml:link rel="alternate" hreflang="x-default" href="{SITE}/{en}/"/>'
         prod = next((p for p in PRODUCTS if u == f"/product/{p['slug']}/"), None)
         if prod: x += f"<image:image><image:loc>{SITE}{prod['img']}</image:loc></image:image>"
+        if u in VIDEO_ON:
+            x += (f"<video:video><video:thumbnail_loc>{SITE}{VIDEO['thumb']}</video:thumbnail_loc><video:title>{esc(VIDEO['name'])}</video:title>"
+                  f"<video:description>{esc(VIDEO['description'])}</video:description><video:content_loc>{SITE}{VIDEO['src']}</video:content_loc>"
+                  f"<video:duration>30</video:duration><video:publication_date>{VIDEO['date']}</video:publication_date></video:video>")
         items.append(x + "</url>")
-    sm = ('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n'
+    sm = ('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">\n'
           + "\n".join(items) + "\n</urlset>\n")
     write("/sitemap.xml", sm)
     write("/sitemap_index.xml", f'<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><sitemap><loc>{SITE}/sitemap.xml</loc><lastmod>{TODAY}</lastmod></sitemap></sitemapindex>\n')
