@@ -1028,6 +1028,13 @@ def reviews_ld(p, d):
                     "reviewRating":{"@type":"Rating","ratingValue":int(r["rating"]),"bestRating":5}} for r in rs[:10]]
     return d
 
+def rating_line(p):
+    rs = reviews_for(p)
+    if not rs:
+        return '<a class="rl rl-0" href="#h-rv"><span class="rv-st" aria-hidden="true">☆☆☆☆☆</span> Be the first to review</a>'
+    avg = sum(int(r["rating"]) for r in rs) / len(rs)
+    return f'<a class="rl" href="#h-rv"><span class="rl-b">{avg:.1f} ★</span> {len(rs)} rating{"s" if len(rs) > 1 else ""} &amp; reviews</a>'
+
 def build_product(p):
     url = f"/product/{p['slug']}/"
     raw = read(os.path.join(SRC, "products", p["slug"] + ".html"))
@@ -1057,6 +1064,7 @@ def build_product(p):
 <div class="buy" id="buy">
 <span class="eyebrow">Mirc Glow · {esc(p["tag"])}</span>
 <h1 class="pdp-t">{esc(p["h1"])}</h1>
+{rating_line(p)}
 <p class="panel-pr"><s>{inr(p["mrp"])}</s> <b>{inr(p["price"])}</b> <span class="save">Save {inr(sv)}</span></p>
 <p class="panel-tax">Taxes included. You save {inr(sv)} {save_note}. Free shipping across India.</p>
 <p class="az-del" data-del><b>FREE delivery</b> in 3–7 days across India · Cash on Delivery available</p>

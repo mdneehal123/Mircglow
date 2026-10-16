@@ -968,3 +968,7 @@ body:has(.lux) .icons3 span{background:#F7F1E4;border:1px solid #E6CF9A}
 .rv-sum{margin-bottom:12px;font-size:1rem}
 .rv-list{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));margin-bottom:14px}
 .rv-i{border:1px solid #E5E7EB;border-radius:14px;padding:14px}.rv-i p{margin:6px 0}.rv-by{font-size:.82rem;color:#5F5F5F}
+/* rating line under product title (marketplace style) */
+.rl{display:inline-flex;align-items:center;gap:8px;margin:4px 0 8px;font-size:.9rem;color:#0F5F28;text-decoration:none;font-weight:600}
+.rl-0{color:#5F5F5F;font-weight:500}.rl-0 .rv-st{color:#C9CED6}
+.rl-b{background:#157A36;color:#fff;border-radius:6px;padding:2px 7px;font-size:.82rem;font-weight:800}
