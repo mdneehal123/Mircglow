@@ -1,6 +1,5 @@
 sleep 100
 S=https://mircglow.com
-curl -s $S/sitemap.xml | grep -o '<loc>[^<]*' | sed 's/<loc>//' > urls.txt
-echo "sitemap: $(wc -l < urls.txt)"
-bad=0; while read u; do c=$(curl -s -o /dev/null -w '%{http_code}' "$u"); [ "$c" != 200 ] && { echo "$c $u"; bad=$((bad+1)); }; done < urls.txt; echo "non-200: $bad"
-for p in winter-skincare-routine-india night-cream-in-kg-ahmedabad kojic-acid-side-effects glass-skin-kaise-paye; do echo "$p $(curl -s -o /dev/null -w '%{http_code}' $S/$p/)"; done
+for p in avocado-night-cream-for-pigmentation-prone-skin avocado-night-cream-for-men avocado-night-cream-in-your-20s avocado-and-kojic-acid-explained avocado-cream-for-sensitive-skin-in-summer how-to-spot-fake-avocado-whitening-creams; do echo "$p $(curl -s -o /dev/null -w '%{http_code}' $S/$p/)"; done
+curl -s $S/product/avocado-night-cream/ -o h; echo "product: reviews-box $(grep -c 'Write a review on WhatsApp' h) hindi $(grep -c 'id=\"hindi\"' h) compare $(grep -c 'all-avocado-creams' h)"
+echo "sitemap: $(curl -s $S/sitemap.xml | grep -c '<loc>')"
