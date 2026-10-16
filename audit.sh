@@ -1,3 +1,2 @@
 sleep 90
-for p in /avocado-cream-in-kg/ /avocado-cream-in-kg-hindi/ /; do echo "$p $(curl -s https://mircglow.com$p | grep -c '1kg-tubs')"; done
-echo "photo $(curl -s -o /dev/null -w '%{http_code}' https://mircglow.com/wp-content/uploads/2026/10/mirc-glow-avocado-cream-1kg-tubs.jpg)"
+for p in avocado-korean-night-cream avocado-night-cream; do curl -s https://mircglow.com/product/$p/ -o h; echo "$p amazon-block:$(grep -c 'id=\"h-amz\"' h) rating-line:$(grep -c 'class=\"rl ' h) ext-link:$(grep -c 'amazon.in/s' h)"; done
