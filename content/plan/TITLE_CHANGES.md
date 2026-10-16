@@ -5,3 +5,4 @@
 - 2026-10-16 /is-avocado-night-cream-good/: was "Is Avocado Night Cream Good?"
 - 2026-10-16 /avocado-cream-for-dry-skin/: was "Avocado Cream for Dry Skin: 5 Simple Ways to Use It"
 - 2026-10-16 /avocado-cream-price-in-india/: was "Avocado Cream Price in India: Value Per Gram"
+- 2026-10-16 /product-category/night-creams/: was "Night Creams for Nourished, Radiant-Looking Skin"

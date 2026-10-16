@@ -171,9 +171,9 @@ PBY = {p["slug"]: p for p in PRODUCTS}
 SINGLES = [p for p in PRODUCTS if "parts" not in p]
 SETS = [p for p in PRODUCTS if "parts" in p]
 CATS = {
- "night-creams": dict(name="Night Creams", h1="Night creams", ko="나이트 크림 · NIGHT CREAMS", parent=None,
-     rt="Night Creams for Nourished, Radiant-Looking Skin | Mirc Glow",
-     rd="Explore Mirc Glow night creams for a comforting evening skincare ritual. Discover avocado, glutathione, Vitamin C and Kojic Acid formulas.",
+ "night-creams": dict(name="Night Creams", h1="Night cream for face", ko="나이트 크림 · NIGHT CREAMS", parent=None,
+     rt="Night Cream for Face: Buy Online in India | Mirc Glow",
+     rd="Buy night cream online in India from ₹349: avocado, glutathione and Glass Glow night creams. Choose by skin type and age. Free shipping and Cash on Delivery.",
      intro="Korean-inspired creams for the last step of your evening routine. Most contain aloe vera, vitamin B3 and kojic acid, and each has its own job."),
  "avocado-night-creams": dict(name="Avocado Night Creams", h1="Avocado night creams", ko="아보카도 · AVOCADO CARE", parent="night-creams",
      rt="Avocado Night Creams for Nourishing Evening Care | Mirc Glow",
@@ -800,7 +800,8 @@ def listing(url, title, desc, h1, ko, intro, items, crumbs, active_chip, extra_h
     chip_html = "".join(f'<a href="{u}"{" aria-current=\"page\"" if u==active_chip else ""}>{n}</a>' for n,u in chips)
     il = {"@type":"ItemList","name":h1,"numberOfItems":len(items),"itemListElement":[{"@type":"ListItem","position":i+1,"url":SITE+f"/product/{p['slug']}/","name":p["name"]} for i,p in enumerate(items)]}
     cp = {"@type":"CollectionPage","@id":SITE+url,"url":SITE+url,"name":h1,"description":desc,"isPartOf":{"@id":SITE+"/#website"}}
-    body = head(title, desc, url, extra=ld(ORG, cp, il, crumbs_ld(crumbs)))
+    fq = faqs_from(extra_html) if extra_html else []
+    body = head(title, desc, url, extra=ld(ORG, cp, il, crumbs_ld(crumbs), *([faq_ld(fq)] if fq else [])))
     body += header("/shop/")
     body += f'<main id="main">{crumbs_html(crumbs)}<div class="w ptop"><span class="lab">{ko}</span><h1 class="dsp">{esc(h1)}</h1><p>{esc(intro)}</p>{list_quick(h1, items)}<nav class="chips" aria-label="Categories">{chip_html}</nav></div>'
     body += f'<section class="w" style="padding-bottom:clamp(48px,6vw,90px)"><div class="grid4">{"".join(card_html(p, "h2") for p in items)}</div></section>'
@@ -817,6 +818,43 @@ def listing(url, title, desc, h1, ko, intro, items, crumbs, active_chip, extra_h
     body += footer()
     write(url, body)
 
+def NIGHT_GUIDE():
+    """Buying guide that makes the Night Creams shop page the main 'night cream' page."""
+    live = {p["slug"] for p in LIVE_POSTS} | {g["slug"] for g in PAGES}
+    groups = [("By skin type", ["night-cream-for-oily-skin","night-cream-for-dry-skin-in-winter","night-cream-for-combination-skin","night-cream-for-sensitive-skin","night-cream-for-normal-skin"]),
+              ("By age and person", ["night-cream-for-teenagers","night-cream-in-your-20s","avocado-night-cream-for-30s","night-cream-for-men"]),
+              ("By concern", ["night-cream-for-acne-marks-and-dark-spots","night-cream-for-tanned-skin","avocado-night-cream-for-pigmentation-prone-skin","best-night-cream-for-glowing-skin"]),
+              ("How to use", ["how-to-apply-night-cream","how-much-night-cream-to-use","night-cream-vs-day-cream","night-cream-vs-moisturizer","can-i-use-night-cream-in-the-day","is-night-cream-necessary","night-cream-benefits","night-cream-side-effects"]),
+              ("हिंदी में", ["night-cream-ke-fayde-aur-nuksan","night-cream-kaise-lagaye","night-cream-kab-lagana-chahiye","night-cream-din-mein-laga-sakte-hain","oily-skin-ke-liye-night-cream"])]
+    title = {**{p["slug"]: p["title"] for p in LIVE_POSTS}, **{g["slug"]: g["title"] for g in PAGES}}
+    cols = "".join(f'<div><h3>{esc(h)}</h3><ul>' + "".join(f'<li><a href="/{x}/">{esc(title[x])}</a></li>' for x in xs if x in live) + "</ul></div>" for h, xs in groups)
+    return NG_HTML.replace("{cols}", cols)
+
+NG_HTML = """<section class="w ng" style="padding-bottom:clamp(48px,7vw,90px)">
+<div class="prose">
+<h2>How to choose a night cream</h2>
+<p>A night cream is a moisturiser made for the hours you sleep: usually richer than a day cream, with no sunscreen, and often with ingredients for a smoother, more even-looking tone. Choose by your skin type first, then by what you want it to do.</p>
+<table><thead><tr><th>Your skin</th><th>Look for</th><th>Mirc Glow pick</th></tr></thead><tbody>
+<tr><td>Dry or tight</td><td>A rich, cushioned cream</td><td><a href="/product/avocado-night-cream/">Avocado Night Cream</a>, 30 g, ₹649</td></tr>
+<tr><td>Normal or combination</td><td>A medium texture, used in a pea-sized amount</td><td><a href="/product/avocado-korean-night-cream/">Avocado Korean Night Cream</a>, 25 g, ₹649</td></tr>
+<tr><td>Oily or acne-prone</td><td>A thin layer of a lighter cream</td><td><a href="/product/glass-glow-cream/">Glass Glow Cream</a>, or a thin layer of the Korean Night Cream</td></tr>
+<tr><td>Dull or uneven-looking</td><td>Glutathione, niacinamide, kojic acid or alpha arbutin, with sunscreen every morning</td><td><a href="/product/glutathione-cream/">Glutathione Cream</a> or <a href="/product/glass-glow-cream/">Glass Glow Cream</a></td></tr>
+<tr><td>Sensitive, or new to skincare</td><td>A short, simple formula; patch test first</td><td><a href="/product/avocado-glow-cream-15g/">Avocado Glow Cream 15g</a> (avocado and aloe vera only)</td></tr>
+</tbody></table>
+<h2>Night cream by age</h2>
+<p><strong>Teens:</strong> a gentle moisturiser is usually enough; skip strong actives unless a doctor advises (<a href="/night-cream-for-teenagers/">night cream for teenagers</a>). <strong>20s:</strong> a light night cream and daily sunscreen (<a href="/night-cream-in-your-20s/">night cream in your 20s</a>). <strong>30s and older:</strong> a richer cream every night, with ingredients such as niacinamide for a smoother, more even look.</p>
+<h2>How to use a night cream</h2>
+<ol><li>Wash your face and pat dry.</li><li>Apply serum first if you use one.</li><li>Take a pea-sized amount and spread it gently upwards over face and neck.</li><li>Use it as the last step, 20 to 30 minutes before sleep.</li><li>Wear sunscreen every morning, especially with kojic acid, glutathione or alpha arbutin.</li></ol>
+<h2>Night cream questions</h2>
+<h3>Which night cream is best for my face?</h3><p>The one that suits your skin type: rich creams for dry skin, lighter textures for oily skin, and glow-focused ingredients for dull or uneven-looking skin. Use the table above, or take the <a href="/skin-quiz/">skin quiz</a>.</p>
+<h3>Is night cream necessary?</h3><p>Not for everyone. It helps most if your skin feels dry or tight in the morning, or if you want ingredients that work while you sleep. Read <a href="/is-night-cream-necessary/">is night cream necessary</a>.</p>
+<h3>Can I use night cream every day?</h3><p>Yes. Most night creams are made for nightly use. Patch test first and use a pea-sized amount.</p>
+<h3>Does night cream change skin colour?</h3><p>No. A night cream can help skin look smoother, fresher and more even, but it does not change your natural skin tone.</p>
+<h3>What is the price of Mirc Glow night cream?</h3><p>From ₹349 for the 10 g Avocado Glow cream to ₹2,499 for the 30 g Glass Glow Cream, with free shipping and Cash on Delivery across India. Salons can also buy <a href="/bulk-night-cream/">night cream in kg</a>.</p>
+</div>
+<div class="ng-guides"><h2 class="az-h">Night cream guides</h2><div class="ng-cols">{cols}</div></div>
+</section>"""
+
 def build_shop():
     help_html = f'''<section class="w" style="padding-bottom:clamp(56px,8vw,110px)"><div class="brief"><div><span class="lab">How ordering works</span><h2 class="dsp" style="margin-top:14px">Order in <em>one message</em>.</h2></div>
 <div class="say"><p>Tap <b>Order</b> on any cream. WhatsApp opens with your order already written. Add your name, address and pincode, choose Cash on Delivery or online payment, and send. We confirm the order and share the tracking number when it ships.</p>
@@ -831,7 +869,7 @@ def build_shop():
         cr = [("Home","/"),("Shop","/shop/")]
         if d["parent"]: cr.append((CATS[d["parent"]]["name"], cat_url(d["parent"])))
         cr.append((d["name"], cat_url(c)))
-        listing(cat_url(c), d["rt"], d["rd"], d["h1"], d["ko"], d["intro"], items, cr, cat_url(c))
+        listing(cat_url(c), d["rt"], d["rd"], d["h1"], d["ko"], d["intro"], items, cr, cat_url(c), NIGHT_GUIDE() if c == "night-creams" else "")
 
 def related_posts(p, n=3):
     pool = [q for q in LIVE_POSTS if q["topic"] == p["topic"]]
