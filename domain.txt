@@ -1,1 +1,12 @@
-status 200 title: <title>Best Night Cream in India for Glowing Skin (2026) | Mirc Glow quickpicks: 4
+/category/skincare-guides/page/3/ -> 404  | final 404
+/avocado-night-cream-side-effects/feed/ -> 404  | final 404
+/night-cream-for-men/feed/ -> 404  | final 404
+/comments/feed/ -> 308 https://mircglow.com/feed/ | final 200
+/category/skincare-guides/feed/ -> 404  | final 404
+/product/glutathione-cream/feed/ -> 404  | final 404
+/product/avocado-night-cream/feed/ -> 404  | final 404
+/glass-skin-routine-steps-for-a-smooth-hydrated-looking-glow/feed/ -> 404  | final 404
+/author/mircglow/feed/ -> 308 https://mircglow.com/about-the-author/ | final 200
+/category/uncategorized/feed/ -> 404  | final 404
+/feed/ -> 200  | final 200
+/night-cream-for-men/ -> 200  | final 200
