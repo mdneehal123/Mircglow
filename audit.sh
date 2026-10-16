@@ -1,6 +1,6 @@
-sleep 90
+sleep 100
 S=https://mircglow.com
-for p in /product/glass-glow-cream/ /night-cream-in-kg-mumbai/ /product-category/night-creams/ /avocado-cream/ /llms.txt; do
- curl -s $S$p -o h
- echo "$p $(curl -s -o /dev/null -w '%{http_code}' $S$p) quick:$(grep -c 'class="quick"' h) strike:$(grep -c StrikethroughPrice h) service:$(grep -c '"@type":"Service"' h) hindi-in-llms:$(grep -c 'Hindi guides' h)"
-done
+curl -s $S/sitemap.xml | grep -o '<loc>[^<]*' | sed 's/<loc>//' > urls.txt
+echo "sitemap: $(wc -l < urls.txt)"
+bad=0; while read u; do c=$(curl -s -o /dev/null -w '%{http_code}' "$u"); [ "$c" != 200 ] && { echo "$c $u"; bad=$((bad+1)); }; done < urls.txt; echo "non-200: $bad"
+for p in winter-skincare-routine-india night-cream-in-kg-ahmedabad kojic-acid-side-effects glass-skin-kaise-paye; do echo "$p $(curl -s -o /dev/null -w '%{http_code}' $S/$p/)"; done
