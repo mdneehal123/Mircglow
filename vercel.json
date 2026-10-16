@@ -83,13 +83,8 @@
       "permanent": true
     },
     {
-      "source": "/comments/feed/?",
+      "source": "/comments/feed(.*)",
       "destination": "/blog/",
-      "permanent": true
-    },
-    {
-      "source": "/author/(.*)/feed/?",
-      "destination": "/about-the-author/",
       "permanent": true
     },
     {
@@ -103,13 +98,18 @@
       "permanent": true
     },
     {
-      "source": "/category/(.*)/page/(.*)",
-      "destination": "/category/$1/",
+      "source": "/category/:cat/page/(.*)",
+      "destination": "/category/:cat/",
       "permanent": true
     },
     {
-      "source": "/(.*)/feed/?",
-      "destination": "/$1/",
+      "source": "/product/:slug/feed(.*)",
+      "destination": "/product/:slug/",
+      "permanent": true
+    },
+    {
+      "source": "/:slug/feed(.*)",
+      "destination": "/:slug/",
       "permanent": true
     },
     {
