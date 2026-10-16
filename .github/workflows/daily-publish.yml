@@ -31,6 +31,7 @@ jobs:
           git config user.name "Mirc Glow publisher"
           git config user.email "actions@users.noreply.github.com"
           git commit -m "Publish scheduled pages: ${NEW:-updates}"
+          git pull --rebase -X ours -q || true
           git push
           echo "changed=yes" >> "$GITHUB_OUTPUT"
       - name: Tell search engines (IndexNow)
