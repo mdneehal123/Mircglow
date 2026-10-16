@@ -124,7 +124,7 @@ AT_A_GLANCE = [
  ("Brand", "Mirc Glow, a Korean-inspired skincare brand"),
  ("Based in", "Bhatkal, Karnataka, India"),
  ("Founder", "Mohammed Nihal"),
- ("Products", "4 face creams and 3 sets: Avocado Korean Night Cream, Glutathione Cream, Avocado Night Cream, Avocado Glow Nourishing Skin Cream, plus combos and a Korean glass skin kit"),
+ ("Products", "6 face creams and 4 sets: Glass Glow Cream, Glutathione Cream, Avocado Korean Night Cream, Avocado Night Cream, Avocado Glow Nourishing Skin Cream (10 g), Avocado Glow Cream (15 g), plus combos and a Korean glass skin kit"),
  ("Key ingredients", "Avocado, glutathione, kojic acid, vitamin C, vitamin B3 (niacinamide) and aloe vera"),
  ("Prices", "₹349 to ₹1,999"),
  ("Delivery", "Free shipping across India, usually 3 to 7 days"),
