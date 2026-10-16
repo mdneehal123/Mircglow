@@ -874,4 +874,11 @@ body:has(.lux) .icons3 span{background:#F7F1E4;border:1px solid #E6CF9A}
 .stage>picture>img{max-height:78%;width:auto;object-fit:contain;filter:drop-shadow(0 40px 40px rgba(120,50,70,.28))}
 .lg .stage>picture>img{width:70%;height:70%;max-height:none}
 .tile>picture{display:block}
+.rv{padding-top:28px;padding-bottom:8px}
+.rv-empty{border:1px dashed #C9D6C2;border-radius:16px;padding:16px;background:#F8FBF5}
+.rv-empty p{margin:0 0 12px}.rv-btn{display:inline-flex!important;width:auto!important;margin-top:4px!important}
+.rv-st{color:#E3A008;letter-spacing:2px;font-size:1.05rem}
+.rv-sum{margin-bottom:12px;font-size:1rem}
+.rv-list{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));margin-bottom:14px}
+.rv-i{border:1px solid #E5E7EB;border-radius:14px;padding:14px}.rv-i p{margin:6px 0}.rv-by{font-size:.82rem;color:#5F5F5F}
 .sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}

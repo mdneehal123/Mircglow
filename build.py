@@ -996,6 +996,38 @@ PAGE_QUICK = {
  "korean-night-cream-hindi": ("कोरियन नाइट क्रीम K-beauty रात के रूटीन का आख़िरी स्टेप है, जो सुबह तक त्वचा को नमी भरी और ग्लास-स्किन जैसी दिखाने में मदद करती है। Mirc Glow की कोरियन-इंस्पायर्ड नाइट क्रीम ₹649 से शुरू होती हैं।", []),
 }
 
+REVIEWS = [r for r in json.load(open(os.path.join(SRC, "reviews.json"), encoding="utf-8"))["reviews"] if r.get("text") and 1 <= int(r.get("rating", 0)) <= 5]
+
+def reviews_for(p):
+    slugs = {p["slug"]} | set(p.get("parts", []))
+    return [r for r in REVIEWS if r["product"] == p["slug"]] if "parts" not in p else [r for r in REVIEWS if r["product"] in slugs]
+
+def stars(n):
+    full = int(n + 0.5)
+    return f'<span class="rv-st" aria-label="{n:.1f} out of 5 stars">' + "★" * full + "☆" * (5 - full) + "</span>"
+
+def reviews_html(p):
+    rs = reviews_for(p)
+    msg = (f"Hi Mirc Glow, here is my review of the {p['name']} ({p['size']}):\n\nRating (1 to 5 stars): \nMy review: \n"
+           "First name and city (shown with the review): ")
+    btn = f'<a class="yb yb-line rv-btn" href="{wa(msg)}" target="_blank" rel="noopener">{WA_SVG}<span>Write a review on WhatsApp</span></a>'
+    if not rs:
+        return (f'<section class="w rv" aria-labelledby="h-rv"><h2 id="h-rv" class="az-h">Customer reviews</h2>'
+                f'<div class="rv-empty"><p>No reviews yet for the {esc(p["name"])}. Bought it? Tell us how your skin feels: your review helps other shoppers.</p>{btn}</div></section>')
+    avg = sum(int(r["rating"]) for r in rs) / len(rs)
+    items = "".join(f'<article class="rv-i">{stars(int(r["rating"]))}<p>{esc(r["text"])}</p><span class="rv-by">{esc(r["name"])}, {esc(r.get("city",""))} · {fmt_date(r["date"])}</span></article>' for r in sorted(rs, key=lambda r: r["date"], reverse=True)[:20])
+    return (f'<section class="w rv" aria-labelledby="h-rv"><h2 id="h-rv" class="az-h">Customer reviews</h2>'
+            f'<div class="rv-sum">{stars(avg)} <b>{avg:.1f} out of 5</b> · {len(rs)} review{"s" if len(rs) > 1 else ""}</div><div class="rv-list">{items}</div>{btn}</section>')
+
+def reviews_ld(p, d):
+    rs = reviews_for(p)
+    if not rs: return d
+    avg = sum(int(r["rating"]) for r in rs) / len(rs)
+    d["aggregateRating"] = {"@type":"AggregateRating","ratingValue":f"{avg:.1f}","reviewCount":len(rs),"bestRating":5,"worstRating":1}
+    d["review"] = [{"@type":"Review","author":{"@type":"Person","name":r["name"]},"datePublished":r["date"],"reviewBody":r["text"],
+                    "reviewRating":{"@type":"Rating","ratingValue":int(r["rating"]),"bestRating":5}} for r in rs[:10]]
+    return d
+
 def build_product(p):
     url = f"/product/{p['slug']}/"
     raw = read(os.path.join(SRC, "products", p["slug"] + ".html"))
@@ -1014,7 +1046,7 @@ def build_product(p):
     if "parts" in p: others = [PBY[s] for s in p["parts"]] + [q for q in SETS if q["slug"] != p["slug"]]
     else: others = [q for q in SINGLES if q["slug"] != p["slug"]] + [s for s in SETS if p["slug"] in s["parts"]]
     others = others[:4]
-    nodes = [ORG, product_ld(p, url), crumbs_ld(crumbs)]
+    nodes = [ORG, reviews_ld(p, product_ld(p, url)), crumbs_ld(crumbs)]
     if faqs: nodes.append(faq_ld(faqs))
     out = head(p["rt"], p["rd"], url, og_type="product", image=p["img"],
                extra=f'<meta property="product:price:amount" content="{p["price"]}"><meta property="product:price:currency" content="INR"><meta property="product:availability" content="in stock"><link rel="preload" as="image" href="{p["img"][:-4]}.mg.webp" type="image/webp" fetchpriority="high">' + ld(*nodes))
@@ -1044,6 +1076,7 @@ def build_product(p):
 {fbt_html(p)}
 <section class="w details">{toc_html}<div class="prose">{product_quick(p)}{body_html}</div></section>
 {compare_html(p)}
+{reviews_html(p)}
 {RECENT_HTML}
 <section class="sec soft" aria-labelledby="h-more"><div class="w"><span class="eyebrow">Pairs well with</span><h2 class="sh" id="h-more">You may also like</h2><div class="grid4">{"".join(card_html(q) for q in others)}</div></div></section>
 </main>

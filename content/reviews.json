@@ -1,0 +1,4 @@
+{
+  "_how": "Add only real customer reviews. One entry per review: {\"product\": \"avocado-night-cream\", \"name\": \"Priya\", \"city\": \"Pune\", \"rating\": 5, \"date\": \"2026-10-20\", \"text\": \"Exactly what they wrote\"}",
+  "reviews": []
+}
