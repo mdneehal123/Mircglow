@@ -238,6 +238,8 @@ TOPICS = {
  "kojic": ("Kojic acid", "avocado-korean-night-cream"),
  "routine": ("Routines", "korean-glass-skin-kit"),
  "night": ("Night cream", "avocado-korean-night-cream"),
+ "concern": ("Dark spots & tone", "glass-glow-cream"),
+ "ingredient": ("Ingredients", "glass-glow-cream"),
 }
 
 # ---------------------------------------------------------------- pages
@@ -821,11 +823,12 @@ def listing(url, title, desc, h1, ko, intro, items, crumbs, active_chip, extra_h
 def NIGHT_GUIDE():
     """Buying guide that makes the Night Creams shop page the main 'night cream' page."""
     live = {p["slug"] for p in LIVE_POSTS} | {g["slug"] for g in PAGES}
-    groups = [("By skin type", ["night-cream-for-oily-skin","night-cream-for-dry-skin-in-winter","night-cream-for-combination-skin","night-cream-for-sensitive-skin","night-cream-for-normal-skin"]),
-              ("By age and person", ["night-cream-for-teenagers","night-cream-in-your-20s","avocado-night-cream-for-30s","night-cream-for-men"]),
-              ("By concern", ["night-cream-for-acne-marks-and-dark-spots","night-cream-for-tanned-skin","avocado-night-cream-for-pigmentation-prone-skin","best-night-cream-for-glowing-skin"]),
-              ("How to use", ["how-to-apply-night-cream","how-much-night-cream-to-use","night-cream-vs-day-cream","night-cream-vs-moisturizer","can-i-use-night-cream-in-the-day","is-night-cream-necessary","night-cream-benefits","night-cream-side-effects"]),
-              ("हिंदी में", ["night-cream-ke-fayde-aur-nuksan","night-cream-kaise-lagaye","night-cream-kab-lagana-chahiye","night-cream-din-mein-laga-sakte-hain","oily-skin-ke-liye-night-cream"])]
+    groups = [("By skin type", ["night-cream-for-dehydrated-skin","night-cream-for-skin-barrier","night-cream-for-rough-skin-texture","lightweight-night-cream-for-humid-weather","night-cream-for-oily-skin","night-cream-for-dry-skin-in-winter","night-cream-for-combination-skin","night-cream-for-sensitive-skin","night-cream-for-normal-skin"]),
+              ("By age and person", ["night-cream-for-teenagers","night-cream-in-your-20s","avocado-night-cream-for-30s","night-cream-for-mature-skin","night-cream-for-fine-lines","night-cream-for-men"]),
+              ("By concern", ["night-cream-for-uneven-skin-tone","night-cream-for-dull-skin","night-cream-for-acne-marks-and-dark-spots","night-cream-for-tanned-skin","avocado-night-cream-for-pigmentation-prone-skin","best-night-cream-for-glowing-skin"]),
+              ("Choosing and buying", ["best-night-cream-for-indian-skin","night-cream-price-in-india","affordable-vs-premium-night-cream","ingredients-to-look-for-in-a-night-cream","night-cream-with-vitamin-c","retinol-night-cream-for-beginners"]),
+              ("How to use", ["how-to-moisturise-skin-overnight","how-to-apply-night-cream","how-much-night-cream-to-use","night-cream-vs-day-cream","night-cream-vs-moisturizer","can-i-use-night-cream-in-the-day","is-night-cream-necessary","night-cream-benefits","night-cream-side-effects"]),
+              ("हिंदी में", ["dark-spots-ke-liye-night-cream","glowing-skin-ke-liye-night-routine","night-cream-ke-fayde-aur-nuksan","night-cream-kaise-lagaye","night-cream-kab-lagana-chahiye","night-cream-din-mein-laga-sakte-hain","oily-skin-ke-liye-night-cream"])]
     title = {**{p["slug"]: p["title"] for p in LIVE_POSTS}, **{g["slug"]: g["title"] for g in PAGES}}
     cols = "".join(f'<div><h3>{esc(h)}</h3><ul>' + "".join(f'<li><a href="/{x}/">{esc(title[x])}</a></li>' for x in xs if x in live) + "</ul></div>" for h, xs in groups)
     return NG_HTML.replace("{cols}", cols)
@@ -1227,7 +1230,9 @@ WPCATS = {  # WordPress post categories (same URLs as on WordPress)
 }
 
 WPCATS["skincare-routines"] = ("Skincare Routines", "Simple skincare routines for Indian weather: winter, summer, monsoon, oily skin and busy working days, plus how to layer serums and creams.", [])
-_TOPIC_CAT = {"avocado": "avocado-skincare", "glutathione": "glutathione-kojic-acid", "kojic": "glutathione-kojic-acid", "night": "night-cream-guides", "routine": "skincare-routines"}
+WPCATS["dark-spots-uneven-skin-tone"] = ("Dark Spots and Uneven Skin Tone", "Honest guides to dark spots, acne marks, pigmentation and uneven-looking skin tone: causes, routines, ingredients and realistic timelines.", [])
+WPCATS["skincare-ingredients"] = ("Skincare Ingredients", "Plain-English guides to skincare ingredients: niacinamide, vitamin C, retinol, alpha arbutin, kojic acid and how to introduce actives safely.", [])
+_TOPIC_CAT = {"avocado": "avocado-skincare", "glutathione": "glutathione-kojic-acid", "kojic": "glutathione-kojic-acid", "night": "night-cream-guides", "routine": "skincare-routines", "concern": "dark-spots-uneven-skin-tone", "ingredient": "skincare-ingredients"}
 for _m in PLAN:
     if _m["kind"] == "post" and _m["slug"] not in UNPUBLISHED:
         WPCATS[_TOPIC_CAT[_m["topic"]]][2].insert(0, _m["slug"])
