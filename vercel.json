@@ -93,32 +93,22 @@
       "permanent": true
     },
     {
-      "source": "/category/skincare-guides/(.+)",
+      "source": "/category/skincare-guides/(.*)",
       "destination": "/blog/",
       "permanent": true
     },
     {
-      "source": "/category/uncategorized/(.+)",
+      "source": "/category/uncategorized/(.*)",
       "destination": "/blog/",
       "permanent": true
     },
     {
-      "source": "/category/([a-z0-9-]+)/page/(.*)",
+      "source": "/category/(.*)/page/(.*)",
       "destination": "/category/$1/",
       "permanent": true
     },
     {
-      "source": "/category/([a-z0-9-]+)/feed/?",
-      "destination": "/category/$1/",
-      "permanent": true
-    },
-    {
-      "source": "/product/([a-z0-9-]+)/feed/?",
-      "destination": "/product/$1/",
-      "permanent": true
-    },
-    {
-      "source": "/([a-z0-9-]+)/feed/?",
+      "source": "/(.*)/feed/?",
       "destination": "/$1/",
       "permanent": true
     },

@@ -1345,7 +1345,7 @@ def build_vercel():
         R("/cart(.*)", "/shop/"), R("/checkout(.*)", "/shop/"), R("/my-account(.*)", "/shop/"),
         R("/product-category/uncategorized/", "/shop/"), R("/category/uncategorized/", "/blog/"), R("/category/skincare-guides/", "/blog/"),
         R("/product-tag/(.*)", "/shop/"), R("/tag/(.*)", "/blog/"), R("/author/(.*)", "/about-the-author/"),
-        R("/comments/feed/?", "/blog/"), R("/author/(.*)/feed/?", "/about-the-author/"), R("/category/skincare-guides/(.+)", "/blog/"), R("/category/uncategorized/(.+)", "/blog/"), R("/category/([a-z0-9-]+)/page/(.*)", "/category/$1/"), R("/category/([a-z0-9-]+)/feed/?", "/category/$1/"), R("/product/([a-z0-9-]+)/feed/?", "/product/$1/"), R("/([a-z0-9-]+)/feed/?", "/$1/"), R("/home/", "/"), R("/sample-page/", "/"), R("/blog/page/(.*)", "/blog/"), R("/page/(.*)", "/blog/"), R("/shop/page/(.*)", "/shop/"),
+        R("/comments/feed/?", "/blog/"), R("/author/(.*)/feed/?", "/about-the-author/"), R("/category/skincare-guides/(.*)", "/blog/"), R("/category/uncategorized/(.*)", "/blog/"), R("/category/(.*)/page/(.*)", "/category/$1/"), R("/(.*)/feed/?", "/$1/"), R("/home/", "/"), R("/sample-page/", "/"), R("/blog/page/(.*)", "/blog/"), R("/page/(.*)", "/blog/"), R("/shop/page/(.*)", "/shop/"),
         R("/post-sitemap.xml", "/sitemap.xml"), R("/page-sitemap.xml", "/sitemap.xml"), R("/product-sitemap.xml", "/sitemap.xml"),
         R("/product_cat-sitemap.xml", "/sitemap.xml"), R("/category-sitemap.xml", "/sitemap.xml"), R("/local-sitemap.xml", "/sitemap.xml"),
         R("/wp-sitemap.xml", "/sitemap.xml"),
