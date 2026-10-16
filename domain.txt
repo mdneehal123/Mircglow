@@ -1,12 +1,12 @@
-/category/skincare-guides/page/3/ -> 404  | final 404
-/avocado-night-cream-side-effects/feed/ -> 404  | final 404
-/night-cream-for-men/feed/ -> 404  | final 404
-/comments/feed/ -> 308 https://mircglow.com/feed/ | final 200
-/category/skincare-guides/feed/ -> 404  | final 404
-/product/glutathione-cream/feed/ -> 404  | final 404
-/product/avocado-night-cream/feed/ -> 404  | final 404
-/glass-skin-routine-steps-for-a-smooth-hydrated-looking-glow/feed/ -> 404  | final 404
+/category/skincare-guides/page/3/ -> 308 https://mircglow.com/blog/ | final 200
+/avocado-night-cream-side-effects/feed/ -> 308 https://mircglow.com/avocado-night-cream-side-effects/ | final 200
+/night-cream-for-men/feed/ -> 308 https://mircglow.com/night-cream-for-men/ | final 200
+/comments/feed/ -> 308 https://mircglow.com/blog/ | final 200
+/category/skincare-guides/feed/ -> 308 https://mircglow.com/blog/ | final 200
+/product/glutathione-cream/feed/ -> 308 https://mircglow.com/product/glutathione-cream/ | final 200
+/product/avocado-night-cream/feed/ -> 308 https://mircglow.com/product/avocado-night-cream/ | final 200
+/glass-skin-routine-steps-for-a-smooth-hydrated-looking-glow/feed/ -> 308 https://mircglow.com/glass-skin-routine-steps-for-a-smooth-hydrated-looking-glow/ | final 200
 /author/mircglow/feed/ -> 308 https://mircglow.com/about-the-author/ | final 200
-/category/uncategorized/feed/ -> 404  | final 404
+/category/uncategorized/feed/ -> 308 https://mircglow.com/blog/ | final 200
 /feed/ -> 200  | final 200
 /night-cream-for-men/ -> 200  | final 200
