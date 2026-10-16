@@ -894,4 +894,5 @@ body:has(.lux) .icons3 span{background:#F7F1E4;border:1px solid #E6CF9A}
 .ng .prose{max-width:820px}
 .ng-guides{margin-top:32px}.ng-cols{display:grid;gap:18px;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
 .ng-cols h3{font-size:1rem;margin:0 0 6px}.ng-cols ul{margin:0;padding-left:18px}.ng-cols li{margin:4px 0;font-size:.92rem}
+.pfig{margin:18px auto;max-width:480px}.pfig img{width:100%;height:auto;border-radius:16px;display:block}.pfig figcaption{font-size:.85rem;color:#5F5F5F;text-align:center;margin-top:6px}
 .sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
