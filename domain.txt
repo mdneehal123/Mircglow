@@ -1,8 +1,9 @@
-avocado-night-cream-for-pigmentation-prone-skin 200
-avocado-night-cream-for-men 200
-avocado-night-cream-in-your-20s 200
-avocado-and-kojic-acid-explained 200
-avocado-cream-for-sensitive-skin-in-summer 200
-how-to-spot-fake-avocado-whitening-creams 200
-product: reviews-box 1 hindi 1 compare 2
-sitemap: 127
+pages in sitemap: 127
+not working: 0
+/ 200
+/product/glass-glow-cream/ 200
+/product/glass-glow-night-duo/ 200
+/product/avocado-glow-cream-15g/ 200
+/avocado-cream-in-kg/ 200
+/avocado-cream-in-kg-hindi/ 200
+new home page: 1
