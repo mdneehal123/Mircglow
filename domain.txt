@@ -1,9 +1,4 @@
-pages in sitemap: 127
-not working: 0
-/ 200
-/product/glass-glow-cream/ 200
-/product/glass-glow-night-duo/ 200
-/product/avocado-glow-cream-15g/ 200
-/avocado-cream-in-kg/ 200
-/avocado-cream-in-kg-hindi/ 200
-new home page: 1
+/avocado-cream-in-kg/ 2
+/avocado-cream-in-kg-hindi/ 2
+/ 1
+photo 200
