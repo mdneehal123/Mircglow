@@ -363,7 +363,7 @@ def faqs_from(body):
     out = []
     for q, a in re.findall(r"<details[^>]*>\s*<summary>(.*?)</summary>(.*?)</details>", body, flags=re.S):
         out.append((strip_tags(q), strip_tags(a)))
-    for sec in re.finditer(r"<h2[^>]*>([^<]*(?:FAQ|[Qq]uestions|Short answers)[^<]*)</h2>(.*?)(?=<h2|\Z)", body, flags=re.S):
+    for sec in re.finditer(r"<h2[^>]*>([^<]*(?:FAQ|[Qq]uestions|Short answers|सवाल)[^<]*)</h2>(.*?)(?=<h2|\Z)", body, flags=re.S):
         chunk = sec.group(2)
         for q, a in re.findall(r"<h3[^>]*>(.*?)</h3>(.*?)(?=<h3|\Z)", chunk, flags=re.S):
             if strip_tags(a): out.append((strip_tags(q), strip_tags(a)))
@@ -776,6 +776,13 @@ def compare_table(items):
                    f'<td>about {inr(round(p["price"]/p["grams"]))}</td><td>{esc(p["when"])}</td><td>{esc(p["best"])}</td></tr>' for p in items)
     return f'<div class="tbl"><table><caption class="sr">Mirc Glow creams compared</caption><thead><tr><th scope="col">Cream</th><th scope="col">Size</th><th scope="col">Price</th><th scope="col">Per gram</th><th scope="col">When</th><th scope="col">Best for</th></tr></thead><tbody>{rows}</tbody></table></div>'
 
+def list_quick(h1, items):
+    lo, hi = min(items, key=lambda p: p["price"]), max(items, key=lambda p: p["price"])
+    val = min(items, key=lambda p: p["price"] / p["grams"])
+    t = (f"{BRAND} has {len(items)} {'products' if h1.lower().startswith('shop') else h1.lower()} from {inr(lo['price'])} ({lo['name']}, {lo['size']}) to {inr(hi['price'])} ({hi['name']}). "
+         f"Best value per gram: {val['name']} ({val['size']}, {inr(val['price'])}). Every order ships free across India with Cash on Delivery.")
+    return qbox(t, label="In short")
+
 def listing(url, title, desc, h1, ko, intro, items, crumbs, active_chip, extra_html=""):
     chips = [("All","/shop/"),("Night creams","/product-category/night-creams/"),("Avocado","/product-category/night-creams/avocado-night-creams/"),("Combos and kits","/product-category/combos/")]
     chip_html = "".join(f'<a href="{u}"{" aria-current=\"page\"" if u==active_chip else ""}>{n}</a>' for n,u in chips)
@@ -783,7 +790,7 @@ def listing(url, title, desc, h1, ko, intro, items, crumbs, active_chip, extra_h
     cp = {"@type":"CollectionPage","@id":SITE+url,"url":SITE+url,"name":h1,"description":desc,"isPartOf":{"@id":SITE+"/#website"}}
     body = head(title, desc, url, extra=ld(ORG, cp, il, crumbs_ld(crumbs)))
     body += header("/shop/")
-    body += f'<main id="main">{crumbs_html(crumbs)}<div class="w ptop"><span class="lab">{ko}</span><h1 class="dsp">{esc(h1)}</h1><p>{esc(intro)}</p><nav class="chips" aria-label="Categories">{chip_html}</nav></div>'
+    body += f'<main id="main">{crumbs_html(crumbs)}<div class="w ptop"><span class="lab">{ko}</span><h1 class="dsp">{esc(h1)}</h1><p>{esc(intro)}</p>{list_quick(h1, items)}<nav class="chips" aria-label="Categories">{chip_html}</nav></div>'
     body += f'<section class="w" style="padding-bottom:clamp(48px,6vw,90px)"><div class="grid4">{"".join(card_html(p, "h2") for p in items)}</div></section>'
     body += banner_strip(items, "Benefits at a glance", "Why you'll love them")
     singles = [p for p in items]
@@ -939,6 +946,44 @@ def compare_html(p):
 
 RECENT_HTML = '<section class="w az-recent" data-recent hidden aria-labelledby="h-recent"><h2 id="h-recent" class="az-h">Your recently viewed items</h2><div class="az-rrow"></div></section>'
 
+def qbox(text, facts=(), label="Quick answer", lang="en"):
+    lab = "छोटा जवाब" if lang == "hi" else label
+    lis = "".join(f"<li>{esc(x)}</li>" for x in facts)
+    return f'<aside class="quick" aria-label="{esc(lab)}"><span class="quick-l">{esc(lab)}</span><p>{esc(text)}</p>{"<ul>" + lis + "</ul>" if lis else ""}</aside>'
+
+def product_quick(p):
+    pg = round(p["price"] / p["grams"], 1)
+    if "parts" in p:
+        parts = " and ".join(PBY[x]["name"] for x in p["parts"])
+        sep = sum(PBY[x]["price"] for x in p["parts"])
+        t = (f"The {BRAND} {p['name']} is a set of {parts} ({p['size']}). It costs {inr(p['price'])} (MRP {inr(p['mrp'])}), "
+             f"{inr(sep - p['price'])} less than buying the jars separately, with free shipping and Cash on Delivery across India. Best for: {p['best'].lower()}.")
+    else:
+        t = (f"{BRAND} {p['name']} is a {p['size']} Korean-inspired face cream made in Karnataka, India, with {', '.join(p['ing'][:-1]).lower()} and {p['ing'][-1].lower()}. "
+             f"It costs {inr(p['price'])} (MRP {inr(p['mrp'])}), about {inr(int(pg)) if pg == int(pg) else '₹' + str(pg)} per gram. Best for: {p['best'].lower()}.")
+    facts = [f"Use: {p['use']}", f"Skin type: {p['skin']}", f"A jar lasts: {p['lasts'].lower()}", "Free shipping, Cash on Delivery, 7-day returns on sealed jars"]
+    return qbox(t, facts, "In short")
+
+def city_quick(g):
+    city = g["crumb"]
+    t = (f"Yes. {BRAND} supplies night cream in kg in {city}: avocado night cream, avocado cream and glutathione cream by the kilo, from 1 kg, "
+         f"couriered from Bhatkal, Karnataka, usually in 3 to 7 days. Send the cream, quantity and your city on WhatsApp ({PHONE}) for the price per kg.")
+    return qbox(t, ["From 1 kg", "Sample before a bulk order", "Price per kg falls as quantity rises", "For salons, parlours, resellers and new brands"])
+
+PAGE_QUICK = {
+ "avocado-cream": ("Avocado cream is a rich moisturiser made with avocado that helps skin feel soft and comfortable. Mirc Glow makes four avocado creams from ₹349 to ₹649: the 10 g and 15 g Avocado Glow creams for daytime and first-time use, and the 30 g Avocado Night Cream and 25 g Avocado Korean Night Cream for nights.",
+                   ["Dry skin: Avocado Night Cream 30 g (₹649)", "Most skin types: Avocado Korean Night Cream 25 g (₹649)", "Simplest formula: Avocado Glow Cream 15 g, avocado + aloe vera (₹399)", "Use a pea-sized amount; sunscreen every morning"]),
+ "korean-night-cream": ("A Korean night cream is the last, sealing step of a K-beauty evening routine, used for a hydrated, glass-skin look by morning. Mirc Glow makes Korean-inspired night creams in India from ₹649, including the Avocado Korean Night Cream, the Glutathione Cream and the Glass Glow Cream.",
+                   ["Apply a pea-sized amount as the last step at night", "Avocado Korean Night Cream: most skin types", "Glass Glow Cream: glutathione, niacinamide, hyaluronic acid, centella, alpha arbutin", "Free shipping and Cash on Delivery in India"]),
+ "bulk-night-cream": ("Yes, Mirc Glow sells night cream in kg. Avocado night cream, avocado cream and glutathione cream are supplied by weight from 1 kg to salons, parlours, resellers and new brands across India. Message the cream, quantity and city on WhatsApp for the price per kg.",
+                   ["From 1 kg; larger orders get a lower rate per kg", "1 kg fills about 33 jars of 30 g", "Sample available before a bulk order", "Shipped from Bhatkal, Karnataka, usually in 3 to 7 days"]),
+ "skincare-gift-sets": ("Mirc Glow skincare gift sets cost ₹849 to ₹2,699: the Day & Night Combo, the Night Cream Combo, the Glass Glow Night Duo and the three-cream Korean Glass Skin Kit. Each costs less than buying the jars separately and ships free across India.",
+                   ["Under ₹1,000: Day & Night Combo (₹849)", "Premium: Glass Glow Night Duo (₹2,699)", "Full routine: Korean Glass Skin Kit (₹1,999)"]),
+ "ingredients": ("Most Mirc Glow creams are built on aloe vera, vitamin B3 (niacinamide) and kojic acid, plus a hero ingredient such as avocado or glutathione. Avocado Glow Cream 15 g is avocado and aloe vera only, and Glass Glow Cream uses glutathione, niacinamide, hyaluronic acid, centella asiatica and alpha arbutin.", []),
+ "avocado-cream-hindi": ("एवोकाडो क्रीम एक मॉइस्चराइज़र है जो त्वचा को मुलायम और आरामदायक महसूस कराती है। Mirc Glow की चार एवोकाडो क्रीम ₹349 से ₹649 तक हैं: दिन के लिए हल्की Avocado Glow क्रीम और रात के लिए Avocado Night Cream व Avocado Korean Night Cream।", []),
+ "korean-night-cream-hindi": ("कोरियन नाइट क्रीम K-beauty रात के रूटीन का आख़िरी स्टेप है, जो सुबह तक त्वचा को नमी भरी और ग्लास-स्किन जैसी दिखाने में मदद करती है। Mirc Glow की कोरियन-इंस्पायर्ड नाइट क्रीम ₹649 से शुरू होती हैं।", []),
+}
+
 def build_product(p):
     url = f"/product/{p['slug']}/"
     raw = read(os.path.join(SRC, "products", p["slug"] + ".html"))
@@ -985,7 +1030,7 @@ def build_product(p):
 </div>
 <section class="w" aria-label="Benefits">{banner(p)}</section>
 {fbt_html(p)}
-<section class="w details">{toc_html}<div class="prose">{body_html}</div></section>
+<section class="w details">{toc_html}<div class="prose">{product_quick(p)}{body_html}</div></section>
 {compare_html(p)}
 {RECENT_HTML}
 <section class="sec soft" aria-labelledby="h-more"><div class="w"><span class="eyebrow">Pairs well with</span><h2 class="sh" id="h-more">You may also like</h2><div class="grid4">{"".join(card_html(q) for q in others)}</div></div></section>
@@ -1006,6 +1051,8 @@ def build_page(g):
         raw += "<h2>और हिंदी गाइड</h2><ul>" + "".join(f'<li><a href="/{x["slug"]}/">{esc(x["title"])}</a></li>' for x in others) + "</ul>"
     raw = lazy_imgs(raw)
     faqs = faqs_from(raw)
+    if g["kind"] != "legacy" and g["slug"] in PAGE_QUICK and "</h1>" in raw:
+        raw = raw.replace("</h1>", "</h1>" + qbox(*PAGE_QUICK[g["slug"]], lang=g["lang"]), 1)
     if g["slug"] in CITY: cr = [("Home","/"),("Bulk orders","/bulk-night-cream/"),(g["crumb"], url)]
     else: cr = [("Home","/"),(g["crumb"], url)]
     alts = None
@@ -1018,7 +1065,11 @@ def build_page(g):
     if faqs: nodes.append(faq_ld(faqs))
     out = head(g["rt"], g["rd"], url, lang=g["lang"], image=g["img"], alts=alts, extra=ld(*nodes))
     out += header()
+    qk = city_quick(g) if g["slug"].startswith("night-cream-in-kg-") else (qbox(*PAGE_QUICK[g["slug"]], lang=g["lang"]) if g["slug"] in PAGE_QUICK else "")
     if g["kind"] == "legacy":
+        if qk and "</h1>" in raw:
+            j = raw.find("</p>", raw.index("</h1>"))
+            raw = raw[:j+4] + qk + raw[j+4:] if j > 0 else raw.replace("</h1>", "</h1>" + qk, 1)
         out += f'<main id="main" class="lg">{crumbs_html(cr)}{raw}{at_glance_html() if g["slug"]=="about" else ""}</main>'
     else:
         out += f'<main id="main" class="plain">{crumbs_html(cr)}<div class="w"><article class="prose">{raw}<p style="margin-top:3em;font-size:.85rem;color:var(--muted)">{"अंतिम अपडेट" if g["lang"]=="hi" else "Last reviewed"}: {fmt_date(TODAY)}</p></article></div></main>'
@@ -1118,6 +1169,9 @@ def build_llms():
     for p in LIVE_POSTS:
         q = GEO.QUICK.get(p["slug"])
         L.append(f"- [{p['title']}]({SITE}/{p['slug']}/): " + (q[0] if q else p['ex']))
+    L += ["", "## Shop by category"] + [f"- [{d['name']}]({SITE}{cat_url(c)})" for c, d in CATS.items()] + [f"- [Gift sets]({SITE}/skincare-gift-sets/)"]
+    L += ["", "## Hindi guides (हिंदी)"] + [f"- [{g['title']}]({SITE}/{g['slug']}/)" for g in PAGES if g["lang"] == "hi"]
+    L += ["", "## Bulk supply by city (night cream and avocado cream in kg)"] + [f"- [{g['title']}]({SITE}/{g['slug']}/)" for g in PAGES if g["slug"].startswith("night-cream-in-kg-")]
     L += ["", "## Brand facts"] + [f"- {k}: {v}" for k, v in GEO.AT_A_GLANCE]
     L += ["", "## About the content", f"- [About the author]({SITE}/about-the-author/): guides are written by founder Mohammed Nihal.",
           f"- [Editorial policy]({SITE}/editorial-policy/): how guides are fact-checked and updated; no medical or skin-colour claims."]
