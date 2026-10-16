@@ -473,13 +473,13 @@ RETURN_POLICY = {"@type":"MerchantReturnPolicy","applicableCountry":"IN","return
 SHIPPING = {"@type":"OfferShippingDetails","shippingRate":{"@type":"MonetaryAmount","value":0,"currency":"INR"},"shippingDestination":{"@type":"DefinedRegion","addressCountry":"IN"},
             "deliveryTime":{"@type":"ShippingDeliveryTime","handlingTime":{"@type":"QuantitativeValue","minValue":0,"maxValue":2,"unitCode":"DAY"},"transitTime":{"@type":"QuantitativeValue","minValue":3,"maxValue":7,"unitCode":"DAY"}}}
 ORG = {"@type":"OnlineStore","@id":ORG_ID,"name":BRAND,"url":SITE+"/","logo":SITE+"/assets/logo.png",
-       "description":"Korean-inspired skincare brand from Bhatkal, Karnataka, making avocado night creams and glutathione cream with aloe vera, vitamin B3 and kojic acid.",
+       "description":"Korean-inspired skincare brand from Bhatkal, Karnataka, India, making avocado night creams, glutathione cream and the Glass Glow Cream, and supplying night cream and avocado cream in kg for salons and resellers.",
        "telephone":PHONE.replace(" ",""),"address":{"@type":"PostalAddress","streetAddress":"Azad Nagar 4th Cross","addressLocality":"Bhatkal","addressRegion":"Karnataka","postalCode":"581320","addressCountry":"IN"},
        "areaServed":{"@type":"Country","name":"India"},"currenciesAccepted":"INR","paymentAccepted":"Cash on Delivery, UPI, card",
        "contactPoint":{"@type":"ContactPoint","telephone":PHONE.replace(" ",""),"contactType":"customer service","areaServed":"IN","availableLanguage":["English","Hindi"]},
        "hasMerchantReturnPolicy":RETURN_POLICY,"foundingLocation":{"@type":"Place","name":"Bhatkal, Karnataka, India"},
        "founder":{"@type":"Person","name":"Mohammed Nihal","url":SITE+"/about-the-author/"},
-       "knowsAbout":["Night cream","Avocado cream","Glutathione cream","Kojic acid","Niacinamide","Korean skincare","Glass skin routine"],
+       "knowsAbout":["Night cream","Avocado cream","Avocado night cream","Glutathione cream","Kojic acid","Niacinamide","Alpha arbutin","Hyaluronic acid","Centella asiatica","Korean skincare","Glass skin routine","Bulk night cream supply"],
        "brand":{"@type":"Brand","name":BRAND}}
 WEBSITE = {"@type":"WebSite","@id":SITE+"/#website","url":SITE+"/","name":BRAND,"inLanguage":"en-IN","publisher":{"@id":ORG_ID}}
 
@@ -497,6 +497,18 @@ def product_ld(p, url):
                    "availability":"https://schema.org/InStock","itemCondition":"https://schema.org/NewCondition","seller":{"@id":ORG_ID},
                    "shippingDetails":SHIPPING,"hasMerchantReturnPolicy":RETURN_POLICY}}
     if "parts" in p: d["isRelatedTo"] = [{"@type":"Product","name":PBY[s]["name"],"url":SITE+f"/product/{s}/"} for s in p["parts"]]
+    # extra real photos shown on the page
+    try:
+        extra = re.findall(r'<img[^>]*src="(/wp-content/[^"]+)"', read(os.path.join(SRC, "products", p["slug"] + ".html")))
+    except Exception: extra = []
+    d["image"] = [SITE + p["img"]] + [SITE + x for x in extra if x != p["img"]][:4]
+    d["mpn"] = f"MG-{p['id']}"
+    d["weight"] = {"@type":"QuantitativeValue","value":p["grams"],"unitCode":"GRM"}
+    d["countryOfOrigin"] = {"@type":"Country","name":"India"}
+    d["manufacturer"] = {"@id":ORG_ID}
+    d["audience"] = {"@type":"PeopleAudience","suggestedMinAge":18}
+    d["offers"]["priceSpecification"] = [{"@type":"UnitPriceSpecification","price":p["price"],"priceCurrency":"INR"},
+        {"@type":"UnitPriceSpecification","priceType":"https://schema.org/StrikethroughPrice","price":p["mrp"],"priceCurrency":"INR"}]
     return d
 
 def ld(*nodes):
@@ -1062,6 +1074,13 @@ def build_page(g):
     ptype = {"about":"AboutPage","contact":"ContactPage","faq":"FAQPage"}.get(g["slug"], "WebPage")
     wp = {"@type":ptype if ptype != "FAQPage" else "WebPage","@id":SITE+url,"url":SITE+url,"name":g["title"],"description":g["rd"],"inLanguage":"hi-IN" if g["lang"]=="hi" else "en-IN","isPartOf":{"@id":SITE+"/#website"},"dateModified":TODAY}
     nodes = [ORG, wp, crumbs_ld(cr)]
+    if g["slug"] in CITY or g["slug"] == "bulk-night-cream":
+        city = g["crumb"] if g["slug"].startswith("night-cream-in-kg-") else None
+        nodes.append({"@type":"Service","@id":SITE+url+"#service","name":g["title"],"serviceType":"Wholesale supply of night cream and avocado cream by the kilogram",
+            "provider":{"@id":ORG_ID},"areaServed":({"@type":"City","name":city,"containedInPlace":{"@type":"Country","name":"India"}} if city else {"@type":"Country","name":"India"}),
+            "audience":{"@type":"BusinessAudience","audienceType":"Salons, beauty parlours, resellers and skincare brands"},
+            "availableChannel":{"@type":"ServiceChannel","servicePhone":{"@type":"ContactPoint","telephone":"+919980881230","contactType":"sales"},"serviceUrl":SITE+url},
+            "offers":{"@type":"Offer","eligibleQuantity":{"@type":"QuantitativeValue","minValue":1,"unitCode":"KGM"},"priceCurrency":"INR","availability":"https://schema.org/InStock","url":SITE+url}})
     if faqs: nodes.append(faq_ld(faqs))
     out = head(g["rt"], g["rd"], url, lang=g["lang"], image=g["img"], alts=alts, extra=ld(*nodes))
     out += header()
