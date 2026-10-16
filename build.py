@@ -1028,10 +1028,28 @@ def reviews_ld(p, d):
                     "reviewRating":{"@type":"Rating","ratingValue":int(r["rating"]),"bestRating":5}} for r in rs[:10]]
     return d
 
+AMZ_URL = "https://www.amazon.in/s?k=Magical+Touch+Avocado+Korean+Night+Cream"
+AMZ_FOR = {"avocado-korean-night-cream", "avocado-night-cream"}
+AMZ_REVIEWS = [  # copied word for word from verified-purchase reviews on Amazon.in (Magical Touch listing, same formula)
+ ("Valkesh A.", 5, "18 July 2026", "Value for money", "I've been using Avocado Korean Night Cream regularly, and my skin feels deeply nourished, soft, and hydrated. My dullness has reduced, and my face looks healthier."),
+ ("Prinkal K.", 5, "15 July 2026", "Very satisfied with this seller.", "Really impressed with this avocado night cream. It feels lightweight, absorbs quickly, and leaves my skin soft, smooth, and well-hydrated by morning. Great for daily use!"),
+ ("Purushottam K.", 5, "15 July 2026", "Good Product", "Loved this avocado night cream. It's lightweight, absorbs quickly, and leaves my skin feeling fresh and moisturized."),
+ ("Poulami M.", 3, "7 September 2026", "Not so good", "গন্ধ টা খুব তীব্র not so good (translation: the smell is very strong)"),
+]
+
+def amazon_reviews_html(p):
+    if p["slug"] not in AMZ_FOR: return ""
+    items = "".join(f'<article class="rv-i">{stars(r)}<b class="rv-t">{esc(t)}</b><p>{esc(x)}</p><span class="rv-by">{esc(n)} · Verified purchase on Amazon.in · {d}</span></article>' for n, r, d, t, x in AMZ_REVIEWS)
+    return (f'<section class="w rv rv-amz" aria-labelledby="h-amz"><h2 id="h-amz" class="az-h">Reviews from Amazon.in</h2>'
+            f'<p class="rv-note">Our avocado night cream is also sold on Amazon.in under our sister label <b>Magical Touch</b> (Avocado Korean Night Cream, same formula: avocado, aloe vera, vitamin B3 and kojic acid). '
+            f'Below is a selection of recent verified-purchase reviews from there, including a critical one, copied word for word. Results vary from person to person.</p>'
+            f'<div class="rv-list">{items}</div></section>')
+
 def rating_line(p):
     rs = reviews_for(p)
     if not rs:
-        return '<a class="rl rl-0" href="#h-rv"><span class="rv-st" aria-hidden="true">☆☆☆☆☆</span> Be the first to review</a>'
+        amz = ' <a class="rl rl-amz" href="#h-amz">See Amazon.in reviews ›</a>' if p["slug"] in AMZ_FOR else ""
+        return '<a class="rl rl-0" href="#h-rv"><span class="rv-st" aria-hidden="true">☆☆☆☆☆</span> Be the first to review</a>' + amz
     avg = sum(int(r["rating"]) for r in rs) / len(rs)
     return f'<a class="rl" href="#h-rv"><span class="rl-b">{avg:.1f} ★</span> {len(rs)} rating{"s" if len(rs) > 1 else ""} &amp; reviews</a>'
 
@@ -1085,6 +1103,7 @@ def build_product(p):
 <section class="w details">{toc_html}<div class="prose">{product_quick(p)}{body_html}</div></section>
 {compare_html(p)}
 {reviews_html(p)}
+{amazon_reviews_html(p)}
 {RECENT_HTML}
 <section class="sec soft" aria-labelledby="h-more"><div class="w"><span class="eyebrow">Pairs well with</span><h2 class="sh" id="h-more">You may also like</h2><div class="grid4">{"".join(card_html(q) for q in others)}</div></div></section>
 </main>

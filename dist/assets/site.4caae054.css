@@ -884,4 +884,6 @@ body:has(.lux) .icons3 span{background:#F7F1E4;border:1px solid #E6CF9A}
 .rl{display:inline-flex;align-items:center;gap:8px;margin:4px 0 8px;font-size:.9rem;color:#0F5F28;text-decoration:none;font-weight:600}
 .rl-0{color:#5F5F5F;font-weight:500}.rl-0 .rv-st{color:#C9CED6}
 .rl-b{background:#157A36;color:#fff;border-radius:6px;padding:2px 7px;font-size:.82rem;font-weight:800}
+.rv-note{font-size:.9rem;color:#374151;margin:0 0 12px}.rv-t{display:block;margin-top:4px}
+.rl-amz{margin-left:12px;color:#0F5F28;font-weight:600}
 .sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
