@@ -1,4 +1,4 @@
-sleep 20
 S=https://mircglow.com
-for p in /category/skincare-guides/page/3/ /avocado-night-cream-side-effects/feed/ /night-cream-for-men/feed/ /comments/feed/ /category/skincare-guides/feed/ /product/glutathione-cream/feed/ /product/avocado-night-cream/feed/ /glass-skin-routine-steps-for-a-smooth-hydrated-looking-glow/feed/ /author/mircglow/feed/ /category/uncategorized/feed/ /feed/ /night-cream-for-men/; do
- echo "$p -> $(curl -s -o /dev/null -w '%{http_code} %{redirect_url}' $S$p) | final $(curl -s -L -o /dev/null -w '%{http_code}' $S$p)"; done
+curl -s $S/sitemap.xml | grep -o '<loc>[^<]*' | sed 's/<loc>//' > urls.txt
+echo "pages in sitemap: $(wc -l < urls.txt)"
+bad=0; while read u; do c=$(curl -s -o /dev/null -w '%{http_code}' "$u"); [ "$c" != 200 ] && { echo "$c $u"; bad=$((bad+1)); }; done < urls.txt; echo "not working: $bad"
