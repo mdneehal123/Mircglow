@@ -363,6 +363,41 @@ def lazy_imgs(body):
         return f'{pre}<picture><source srcset="{w}" type="image/webp">{tag}</picture>'
     return re.sub(r"(.{0,12})(<img [^>]*>)", pic, body, flags=re.S)
 
+def build_llms_full():
+    """One plain-text file with every indexable page's short answer, key facts and FAQs, for AI assistants."""
+    import html as _h
+    def txt(x): return re.sub(r"\s+", " ", _h.unescape(re.sub(r"<[^>]+>", " ", x))).strip()
+    rows = []
+    for root, _, files in os.walk(DIST):
+        if "index.html" not in files: continue
+        s = open(os.path.join(root, "index.html"), encoding="utf-8").read()
+        if 'name="robots" content="noindex' in s: continue
+        url = SITE + "/" + os.path.relpath(root, DIST).replace(".", "").strip("/") + "/"
+        url = url.replace("//", "/").replace("https:/", "https://") if url != SITE + "//" else SITE + "/"
+        c = re.search(r'<link rel="canonical" href="([^"]+)"', s)
+        if c and c.group(1).rstrip("/") != url.rstrip("/"): continue
+        t = re.search(r"<title>(.*?)</title>", s, re.S)
+        q = re.search(r'<aside class="quick"[^>]*>.*?<p>(.*?)</p>(?:<ul>(.*?)</ul>)?', s, re.S)
+        if not q:
+            q2 = re.search(r"<p><strong>(?:Short answer|Quick answer|छोटा जवाब):?</strong>:?(.*?)</p>", s, re.S)
+        faqs = []
+        for m in re.finditer(r'<script type="application/ld\+json">(.*?)</script>', s, re.S):
+            try: d = json.loads(m.group(1))
+            except Exception: continue
+            for node in (d.get("@graph", [d]) if isinstance(d, dict) else d):
+                if isinstance(node, dict) and node.get("@type") == "FAQPage":
+                    faqs += [(e["name"], e["acceptedAnswer"]["text"]) for e in node.get("mainEntity", [])]
+        block = [f"## {txt(t.group(1)) if t else url}", f"URL: {url}"]
+        if q:
+            block.append(f"Short answer: {txt(q.group(1))}")
+            if q.group(2): block += [f"- {txt(x)}" for x in re.findall(r"<li>(.*?)</li>", q.group(2), re.S)]
+        elif q2: block.append(f"Short answer: {txt(q2.group(1))}")
+        for a, b in faqs[:8]: block.append(f"Q: {txt(a)}\nA: {txt(b)}")
+        rows.append((0 if "/product/" in url else 1 if url.count("/") <= 4 else 2, url, "\n".join(block)))
+    rows.sort()
+    head_ = [f"# {BRAND}: full answers file", "", f"> Every public page on {SITE} with its short answer, key facts and common questions, so AI assistants can read and quote the site in one go. Prices in INR. Mirc Glow creams are cosmetics: they do not change natural skin tone or treat skin conditions. Orders: WhatsApp {PHONE}.", f"Summary index: {SITE}/llms.txt", "", ""]
+    write("/llms-full.txt", "\n".join(head_) + "\n\n".join(r[2] for r in rows) + "\n")
+
 def faqs_from(body):
     """Pull Q&A pairs from <details>, FAQ-style h3 lists, and 'Short answers' blocks."""
     out = []
@@ -695,7 +730,7 @@ def fk_top():
     sets_row = ('<section class="fk-deals" aria-labelledby="h-sets2"><div class="fk-dh"><h2 id="h-sets2" class="fk-h">Combos &amp; kits</h2>'
                 f'<a href="{cat_url("combos")}">View all ›</a></div><div class="fk-row">{"".join(deal(p) for p in SETS)}</div></section>')
     intro = ('<section class="fk-intro"><h1 id="h-home">Mirc Glow avocado night creams &amp; Korean-inspired skincare</h1>'
-             '<p>Avocado, glutathione and glass-skin creams made in Karnataka, for smoother, brighter-looking skin. Order in one WhatsApp message: free shipping across India, Cash on Delivery and 7-day returns.</p></section>')
+             '<p>Avocado, glutathione and glass-skin creams made in Karnataka, for smoother, brighter-looking skin. Order in one WhatsApp message: free shipping across India, Cash on Delivery and 7-day returns.</p>' + qbox("Mirc Glow is a Korean-inspired skincare brand from Bhatkal, Karnataka, India. It sells avocado night creams (from ₹349), a glutathione cream (₹1,499) and the Glass Glow Cream (₹2,499) online across India, with free shipping, Cash on Delivery, 7-day returns on sealed jars and orders on WhatsApp +91 99808 81230. Salons can buy night cream in kg.", label="In short") + '</section>')
     return f'<div class="fk">{search}{circles}{slider}{intro}{coupons}{deals_html}{grid}{budget}{sets_row}</div>'
 
 def build_home():
@@ -966,7 +1001,7 @@ def build_blog():
         cp = {"@type":"CollectionPage","@id":SITE+url,"url":SITE+url,"name":h1,"description":desc}
         out = head(title, desc, url, extra=ld(ORG, cp, il, crumbs_ld(crumbs)))
         out += header("/blog/")
-        out += f'''<main id="main">{crumbs_html(crumbs)}<div class="w ptop"><span class="lab"><span lang="ko">가이드</span> · Skincare guides</span><h1 class="dsp">{esc(h1)}</h1><p>Honest, plain-English guides to night creams, glutathione, kojic acid and glass skin routines for Indian weather. Written by the Mirc Glow team; general information, not medical advice.</p><nav class="chips" aria-label="Topics">{chips}</nav></div>
+        out += f'''<main id="main">{crumbs_html(crumbs)}<div class="w ptop"><span class="lab"><span lang="ko">가이드</span> · Skincare guides</span><h1 class="dsp">{esc(h1)}</h1>{qbox(f"The Mirc Glow journal has {len(LIVE_POSTS)} free skincare guides for Indian skin and weather, on night creams, avocado cream, glutathione, kojic acid, dark spots and glass skin routines, plus Hindi guides. Each guide opens with a short answer and is written by founder Mohammed Nihal.", label="In short")}<p>Honest, plain-English guides to night creams, glutathione, kojic acid and glass skin routines for Indian weather. Written by the Mirc Glow team; general information, not medical advice.</p><nav class="chips" aria-label="Topics">{chips}</nav></div>
 <section class="w" style="padding-bottom:clamp(48px,6vw,80px)"><h2 class="lab" style="margin-bottom:22px">Start here</h2><div class="journal">{"".join(post_card(p) for p in hubs)}</div></section>
 {secs}{tools}</main>'''
         out += footer()
@@ -1042,6 +1077,27 @@ PAGE_QUICK = {
  "avocado-cream-hindi": ("एवोकाडो क्रीम एक मॉइस्चराइज़र है जो त्वचा को मुलायम और आरामदायक महसूस कराती है। Mirc Glow की चार एवोकाडो क्रीम ₹349 से ₹649 तक हैं: दिन के लिए हल्की Avocado Glow क्रीम और रात के लिए Avocado Night Cream व Avocado Korean Night Cream।", []),
  "korean-night-cream-hindi": ("कोरियन नाइट क्रीम K-beauty रात के रूटीन का आख़िरी स्टेप है, जो सुबह तक त्वचा को नमी भरी और ग्लास-स्किन जैसी दिखाने में मदद करती है। Mirc Glow की कोरियन-इंस्पायर्ड नाइट क्रीम ₹649 से शुरू होती हैं।", []),
 }
+PAGE_QUICK.update({
+ "about": ("Mirc Glow is a Korean-inspired skincare brand from Bhatkal, Karnataka, India, founded by Mohammed Nihal. It makes avocado night creams, a glutathione cream and the Glass Glow Cream (₹349 to ₹2,499), sells them through mircglow.com and WhatsApp with free shipping and Cash on Delivery across India, and supplies night cream in kg to salons and resellers.",
+           ["Founded by Mohammed Nihal in Bhatkal, Karnataka", "6 face creams and 4 sets, ₹349 to ₹2,699", "Orders on WhatsApp +91 99808 81230", "Cosmetic claims only: no fairness or whitening promises"]),
+ "faq": ("Mirc Glow ships free across India in about 3 to 7 days, accepts Cash on Delivery or an online payment link, and takes back sealed jars within 7 days. You order by tapping Buy Now, which opens WhatsApp with your order written; most creams are used as the last step at night, with sunscreen every morning.", []),
+ "shipping-policy": ("Shipping is free on every Mirc Glow order within India. Most orders arrive in 3 to 7 days, and you get a tracking number on WhatsApp or SMS when the parcel is dispatched. Cash on Delivery is available. We do not ship outside India.", []),
+ "returns-refunds": ("Unopened, sealed Mirc Glow jars can be returned within 7 days of delivery. Damaged, wrong or expired items are replaced or refunded; tell us on WhatsApp with a photo. Refunds are made within 5 to 7 working days after the return is checked. Opened jars cannot be returned for hygiene reasons.", []),
+ "contact": ("Contact Mirc Glow on WhatsApp or phone at +91 99808 81230, or write to us at Azad Nagar 4th Cross, Bhatkal, Karnataka 581320, India. WhatsApp is the fastest way to order, ask about a cream or get a bulk quote.", []),
+ "track-order": ("To track a Mirc Glow order, use the tracking number we send on WhatsApp or SMS when your parcel is dispatched, or message +91 99808 81230 with your name and order details. Most orders arrive in 3 to 7 days.", []),
+ "skin-quiz": ("The Mirc Glow skin quiz asks four quick questions about your skin type, main concern and routine, then suggests one cream. It takes under a minute and needs no sign-up.", []),
+ "skincare-ingredient-glossary": ("This glossary explains 15 common skincare ingredients in plain English, including avocado, aloe vera, niacinamide (vitamin B3), kojic acid, glutathione, vitamin C, alpha arbutin, hyaluronic acid and centella asiatica, with what each does and who it suits.", []),
+ "skincare-routine-builder": ("The routine builder gives you a simple morning and night skincare routine for your skin type in a few taps: cleanse, moisturise and protect in the morning; cleanse, treat and seal at night.", []),
+ "about-the-author": ("Mirc Glow's skincare guides are written by founder Mohammed Nihal in Bhatkal, Karnataka. They are general skincare information, checked against established ingredient knowledge, and avoid medical, fairness or guaranteed-result claims.", []),
+ "privacy": ("Mirc Glow collects only what it needs to deliver and support your order: your name, address, phone number, email if you share it, and what you ordered. Online payments go through a secure payment gateway, so we never see your card or UPI details. We share details only with couriers, payment gateways, our service providers and authorities where the law requires, and we do not sell your personal information. The site needs no account or login.", []),
+ "terms": ("These terms apply when you use mircglow.com or order from Mirc Glow. Our products are cosmetics, not medicines, and results vary. Prices are in Indian Rupees, with any taxes confirmed before you pay; you can pay online or by Cash on Delivery. Orders are placed on WhatsApp or through a payment link, and paid orders we cancel are refunded in full. Patch test before first use.", []),
+ "editorial-policy": ("Mirc Glow guides are written in plain English or Hindi by the founder, reviewed and dated, and updated when facts or prices change. We never claim a cosmetic changes skin colour, treats a medical condition or works in a fixed number of days.", []),
+})
+for _hub_slug, _hub in HUB.items():
+    if _hub in GEO.QUICK and _hub_slug not in GEO.QUICK:
+        GEO.QUICK[_hub_slug] = GEO.QUICK[_hub]
+PLAN_QUICK = {m["slug"]: (m["quick"], m.get("facts", [])) for m in PLAN if m.get("quick") and m["kind"] == "bulk"}
+PAGE_QUICK.update(PLAN_QUICK)
 
 REVIEWS = [r for r in json.load(open(os.path.join(SRC, "reviews.json"), encoding="utf-8"))["reviews"] if r.get("text") and 1 <= int(r.get("rating", 0)) <= 5]
 
@@ -1248,7 +1304,7 @@ def build_wpcats():
         robots = "index, follow, max-image-preview:large, max-snippet:-1" if len(items) > 1 else "noindex, follow"
         out=head(f"{name} %s Skincare Guides | Mirc Glow" % "-", desc, url, robots=robots, extra=ld(ORG,cp,crumbs_ld(crumbs)))
         out+=header("/blog/")
-        out+=f'<main id="main">{crumbs_html(crumbs)}<div class="w ptop"><span class="eyebrow">Skincare guides</span><h1 class="dsp">{esc(name)}</h1><p>{esc(desc)}</p></div><section class="w" style="padding-bottom:40px"><div class="posts">{"".join(post_card(p) for p in items)}</div></section></main>'
+        out+=f'<main id="main">{crumbs_html(crumbs)}<div class="w ptop"><span class="eyebrow">Skincare guides</span><h1 class="dsp">{esc(name)}</h1><p>{esc(desc)}</p>{qbox(f"Mirc Glow has {len(items)} guides on {name.lower()}, written in plain English by founder Mohammed Nihal and reviewed for Indian skin and weather. Start with: " + "; ".join(p["title"] for p in items[:3]) + ".", label="In short") if items else ""}</div><section class="w" style="padding-bottom:40px"><div class="posts">{"".join(post_card(p) for p in items)}</div></section></main>'
         out+=footer()
         write(url,out)
 
@@ -1321,10 +1377,11 @@ def build_llms():
         L.append(f"- [{p['title']}]({SITE}/{p['slug']}/): " + (q[0] if q else p['ex']))
     L += ["", "## Shop by category"] + [f"- [{d['name']}]({SITE}{cat_url(c)})" for c, d in CATS.items()] + [f"- [Gift sets]({SITE}/skincare-gift-sets/)"]
     L += ["", "## Hindi guides (हिंदी)"] + [f"- [{g['title']}]({SITE}/{g['slug']}/)" for g in PAGES if g["lang"] == "hi"]
-    L += ["", "## Bulk supply by city (night cream and avocado cream in kg)"] + [f"- [{g['title']}]({SITE}/{g['slug']}/)" for g in PAGES if g["slug"].startswith("night-cream-in-kg-")]
+    L += ["", "## Bulk and wholesale supply (cream by the kg)"] + [f"- [{g['title']}]({SITE}/{g['slug']}/)" + (f": {PAGE_QUICK[g['slug']][0]}" if g['slug'] in PAGE_QUICK else "") for g in PAGES if g["slug"] in CITY]
+    L += ["", "## Guide categories"] + [f"- [{v[0]}]({SITE}/category/{c}/)" for c, v in WPCATS.items() if len(v[2]) > 1] + [f"- [All skincare guides]({SITE}/blog/)"]
     L += ["", "## Brand facts"] + [f"- {k}: {v}" for k, v in GEO.AT_A_GLANCE]
     L += ["", "## About the content", f"- [About the author]({SITE}/about-the-author/): guides are written by founder Mohammed Nihal.",
-          f"- [Editorial policy]({SITE}/editorial-policy/): how guides are fact-checked and updated; no medical or skin-colour claims."]
+          f"- [Editorial policy]({SITE}/editorial-policy/): how guides are fact-checked and updated; no medical or skin-colour claims.", f"- [Privacy policy]({SITE}/privacy/)", f"- [Terms]({SITE}/terms/)", f"- [Full answers file: every page's short answer and FAQs]({SITE}/llms-full.txt)"]
     L += ["", "## Common questions"] + [f"- {q} {a}" for k in ("shipping-policy", "returns-refunds") for q, a in GEO.PAGE_ANSWERS[k]]
     write("/llms.txt", "\n".join(L) + "\n")
 
@@ -1363,7 +1420,8 @@ def build_vercel():
                       {"source":"/assets/(.*)","headers":[{"key":"Cache-Control","value":"public, max-age=31536000, immutable"}]},
                       {"source":"/wp-content/uploads/(.*)","headers":[{"key":"Cache-Control","value":"public, max-age=2592000, stale-while-revalidate=86400"}]},
                       {"source":"/feed.xml","headers":[{"key":"Content-Type","value":"application/rss+xml; charset=utf-8"}]},
-                      {"source":"/llms.txt","headers":[{"key":"Content-Type","value":"text/plain; charset=utf-8"}]}]}
+                      {"source":"/llms.txt","headers":[{"key":"Content-Type","value":"text/plain; charset=utf-8"}]},
+                      {"source":"/llms-full.txt","headers":[{"key":"Content-Type","value":"text/plain; charset=utf-8"}]}]}
     with open(os.path.join(DIST, "vercel.json"), "w") as f: json.dump(cfg, f, indent=2)
     # project settings for Vercel (repo root): serve the ready-built dist/ folder, no build step needed
     root_cfg = {"$schema": cfg["$schema"], "framework": None, "buildCommand": "", "installCommand": "", "outputDirectory": "dist", **{k: v for k, v in cfg.items() if k != "$schema"}}
@@ -1400,7 +1458,7 @@ def main():
     for p in PRODUCTS: build_product(p)
     for p in POSTS: build_post(p)
     for g in PAGES: build_page(g)
-    build_404(); build_sitemaps(); build_robots(); build_llms(); build_feed(); build_vercel()
+    build_404(); build_sitemaps(); build_robots(); build_llms(); build_feed(); build_vercel(); build_llms_full()
     n = sum(len(fs) for _, _, fs in os.walk(DIST))
     print(f"built {n} files into dist/")
 
