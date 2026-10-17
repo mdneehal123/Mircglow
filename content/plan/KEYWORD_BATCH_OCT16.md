@@ -7,3 +7,7 @@ Shared rules for every page (in addition to BRIEF.md):
 - Every page links to the Night Creams shop page /product-category/night-creams/ (anchor containing "night cream") OR to /shop/ where night cream is off-topic, plus 1-2 relevant products and 3+ existing guides from LINKS.md.
 - No banned claims. "Fairness" may appear only as the topic people search for, never as a promise.
 - Topic values for metadata: "night", "routine", "concern" (dark spots / uneven tone / acne marks / brightening), "ingredient" (ingredient explainers).
+
+## Batch 2 (18 Oct 2026) additions
+- New metadata kind "bulk" for B2B pages (content/pages/<slug>.html, plain prose like other pages, with one <h1>). Bulk facts: Mirc Glow supplies avocado night cream, avocado Korean night cream, avocado glow cream and glutathione cream by weight, from 1 kg, to salons, parlours, resellers and brands across India; sample before bulk; price per kg depends on cream, quantity and packing and is quoted on WhatsApp +91 99808 81230; shipped from Bhatkal, Karnataka, usually 3–7 days; real photo of 1 kg tubs at /wp-content/uploads/2026/10/mirc-glow-avocado-cream-1kg-tubs.jpg. NEVER invent prices per kg, minimum orders other than "from 1 kg", certifications, licences or clients. Link /bulk-night-cream/ and /avocado-cream-in-kg/.
+- Kojic acid is in Avocado Night Cream, Avocado Korean Night Cream, Avocado Glow Nourishing Skin Cream 10 g and Glutathione Cream (not in Avocado Glow Cream 15 g or Glass Glow Cream).

@@ -288,6 +288,9 @@ for _m in PLAN:
         if _m.get("quick"): GEO.QUICK[_m["slug"]] = (_m["quick"], _m.get("facts", []))
     elif _m["kind"] == "hindi":
         PAGES.append(G(_m["slug"], _m["title"], _m["rt"], _m["rd"], "plain", crumb=_m["title"].split("(")[0].strip(), lang="hi"))
+    elif _m["kind"] == "bulk":
+        PAGES.append(G(_m["slug"], _m["title"], _m["rt"], _m["rd"], "plain", crumb=_m["title"], img="/wp-content/uploads/2026/10/mirc-glow-avocado-cream-1kg-tubs.jpg"))
+        CITY.add(_m["slug"])
     elif _m["kind"] == "city":
         PAGES.append(G(_m["slug"], _m["title"], _m["rt"], _m["rd"], "legacy", crumb=_m["title"].replace("Night Cream in Kg in ", ""), img="/wp-content/uploads/2026/10/mirc-glow-bulk-night-cream-in-kg.webp"))
         CITY.add(_m["slug"])
