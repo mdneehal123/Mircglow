@@ -5,8 +5,12 @@ This repository is the whole website. Every page keeps the same address it had o
 ## 1. Connect to Vercel
 
 1. On vercel.com, choose **Add New → Project**, then import the GitHub repository **mircglow**.
-2. Framework Preset: **Other**. Leave Build Command and Install Command empty. Output Directory: `dist` (already set in `vercel.json`).
+2. Framework Preset: **Other**. Leave Build Command and Install Command empty. Output Directory: `dist` (already set in `vercel.json`). The `api/` folder holds the checkout functions; Vercel deploys them automatically, no setting needed.
 3. Deploy, then open the `*.vercel.app` link and check the home page, a product page, the blog and the skin quiz.
+
+## 1b. Switch on the website checkout
+
+Add the environment variables listed in `README.md` (Razorpay, Delhivery, Order Desk), then redeploy. Place one small test order of each kind (online and Cash on Delivery) and check that it appears in the Order Desk and, for COD, in the Delhivery panel.
 
 ## 2. Switch the domain
 

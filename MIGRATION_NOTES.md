@@ -9,8 +9,9 @@ Old product slugs (WordPress redirected these automatically):
 - /product/glow-clarifying-cleanser/ -> /product/avocado-face-cream/
 - /is-avocado-face-cream-good-for-glowing-skinis-avocado-cream-good-for-your-skin/ -> /is-avocado-cream-good-for-your-skin/
 
-Shop flows (static site has no cart):
-- /cart/, /checkout/, /my-account/ (and subpaths) -> /shop/
+Shop flows (website checkout added Oct 2026):
+- /cart/ and /checkout/ are real pages again (noindex); old subpaths such as /checkout/order-received/... -> /checkout/, /cart/... -> /cart/
+- /my-account/ (and subpaths) -> /shop/
 - ?add-to-cart= links -> rewrite to WhatsApp order links in HTML
 
 ## Consolidated posts (canonical set on WordPress 14 Oct; convert to 301 ~4 weeks after launch)

@@ -57,6 +57,26 @@ for t, us in titles.items():
 for d, us in descs.items():
     if len(us) > 1: problems.append(f"duplicate description: {us}")
 
+# shop pages stay out of Google; product prices on the pages match the server price table (api/_products.json)
+sitemap = open(os.path.join(DIST, "sitemap.xml"), encoding="utf-8").read()
+for u in ("/cart/", "/checkout/", "/order-success/"):
+    f = os.path.join(DIST, u.strip("/"), "index.html")
+    if not os.path.exists(f): problems.append(f"{u}: missing"); continue
+    if 'name="robots" content="noindex' not in open(f, encoding="utf-8").read(): problems.append(f"{u}: should be noindex")
+for f in pages:
+    s = open(f, encoding="utf-8").read()
+    if 'name="robots" content="noindex' in s:
+        rel = "/" + os.path.relpath(f, DIST).replace("index.html", "")
+        if f"<loc>https://mircglow.com{rel}</loc>" in sitemap: problems.append(f"{rel}: noindex page listed in sitemap")
+try:
+    server = json.load(open(os.path.join(ROOT, "api", "_products.json"), encoding="utf-8"))["products"]
+    for slug, sp in server.items():
+        f = os.path.join(DIST, "product", slug, "index.html")
+        m = re.search(r'property="product:price:amount" content="(\d+)"', open(f, encoding="utf-8").read()) if os.path.exists(f) else None
+        if not m: problems.append(f"api/_products.json: no product page for {slug}")
+        elif int(m.group(1)) != sp["price"]: problems.append(f"price mismatch {slug}: page {m.group(1)} vs checkout {sp['price']}")
+except Exception as e: problems.append(f"api/_products.json unreadable: {e}")
+
 # URL parity with the live WordPress site (published posts, pages, products, categories)
 wp = """/ /shop/ /blog/ /about/ /contact/ /faq/ /ingredients/ /privacy/ /terms/ /avocado-cream/ /korean-night-cream/ /skincare-routine-builder/
 /skincare-ingredient-glossary/ /skin-quiz/ /returns-refunds/ /shipping-policy/ /track-order/ /bulk-night-cream/ /skincare-gift-sets/
