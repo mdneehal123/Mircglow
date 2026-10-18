@@ -168,6 +168,36 @@ PRODUCTS = [
       parts=["glutathione-cream","avocado-korean-night-cream","avocado-face-cream"]),
 ]
 PBY = {p["slug"]: p for p in PRODUCTS}
+
+# ---------------------------------------------------------------- online checkout
+# Order Desk product ids (brand "mg"). Products not listed go to the Order Desk with an empty id
+# and keep their name and price as sold.
+DESK_IDS = {"avocado-korean-night-cream":"mg1", "glutathione-cream":"mg2", "avocado-night-cream":"mg3", "avocado-face-cream":"mg4",
+            "day-and-night-cream-combo":"mg5", "night-cream-combo":"mg6", "korean-glass-skin-kit":"mg7"}
+# Checkout coupons. The same table is used by the server (api/_products.json), so the amount charged always matches.
+COUPONS = {"GLOW10": dict(type="pct", value=10, min=0, label="10% off your first order")}
+
+def sold_name(p):
+    """Item name as sold, e.g. 'Avocado Korean Night Cream 25g' or 'Night Cream Combo (30g + 30g)'."""
+    size = p["size"].replace(" g", "g")
+    if "parts" in p: return f'{p["name"]} ({size})'
+    return p["name"] if size in p["name"] else f'{p["name"]} {size}'
+
+def catalog_server():
+    return {"products": {p["slug"]: {"sold": sold_name(p), "price": p["price"], "desk": DESK_IDS.get(p["slug"], ""), "units": len(p.get("parts", [])) or 1}
+                         for p in PRODUCTS},
+            "coupons": {k: {x: v[x] for x in ("type", "value", "min")} for k, v in COUPONS.items()}}
+
+def catalog_client():
+    img = lambda p: p["img"][:-4] + ".mg.webp" if p["img"].endswith(".png") and webp_src(p["img"]) else p["img"]
+    return {"p": {p["slug"]: {"n": p["name"], "s": p["size"], "sold": sold_name(p), "p": p["price"], "m": p["mrp"], "i": img(p), "u": f"/product/{p['slug']}/"}
+                  for p in PRODUCTS},
+            "c": COUPONS, "wa": WA_NUM}
+
+def write_catalog():
+    os.makedirs(os.path.join(ROOT, "api"), exist_ok=True)
+    with open(os.path.join(ROOT, "api", "_products.json"), "w", encoding="utf-8") as f:
+        json.dump(catalog_server(), f, ensure_ascii=False, indent=1); f.write("\n")
 SINGLES = [p for p in PRODUCTS if "parts" not in p]
 SETS = [p for p in PRODUCTS if "parts" in p]
 CATS = {
@@ -450,6 +480,13 @@ def buy_btn(p, label="Buy on WhatsApp", cls="yb yb-fill"):
     return (f'<a class="{cls}" href="{wa(order_msg(p))}" data-wa-order="{p["slug"]}" target="_blank" rel="noopener">'
             f'{WA_SVG}<span>{label}</span></a>')
 
+CART_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 10.2a1 1 0 0 0 1 .8h8.9a1 1 0 0 0 1-.8L20 7H6.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/><circle cx="9" cy="19" r="1.5" fill="currentColor"/><circle cx="17" cy="19" r="1.5" fill="currentColor"/></svg>'
+
+def cart_btns(p, buy="Buy now"):
+    """Add to cart + Buy now. Shown only while online checkout is switched on (site.js); otherwise WhatsApp ordering stays."""
+    return (f'<div class="cbtns" data-shop><button type="button" class="yb yb-line" data-cart-add="{p["slug"]}">Add to cart</button>'
+            f'<button type="button" class="yb yb-fill" data-cart-buy="{p["slug"]}">{buy}</button></div>')
+
 PAY_CHIPS = ('<div class="chips-pay" aria-label="Payment options"><span>💵 Cash on Delivery</span><span>📱 UPI</span>'
              '<span>💳 Cards</span><span>🚚 Free shipping</span></div>')
 
@@ -586,7 +623,7 @@ def head(title, desc, url, *, lang="en", og_type="website", image=None, canonica
 <link rel="apple-touch-icon" href="/assets/logo.png">
 <link rel="stylesheet" href="{CSS_HREF}">
 <link rel="alternate" type="application/rss+xml" title="{BRAND} Journal" href="{SITE}/feed/">
-<script>addEventListener("error",function(e){{var t=e.target;if(t&&t.tagName==="IMG"&&!t.onerror)t.classList.add("broken")}},true)</script>
+<script>addEventListener("error",function(e){{var t=e.target;if(t&&t.tagName==="IMG"&&!t.onerror)t.classList.add("broken")}},true);try{{var c=JSON.parse(localStorage.getItem("mg_pay")||"null");if(c&&c.v&&!c.v.enabled&&!c.v.cod&&Date.now()-c.t<6e5)document.documentElement.classList.add("shop-off")}}catch(e){{}}</script>
 {extra}
 </head>
 <body>
@@ -611,6 +648,7 @@ def header(active=""):
 <a class="word" href="/" aria-label="Mirc Glow home">MIRC<b>GLOW</b></a>
 <nav class="nav" aria-label="Main">{nav}</nav>
 <a class="hwa" href="{WA_HELLO}" target="_blank" rel="noopener" aria-label="Order on WhatsApp">{WA_SVG}<span>Order on WhatsApp</span></a>
+<a class="hcart" href="/cart/" data-cart-open data-shop aria-label="Cart">{CART_SVG}<i data-cart-count hidden>0</i></a>
 </div></header>
 '''
 
@@ -1023,7 +1061,9 @@ def fbt_html(p):
                             f'<small>{x["size"]}</small></span><b class="az-fp">{inr(x["price"])}</b></a>')
     return (f'<section class="w az-fbt" aria-labelledby="h-fbt"><h2 id="h-fbt" class="az-h">Frequently bought together</h2>'
             f'<div class="az-fbox"><div class="az-fitems">{item(p, True)}<span class="az-plus" aria-hidden="true">+</span>{item(q, False)}</div>'
-            f'<div class="az-ftot"><p>Total price: <b>{inr(total)}</b></p><a class="yb yb-fill" href="{wa(msg)}" target="_blank" rel="noopener">{WA_SVG}<span>Buy both on WhatsApp</span></a>{alt}</div></div></section>')
+            f'<div class="az-ftot"><p>Total price: <b>{inr(total)}</b></p><button type="button" class="yb yb-fill" data-shop data-cart-add="{p["slug"]},{q["slug"]}">Add both to cart</button>'
+            f'<a class="yb yb-fill" data-shop-off href="{wa(msg)}" target="_blank" rel="noopener">{WA_SVG}<span>Buy both on WhatsApp</span></a>'
+            f'<a class="az-wa" data-shop href="{wa(msg)}" target="_blank" rel="noopener">Or buy both on WhatsApp</a>{alt}</div></div></section>')
 
 def compare_html(p):
     """Amazon-style 'Compare with similar items' table."""
@@ -1208,9 +1248,11 @@ def build_product(p):
 <p class="az-del" data-del><b>FREE delivery</b> in 3–7 days across India · Cash on Delivery available</p>
 <p class="lead2">{esc(p["lead"])}</p>
 {qty_box(p["slug"])}
-{buy_btn(p, "Buy Now on WhatsApp")}
+{cart_btns(p)}
+<div class="wa-alt">{buy_btn(p, "Buy Now on WhatsApp")}</div>
 <a class="yb yb-line" href="{wa("Hi Mirc Glow, I have a question about the " + p["name"] + ".")}" target="_blank" rel="noopener">Ask a question first</a>
-<p class="howpay">Tap Buy Now, add your name, address and pincode, and send. Pay by Cash on Delivery or a secure online link. We confirm every order on WhatsApp. First order? Mention <b>GLOW10</b> for 10% off.</p>
+<p class="howpay" data-shop>Tap Buy now and fill in your address on one short page. Pay online by UPI or card, or choose Cash on Delivery. Prefer WhatsApp? Use the WhatsApp button instead. First order? Use <b>GLOW10</b> for 10% off.</p>
+<p class="howpay" data-shop-off>Tap Buy Now, add your name, address and pincode, and send. Pay by Cash on Delivery or a secure online link. We confirm every order on WhatsApp. First order? Mention <b>GLOW10</b> for 10% off.</p>
 {PAY_CHIPS}
 <ul class="ticks">{pts}</ul>
 <div class="trust4"><div><span>🚚</span><b>Free shipping</b><small>3 to 7 days</small></div><div><span>💵</span><b>Cash on Delivery</b><small>Or pay online</small></div><div><span>↩️</span><b>7-day returns</b><small><a href="/returns-refunds/">Sealed jars</a></small></div><div><span>💬</span><b>WhatsApp help</b><small>{PHONE}</small></div></div>
@@ -1229,7 +1271,7 @@ def build_product(p):
 <section class="sec soft" aria-labelledby="h-more"><div class="w"><span class="eyebrow">Pairs well with</span><h2 class="sh" id="h-more">You may also like</h2><div class="grid4">{"".join(card_html(q) for q in others)}</div></div></section>
 </main>
 <script type="application/json" id="rv-item">{json.dumps({"u": url, "n": p["name"], "i": p["img"][:-4] + ".mg.webp" if p["img"].endswith(".png") else p["img"], "p": inr(p["price"]), "m": inr(p["mrp"])}, ensure_ascii=False)}</script>
-<div class="pbar" id="pbar" hidden><div><b>{esc(p["name"])}</b><span>{inr(p["price"])}</span></div>{buy_btn(p, "Buy Now", "yb yb-fill yb-sm")}</div>
+<div class="pbar" id="pbar" hidden><div><b>{esc(p["name"])}</b><span>{inr(p["price"])}</span></div><button type="button" class="yb yb-fill yb-sm" data-shop data-cart-buy="{p["slug"]}">Buy now</button><span class="pbar-wa" data-shop-off>{buy_btn(p, "Buy Now", "yb yb-fill yb-sm")}</span></div>
 '''
     out += footer()
     write(url, out)
@@ -1307,6 +1349,92 @@ def build_wpcats():
         out+=f'<main id="main">{crumbs_html(crumbs)}<div class="w ptop"><span class="eyebrow">Skincare guides</span><h1 class="dsp">{esc(name)}</h1><p>{esc(desc)}</p>{qbox(f"Mirc Glow has {len(items)} guides on {name.lower()}, written in plain English by founder Mohammed Nihal and reviewed for Indian skin and weather. Start with: " + "; ".join(p["title"] for p in items[:3]) + ".", label="In short") if items else ""}</div><section class="w" style="padding-bottom:40px"><div class="posts">{"".join(post_card(p) for p in items)}</div></section></main>'
         out+=footer()
         write(url,out)
+
+STATES = ["Andaman and Nicobar Islands","Andhra Pradesh","Arunachal Pradesh","Assam","Bihar","Chandigarh","Chhattisgarh","Dadra and Nagar Haveli and Daman and Diu","Delhi","Goa","Gujarat","Haryana","Himachal Pradesh","Jammu and Kashmir","Jharkhand","Karnataka","Kerala","Ladakh","Lakshadweep","Madhya Pradesh","Maharashtra","Manipur","Meghalaya","Mizoram","Nagaland","Odisha","Puducherry","Punjab","Rajasthan","Sikkim","Tamil Nadu","Telangana","Tripura","Uttar Pradesh","Uttarakhand","West Bengal"]
+NOINDEX = "noindex, nofollow"
+
+def ck_bar(step):
+    steps = ["Cart", "Details", "Done"]
+    prog = "<i></i>".join(f'<span{" class=on" if i == step else ""}>{t}</span>' for i, t in enumerate(steps))
+    return (f'<div class="ck-bar"><div class="w"><a class="word" href="/" aria-label="Mirc Glow home">MIRC<b>GLOW</b></a>'
+            f'<div class="ck-prog" aria-label="Checkout progress">{prog}</div><span class="ck-sec">🔒 Secure</span></div></div>')
+
+def ck_end():
+    return f'<script src="{JS_HREF}" defer></script>\n</body>\n</html>\n'
+
+def build_cart():
+    out = head("Your cart | Mirc Glow", "Your Mirc Glow cart: review your creams, change quantities and go to the secure checkout. Free shipping and Cash on Delivery across India.", "/cart/", robots=NOINDEX)
+    out += header("/shop/")
+    out += f'''<main id="main" class="ck-page"><div class="w ck-narrow">
+<h1 class="ck-h1">Your cart</h1>
+<div data-cart-page><p class="ck-muted">Loading your cart…</p></div>
+<noscript><p class="ck-muted">The cart needs JavaScript. You can also <a href="{WA_HELLO}">order on WhatsApp</a>.</p></noscript>
+</div></main>'''
+    out += footer()
+    write("/cart/", out)
+
+def build_checkout():
+    f = lambda id, label, attrs="": f'<div class="ck-f" id="f-{id}"><label for="{id}">{label}</label><input id="{id}" name="{id}" {attrs}><span class="ck-err"></span></div>'
+    opts = "".join(f"<option>{s}</option>" for s in STATES)
+    out = head("Checkout | Mirc Glow", "Mirc Glow secure checkout: enter your delivery address and pay online by UPI or card, or choose Cash on Delivery. Free shipping across India.", "/checkout/", robots=NOINDEX)
+    out += ck_bar(1)
+    out += f'''<main id="main" class="ck">
+<form id="ckForm" novalidate><div class="w ck-cols">
+<div class="ck-main">
+<h1 class="ck-h1">Checkout</h1>
+<div class="ck-empty" id="ckEmpty" hidden><p>Your cart is empty.</p><a class="yb yb-fill" href="/shop/">Shop the creams</a></div>
+<section class="ck-p" aria-labelledby="h-c1"><h2 id="h-c1"><span class="ck-n" id="n1">1</span>Contact</h2>
+<div class="ck-fs">
+<div class="ck-f" id="f-phone"><label for="phone">Mobile number</label><div class="ck-tel"><span>+91</span><input id="phone" name="phone" inputmode="numeric" maxlength="10" autocomplete="tel-national" placeholder="10-digit mobile"></div><span class="ck-err"></span></div>
+{f("email", "Email (optional, for order updates)", 'type="email" autocomplete="email" placeholder="you@example.com"')}
+</div></section>
+<section class="ck-p" aria-labelledby="h-c2"><h2 id="h-c2"><span class="ck-n" id="n2">2</span>Delivery address</h2>
+<div class="ck-fs">
+{f("name", "Full name", 'autocomplete="name" placeholder="Name on the parcel"')}
+<div class="ck-f" id="f-address"><label for="address">Full address (house no., building, street, area)</label><textarea id="address" name="address" rows="2" autocomplete="street-address"></textarea><span class="ck-err"></span></div>
+{f("landmark", "Landmark (optional)", 'placeholder="e.g. opposite the bus stand"')}
+<div class="ck-2">{f("pin", "Pin code", 'inputmode="numeric" maxlength="6" autocomplete="postal-code" placeholder="6 digits"')}{f("city", "City", 'autocomplete="address-level2"')}</div>
+<p class="ck-msg" id="pinMsg" aria-live="polite"></p>
+<div class="ck-f" id="f-state"><label for="state">State</label><select id="state" name="state" autocomplete="address-level1"><option value="">Select state</option>{opts}</select><span class="ck-err"></span></div>
+<div class="ck-hp" aria-hidden="true"><label for="website">Website</label><input id="website" name="website" tabindex="-1" autocomplete="off"></div>
+</div></section>
+<section class="ck-p" aria-labelledby="h-c3"><h2 id="h-c3"><span class="ck-n">3</span>Payment</h2>
+<div class="ck-pay">
+<label class="ck-opt"><input type="radio" name="pay" value="online" checked><span><b>Pay online (Razorpay)</b><small id="onlineNote">UPI · Cards · Net banking · Wallets, full amount</small></span></label>
+<label class="ck-opt"><input type="radio" name="pay" value="cod"><span><b>Cash on Delivery</b><small>Nothing to pay now. Pay when the parcel arrives</small></span><em>Free</em></label>
+</div></section>
+</div>
+<aside class="ck-sum" aria-labelledby="h-sum">
+<button type="button" class="ck-sumt" id="sumT" aria-expanded="false" aria-controls="sumBody"><span>Order summary ▾</span><b id="sumTop"></b></button>
+<div class="ck-p ck-sump" id="sumBody">
+<h2 id="h-sum">Order summary</h2>
+<div class="ck-lines" id="ckLines"></div>
+<div class="ck-cp"><input id="coupon" placeholder="Coupon code" aria-label="Coupon code" autocomplete="off"><button type="button" class="yb yb-line" id="applyC">Apply</button></div>
+<p class="ck-msg" id="cMsg" aria-live="polite"></p>
+<div class="ck-tot" id="ckTot"></div>
+<ul class="ck-trust"><li>✓ 100% original</li><li>🚚 Free shipping</li><li>↩️ 7-day returns</li></ul>
+</div>
+</aside>
+</div>
+<div class="ck-place"><div class="w"><div class="ck-amt" id="barAmt"></div><button class="yb yb-fill" type="submit" id="placeBtn">Place order</button></div>
+<div class="w"><p class="ck-msg no" id="payMsg" role="alert" hidden></p><a class="ck-wa" href="{WA_HELLO}" target="_blank" rel="noopener" id="ckWa">{WA_SVG}<span>Prefer WhatsApp? Order there</span></a></div></div>
+</form>
+<noscript><div class="w"><p>Checkout needs JavaScript. You can <a href="{WA_HELLO}">order on WhatsApp</a> instead.</p></div></noscript>
+</main>'''
+    out += ck_end()
+    write("/checkout/", out)
+
+def build_success():
+    out = head("Order placed | Mirc Glow", "Thank you for your Mirc Glow order. See your order number, payment status and Delhivery tracking number, and send the details on WhatsApp.", "/order-success/", robots=NOINDEX)
+    out += ck_bar(2)
+    out += f'''<main id="main" class="ck"><div class="w ck-done" data-success>
+<div class="ck-tick" aria-hidden="true">✓</div>
+<h1 class="ck-h1" id="okH">Thank you</h1>
+<div id="okBody"><p class="ck-muted">Your order details are shown here right after checkout. Questions? <a href="{WA_HELLO}" target="_blank" rel="noopener">Message us on WhatsApp</a>.</p></div>
+<a class="yb yb-line" href="/shop/">Continue shopping</a>
+</div></main>'''
+    out += ck_end()
+    write("/order-success/", out)
 
 def build_404():
     out = head("Page not found | Mirc Glow", "This page could not be found. Browse Mirc Glow avocado night creams, glutathione cream and skincare guides instead.", "/404.html", robots="noindex, follow")
@@ -1402,7 +1530,7 @@ def build_vercel():
         R("/product/radiance-renewal-serum/", "/product/avocado-night-cream/"),
         R("/product/glow-clarifying-cleanser/", "/product/avocado-face-cream/"),
         R("/is-avocado-face-cream-good-for-glowing-skinis-avocado-cream-good-for-your-skin/", "/is-avocado-cream-good-for-your-skin/"),
-        R("/cart(.*)", "/shop/"), R("/checkout(.*)", "/shop/"), R("/my-account(.*)", "/shop/"),
+        R("/cart/(.+)", "/cart/"), R("/checkout/(.+)", "/checkout/"), R("/my-account(.*)", "/shop/"),
         R("/product-category/uncategorized/", "/shop/"), R("/category/uncategorized/", "/blog/"), R("/category/skincare-guides/", "/blog/"),
         R("/product-tag/(.*)", "/shop/"), R("/tag/(.*)", "/blog/"), R("/author/(.*)", "/about-the-author/"),
         R("/comments/feed(.*)", "/blog/"), R("/category/skincare-guides/(.*)", "/blog/"), R("/category/uncategorized/(.*)", "/blog/"), R("/category/:cat/page/(.*)", "/category/:cat/"), R("/product/:slug/feed(.*)", "/product/:slug/"), R("/:slug/feed(.*)", "/:slug/"), R("/home/", "/"), R("/sample-page/", "/"), R("/blog/page/(.*)", "/blog/"), R("/page/(.*)", "/blog/"), R("/shop/page/(.*)", "/shop/"),
@@ -1439,7 +1567,7 @@ def build_assets():
     os.makedirs(os.path.join(DIST, "assets"), exist_ok=True)
     with open(os.path.join(DIST, "assets", f"site.{h}.css"), "w") as f: f.write(css)
     CSS_HREF = f"/assets/site.{h}.css"
-    js = read(os.path.join(ROOT, "src", "site.js")); hj = hashlib.sha1(js.encode()).hexdigest()[:8]
+    js = "window.MG_CAT=" + json.dumps(catalog_client(), ensure_ascii=False, separators=(",", ":")) + ";\n" + read(os.path.join(ROOT, "src", "site.js")); hj = hashlib.sha1(js.encode()).hexdigest()[:8]
     with open(os.path.join(DIST, "assets", f"site.{hj}.js"), "w") as f: f.write(js)
     JS_HREF = f"/assets/site.{hj}.js"
     icon = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><defs><radialGradient id="g" cx=".38" cy=".3"><stop offset="0" stop-color="#fff"/><stop offset=".5" stop-color="#F7E6E8"/><stop offset="1" stop-color="#E3B4BF"/></radialGradient></defs>'
@@ -1458,6 +1586,7 @@ def main():
     for p in PRODUCTS: build_product(p)
     for p in POSTS: build_post(p)
     for g in PAGES: build_page(g)
+    build_cart(); build_checkout(); build_success(); write_catalog()
     build_404(); build_sitemaps(); build_robots(); build_llms(); build_feed(); build_vercel(); build_llms_full()
     n = sum(len(fs) for _, _, fs in os.walk(DIST))
     print(f"built {n} files into dist/")

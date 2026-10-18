@@ -24,7 +24,7 @@ jobs:
       - name: Commit if anything new went live
         id: commit
         run: |
-          git add -A dist
+          git add -A dist api/_products.json
           if git diff --cached --quiet; then echo "changed=no" >> "$GITHUB_OUTPUT"; exit 0; fi
           NEW=$(git diff --cached --name-only --diff-filter=A dist | grep '/index.html$' | sed 's#^dist##; s#index.html$##' | tr '\n' ' ')
           echo "new=$NEW" >> "$GITHUB_OUTPUT"

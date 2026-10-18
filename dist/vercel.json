@@ -34,13 +34,13 @@
       "permanent": true
     },
     {
-      "source": "/cart(.*)",
-      "destination": "/shop/",
+      "source": "/cart/(.+)",
+      "destination": "/cart/",
       "permanent": true
     },
     {
-      "source": "/checkout(.*)",
-      "destination": "/shop/",
+      "source": "/checkout/(.+)",
+      "destination": "/checkout/",
       "permanent": true
     },
     {

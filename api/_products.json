@@ -1,0 +1,71 @@
+{
+ "products": {
+  "avocado-korean-night-cream": {
+   "sold": "Avocado Korean Night Cream 25g",
+   "price": 649,
+   "desk": "mg1",
+   "units": 1
+  },
+  "glass-glow-cream": {
+   "sold": "Glass Glow Cream 30g",
+   "price": 2499,
+   "desk": "",
+   "units": 1
+  },
+  "glutathione-cream": {
+   "sold": "Glutathione Cream 30g",
+   "price": 1499,
+   "desk": "mg2",
+   "units": 1
+  },
+  "avocado-night-cream": {
+   "sold": "Avocado Night Cream 30g",
+   "price": 649,
+   "desk": "mg3",
+   "units": 1
+  },
+  "avocado-face-cream": {
+   "sold": "Avocado Glow Cream 10g",
+   "price": 349,
+   "desk": "mg4",
+   "units": 1
+  },
+  "avocado-glow-cream-15g": {
+   "sold": "Avocado Glow Cream 15g",
+   "price": 399,
+   "desk": "",
+   "units": 1
+  },
+  "day-and-night-cream-combo": {
+   "sold": "Day & Night Combo (10g + 30g)",
+   "price": 849,
+   "desk": "mg5",
+   "units": 2
+  },
+  "night-cream-combo": {
+   "sold": "Night Cream Combo (30g + 30g)",
+   "price": 1799,
+   "desk": "mg6",
+   "units": 2
+  },
+  "glass-glow-night-duo": {
+   "sold": "Glass Glow Night Duo (30g + 30g)",
+   "price": 2699,
+   "desk": "",
+   "units": 2
+  },
+  "korean-glass-skin-kit": {
+   "sold": "Korean Glass Skin Kit (30g + 25g + 10g)",
+   "price": 1999,
+   "desk": "mg7",
+   "units": 3
+  }
+ },
+ "coupons": {
+  "GLOW10": {
+   "type": "pct",
+   "value": 10,
+   "min": 0
+  }
+ }
+}
