@@ -1148,20 +1148,20 @@ def amazon_reviews_html(p):
             f'Below is a selection of recent verified-purchase reviews from there, including a critical one, copied word for word. Results vary from person to person.</p>'
             f'<div class="rv-list">{items}</div></section>')
 
-VIDEO = {"name":"Avocado Night Cream: Benefits and How to Use",
- "description":"A 30-second guide to Mirc Glow Avocado Night Cream: three benefits (overnight moisture, smoother-looking skin, a more even-looking tone with sunscreen) and how to apply it in five steps.",
- "src":"/wp-content/uploads/2026/10/mirc-glow-avocado-night-cream-benefits-how-to-use.mp4",
- "thumb":"/wp-content/uploads/2026/10/mirc-glow-avocado-night-cream-video-thumb.jpg","date":"2026-10-16T16:30:00+05:30","dur":"PT30S"}
-VIDEO_ON = {"/product/avocado-night-cream/", "/is-avocado-night-cream-good/", "/product/avocado-korean-night-cream/"}
+# Videos: content/videos.json lists each video (name, description, src mp4, thumb jpg, date, dur "PT30S", pages it appears on).
+# A page shows its video above the first H2, with VideoObject schema and a video entry in the sitemap.
+VIDEOS = json.load(open(os.path.join(SRC, "videos.json"), encoding="utf-8"))
+VIDEO_BY_URL = {u: v for v in VIDEOS for u in v["pages"]}
+VIDEO_ON = set(VIDEO_BY_URL)
 
 def video_html(url):
     if url not in VIDEO_ON: return ""
-    v = VIDEO
+    v = VIDEO_BY_URL[url]
     return (f'<figure class="vid"><video controls preload="none" playsinline width="720" height="1280" poster="{v["thumb"]}">'
-            f'<source src="{v["src"]}" type="video/mp4"></video><figcaption>{esc(v["name"])} (30 seconds)</figcaption></figure>')
+            f'<source src="{v["src"]}" type="video/mp4"></video><figcaption>{esc(v["name"])} ({int(re.sub(r"[^0-9]", "", v.get("dur", "PT30S")) or 30)} seconds)</figcaption></figure>')
 
 def video_ld(url):
-    v = VIDEO
+    v = VIDEO_BY_URL[url]
     return {"@type":"VideoObject","@id":SITE+url+"#video","name":v["name"],"description":v["description"],"thumbnailUrl":[SITE+v["thumb"]],
             "uploadDate":v["date"],"duration":v["dur"],"contentUrl":SITE+v["src"],"publisher":{"@id":ORG_ID},"inLanguage":"en-IN"}
 
@@ -1336,9 +1336,10 @@ def build_sitemaps():
         prod = next((p for p in PRODUCTS if u == f"/product/{p['slug']}/"), None)
         if prod: x += f"<image:image><image:loc>{SITE}{prod['img']}</image:loc></image:image>"
         if u in VIDEO_ON:
-            x += (f"<video:video><video:thumbnail_loc>{SITE}{VIDEO['thumb']}</video:thumbnail_loc><video:title>{esc(VIDEO['name'])}</video:title>"
-                  f"<video:description>{esc(VIDEO['description'])}</video:description><video:content_loc>{SITE}{VIDEO['src']}</video:content_loc>"
-                  f"<video:duration>30</video:duration><video:publication_date>{VIDEO['date']}</video:publication_date></video:video>")
+            V = VIDEO_BY_URL[u]; secs = int(re.sub(r"\D", "", V.get("dur", "PT30S")) or 30)
+            x += (f"<video:video><video:thumbnail_loc>{SITE}{V['thumb']}</video:thumbnail_loc><video:title>{esc(V['name'])}</video:title>"
+                  f"<video:description>{esc(V['description'])}</video:description><video:content_loc>{SITE}{V['src']}</video:content_loc>"
+                  f"<video:duration>{secs}</video:duration><video:publication_date>{V['date']}</video:publication_date></video:video>")
         items.append(x + "</url>")
     sm = ('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">\n'
           + "\n".join(items) + "\n</urlset>\n")
