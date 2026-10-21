@@ -35,17 +35,12 @@
     },
     {
       "source": "/cart(.*)",
-      "destination": "/shop/",
-      "permanent": true
-    },
-    {
-      "source": "/checkout(.*)",
-      "destination": "/shop/",
+      "destination": "/checkout/",
       "permanent": true
     },
     {
       "source": "/my-account(.*)",
-      "destination": "/shop/",
+      "destination": "/track-order/",
       "permanent": true
     },
     {

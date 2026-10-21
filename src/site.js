@@ -20,7 +20,7 @@
     } catch (x) {}
   }, true);
   // sticky buy bar on product pages, once the main buy button is off screen
-  var bar = document.getElementById("pbar"), buy = document.querySelector("#buy [data-wa-order]");
+  var bar = document.getElementById("pbar"), buy = document.querySelector("#buy [data-cart-add]");
   if (bar && buy && "IntersectionObserver" in window) {
     new IntersectionObserver(function (es) { var r = es[0]; bar.hidden = r.isIntersecting || r.boundingClientRect.top > 0; }).observe(buy);
   }
@@ -89,4 +89,35 @@
     list = [cur].concat(list.filter(function (x) { return x.u !== cur.u; })).slice(0, 10);
     try { localStorage.setItem(K, JSON.stringify(list)); } catch (e) {}
   }
+})();
+/* Cart: kept only in this browser (localStorage "mg_cart" = [{id, qty}]). Checkout is at /checkout/. */
+(function () {
+  var K = "mg_cart";
+  function get() { try { var c = JSON.parse(localStorage.getItem(K) || "[]"); return Array.isArray(c) ? c : []; } catch (e) { return []; } }
+  function set(c) { try { localStorage.setItem(K, JSON.stringify(c)); } catch (e) {} count(); }
+  function count() {
+    var n = get().reduce(function (a, l) { return a + (l.qty || 0); }, 0);
+    document.querySelectorAll("[data-cart-count]").forEach(function (b) { b.textContent = n; b.hidden = !n; });
+  }
+  function add(id, qty) {
+    var c = get(), l = c.filter(function (x) { return x.id === id; })[0];
+    if (l) l.qty = Math.min(10, l.qty + qty); else c.push({ id: id, qty: Math.min(10, qty) });
+    set(c);
+  }
+  function toast(msg) {
+    var t = document.getElementById("cart-toast");
+    if (!t) { t = document.createElement("div"); t.id = "cart-toast"; t.className = "cart-toast"; t.setAttribute("role", "status"); document.body.appendChild(t); }
+    t.innerHTML = msg; t.classList.add("on"); clearTimeout(t._h); t._h = setTimeout(function () { t.classList.remove("on"); }, 3500);
+  }
+  window.MGCart = { get: get, set: set, add: add, count: count };
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest("[data-cart-add]"); if (!b) return;
+    e.preventDefault();
+    var box = b.closest(".panel, .buy"); var q = box && box.querySelector(".qty input");
+    var n = q ? parseInt(q.value, 10) || 1 : 1;
+    add(b.getAttribute("data-cart-add"), n);
+    if (b.hasAttribute("data-go")) { location.href = "/checkout/"; return; }
+    toast('Added to cart · <a href="/checkout/">View cart &amp; checkout</a>');
+  });
+  count();
 })();

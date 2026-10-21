@@ -37,3 +37,6 @@ content/plan/<slug>.json :
 
 Files go to: English guides → content/posts/<slug>.html ; Hindi → content/pages/<slug>.html ; City → content/pages/<slug>.html.
 Do not edit any other file. When finished, reply with just the list of slugs written.
+
+## No similar pages (owner rule, 22 Oct 2026)
+Before writing a new page, check existing pages (content/posts, content/pages, schedule.json). If one already answers the same search, improve that page instead of adding a new one.

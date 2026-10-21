@@ -1,0 +1,68 @@
+{
+ "prepaidPct": 5,
+ "coupons": {
+  "GLOW10": 10
+ },
+ "products": {
+  "avocado-korean-night-cream": {
+   "name": "Mirc Glow Avocado Korean Night Cream 25g",
+   "price": 649,
+   "jars": 1,
+   "desk": "mg1"
+  },
+  "glass-glow-cream": {
+   "name": "Mirc Glow Glass Glow Cream 30g",
+   "price": 2499,
+   "jars": 1,
+   "desk": "mg9"
+  },
+  "glutathione-cream": {
+   "name": "Mirc Glow Glutathione Cream 30g",
+   "price": 1499,
+   "jars": 1,
+   "desk": "mg2"
+  },
+  "avocado-night-cream": {
+   "name": "Mirc Glow Avocado Night Cream 30g",
+   "price": 649,
+   "jars": 1,
+   "desk": "mg3"
+  },
+  "avocado-face-cream": {
+   "name": "Mirc Glow Avocado Glow Cream 10g",
+   "price": 349,
+   "jars": 1,
+   "desk": "mg4"
+  },
+  "avocado-glow-cream-15g": {
+   "name": "Mirc Glow Avocado Glow Cream 15g 15g",
+   "price": 399,
+   "jars": 1,
+   "desk": "mg8"
+  },
+  "day-and-night-cream-combo": {
+   "name": "Mirc Glow Day & Night Combo 10g + 30g",
+   "price": 849,
+   "jars": 2,
+   "desk": "mg5"
+  },
+  "night-cream-combo": {
+   "name": "Mirc Glow Night Cream Combo 30g + 30g",
+   "price": 1799,
+   "jars": 2,
+   "desk": "mg6"
+  },
+  "glass-glow-night-duo": {
+   "name": "Mirc Glow Glass Glow Night Duo 30g + 30g",
+   "price": 2699,
+   "jars": 2,
+   "desk": "mg10"
+  },
+  "korean-glass-skin-kit": {
+   "name": "Mirc Glow Korean Glass Skin Kit 30g + 25g + 10g",
+   "price": 1999,
+   "jars": 3,
+   "desk": "mg7"
+  }
+ }
+}

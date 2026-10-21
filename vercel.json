@@ -1,9 +1,15 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
-  "buildCommand": "",
-  "installCommand": "",
+  "installCommand": "python3 -m pip install --quiet --user pillow || echo 'pillow not installed; images keep working'",
+  "buildCommand": "python3 build.py || echo 'build.py failed; using the committed dist folder'",
   "outputDirectory": "dist",
+  "crons": [
+    {
+      "path": "/api/publish",
+      "schedule": "35 0 * * *"
+    }
+  ],
   "cleanUrls": false,
   "trailingSlash": true,
   "redirects": [
@@ -39,17 +45,12 @@
     },
     {
       "source": "/cart(.*)",
-      "destination": "/shop/",
-      "permanent": true
-    },
-    {
-      "source": "/checkout(.*)",
-      "destination": "/shop/",
+      "destination": "/checkout/",
       "permanent": true
     },
     {
       "source": "/my-account(.*)",
-      "destination": "/shop/",
+      "destination": "/track-order/",
       "permanent": true
     },
     {
