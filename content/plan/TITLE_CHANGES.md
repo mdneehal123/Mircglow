@@ -7,3 +7,7 @@
 - 2026-10-16 /avocado-cream-price-in-india/: was "Avocado Cream Price in India: Value Per Gram"
 - 2026-10-16 /product-category/night-creams/: was "Night Creams for Nourished, Radiant-Looking Skin"
 - 2026-10-16 /best-night-cream-for-glowing-skin/: was "Best Night Cream for Glowing Skin in India (2026 Guide)" (page 3 for "best night cream")
+- 2026-10-21 /night-cream-for-oily-skin/: was "Night Cream for Oily Skin (2026): 6 Rules and Best Picks" (GSC: night cream for oily skin, best night cream for oily skin, night face cream for oily skin; added picks + monsoon + FAQs)
+- 2026-10-21 /night-cream-for-combination-skin/: was "Night Cream for Combination Skin: How to Use" (GSC: night cream for combination skin; added "best" section)
+- 2026-10-21 /how-to-apply-night-cream/: was "How to Apply Night Cream: 6 Easy Steps Most People Skip" (GSC: how to use night cream)
+- 2026-10-21 /avocado-night-cream-benefits-hindi/: was "Avocado Night Cream Ke Fayde: एवोकाडो नाइट क्रीम के 7 फायदे" (GSC: avocado night cream benefits in hindi)
