@@ -288,6 +288,8 @@ for _m in PLAN:
         if _m.get("quick"): GEO.QUICK[_m["slug"]] = (_m["quick"], _m.get("facts", []))
     elif _m["kind"] == "hindi":
         PAGES.append(G(_m["slug"], _m["title"], _m["rt"], _m["rd"], "plain", crumb=_m["title"].split("(")[0].strip(), lang="hi"))
+    elif _m["kind"] == "regional":
+        PAGES.append(G(_m["slug"], _m["title"], _m["rt"], _m["rd"], "plain", crumb=_m["title"].split("(")[0].strip(), lang=_m["lang"]))
     elif _m["kind"] == "bulk":
         PAGES.append(G(_m["slug"], _m["title"], _m["rt"], _m["rd"], "plain", crumb=_m["title"], img="/wp-content/uploads/2026/10/mirc-glow-avocado-cream-1kg-tubs.jpg"))
         CITY.add(_m["slug"])
@@ -557,6 +559,9 @@ def ld(*nodes):
 # ---------------------------------------------------------------- layout
 CSS_HREF = None
 JS_HREF = None
+LANG_TAG = {"en":"en-IN","hi":"hi-IN","ta":"ta-IN","te":"te-IN","mr":"mr-IN","bn":"bn-IN"}
+LANG_NAME = {"ta":"தமிழ்","te":"తెలుగు","mr":"मराठी","bn":"বাংলা"}
+
 def head(title, desc, url, *, lang="en", og_type="website", image=None, canonical=None, alts=None, extra="", robots="index, follow, max-image-preview:large, max-snippet:-1"):
     canonical = canonical or SITE + url
     image = SITE + (image or PBY["avocado-korean-night-cream"]["img"])
@@ -564,7 +569,7 @@ def head(title, desc, url, *, lang="en", og_type="website", image=None, canonica
     if alts:
         for code, u in alts: hl += f'<link rel="alternate" hreflang="{code}" href="{SITE+u}">'
     return f'''<!doctype html>
-<html lang="{'hi-IN' if lang=='hi' else 'en-IN'}">
+<html lang="{LANG_TAG.get(lang, 'en-IN')}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -573,7 +578,7 @@ def head(title, desc, url, *, lang="en", og_type="website", image=None, canonica
 <link rel="canonical" href="{canonical}">
 <meta name="robots" content="{robots}">
 {hl}
-<meta property="og:locale" content="{'hi_IN' if lang=='hi' else 'en_IN'}">
+<meta property="og:locale" content="{LANG_TAG.get(lang, 'en-IN').replace('-', '_')}">
 <meta property="og:type" content="{og_type}">
 <meta property="og:site_name" content="{BRAND}">
 <meta property="og:title" content="{esc(title)}">
@@ -923,6 +928,24 @@ def related_posts(p, n=3):
 def guide_note():
     return f'''<aside class="note"><b>About this guide</b><p>Written by <a href="/about-the-author/">Mohammed Nihal</a>, founder of Mirc Glow, in Bhatkal, Karnataka, and reviewed on {fmt_date(TODAY)}. This is general skincare information, not medical advice. If you have a skin condition, are pregnant, or get a reaction that does not settle, please see a dermatologist.</p><p>Questions about our creams? WhatsApp <a href="{WA_ASK}" target="_blank" rel="noopener">{PHONE}</a>. Free shipping · Cash on Delivery · <a href="/returns-refunds/">7-day returns</a> on sealed jars.</p></aside>'''
 
+BUYBOX_SKIP = {"avocado-cream", "avocado-cream-in-kg", "avocado-cream-in-kg-hindi", "buy-avocado-night-cream-online"}
+def wants_buybox(slug, topic=None):
+    return slug not in BUYBOX_SKIP and (topic == "avocado" or "avocado" in slug)
+
+def avocado_buybox(lang="en"):
+    picks = [("avocado-glow-cream-15g", "Gentle: avocado + aloe vera"), ("avocado-korean-night-cream", "With niacinamide + kojic acid"), ("avocado-night-cream", "Richest, for dry skin")]
+    lab, foot = ("एवोकाडो क्रीम खरीदें", "फ्री शिपिंग · कैश ऑन डिलीवरी · सील जार पर 7 दिन रिटर्न") if lang == "hi" else ("Shop avocado creams", "Free shipping · Cash on Delivery · 7-day returns on sealed jars")
+    items = "".join(f'<li><a href="/product/{s}/"><b>{esc(PBY[s]["name"].replace(" 15g", ""))} <small>{PBY[s]["size"]}</small></b><span>{t}</span><em>{inr(PBY[s]["price"])}</em></a></li>' for s, t in picks)
+    return (f'<aside class="buybox" aria-label="{lab}"><span class="buybox-l">{lab}</span><ul>{items}</ul>'
+            f'<p>{foot} · <a href="{wa("Hi Mirc Glow, I want to order an avocado cream.")}" target="_blank" rel="noopener">Order on WhatsApp</a></p></aside>')
+
+def with_buybox(raw, lang="en"):
+    """Place the avocado buy box just before the second <h2> (after the opening section)."""
+    box = avocado_buybox(lang)
+    i = raw.find("<h2"); j = raw.find("<h2", i + 3) if i >= 0 else -1
+    k = j if j > 0 else i
+    return raw[:k] + box + raw[k:] if k > 0 else raw + box
+
 def product_cta(p):
     return (f'<aside class="pcta" aria-label="Featured cream">{photo(p, "", alt=p["name"])}<div><span class="lab">From this guide</span><h2>{esc(p["name"])} · {p["size"]}</h2><p>{esc(p["lead"])}</p>'
             f'<div class="row"><span class="price">{inr(p["price"])} <s>{inr(p["mrp"])}</s></span><a class="order" href="{wa(order_msg(p))}" target="_blank" rel="noopener">Order on WhatsApp</a><a class="link" href="/product/{p["slug"]}/">Details</a></div></div></aside>')
@@ -940,6 +963,7 @@ def build_post(p):
     if url in VIDEO_ON:
         k = raw.find("<h2")
         raw = (raw[:k] + video_html(url) + raw[k:]) if k > 0 else video_html(url) + raw
+    if wants_buybox(p["slug"], p["topic"]): raw = with_buybox(raw)
     body_html, toc = add_h2_ids(lazy_imgs(raw))
     faqs = faqs_from(raw)
     mins = max(2, round(words(raw) / 200))
@@ -1242,6 +1266,7 @@ def build_page(g):
     if g["lang"] == "hi":
         others = [x for x in PAGES if x["lang"] == "hi" and x["slug"] != g["slug"]]
         raw += "<h2>और हिंदी गाइड</h2><ul>" + "".join(f'<li><a href="/{x["slug"]}/">{esc(x["title"])}</a></li>' for x in others) + "</ul>"
+    if g["kind"] != "legacy" and wants_buybox(g["slug"]): raw = with_buybox(raw, g["lang"])
     raw = lazy_imgs(raw)
     faqs = faqs_from(raw)
     if g["kind"] != "legacy" and g["slug"] in PAGE_QUICK and "</h1>" in raw:
@@ -1253,7 +1278,7 @@ def build_page(g):
         en, hi = (g["slug"], g["alt"]) if g["lang"] == "en" else (g["alt"], g["slug"])
         alts = [("en-IN", f"/{en}/"), ("hi-IN", f"/{hi}/"), ("x-default", f"/{en}/")]
     ptype = {"about":"AboutPage","contact":"ContactPage","faq":"FAQPage"}.get(g["slug"], "WebPage")
-    wp = {"@type":ptype if ptype != "FAQPage" else "WebPage","@id":SITE+url,"url":SITE+url,"name":g["title"],"description":g["rd"],"inLanguage":"hi-IN" if g["lang"]=="hi" else "en-IN","isPartOf":{"@id":SITE+"/#website"},"dateModified":TODAY}
+    wp = {"@type":ptype if ptype != "FAQPage" else "WebPage","@id":SITE+url,"url":SITE+url,"name":g["title"],"description":g["rd"],"inLanguage":LANG_TAG.get(g["lang"], "en-IN"),"isPartOf":{"@id":SITE+"/#website"},"dateModified":TODAY}
     nodes = [ORG, wp, crumbs_ld(cr)]
     if g["slug"] in CITY or g["slug"] == "bulk-night-cream":
         city = g["crumb"] if g["slug"].startswith("night-cream-in-kg-") else None
@@ -1404,6 +1429,8 @@ def build_llms():
         L.append(f"- [{p['title']}]({SITE}/{p['slug']}/): " + (q[0] if q else p['ex']))
     L += ["", "## Shop by category"] + [f"- [{d['name']}]({SITE}{cat_url(c)})" for c, d in CATS.items()] + [f"- [Gift sets]({SITE}/skincare-gift-sets/)"]
     L += ["", "## Hindi guides (हिंदी)"] + [f"- [{g['title']}]({SITE}/{g['slug']}/)" for g in PAGES if g["lang"] == "hi"]
+    if any(g["lang"] in LANG_NAME for g in PAGES):
+        L += ["", "## Tamil, Telugu, Marathi and Bengali guides"] + [f"- [{g['title']}]({SITE}/{g['slug']}/) ({LANG_NAME[g['lang']]})" for g in PAGES if g["lang"] in LANG_NAME]
     L += ["", "## Bulk and wholesale supply (cream by the kg)"] + [f"- [{g['title']}]({SITE}/{g['slug']}/)" + (f": {PAGE_QUICK[g['slug']][0]}" if g['slug'] in PAGE_QUICK else "") for g in PAGES if g["slug"] in CITY]
     L += ["", "## Guide categories"] + [f"- [{v[0]}]({SITE}/category/{c}/)" for c, v in WPCATS.items() if len(v[2]) > 1] + [f"- [All skincare guides]({SITE}/blog/)"]
     L += ["", "## Brand facts"] + [f"- {k}: {v}" for k, v in GEO.AT_A_GLANCE]

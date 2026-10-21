@@ -984,3 +984,18 @@ body:has(.lux) .icons3 span{background:#F7F1E4;border:1px solid #E6CF9A}
 .ng-guides{margin-top:32px}.ng-cols{display:grid;gap:18px;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
 .ng-cols h3{font-size:1rem;margin:0 0 6px}.ng-cols ul{margin:0;padding-left:18px}.ng-cols li{margin:4px 0;font-size:.92rem}
 .pfig{margin:18px auto;max-width:480px}.pfig img{width:100%;height:auto;border-radius:16px;display:block}.pfig figcaption{font-size:.85rem;color:#5F5F5F;text-align:center;margin-top:6px}
+
+/* Avocado buy box (inside avocado guides) */
+.buybox{margin:26px 0;max-width:760px;border:1px solid #d6ead9;background:#f6fbf7;border-radius:18px;padding:16px 18px}
+.buybox-l{display:inline-block;font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--green);margin-bottom:8px}
+.buybox ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.buybox li{margin:0}
+.buybox li a{display:grid;grid-template-columns:1fr auto;grid-template-areas:"n p" "t p";gap:2px 12px;align-items:center;background:#fff;border:1px solid var(--hair);border-radius:12px;padding:10px 14px;text-decoration:none;color:var(--ink)}
+.buybox li a:hover{border-color:var(--green)}
+.buybox li b{grid-area:n;font-size:.98rem}
+.buybox li small{font-weight:600;color:var(--muted);font-size:.8rem}
+.buybox li b,.buybox li span{line-height:1.35}
+.buybox li span{grid-area:t;font-size:.85rem;color:var(--muted)}
+.buybox li em{grid-area:p;font-style:normal;font-weight:800;color:var(--green);font-size:1.05rem}
+.buybox p{margin:10px 0 0;font-size:.88rem;color:var(--muted)}
+.buybox p a{color:var(--wa-ink);font-weight:700}
