@@ -582,8 +582,8 @@ def head(title, desc, url, *, lang="en", og_type="website", image=None, canonica
 <meta property="og:image" content="{image}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#ffffff">
-<link rel="icon" href="/assets/icon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/assets/logo.png">
+<link rel="icon" href="/favicon.ico" sizes="48x48"><link rel="icon" href="/favicon-96x96.png" type="image/png" sizes="96x96"><link rel="icon" href="/favicon-192x192.png" type="image/png" sizes="192x192"><link rel="icon" href="/assets/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="{CSS_HREF}">
 <link rel="alternate" type="application/rss+xml" title="{BRAND} Journal" href="{SITE}/feed/">
 <script>addEventListener("error",function(e){{var t=e.target;if(t&&t.tagName==="IMG"&&!t.onerror)t.classList.add("broken")}},true)</script>
@@ -1443,9 +1443,13 @@ def build_assets():
     js = read(os.path.join(ROOT, "src", "site.js")); hj = hashlib.sha1(js.encode()).hexdigest()[:8]
     with open(os.path.join(DIST, "assets", f"site.{hj}.js"), "w") as f: f.write(js)
     JS_HREF = f"/assets/site.{hj}.js"
-    icon = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><defs><radialGradient id="g" cx=".38" cy=".3"><stop offset="0" stop-color="#fff"/><stop offset=".5" stop-color="#F7E6E8"/><stop offset="1" stop-color="#E3B4BF"/></radialGradient></defs>'
-            '<circle cx="32" cy="32" r="30" fill="url(#g)"/><text x="32" y="41" text-anchor="middle" font-family="Georgia,serif" font-size="26" fill="#9C5468">M</text></svg>')
+    icon = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#9C5468"/>'
+            '<circle cx="32" cy="32" r="28.5" fill="none" stroke="#B87487" stroke-width="1"/>'
+            '<text x="32" y="45.5" text-anchor="middle" font-family="Georgia,\'Times New Roman\',serif" font-weight="700" font-size="40" fill="#FFF7F8">M</text></svg>')
     with open(os.path.join(DIST, "assets", "icon.svg"), "w") as f: f.write(icon)
+    # site icon for Google results and browsers: bold "M", served from the site root (favicon.ico + PNG sizes)
+    for fn in os.listdir(os.path.join(ROOT, "src", "icons")):
+        if fn.startswith(("favicon", "apple-touch-icon")): shutil.copy(os.path.join(ROOT, "src", "icons", fn), os.path.join(DIST, fn))
     src_logo = os.path.join(ROOT, "src", "logo.png")
     if os.path.exists(src_logo): shutil.copy(src_logo, os.path.join(DIST, "assets", "logo.png"))
     shutil.copy(os.path.join(ROOT, "DEPLOY.md"), os.path.join(DIST, "DEPLOY.md"))
