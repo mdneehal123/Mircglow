@@ -1353,6 +1353,32 @@ def build_robots():
     txt += f"\nSitemap: {SITE}/sitemap.xml\nSitemap: {SITE}/sitemap_index.xml\n"
     write("/robots.txt", txt)
 
+def build_merchant_feed():
+    """Google Merchant Center product feed (free listings / Shopping): /google-merchant-feed.xml. Prices are the real selling prices only."""
+    def x(t): return html.escape(re.sub(r"\s+", " ", strip_tags(str(t))).strip(), quote=False)
+    items = []
+    for p in PRODUCTS:
+        url = f"{SITE}/product/{p['slug']}/"
+        try: extra = re.findall(r'<img[^>]*src="(/wp-content/[^"]+)"', read(os.path.join(SRC, "products", p["slug"] + ".html")))
+        except Exception: extra = []
+        extra = [e for e in dict.fromkeys(extra) if e != p["img"]][:4]
+        desc = f"{strip_tags(p['lead'])} Size: {p['size']}. Key ingredients: {', '.join(p['ing'])}. How to use: {strip_tags(p['use'])}. Patch test before first use."
+        it = [f"<g:id>MG-{p['id']}</g:id>", f"<title>{x(p['h1']).replace('MircGlow', 'Mirc Glow')}</title>", f"<description>{x(desc)[:4900]}</description>",
+              f"<link>{url}</link>", f"<g:image_link>{SITE}{p['img']}</g:image_link>"]
+        it += [f"<g:additional_image_link>{SITE}{e}</g:additional_image_link>" for e in extra]
+        it += ["<g:availability>in_stock</g:availability>", f"<g:price>{p['price']:.2f} INR</g:price>", f"<g:brand>{x(BRAND)}</g:brand>",
+               "<g:condition>new</g:condition>", "<g:identifier_exists>no</g:identifier_exists>", f"<g:mpn>MG-{p['id']}</g:mpn>",
+               "<g:google_product_category>Health &amp; Beauty &gt; Personal Care &gt; Cosmetics &gt; Skin Care &gt; Lotion &amp; Moisturizer</g:google_product_category>",
+               f"<g:product_type>Skin care &gt; {'Sets and combos' if 'parts' in p else 'Face creams'}</g:product_type>",
+               "<g:shipping><g:country>IN</g:country><g:price>0.00 INR</g:price><g:min_handling_time>0</g:min_handling_time><g:max_handling_time>2</g:max_handling_time><g:min_transit_time>3</g:min_transit_time><g:max_transit_time>7</g:max_transit_time></g:shipping>"]
+        if "parts" in p: it.append("<g:is_bundle>yes</g:is_bundle>")
+        else: it.append(f"<g:unit_pricing_measure>{p['grams']}g</g:unit_pricing_measure>")
+        items.append("<item>" + "".join(it) + "</item>")
+    feed = ('<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:g="http://base.google.com/ns/1.0"><channel>'
+            f"<title>{x(BRAND)} products</title><link>{SITE}/</link><description>{x(BRAND)} skincare products sold on mircglow.com</description>"
+            + "".join(items) + "</channel></rss>\n")
+    write("/google-merchant-feed.xml", feed)
+
 def build_llms():
     L = [f"# {BRAND}", "",
          "> Korean-inspired skincare brand from Bhatkal, Karnataka, India. Six creams and four sets built around avocado, glutathione and kojic acid. The four original creams contain aloe vera, vitamin B3 and kojic acid; Avocado Glow Cream 15g is avocado and aloe vera only; Glass Glow Cream 30g has glutathione, niacinamide, hyaluronic acid, centella asiatica and alpha arbutin. Sold directly across India with free shipping, Cash on Delivery and 7-day returns on sealed jars. Orders are placed on WhatsApp (+91 99808 81230).", "",
@@ -1463,7 +1489,7 @@ def main():
     for p in PRODUCTS: build_product(p)
     for p in POSTS: build_post(p)
     for g in PAGES: build_page(g)
-    build_404(); build_sitemaps(); build_robots(); build_llms(); build_feed(); build_vercel(); build_llms_full()
+    build_404(); build_sitemaps(); build_robots(); build_llms(); build_feed(); build_vercel(); build_llms_full(); build_merchant_feed()
     n = sum(len(fs) for _, _, fs in os.walk(DIST))
     print(f"built {n} files into dist/")
 
