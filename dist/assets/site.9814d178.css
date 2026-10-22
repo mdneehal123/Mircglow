@@ -941,6 +941,9 @@ body:has(.lux) .icons3 span{background:#F7F1E4;border:1px solid #E6CF9A}
 .co-f input:focus{outline:2px solid var(--green);border-color:transparent}
 .co-f .hint{font-weight:400;color:var(--muted);font-size:.78rem}
 .co-hp{position:absolute;left:-9999px}
+.co-grid label.co-consent{display:flex!important;flex-direction:row;gap:10px;align-items:flex-start;font-size:.9rem;color:var(--muted,#555);line-height:1.4;cursor:pointer}
+.co-grid label.co-consent input{margin:3px 0 0;width:auto;flex:none;accent-color:var(--green)}
+.co-grid label.co-consent span{flex:1}
 .co-pay{display:grid;gap:8px}
 .co-opt{display:flex;gap:10px;align-items:flex-start;border:1.5px solid var(--hair);border-radius:12px;padding:12px;cursor:pointer}
 .co-opt input{margin-top:3px;accent-color:var(--green)}

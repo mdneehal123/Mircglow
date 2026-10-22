@@ -1369,6 +1369,7 @@ def build_checkout():
 <label>Landmark <span class="hint">optional</span><input name="landmark" maxlength="120"></label>
 <div class="two"><label>City<input name="city" autocomplete="address-level2" required maxlength="60"></label><label>State<input name="state" autocomplete="address-level1" maxlength="60"></label></div>
 <label>Email <span class="hint">optional, for the receipt</span><input name="email" type="email" autocomplete="email" maxlength="120"></label>
+<label class="co-consent"><input type="checkbox" name="consent" value="1"><span>You may message me on WhatsApp about this order and related offers, even if I don't complete it.</span></label>
 <label class="co-hp" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off"></label>
 </div></section>
 </div>

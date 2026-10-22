@@ -150,6 +150,18 @@ function mgCheckout() {
       render();
     }).catch(function () {});
   });
+  // Shopper ticked "you may message me": tell the shop (once per number per visit) so it can follow up on WhatsApp. Nothing is sent unless the box is ticked.
+  var leadSent = {};
+  function lead() {
+    try {
+      var f = $("#co-form"), c = form(); if (!f.elements.consent.checked || !/^[6-9]\d{9}$/.test(c.phone) || leadSent[c.phone]) return;
+      leadSent[c.phone] = 1;
+      fetch("/api/lead/", { method: "POST", keepalive: true, headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ phone: c.phone, name: c.name, consent: true, website: f.elements.website.value, product: cart().map(function (l) { return P[l.id].name; }).join(", ") }) }).catch(function () {});
+    } catch (e) {}
+  }
+  ["phone", "name"].forEach(function (n) { $("#co-form").elements[n].addEventListener("blur", lead); });
+  $("#co-form").elements.consent.addEventListener("change", lead);
   $("#co-form").addEventListener("submit", function (e) {
     e.preventDefault(); if (busy) return;
     var c = form(), m = mode(), err = check(c);
