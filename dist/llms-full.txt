@@ -1055,7 +1055,7 @@ A: Yes. Use a light texture and a thin layer, especially in humid months.
 
 ## Skincare Blog: Night Cream, Glutathione and Glass Skin Guides | Mirc Glow
 URL: https://mircglow.com/blog/
-Short answer: The Mirc Glow journal has 154 free skincare guides for Indian skin and weather, on night creams, avocado cream, glutathione, kojic acid, dark spots and glass skin routines, plus Hindi guides. Each guide opens with a short answer and is written by founder Mohammed Nihal.
+Short answer: The Mirc Glow journal has 156 free skincare guides for Indian skin and weather, on night creams, avocado cream, glutathione, kojic acid, dark spots and glass skin routines, plus Hindi guides. Each guide opens with a short answer and is written by founder Mohammed Nihal.
 
 ## Bridal Skincare Routine: 30-Day Plan | Mirc Glow
 URL: https://mircglow.com/bridal-skincare-routine-30-days/
@@ -1817,6 +1817,24 @@ A: It helps, especially if your skin feels tight or dry. Oily skin can use a thi
 Q: Can a groom get glowing skin in one week?
 A: In a week, skin can look more hydrated and rested. A more even tone takes 8–12 weeks.
 
+## Hard Water Skin Care: Routine for Indian Homes | Mirc Glow
+URL: https://mircglow.com/hard-water-skincare/
+Short answer: Hard water leaves a mineral and soap film that can make your face feel tight and dry. Wash with lukewarm water and a mild non-soap face wash, finish with a splash of filtered or boiled-and-cooled water, and moisturise within a minute of patting dry.
+- Hard water carries more calcium and magnesium
+- Bar soap reacts most with hard water
+- A filtered-water final rinse is a cheap fix
+- Moisturise within a minute of washing
+Q: Is hard water bad for your face?
+A: It is not dangerous, but it can leave a soap film that makes skin feel tight and dry. A gentle wash, a filtered-water rinse and moisturiser usually help.
+Q: Should I wash my face with RO water?
+A: If it is easy, use RO, filtered or boiled-and-cooled water for the last rinse. You do not need it for the whole wash.
+Q: Can hard water cause pimples?
+A: It is not a main cause of acne, but the leftover film and harsh scrubbing can make skin feel congested. See a dermatologist for painful or cystic acne.
+Q: Does a TDS meter show water hardness?
+A: Not exactly. TDS counts all dissolved solids; hardness is mainly calcium and magnesium. A hardness test strip is more direct.
+Q: What is the best moisturiser for hard water skin?
+A: Any comfortable cream with humectants like glycerin or aloe vera and softening oils, applied to slightly damp skin within a minute of washing.
+
 ## How Long Can Dark Spots Take to Fade? | Mirc Glow
 URL: https://mircglow.com/how-long-do-dark-spots-take-to-fade/
 Short answer: It depends on the mark. Light tanning may look less noticeable in a few weeks, brown acne marks often take 3 to 6 months, and sun spots or melasma can last much longer. With a gentle routine and daily sunscreen, judge your progress after 8 to 12 weeks.
@@ -2022,6 +2040,24 @@ Q: Should I apply night cream on wet or dry skin?
 A: Slightly damp skin is best for most moisturising creams.
 Q: Can I sleep with a thick layer of cream?
 A: For very dry skin occasionally, yes, but a normal amount every night is usually enough.
+
+## How to Patch Test a Face Cream: Step-by-Step | Mirc Glow
+URL: https://mircglow.com/how-to-patch-test-face-cream/
+Short answer: Apply a coin-sized amount on your inner arm or below your jawline and check at 24 and 48 hours. If there is no redness, itching or bumps, repeat for three to five nights, then try one cheek before using it on your whole face.
+- Check the spot at 24 and 48 hours
+- Repeat on the same spot for 3 to 5 nights
+- Test one new product at a time
+- Stop and see a dermatologist for rash or swelling
+Q: How long should a patch test take?
+A: Check at 24 and 48 hours, then repeat on the same spot for three to five nights before using the cream on your whole face.
+Q: Where is the best place to patch test a face cream?
+A: The inner forearm is easy to watch; also test just below the jawline or behind the ear, since facial skin is thinner.
+Q: Is tingling normal during a patch test?
+A: A mild tingle that fades in a minute or two can happen with actives. Burning, itching or lasting redness is not normal; stop the product.
+Q: Can I patch test on my face directly?
+A: Test on the arm or jawline first, then one small area of the face before the full face.
+Q: Do I need to patch test every new jar of the same cream?
+A: Not usually, but test again if the formula or ingredient list has changed.
 
 ## How to Spot Fake Avocado Creams Safely | Mirc Glow
 URL: https://mircglow.com/how-to-spot-fake-avocado-whitening-creams/
@@ -4246,7 +4282,7 @@ Short answer: Mirc Glow has 9 guides on skincare ingredients, written in plain E
 
 ## Skincare Routines - Skincare Guides | Mirc Glow
 URL: https://mircglow.com/category/skincare-routines/
-Short answer: Mirc Glow has 30 guides on skincare routines, written in plain English by founder Mohammed Nihal and reviewed for Indian skin and weather. Start with: Bridal Skincare Routine: A 30-Day Plan Before Your Wedding; Skincare Gift for Mother: Gentle Picks for Mature Skin; Skincare Gift for Girlfriend: Thoughtful Picks by Budget.
+Short answer: Mirc Glow has 32 guides on skincare routines, written in plain English by founder Mohammed Nihal and reviewed for Indian skin and weather. Start with: How to Patch Test a Face Cream: A Simple Step-by-Step Guide; Hard Water Skin Care: How to Stop Your Face Feeling Tight After Washing; Bridal Skincare Routine: A 30-Day Plan Before Your Wedding.
 
 ## Combos and Kits - Mirc Glow
 URL: https://mircglow.com/product-category/combos/

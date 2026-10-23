@@ -52,3 +52,9 @@ Retitled to the PDF wording on 2026-10-22 (see TITLE_CHANGES.md): night-cream-fo
 ## Rule from the owner (22 Oct): no similar pages
 Do not publish a new page when an existing page already covers the same search intent; improve the existing page instead.
 Unscheduled and merged on 22 Oct (drafts kept in content/drafts/): night-cream-for-girls -> night-cream-under-500; night-cream-for-40s -> night-cream-for-mature-skin; moisturizer-for-dull-skin -> night-cream-for-dull-skin; niacinamide-cream-for-glowing-skin -> vitamin-b3-niacinamide-in-night-cream; skin-brightening-cream-for-men -> face-cream-for-men-daily-use; sardi-mein-kaun-si-night-cream-lagaye -> sardiyon-mein-chehre-ki-care; night-cream-lagane-ke-baad-kya-kare -> night-cream-kaise-lagaye.
+
+## Daily SEO agent: new pages
+| Date | Keyword | Slug | Why |
+|---|---|---|---|
+| 2026-10-23 | hard water skin care | /hard-water-skincare/ | Results are small brand blogs and a Substack post; borewell/tanker water is common in India; no existing page on it |
+| 2026-10-23 | how to patch test face cream | /how-to-patch-test-face-cream/ | Results are foreign brand help pages with no Indian context; every guide tells readers to patch test, so it is a useful hub |
