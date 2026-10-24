@@ -971,4 +971,5 @@ body:has(.lux) .icons3 span{background:#F7F1E4;border:1px solid #E6CF9A}
 .co-cp input:focus{outline:2px solid var(--green);border-color:transparent}
 @media(max-width:899px){.hwa{display:none}.hcart{margin-left:auto}}
 .co-opt[hidden],.co-empty[hidden],[data-co-main][hidden],.co-msg[hidden]{display:none!important}
+.qp{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:18px 0}.qp-c{display:flex;flex-direction:column;gap:6px;padding:12px;border-radius:16px;background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.08);text-align:center}.qp-c img{width:100%;height:auto;aspect-ratio:1;object-fit:contain;border-radius:10px}.qp-t{font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:#1b7a3a;font-weight:600}.qp-l{font-size:.82rem;opacity:.75}.qp-p{font-weight:700;font-size:1.05rem}.qp-b{margin-top:auto;padding:12px 16px;letter-spacing:.12em}@media(min-width:720px){.qp{grid-template-columns:repeat(3,1fr)}}
 .sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
