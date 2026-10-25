@@ -745,7 +745,34 @@ def fk_top():
                 f'<a href="{cat_url("combos")}">View all ›</a></div><div class="fk-row">{"".join(deal(p) for p in SETS)}</div></section>')
     intro = ('<section class="fk-intro"><h1 id="h-home">Mirc Glow avocado night creams &amp; Korean-inspired skincare</h1>'
              '<p>Avocado, glutathione and glass-skin creams made in Karnataka, for smoother, brighter-looking skin. Order in one WhatsApp message: free shipping across India, Cash on Delivery and 7-day returns.</p>' + qbox("Mirc Glow is a Korean-inspired skincare brand from Bhatkal, Karnataka, India. It sells avocado night creams (from ₹349), a glutathione cream (₹1,499) and the Glass Glow Cream (₹2,499) online across India, with free shipping, Cash on Delivery, 7-day returns on sealed jars and orders on WhatsApp +91 99808 81230. Salons can buy night cream in kg.", label="In short") + '</section>')
-    return f'<div class="fk">{search}{circles}{slider}{intro}{coupons}{deals_html}{grid}{budget}{sets_row}</div>'
+    BR="/wp-content/uploads/2026/10/brands/"
+    def otile(href, img, name, sub, webp=True):
+        pic = (f'<picture><source srcset="{BR}{img}.webp" type="image/webp"><img src="{BR}{img}.jpg" alt="{esc(name)}" width="300" height="300" loading="lazy" decoding="async"></picture>' if webp
+               else f'<img src="{BR}{img}.jpg" alt="{esc(name)}" width="300" height="300" loading="lazy" decoding="async">')
+        return f'<a class="ob-t" href="{href}" target="_blank" rel="noopener">{pic}<b>{esc(name)}</b><span>{esc(sub)}</span></a>'
+    GX="https://glutanex.co.in/product/"
+    gx = [("glutanex-glutathione-night-cream","glutanex-glutathione-night-cream-30g","Glutathione Night Cream","30 g"),
+          ("glutanex-gluta-boost-face-wash","glutanex-gluta-boost-glutathione-face-wash-100ml","Gluta Boost Face Wash","100 ml"),
+          ("glutanex-aqua-fresh-shower-gel","glutanex-aqua-fresh-glutathione-shower-gel-100ml","Aqua Fresh Shower Gel","100 ml"),
+          ("glutanex-glow-duo-night-cream-face-wash","glutanex-glow-duo-glutathione-cream-face-wash","Glow Duo","Night cream + face wash"),
+          ("glutanex-glow-trio-night-cream-face-wash-shower-gel","glutanex-glow-trio-night-cream-face-wash-shower-gel","Glow Trio","Night cream + face wash + shower gel"),
+          ("glutanex-face-wash-shower-gel-combo","glutanex-face-wash-and-shower-gel-combo","Face Wash + Shower Gel","Combo"),
+          ("glutanex-night-cream-shower-gel-combo","glutanex-night-cream-and-shower-gel-combo","Night Cream + Shower Gel","Combo")]
+    FP="https://www.fairnpink.in/product/"
+    fp = [("fair-n-pink-advance-radiance-cream","product-1080","Advance Radiance Cream","10 g · ₹999"),
+          ("fair-n-pink-advance-radiance-cream-pack-of-2","merchant-pack-2","Pack of 2","2 x 10 g · ₹1,899"),
+          ("fair-n-pink-advance-radiance-cream-pack-of-3","merchant-pack-3","Pack of 3","3 x 10 g · ₹2,699")]
+    brands = ('<section class="ob" aria-labelledby="h-ob"><p class="ob-eye">The Mirc family</p><h2 id="h-ob" class="fk-h">Our other brands</h2>'
+        '<p class="ob-lead">Two more skincare brands from the same team in Karnataka, made with the same care.</p><div class="ob-grid">'
+        '<article class="ob-b ob-dark"><p class="ob-k">Glutathione skincare</p><h3>GlutaNex</h3>'
+        '<p class="ob-d">Glutathione night cream, face wash and shower gel for brighter-looking skin, face and body. Launching soon.</p>'
+        '<div class="ob-row">' + "".join(otile(GX+sl+"/", im, n, sub + " · Launching soon") for sl,im,n,sub in gx) + '</div>'
+        '<a class="ob-cta" href="https://glutanex.co.in/" target="_blank" rel="noopener">Visit GlutaNex</a></article>'
+        '<article class="ob-b ob-light"><p class="ob-k">Radiance care</p><h3>Fair N Pink</h3>'
+        '<p class="ob-d">Advance Radiance Cream in a 10 g jar, with value packs of 2 and 3. Free shipping across India.</p>'
+        '<div class="ob-row">' + "".join(otile(FP+sl+"/", im, n, sub, webp=False) for sl,im,n,sub in fp) + '</div>'
+        '<a class="ob-cta" href="https://www.fairnpink.in/" target="_blank" rel="noopener">Visit Fair N Pink</a></article></div></section>')
+    return f'<div class="fk">{search}{circles}{slider}{intro}{coupons}{deals_html}{grid}{budget}{sets_row}{brands}</div>'
 
 def build_home():
     url = "/"
