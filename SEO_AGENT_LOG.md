@@ -67,3 +67,5 @@ Unscheduled and merged on 22 Oct (drafts kept in content/drafts/): night-cream-f
 | 2026-10-24 | skincare for bike riders | /skincare-for-bike-riders/ | Results were one listicle, old news syndication (2013/2020) and helmet/mask product pages; daily two-wheeler commuting is very common in India; no existing page on it |
 
 2026-10-25 (manual, from Search Console impressions): 4 long-tail guides: /night-cream-for-oily-skin-in-monsoon/, /night-cream-for-oily-skin-under-500/, /night-cream-for-combination-skin-in-winter/, /night-cream-for-oily-acne-prone-skin/. Linked from /night-cream-for-oily-skin/, /night-cream-for-combination-skin/ and /best-night-cream-for-glowing-skin/. Pillar page retitled to lead with "best night cream in India"; product photo cards added.
+
+2026-10-25 (manual): 4 wholesale-lead pages: /night-cream-reseller-in-india/, /night-cream-for-bridal-makeup-artists/, /start-a-skincare-brand-night-cream-in-kg/, /night-cream-supplier-in-karnataka/ (linked from /bulk-night-cream/). /glutathione-cream-in-kg/ title now leads with "Glutathione Night Cream in Kg". Home: "Our other brands" section.
