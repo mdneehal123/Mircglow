@@ -24,3 +24,8 @@
 - 2026-10-22 /how-to-moisturise-skin-overnight/: was "How to Moisturise Skin Overnight" (keyword from owner's PDF list)
 - 2026-10-22 /night-cream-under-1000/: was "Night Cream Under 1000: Price per Gram" (keyword from owner's PDF list)
 - 2026-10-22 /best-cream-for-dark-spots-in-india/: was "Best Cream for Dark Spots in India: Buyer's Guide" (keyword from owner's PDF list)
+- 2026-10-25 /best-glutathione-cream-in-india/: was "Best Glutathione Cream in India: Buyer's Guide" (weekly booster; target: best glutathione cream in India)
+- 2026-10-25 /best-kojic-acid-cream-in-india/: was "Best Kojic Acid Cream in India: Buyer's Guide" (weekly booster; target: best kojic acid cream in India)
+- 2026-10-25 /best-korean-night-cream-in-india/: was "Best Korean Night Cream in India: How to Choose" (weekly booster; target: best korean night cream in India)
+- 2026-10-25 /best-face-cream-for-glowing-skin/: was "Best Face Cream for Glowing Skin: Guide" (weekly booster; target: best face cream for glowing skin (in India))
+- 2026-10-25 /night-cream-under-500/: was "Night Cream Under 500: What ₹500 Buys" (weekly booster; target: best night cream under 500)

@@ -12,6 +12,11 @@ Pages strengthened from Search Console queries. The Sunday booster skips these f
 | 2026-10-22 | /monsoon-skincare-routine-india/ | monsoon skin care routine | Title uses "Skin Care"; new "After the monsoon" October section |
 | 2026-10-22 | /dry-patches-on-face/ | dry patches on face | Winter title; new "around the nose, mouth and eyebrows" section |
 | 2026-10-22 | 6 price/amount guides | how long does night cream last | Jar life made consistent everywhere: 30 g lasts about 6 to 8 weeks |
+| 2026-10-25 | /best-glutathione-cream-in-india/ | best glutathione cream in India | Title/description; new sections "cream, serum or face wash" (table) and "price by budget"; 3 short answers; linked from glutathione benefits, how-to-use and side-effects guides |
+| 2026-10-25 | /best-kojic-acid-cream-in-india/ | best kojic acid cream in India | Title/description; new sections "cream, serum or soap" (table) and "body areas" (patch test, shaving/waxing wait); 3 short answers; linked from kojic dark spots, price and side-effects guides |
+| 2026-10-25 | /best-korean-night-cream-in-india/ | best korean night cream in India | Title/description; new "texture for your weather" table and "price in India" section; 3 short answers; linked from Korean price, humid-weather and sleeping-mask guides |
+| 2026-10-25 | /best-face-cream-for-glowing-skin/ | best face cream for glowing skin (in India) | Title adds "in India"; new "day vs night cream" table and "for men" section; 3 short answers; linked from dull skin, best night cream for glowing skin and men's cream guides |
+| 2026-10-25 | /night-cream-under-500/ | best night cream under 500 | Title targets "best night cream under 500"; new "day or night cream under ₹500" section; removed a self-link; 3 short answers; linked from avocado price, beginners routine and how-much-to-use guides |
 
 ## New pages: avocado sales batch (see content/plan/AVOCADO_BATCH_OCT22.md)
 | Go-live | Page | Keyword |
