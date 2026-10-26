@@ -247,7 +247,7 @@ G = lambda slug, title, rt, rd, kind, crumb=None, img=None, lang="en", alt=None:
 PAGES = [
  G("avocado-cream","Avocado Cream","Avocado Cream: 4 Best Picks for Soft, Nourished Skin | Mirc Glow","Shop avocado cream by Mirc Glow in India. Compare 4 avocado creams with aloe vera, vitamin B3 and kojic acid, from ₹349, and find the right one for your skin.","legacy",img=UP+"04BCBF62-EE16-4594-B65C-BDA805C264CB.png",alt="avocado-cream-hindi"),
  G("korean-night-cream","Korean Night Cream","Korean Night Cream: 3 Best Picks for a Glass Skin Glow | Mirc Glow","Shop Korean night cream by Mirc Glow in India. Compare 3 Korean-inspired night creams with avocado, vitamin B3 and kojic acid, from ₹649, and learn how to use them.","legacy",img=UP+"4ED0DC3B-11FA-4903-87CC-21E1887C89E5.png",alt="korean-night-cream-hindi"),
- G("avocado-cream-hindi","एवोकाडो क्रीम (Avocado Cream in Hindi)","Avocado Cream Benefits in Hindi: फायदे और तरीका | Mirc Glow","Avocado cream ke fayde: एवोकाडो क्रीम चेहरे के लिए क्या करती है, कैसे लगाएं, किस स्किन के लिए सही है, और Mirc Glow की 3 एवोकाडो क्रीम की तुलना।","plain",crumb="एवोकाडो क्रीम",lang="hi",alt="avocado-cream",img=UP+"04BCBF62-EE16-4594-B65C-BDA805C264CB.png"),
+ G("avocado-cream-hindi","एवोकाडो क्रीम (Avocado Cream in Hindi)","Avocado Cream Benefits in Hindi: फायदे और तरीका | Mirc Glow","Avocado cream ke fayde: एवोकाडो क्रीम चेहरे के लिए क्या करती है, कैसे लगाएं, किस स्किन के लिए सही है, और Mirc Glow की 4 एवोकाडो क्रीम की तुलना।","plain",crumb="एवोकाडो क्रीम",lang="hi",alt="avocado-cream",img=UP+"04BCBF62-EE16-4594-B65C-BDA805C264CB.png"),
  G("avocado-night-cream-benefits-hindi","एवोकाडो नाइट क्रीम के फायदे (Avocado Night Cream Ke Fayde)","Avocado Night Cream Benefits in Hindi: 7 फायदे | Mirc Glow","एवोकाडो नाइट क्रीम के फायदे (avocado night cream ke fayde) आसान हिंदी में: रात भर नमी, मुलायम त्वचा, कैसे लगाएं, किस स्किन के लिए सही है और FAQ।","plain",crumb="एवोकाडो नाइट क्रीम के फायदे",lang="hi",img=UP+"04BCBF62-EE16-4594-B65C-BDA805C264CB-1.png"),
  G("korean-night-cream-hindi","कोरियन नाइट क्रीम (Korean Night Cream in Hindi)","कोरियन नाइट क्रीम क्या है? फायदे और लगाने का सही तरीका | Mirc Glow","कोरियन नाइट क्रीम क्या होती है, इसके फायदे क्या हैं और इसे कैसे लगाएं? आसान हिंदी में पूरी जानकारी, साथ में Mirc Glow की 3 नाइट क्रीम की तुलना।","plain",crumb="कोरियन नाइट क्रीम",lang="hi",alt="korean-night-cream",img=UP+"4ED0DC3B-11FA-4903-87CC-21E1887C89E5.png"),
  G("skin-quiz","Skin Quiz","Skin Quiz: Find Your Best Cream in 4 Easy Questions | Mirc Glow","Take the Mirc Glow skin quiz. Answer 4 easy questions about your skin and get a cream recommendation with tips on how to use it.","legacy"),
@@ -1319,6 +1319,10 @@ def build_page(g):
         alts = [("en-IN", f"/{en}/"), ("hi-IN", f"/{hi}/"), ("x-default", f"/{en}/")]
     ptype = {"about":"AboutPage","contact":"ContactPage","faq":"FAQPage"}.get(g["slug"], "WebPage")
     wp = {"@type":ptype if ptype != "FAQPage" else "WebPage","@id":SITE+url,"url":SITE+url,"name":g["title"],"description":g["rd"],"inLanguage":LANG_TAG.get(g["lang"], "en-IN"),"isPartOf":{"@id":SITE+"/#website"},"dateModified":TODAY}
+    hi_guide = g["lang"] == "hi" and g["kind"] != "legacy" and g["slug"] not in CITY and "-in-kg" not in g["slug"]
+    if hi_guide:
+        wp["author"] = {"@type":"Person","name":"Mohammed Nihal","url":SITE+"/about-the-author/","jobTitle":"Founder, Mirc Glow"}
+        wp["publisher"] = {"@id":ORG_ID}
     nodes = [ORG, wp, crumbs_ld(cr)]
     if g["slug"] in CITY or g["slug"] == "bulk-night-cream":
         city = g["crumb"] if g["slug"].startswith("night-cream-in-kg-") else None
@@ -1337,7 +1341,7 @@ def build_page(g):
             raw = raw[:j+4] + qk + raw[j+4:] if j > 0 else raw.replace("</h1>", "</h1>" + qk, 1)
         out += f'<main id="main" class="lg">{crumbs_html(cr)}{raw}{at_glance_html() if g["slug"]=="about" else ""}</main>'
     else:
-        out += f'<main id="main" class="plain">{crumbs_html(cr)}<div class="w"><article class="prose">{raw}<p style="margin-top:3em;font-size:.85rem;color:var(--muted)">{"अंतिम अपडेट" if g["lang"]=="hi" else "Last reviewed"}: {fmt_date(TODAY)}</p></article></div></main>'
+        out += f'<main id="main" class="plain">{crumbs_html(cr)}<div class="w"><article class="prose">{raw}<p style="margin-top:3em;font-size:.85rem;color:var(--muted)">{('लेखक: <a href="/about-the-author/">Mohammed Nihal</a>, Founder, Mirc Glow · ') if hi_guide else ""}{"अंतिम अपडेट" if g["lang"]=="hi" else "Last reviewed"}: {fmt_date(TODAY)}</p></article></div></main>'
     out += footer()
     write(url, out)
 
