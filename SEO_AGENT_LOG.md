@@ -67,6 +67,8 @@ Unscheduled and merged on 22 Oct (drafts kept in content/drafts/): night-cream-f
 | 2026-10-24 | skincare for bike riders | /skincare-for-bike-riders/ | Results were one listicle, old news syndication (2013/2020) and helmet/mask product pages; daily two-wheeler commuting is very common in India; no existing page on it |
 | 2026-10-27 | skincare for air pollution india | /skincare-for-air-pollution-india/ | Results were news-site listicles, a shopping-app blog and spammy salon pages; smog season starts now in North India; no existing page on pollution |
 | 2026-10-27 | what to apply after face pack (multani mitti) | /what-to-apply-after-face-pack/ | Results were spam FAQ pages, pharmacy product listings and one news how-to; very common Indian home-pack habit; no existing page on it |
+| 2026-10-28 | how to remove makeup before bed | /how-to-remove-makeup-before-bed/ | Results were foreign makeup-brand pages and one Indian news how-to; no existing page targets makeup removal though many guides mention it; leads naturally into night cream |
+| 2026-10-28 | skin care for lack of sleep | /skin-care-for-lack-of-sleep/ | Results were a US surgery site, a salon-app blog, news and foreign brand pages; late nights are common (exams, commutes, shifts); realistic routine with no promises |
 
 2026-10-25 (manual, from Search Console impressions): 4 long-tail guides: /night-cream-for-oily-skin-in-monsoon/, /night-cream-for-oily-skin-under-500/, /night-cream-for-combination-skin-in-winter/, /night-cream-for-oily-acne-prone-skin/. Linked from /night-cream-for-oily-skin/, /night-cream-for-combination-skin/ and /best-night-cream-for-glowing-skin/. Pillar page retitled to lead with "best night cream in India"; product photo cards added.
 
