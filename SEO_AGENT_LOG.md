@@ -17,6 +17,7 @@ Pages strengthened from Search Console queries. The Sunday booster skips these f
 | 2026-10-25 | /best-korean-night-cream-in-india/ | best korean night cream in India | Title/description; new "texture for your weather" table and "price in India" section; 3 short answers; linked from Korean price, humid-weather and sleeping-mask guides |
 | 2026-10-25 | /best-face-cream-for-glowing-skin/ | best face cream for glowing skin (in India) | Title adds "in India"; new "day vs night cream" table and "for men" section; 3 short answers; linked from dull skin, best night cream for glowing skin and men's cream guides |
 | 2026-10-25 | /night-cream-under-500/ | best night cream under 500 | Title targets "best night cream under 500"; new "day or night cream under ₹500" section; removed a self-link; 3 short answers; linked from avocado price, beginners routine and how-much-to-use guides |
+| 2026-10-30 | /product-category/night-creams/avocado-night-creams/ | avocado night cream (118 impressions, 0 clicks in 3 months) | Owner request from Search Console. Title and H1 now lead with "Avocado Night Cream"; new buying guide on the page (4-cream table with real ingredients and prices, how to use, honest expectations, 5 FAQs); linked with exact anchor from best avocado cream and buy-online guides |
 
 ## New pages: avocado sales batch (see content/plan/AVOCADO_BATCH_OCT22.md)
 | Go-live | Page | Keyword |

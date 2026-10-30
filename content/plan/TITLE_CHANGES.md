@@ -31,3 +31,4 @@
 - 2026-10-25 /night-cream-under-500/: was "Night Cream Under 500: What ₹500 Buys" (weekly booster; target: best night cream under 500)
 - 2026-10-26 /avocado-cream-hindi/: was "एवोकाडो क्रीम के फायदे और इस्तेमाल का तरीका" (people type the search in English letters: "avocado cream benefits in hindi"; added it to the title and "avocado cream ke fayde" to the description)
 - 2026-10-26 /lightweight-night-cream-for-humid-weather/: was "Lightweight Night Cream for Oily Skin & Humid Weather" (removed "Oily Skin" so it stops competing with /night-cream-for-oily-skin/ for the same search)
+- 2026-10-30 /product-category/night-creams/avocado-night-creams/: was "Avocado Night Creams for Nourishing Evening Care", H1 "Avocado night creams" (GSC: "avocado night cream", 118 impressions in 3 months, 0 clicks; added a buying guide: 4-cream comparison table, how to use, honest expectations, 5 FAQs)

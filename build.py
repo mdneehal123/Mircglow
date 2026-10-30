@@ -175,9 +175,9 @@ CATS = {
      rt="Night Cream for Face: Buy Online in India | Mirc Glow",
      rd="Buy night cream online in India from ₹349: avocado, glutathione and Glass Glow night creams. Choose by skin type and age. Free shipping and Cash on Delivery.",
      intro="Korean-inspired creams for the last step of your evening routine. Most contain aloe vera, vitamin B3 and kojic acid, and each has its own job."),
- "avocado-night-creams": dict(name="Avocado Night Creams", h1="Avocado night creams", ko="아보카도 · AVOCADO CARE", parent="night-creams",
-     rt="Avocado Night Creams for Nourishing Evening Care | Mirc Glow",
-     rd="Shop Mirc Glow avocado night creams and avocado face creams in India, from ₹349. Avocado with aloe vera, vitamin B3 and kojic acid. Free shipping and COD.",
+ "avocado-night-creams": dict(name="Avocado Night Creams", h1="Avocado night cream", ko="아보카도 · AVOCADO CARE", parent="night-creams",
+     rt="Avocado Night Cream: Buy Online in India from ₹349 | Mirc Glow",
+     rd="Avocado night cream from ₹349: compare 4 Mirc Glow avocado creams by skin type, jar size and ingredients. Free shipping across India and Cash on Delivery.",
      intro="Rich, cushioned avocado creams for skin that feels dry or tight after washing. Pick by jar size and the time of day you want to use it."),
  "combos": dict(name="Combos and Kits", h1="Combos and kits", ko="세트 · SETS", parent=None,
      rt="Combos and Kits - Mirc Glow",
@@ -888,6 +888,31 @@ def NIGHT_GUIDE():
     cols = "".join(f'<div><h3>{esc(h)}</h3><ul>' + "".join(f'<li><a href="/{x}/">{esc(title[x])}</a></li>' for x in xs if x in live) + "</ul></div>" for h, xs in groups)
     return NG_HTML.replace("{cols}", cols)
 
+AV_HTML = """<section class="w ng" style="padding-bottom:clamp(48px,7vw,90px)">
+<div class="prose">
+<h2>Which avocado night cream should you pick?</h2>
+<p>An avocado night cream is a moisturiser with avocado for a soft, cushioned feel overnight. All four Mirc Glow avocado creams have avocado and aloe vera; three also have vitamin B3 (niacinamide) and kojic acid for a more even-looking tone. Pick by skin type and jar size:</p>
+<table><thead><tr><th>Cream</th><th>Ingredients</th><th>Best for</th><th>Price</th></tr></thead><tbody>
+<tr><td><a href="/product/avocado-night-cream/">Avocado Night Cream</a>, 30 g</td><td>Avocado, aloe vera, vitamin B3, kojic acid</td><td>Dry and normal skin; the richest texture</td><td>₹649</td></tr>
+<tr><td><a href="/product/avocado-korean-night-cream/">Avocado Korean Night Cream</a>, 25 g</td><td>Avocado, aloe vera, vitamin B3, kojic acid</td><td>Most skin types, including combination</td><td>₹649</td></tr>
+<tr><td><a href="/product/avocado-glow-cream-15g/">Avocado Glow Cream 15g</a></td><td>Avocado and aloe vera only (no kojic acid)</td><td>Sensitive skin, beginners, after waxing or threading</td><td>₹399</td></tr>
+<tr><td><a href="/product/avocado-face-cream/">Avocado Glow Cream</a>, 10 g</td><td>Avocado, aloe vera, vitamin B3, kojic acid</td><td>Trying avocado cream first; day or night</td><td>₹349</td></tr>
+</tbody></table>
+<p>Not sure between the two night creams? Read <a href="/avocado-night-cream-vs-avocado-korean-night-cream/">Avocado Night Cream vs Avocado Korean Night Cream</a>. For a full comparison, see <a href="/best-avocado-cream-in-india/">how to choose the best avocado cream in India</a>.</p>
+<h2>How to use avocado night cream</h2>
+<ol><li>Wash your face with a gentle face wash and pat dry, leaving it slightly damp.</li><li>Take a pea-sized amount for the face and neck.</li><li>Dot it on the forehead, cheeks and chin, and spread gently upwards.</li><li>Use it as the last step of your night routine.</li><li>Wear sunscreen every morning, especially with creams that contain kojic acid.</li></ol>
+<p>Oily skin needs only a thin layer; dry skin can use a little more in winter. More tips: <a href="/avocado-cream-kaise-lagaye/">avocado cream kaise lagaye</a> and <a href="/can-i-use-avocado-night-cream-every-night/">can I use avocado night cream every night?</a></p>
+<h2>What to expect, honestly</h2>
+<p>Most people notice softer, more comfortable skin within the first week or two. A more even-looking tone takes longer, usually 8 to 12 weeks of steady use with daily sunscreen. No avocado cream changes your natural skin colour; avoid any cream that promises fairness or overnight results. Patch test first, and read <a href="/avocado-night-cream-side-effects/">avocado night cream side effects</a> if you have sensitive skin.</p>
+<h2>Avocado night cream questions</h2>
+<h3>What are the benefits of avocado night cream?</h3><p>It helps skin feel moisturised, soft and less tight by morning, and creams with vitamin B3 and kojic acid can help skin look more even over weeks. See <a href="/avocado-night-cream-benefits-hindi/">avocado night cream benefits in Hindi</a> and <a href="/avocado-night-cream-review/">our honest review</a>.</p>
+<h3>Which avocado night cream is best for oily skin?</h3><p>A thin layer of the Avocado Korean Night Cream, or the gentle Avocado Glow Cream 15g. Read <a href="/avocado-cream-for-oily-skin/">avocado cream for oily skin</a>.</p>
+<h3>How long does a jar last?</h3><p>At a pea-sized amount each night, a 30 g jar lasts several weeks. See <a href="/how-long-does-a-jar-of-night-cream-last/">how long a jar of night cream lasts</a> and <a href="/avocado-cream-price-in-india/">avocado cream price in India</a>.</p>
+<h3>Can I order with Cash on Delivery?</h3><p>Yes. Shipping is free across India, usually in 3 to 7 days, with Cash on Delivery or an online payment link, and 7-day returns on sealed jars. You can also <a href="/buy-avocado-night-cream-online/">buy avocado night cream online</a> on WhatsApp.</p>
+<h3>How do I know my jar is original?</h3><p>Read <a href="/avocado-night-cream-original/">avocado night cream original vs fake</a>.</p>
+</div>
+</section>"""
+
 NG_HTML = """<section class="w ng" style="padding-bottom:clamp(48px,7vw,90px)">
 <div class="prose">
 <h2>How to choose a night cream</h2>
@@ -957,7 +982,7 @@ def build_shop():
         cr = [("Home","/"),("Shop","/shop/")]
         if d["parent"]: cr.append((CATS[d["parent"]]["name"], cat_url(d["parent"])))
         cr.append((d["name"], cat_url(c)))
-        listing(cat_url(c), d["rt"], d["rd"], d["h1"], d["ko"], d["intro"], items, cr, cat_url(c), NIGHT_GUIDE() if c == "night-creams" else "")
+        listing(cat_url(c), d["rt"], d["rd"], d["h1"], d["ko"], d["intro"], items, cr, cat_url(c), NIGHT_GUIDE() if c == "night-creams" else (AV_HTML if c == "avocado-night-creams" else ""))
 
 def related_posts(p, n=3):
     pool = [q for q in LIVE_POSTS if q["topic"] == p["topic"]]
