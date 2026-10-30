@@ -69,6 +69,8 @@ Unscheduled and merged on 22 Oct (drafts kept in content/drafts/): night-cream-f
 | 2026-10-27 | what to apply after face pack (multani mitti) | /what-to-apply-after-face-pack/ | Results were spam FAQ pages, pharmacy product listings and one news how-to; very common Indian home-pack habit; no existing page on it |
 | 2026-10-28 | how to remove makeup before bed | /how-to-remove-makeup-before-bed/ | Results were foreign makeup-brand pages and one Indian news how-to; no existing page targets makeup removal though many guides mention it; leads naturally into night cream |
 | 2026-10-28 | skin care for lack of sleep | /skin-care-for-lack-of-sleep/ | Results were a US surgery site, a salon-app blog, news and foreign brand pages; late nights are common (exams, commutes, shifts); realistic routine with no promises |
+| 2026-10-30 | skin care for hill station trip | /skin-care-for-hill-station-trip/ | Results were a 2019 grocery-app blog, packing-list travel blogs and news features; winter hill trips (Manali, Shimla, Ooty) peak Nov–Feb; no existing travel/altitude page |
+| 2026-10-30 | skin care after swimming | /skin-care-after-swimming/ | Results were a men's magazine piece, Hindi news, 2011/2015 Boldsky posts and foreign pages; practical chlorine + Indian sun + hard-water routine; no existing page on swimming |
 
 2026-10-25 (manual, from Search Console impressions): 4 long-tail guides: /night-cream-for-oily-skin-in-monsoon/, /night-cream-for-oily-skin-under-500/, /night-cream-for-combination-skin-in-winter/, /night-cream-for-oily-acne-prone-skin/. Linked from /night-cream-for-oily-skin/, /night-cream-for-combination-skin/ and /best-night-cream-for-glowing-skin/. Pillar page retitled to lead with "best night cream in India"; product photo cards added.
 
