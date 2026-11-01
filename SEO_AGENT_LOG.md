@@ -84,3 +84,17 @@ Unscheduled and merged on 22 Oct (drafts kept in content/drafts/): night-cream-f
 
 2026-10-26 (manual, ranking boost from Search Console, owner request): no new pages. /night-cream-for-combination-skin/ had only 13 internal links in, so it now gets links from 5 related guides (avocado cream for combination skin, oily skin under 500, oily skin in monsoon, lightweight humid weather, night cream under 500), plus a short answer for "night moisturiser for combination skin". Retitled /avocado-cream-hindi/ and /lightweight-night-cream-for-humid-weather/ (see TITLE_CHANGES.md). Left the titles of /night-cream-for-oily-skin/, /night-cream-for-combination-skin/ and /avocado-night-cream-benefits-hindi/ alone: they were changed on 21 Oct and need 3–4 weeks before they are judged.
 2026-10-26 (manual, owner request "we want No. 1"): Hindi guides (36 pages) now show the author byline (Mohammed Nihal, Founder) and carry author/publisher in their schema, like the English guides already did. Fixed /avocado-cream-hindi/ description: 4 avocado creams, not 3.
+
+## Freshness
+Monthly freshness updater. Do not refresh the same page again within 3 months of the date shown.
+
+| Date | Page | What changed |
+|---|---|---|
+| 2026-11-01 | /diwali-skincare-gift-ideas/ | Order-date table updated for the last week before Diwali (honest that later orders may arrive after 8 Nov); added Christmas (Fri 25 Dec) and New Year rows; 2 new short answers (too late to order? Christmas/wedding gifts) |
+| 2026-11-01 | /skincare-gift-for-wife/ | Removed past Karwa Chauth note; Diwali/Bhai Dooj/Christmas timing; 1 new short answer (winter gift) |
+| 2026-11-01 | /skincare-gift-for-girlfriend/ | Diwali timing fixed; new Christmas and New Year section; 1 new short answer |
+| 2026-11-01 | /skincare-gift-for-mother/ | Diwali timing fixed; new winter section linking room heater guide; 1 new short answer (dry winter skin) |
+| 2026-11-01 | /avocado-cream-combo-gift-set/ | Order dates updated (Bhai Dooj, Christmas, weddings); 1 new short answer (wedding gift) |
+| 2026-11-01 | /skincare-gifts-in-bulk-for-diwali/ | Order timing after the Diwali window; new year-end/New Year gifts section; 1 new FAQ |
+| 2026-11-01 | /diwali-skincare-routine/ | Countdown rewritten for 1–8 Nov (no new products, facial cut-off, smog days); new Chhath Puja (13–16 Nov) section; short answers updated + 1 new (smog after Diwali) |
+| 2026-11-01 | /winter-wedding-skincare/ | New "start from your date" table for Nov–Feb weddings and smog-season note; 2 new short answers (wedding in 3 weeks; heaters/hot water) |
