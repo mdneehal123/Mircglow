@@ -32,3 +32,8 @@
 - 2026-10-26 /avocado-cream-hindi/: was "एवोकाडो क्रीम के फायदे और इस्तेमाल का तरीका" (people type the search in English letters: "avocado cream benefits in hindi"; added it to the title and "avocado cream ke fayde" to the description)
 - 2026-10-26 /lightweight-night-cream-for-humid-weather/: was "Lightweight Night Cream for Oily Skin & Humid Weather" (removed "Oily Skin" so it stops competing with /night-cream-for-oily-skin/ for the same search)
 - 2026-10-30 /product-category/night-creams/avocado-night-creams/: was "Avocado Night Creams for Nourishing Evening Care", H1 "Avocado night creams" (GSC: "avocado night cream", 118 impressions in 3 months, 0 clicks; added a buying guide: 4-cream comparison table, how to use, honest expectations, 5 FAQs)
+- 2026-11-01 /best-avocado-cream-in-india/: was "Best Avocado Cream in India: Buyer's Guide" (weekly booster; target: best avocado cream for face in India; added season table, men section, 3 short answers)
+- 2026-11-01 /brightening-face-cream-india/: was "Brightening Face Cream India: How to Choose" (weekly booster; target: brightening face cream in India; added timeline, day/night, what not to mix, vs fairness cream)
+- 2026-11-01 /night-cream-price-in-india/: was "Night Cream Price in India: Price Bands & Value" (weekly booster; target: night cream price in India; added cost-per-night table, combos, cheap/costly red flags)
+- 2026-11-01 /product/glutathione-cream/: was "Glutathione Cream with Vitamin C & Kojic Acid 30g: Best for Glow" (weekly booster; removed "Best", now 57 chars; added direct answer, before-you-buy checks, 4 FAQs)
+- 2026-11-01 /product/avocado-night-cream/: was "Avocado Night Cream with Kojic Acid 30g: Best for Dry Skin" (weekly booster; removed "Best", now 51 chars; added 3 FAQs)
