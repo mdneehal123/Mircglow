@@ -547,7 +547,7 @@ def product_ld(p, url):
          "offers":{"@type":"Offer","url":SITE+url,"priceCurrency":"INR","price":str(p["price"]),"priceValidUntil":"2027-03-31",
                    "availability":"https://schema.org/InStock","itemCondition":"https://schema.org/NewCondition","seller":{"@id":ORG_ID},
                    "shippingDetails":SHIPPING,"hasMerchantReturnPolicy":RETURN_POLICY}}
-    if "parts" in p: d["isRelatedTo"] = [{"@type":"Product","name":PBY[s]["name"],"url":SITE+f"/product/{s}/"} for s in p["parts"]]
+    if "parts" in p: d["isRelatedTo"] = [{"@id":SITE+f"/product/{s}/#product","name":PBY[s]["name"],"url":SITE+f"/product/{s}/"} for s in p["parts"]]  # @id reference: a nested Product without offers is flagged by Google
     # extra real photos shown on the page
     try:
         extra = re.findall(r'<img[^>]*src="(/wp-content/[^"]+)"', read(os.path.join(SRC, "products", p["slug"] + ".html")))
