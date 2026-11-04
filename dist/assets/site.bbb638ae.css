@@ -958,6 +958,10 @@ body:has(.lux) .icons3 span{background:#F7F1E4;border:1px solid #E6CF9A}
 .co-cp input{flex:1}
 .co-cp button{border:1.5px solid var(--green);background:#fff;color:var(--green);border-radius:10px;padding:0 14px;font-weight:700;cursor:pointer}
 .co-msg{font-size:.88rem;margin:8px 0 0;min-height:1em}
+.co-nudge{margin-top:10px;padding:12px;border-radius:12px;background:var(--mint);border:1.5px dashed var(--green);font-size:.9rem}
+.co-nudge p{margin:0 0 8px}
+.co-nudge b{color:var(--green)}
+.co-nudge button{width:100%}
 .co-msg.err{color:var(--sale)}
 .co-msg.ok{color:var(--green)}
 .co-go{margin-top:10px}

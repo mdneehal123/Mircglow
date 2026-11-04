@@ -3,7 +3,7 @@
 function mgCheckout() {
   var D = JSON.parse(document.getElementById("co-data").textContent);
   var P = D.products, $ = function (s) { return document.querySelector(s); };
-  var cfg = { online: false, cod: false, prepaidPct: D.prepaidPct }, coupon = "", busy = false;
+  var cfg = { online: false, cod: false, prepaidPct: D.prepaidPct, prepaidExtra: D.prepaidExtra || 0 }, coupon = "", busy = false;
   var inr = function (n) { return "₹" + Math.round(n).toLocaleString("en-IN"); };
   var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
   function cart() { return MGCart.get().filter(function (l) { return P[l.id] && l.qty > 0; }); }
@@ -11,9 +11,10 @@ function mgCheckout() {
   function totals(mode) {
     var sub = cart().reduce(function (a, l) { return a + P[l.id].price * l.qty; }, 0);
     var cOff = D.coupons[coupon] ? Math.round(sub * D.coupons[coupon] / 100) : 0;
-    var pOff = mode === "online" ? Math.round((sub - cOff) * cfg.prepaidPct / 100) : 0;
+    var pOff = mode === "online" ? Math.min(sub - cOff - 1, Math.round((sub - cOff) * cfg.prepaidPct / 100) + cfg.prepaidExtra) : 0;
     return { sub: sub, cOff: cOff, pOff: pOff, total: sub - cOff - pOff };
   }
+  function offLabel() { return [cfg.prepaidPct ? cfg.prepaidPct + "%" : "", cfg.prepaidExtra ? "₹" + cfg.prepaidExtra : ""].filter(Boolean).join(" + "); }
   function mode() { var r = document.querySelector('input[name="pay"]:checked'); return r ? r.value : ""; }
 
   function render() {
@@ -30,11 +31,15 @@ function mgCheckout() {
     var m = mode(), t = totals(m || "cod");
     var rows = '<span>Subtotal</span><span>' + inr(t.sub) + '</span>';
     if (t.cOff) rows += '<span>Code ' + esc(coupon) + '</span><span class="off">−' + inr(t.cOff) + '</span>';
-    if (t.pOff) rows += '<span>Online payment ' + cfg.prepaidPct + '% off</span><span class="off">−' + inr(t.pOff) + '</span>';
+    if (t.pOff) rows += '<span>Online payment ' + offLabel() + ' off</span><span class="off">−' + inr(t.pOff) + '</span>';
     rows += '<span>Shipping</span><span class="off">FREE</span><span class="tot">Total</span><span class="tot">' + inr(t.total) + '</span>';
     $("[data-co-sum]").innerHTML = rows;
     var on = totals("online").total;
-    $("[data-pay-online-note]").textContent = cfg.prepaidPct ? "UPI, cards, net banking · pay " + inr(on) + " (" + cfg.prepaidPct + "% off)" : "UPI, cards, net banking";
+    $("[data-pay-online-note]").textContent = (cfg.prepaidPct || cfg.prepaidExtra) ? "UPI, cards, net banking · pay " + inr(on) + " (" + offLabel() + " off)" : "UPI, cards, net banking";
+    // COD chosen: suggest paying online, with the exact saving
+    var nudge = $("[data-co-nudge]"), save = totals("cod").total - on;
+    nudge.hidden = !(m === "cod" && cfg.online && save > 0);
+    if (!nudge.hidden) $("[data-co-nudge-text]").innerHTML = "<b>Save " + inr(save) + " by paying online</b> — pay " + inr(on) + " instead of " + inr(totals("cod").total) + ". UPI, cards or net banking; no cash needed at the door.";
     $("[data-pay-cod-note]").textContent = "Pay " + inr(totals("cod").total) + " in cash or UPI when it arrives";
     var go = $("[data-co-go]");
     go.textContent = m === "online" ? "Pay " + inr(t.total) + " securely" : m === "cod" ? "Place order · " + inr(t.total) + " on delivery" : "Send order on WhatsApp";
@@ -129,6 +134,7 @@ function mgCheckout() {
     }
   });
   $("#co-form").addEventListener("change", function (e) { if (e.target.name === "pay") render(); save(); });
+  $("[data-co-nudge-go]").addEventListener("click", function () { var on = document.querySelector('input[name="pay"][value="online"]'); if (on && !on.disabled) { on.checked = true; render(); } });
   $("#co-form").addEventListener("input", function () { $("[data-co-wa]").href = waLink(); });
   $("[data-cp-apply]").addEventListener("click", function () {
     var v = $("#co-cp").value.trim().toUpperCase();
@@ -187,13 +193,13 @@ function mgCheckout() {
 
   // which payment options are switched on (from the server; no secrets)
   restore(); render();
-  fetch("/api/payment-config/").then(function (r) { return r.json(); }).then(function (j) { cfg.online = !!j.online; cfg.cod = !!j.cod; if (j.prepaidPct != null) cfg.prepaidPct = j.prepaidPct; })
+  fetch("/api/payment-config/").then(function (r) { return r.json(); }).then(function (j) { cfg.online = !!j.online; cfg.cod = !!j.cod; if (j.prepaidPct != null) cfg.prepaidPct = j.prepaidPct; if (j.prepaidExtra != null) cfg.prepaidExtra = j.prepaidExtra; })
     .catch(function () {}).then(function () {
       var on = document.querySelector('input[name="pay"][value="online"]'), cod = document.querySelector('input[name="pay"][value="cod"]');
       [[on, cfg.online], [cod, cfg.cod]].forEach(function (x) { x[0].disabled = !x[1]; x[0].closest(".co-opt").hidden = !x[1]; });
       if (cfg.online) on.checked = true; else if (cfg.cod) cod.checked = true;
       $("[data-co-waonly]").hidden = cfg.online || cfg.cod;
-      if (!cfg.online) cfg.prepaidPct = 0;
+      if (!cfg.online) { cfg.prepaidPct = 0; cfg.prepaidExtra = 0; }
       applyCod(); render();
     });
   checkPin(); // a pin code restored from the last visit is checked too

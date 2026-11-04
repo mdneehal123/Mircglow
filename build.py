@@ -1301,7 +1301,7 @@ def build_product(p):
 {qty_box(p["slug"])}
 <div class="buy2">{buy_btn(p, "Buy Now")}{buy_btn(p, "Add to Cart", "yb yb-line", go=False)}</div>
 {wa_btn(p, "Order on WhatsApp instead")}
-<p class="howpay">Pay online with UPI or card ({PREPAID_PCT}% off), or choose Cash on Delivery at checkout. First order? Use code <b>GLOW10</b> for 10% off. Questions? <a href="{wa("Hi Mirc Glow, I have a question about the " + p["name"] + ".")}" target="_blank" rel="noopener">Ask us on WhatsApp</a>.</p>
+<p class="howpay">Pay online with UPI or card ({PREPAID_PCT}% + ₹{PREPAID_EXTRA} off), or choose Cash on Delivery at checkout. First order? Use code <b>GLOW10</b> for 10% off. Questions? <a href="{wa("Hi Mirc Glow, I have a question about the " + p["name"] + ".")}" target="_blank" rel="noopener">Ask us on WhatsApp</a>.</p>
 {PAY_CHIPS}
 <ul class="ticks">{pts}</ul>
 <div class="trust4"><div><span>🚚</span><b>Free shipping</b><small>3 to 7 days</small></div><div><span>💵</span><b>Cash on Delivery</b><small>Or pay online</small></div><div><span>↩️</span><b>7-day returns</b><small><a href="/returns-refunds/">Sealed jars</a></small></div><div><span>💬</span><b>WhatsApp help</b><small>{PHONE}</small></div></div>
@@ -1411,7 +1411,7 @@ def build_checkout():
     def img(p):
         w = p["img"][:-4] + ".mg.webp"
         return w if p["img"].endswith(".png") and os.path.exists(os.path.join(ROOT, w.lstrip("/"))) else p["img"]
-    data = {"wa": WA_NUM, "prepaidPct": PREPAID_PCT, "coupons": COUPONS,
+    data = {"wa": WA_NUM, "prepaidPct": PREPAID_PCT, "prepaidExtra": PREPAID_EXTRA, "coupons": COUPONS,
             "products": {p["slug"]: {"name": p["name"], "size": p["size"], "price": p["price"], "img": img(p), "u": f'/product/{p["slug"]}/'} for p in PRODUCTS}}
     robots = "noindex, nofollow"
     out = head("Checkout | Mirc Glow", "Your Mirc Glow cart: pay online with UPI or card, or choose Cash on Delivery. Free shipping across India.", "/checkout/", robots=robots)
@@ -1440,6 +1440,7 @@ def build_checkout():
 <div class="co-pay">
 <label class="co-opt" hidden><input type="radio" name="pay" value="online" disabled><span><b>Pay online</b><small data-pay-online-note></small></span></label>
 <label class="co-opt" hidden><input type="radio" name="pay" value="cod" disabled><span><b>Cash on Delivery</b><small data-pay-cod-note></small></span></label>
+<div class="co-nudge" data-co-nudge hidden><p data-co-nudge-text></p><button type="button" class="yb yb-fill" data-co-nudge-go>Pay online instead</button></div>
 <p class="co-msg" data-co-waonly hidden>Online checkout is being set up. Tap the button below to send this order on WhatsApp; we confirm it there.</p>
 </div>
 <div class="co-cp" style="margin-top:12px"><input id="co-cp" placeholder="Discount code" aria-label="Discount code" autocomplete="off"><button type="button" data-cp-apply>Apply</button></div>
@@ -1524,11 +1525,12 @@ DESK_IDS = {"avocado-korean-night-cream":"mg1","glutathione-cream":"mg2","avocad
              "day-and-night-cream-combo":"mg5","night-cream-combo":"mg6","korean-glass-skin-kit":"mg7",
              "avocado-glow-cream-15g":"mg8","glass-glow-cream":"mg9","glass-glow-night-duo":"mg10"}
 PREPAID_PCT = 5   # % off when paying online (shown at checkout; server uses api/_catalog.json)
+PREPAID_EXTRA = 50   # extra ₹ off when paying online, on top of PREPAID_PCT
 COUPONS = {"GLOW10": 10}   # first-order code already promised on product pages (10% off)
 
 def build_checkout_catalog():
     """Writes api/_catalog.json: the prices the payment server charges. Generated from PRODUCTS so it can never drift."""
-    cat = {"prepaidPct": PREPAID_PCT, "coupons": COUPONS, "products": {}}
+    cat = {"prepaidPct": PREPAID_PCT, "prepaidExtra": PREPAID_EXTRA, "coupons": COUPONS, "products": {}}
     for p in PRODUCTS:
         jars = len(p.get("parts") or []) or 1
         cat["products"][p["slug"]] = {"name": f'Mirc Glow {p["name"]}' + ("" if p["size"] in p["name"] else f' {p["size"]}'.replace(" g", "g").replace("g + ", "g + ")),
