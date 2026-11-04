@@ -3,6 +3,7 @@
 const CAT = require("./_catalog.json");
 const PRODUCTS = CAT.products;
 const PREPAID_PCT = Number(CAT.prepaidPct) || 0;
+const PREPAID_EXTRA = Number(CAT.prepaidExtra) || 0;   // extra ₹ off when paying online
 const COUPONS = CAT.coupons || {};   // e.g. {"GLOW10": 10} = 10% off
 
 // mode "online": prepaid discount applies. mode "cod": full price, paid at the door.
@@ -17,8 +18,8 @@ function price(items, mode = "online", couponCode = "") {
   const sub = lines.reduce((a, l) => a + l.total, 0);
   const code = String(couponCode || "").toUpperCase().trim();
   const coupOff = COUPONS[code] ? Math.round((sub * COUPONS[code]) / 100) : 0;
-  const prepaidOff = mode === "online" ? Math.round(((sub - coupOff) * PREPAID_PCT) / 100) : 0;
+  const prepaidOff = mode === "online" ? Math.min(sub - coupOff - 1, Math.round(((sub - coupOff) * PREPAID_PCT) / 100) + PREPAID_EXTRA) : 0;
   const discount = coupOff + prepaidOff;
   return { lines, sub, coupon: coupOff ? code : "", coupOff, prepaidOff, discount, total: sub - discount, units: lines.reduce((a, l) => a + l.qty * (l.jars || 1), 0) };
 }
-module.exports = { price, PREPAID_PCT, COUPONS };
+module.exports = { price, PREPAID_PCT, PREPAID_EXTRA, COUPONS };

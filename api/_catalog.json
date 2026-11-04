@@ -1,5 +1,6 @@
 {
  "prepaidPct": 5,
+ "prepaidExtra": 50,
  "coupons": {
   "GLOW10": 10
  },
