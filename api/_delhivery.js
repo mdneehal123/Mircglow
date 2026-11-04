@@ -17,11 +17,15 @@ const delhiveryOn = () => Boolean(token() && pickup());
 const RETURN = { name: "Beauty Mart", add: "Azad Nagar 4th Cross, Bhatkal", city: "Bhatkal", state: "Karnataka", pin: "581320", phone: "9980881230" };
 
 async function serviceable(pin) {
-  const r = await fetch(base() + "/c/api/pin-codes/json/?filter_codes=" + encodeURIComponent(pin), { headers: { Authorization: "Token " + token(), Accept: "application/json" } });
+  // 8-second limit: a Delhivery call that doesn't answer counts as a failed check.
+  const r = await fetch(base() + "/c/api/pin-codes/json/?filter_codes=" + encodeURIComponent(pin), { headers: { Authorization: "Token " + token(), Accept: "application/json" }, signal: AbortSignal.timeout(8000) });
+  if (!r.ok) throw new Error("delhivery_http_" + r.status);
   const j = await r.json().catch(() => ({}));
   const pc = j && j.delivery_codes && j.delivery_codes[0] && j.delivery_codes[0].postal_code;
   if (!pc) return { known: false, cod: false, prepaid: false };
-  return { known: true, cod: String(pc.cod).toUpperCase() === "Y", prepaid: String(pc.pre_paid).toUpperCase() === "Y", city: pc.city || "", state: pc.state_code || "" };
+  // "Embargo" in remarks: Delhivery has stopped deliveries to this pin code for now, so no COD there even if cod is "Y".
+  const embargo = /embargo/i.test(String(pc.remarks || ""));
+  return { known: true, cod: !embargo && String(pc.cod).toUpperCase() === "Y", prepaid: String(pc.pre_paid).toUpperCase() === "Y", embargo, city: pc.city || "", state: pc.state_code || "" };
 }
 
 async function createShipment({ ref, c, q, pay }) {

@@ -14,14 +14,12 @@ module.exports = async (req, res) => {
   let q, c;
   try { q = price(b.items, "cod", b.coupon); c = customer(b.customer); } catch (e) { return send(res, 400, { error: e.message }); }
   const ref = String(b.ref || "").replace(/[^A-Z0-9]/gi, "").slice(0, 20) || "MG" + Date.now().toString(36).toUpperCase();
+  // COD only when Delhivery confirms this pin code is serviceable and allows COD. Unknown pin, failed check or no answer: refuse, before saving or booking.
+  let codOk = false;
+  if (delhiveryOn()) { try { const s = await serviceable(c.pin); codOk = s.known && s.cod; } catch (e) { codOk = false; } }
+  if (!codOk) return send(res, 409, { error: "Cash on Delivery is not available for this pincode. Please pay online.", codUnavailable: true });
   let d = { ok: false, error: "Delhivery not set up" };
-  if (delhiveryOn()) {
-    try {
-      const s = await serviceable(c.pin);
-      if (s.known && !s.cod) return send(res, 409, { error: "Cash on Delivery isn't available for pin code " + c.pin + ". Please pay online instead.", codUnavailable: true });
-    } catch (e) { /* if the check fails, still try to book */ }
-    try { d = await createShipment({ ref, c, q, pay: "cod" }); } catch (e) { d = { ok: false, error: String(e.message || e) }; }
-  }
+  try { d = await createShipment({ ref, c, q, pay: "cod" }); } catch (e) { d = { ok: false, error: String(e.message || e) }; }
   const desk = await pushToDesk(d.ok
     ? { ref, c, q, pay: "cod", paid: false, courier: "Delhivery", awb: d.awb, note: `COD booked with Delhivery · AWB ${d.awb} · print the label from the Delhivery panel` }
     : { ref, c, q, pay: "cod", paid: false, note: "⚠ COD website order, not booked with Delhivery (" + d.error + "). Please book it by hand." });
