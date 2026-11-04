@@ -136,20 +136,32 @@ function mgCheckout() {
     if (D.coupons[v]) { coupon = v; msg("Code " + v + " applied: " + D.coupons[v] + "% off.", "ok"); } else { coupon = ""; msg("That code isn't valid.", "err"); }
     render();
   });
-  var pinEl = $("#co-form").elements.pin, lastPin = "";
-  pinEl.addEventListener("input", function () {
-    var p = pinEl.value.replace(/\D/g, ""); if (p.length !== 6 || p === lastPin) return; lastPin = p;
-    fetch("/api/pincode/?pin=" + p).then(function (r) { return r.json(); }).then(function (s) {
-      var f = $("#co-form"), note = $("[data-pin-note]");
-      if (!s.known) { note.textContent = ""; return; }
-      if (s.city && !f.elements.city.value) f.elements.city.value = s.city.replace(/\b\w/g, function (x) { return x.toUpperCase(); }).replace(/\B\w+/g, function (x) { return x.toLowerCase(); });
-      if (s.state && !f.elements.state.value) f.elements.state.value = s.state;
-      var cod = document.querySelector('input[name="pay"][value="cod"]');
-      if (cod && cfg.cod) { cod.disabled = !s.cod; cod.closest(".co-opt").classList.toggle("off", !s.cod); if (!s.cod && cod.checked) { var on = document.querySelector('input[name="pay"][value="online"]'); if (on && !on.disabled) on.checked = true; } }
-      note.textContent = s.cod ? "✓ We deliver here · Cash on Delivery available" : (s.prepaid ? "✓ We deliver here · online payment only for this pin code" : "");
-      render();
-    }).catch(function () {});
-  });
+  // COD for the entered pin code: null = not checked yet, true = Delhivery allows COD, false = not allowed / check failed.
+  var pinEl = $("#co-form").elements.pin, lastPin = "", pinCod = null, NO_COD = "Cash on Delivery is not available for this pincode. Please pay online.";
+  function applyCod() {
+    var cod = document.querySelector('input[name="pay"][value="cod"]'), note = $("[data-pin-note]");
+    if (pinCod !== null) note.textContent = pinCod ? "✓ We deliver here · Cash on Delivery available" : (cfg.cod ? NO_COD : "");
+    if (!cod || !cfg.cod) return;
+    var blocked = pinCod === false;
+    cod.disabled = blocked; cod.closest(".co-opt").classList.toggle("off", blocked);
+    if (blocked && cod.checked) { cod.checked = false; var on = document.querySelector('input[name="pay"][value="online"]'); if (on && !on.disabled) on.checked = true; }
+  }
+  function checkPin() {
+    var p = pinEl.value.replace(/\D/g, "");
+    if (p.length !== 6) { if (lastPin) { lastPin = ""; pinCod = null; $("[data-pin-note]").textContent = ""; applyCod(); render(); } return; }
+    if (p === lastPin) return; lastPin = p;
+    fetch("/api/pincode/?pin=" + p).then(function (r) { return r.json(); }).catch(function () { return {}; }).then(function (s) {
+      if (p !== lastPin) return; // the pin code changed while this check was running
+      var f = $("#co-form");
+      pinCod = !!(s && s.known && s.cod);
+      if (s && s.known) {
+        if (s.city && !f.elements.city.value) f.elements.city.value = s.city.replace(/\b\w/g, function (x) { return x.toUpperCase(); }).replace(/\B\w+/g, function (x) { return x.toLowerCase(); });
+        if (s.state && !f.elements.state.value) f.elements.state.value = s.state;
+      }
+      applyCod(); render();
+    });
+  }
+  pinEl.addEventListener("input", checkPin);
   // Shopper ticked "you may message me": tell the shop (once per number per visit) so it can follow up on WhatsApp. Nothing is sent unless the box is ticked.
   var leadSent = {};
   function lead() {
@@ -182,8 +194,9 @@ function mgCheckout() {
       if (cfg.online) on.checked = true; else if (cfg.cod) cod.checked = true;
       $("[data-co-waonly]").hidden = cfg.online || cfg.cod;
       if (!cfg.online) cfg.prepaidPct = 0;
-      render();
+      applyCod(); render();
     });
+  checkPin(); // a pin code restored from the last visit is checked too
 }
 // runs after every deferred script (site.js provides MGCart)
 if (window.MGCart) mgCheckout(); else document.addEventListener("DOMContentLoaded", mgCheckout);
