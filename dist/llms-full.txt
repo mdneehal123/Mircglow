@@ -1287,7 +1287,7 @@ Short answer: सबसे अच्छी नाइट क्रीम वह�
 
 ## Skincare Blog: Night Cream, Glutathione and Glass Skin Guides
 URL: https://mircglow.com/blog/
-Short answer: The Mirc Glow journal has 194 free skincare guides for Indian skin and weather, on night creams, avocado cream, glutathione, kojic acid, dark spots and glass skin routines, plus Hindi guides. Each guide opens with a short answer and is written by founder Mohammed Nihal.
+Short answer: The Mirc Glow journal has 196 free skincare guides for Indian skin and weather, on night creams, avocado cream, glutathione, kojic acid, dark spots and glass skin routines, plus Hindi guides. Each guide opens with a short answer and is written by founder Mohammed Nihal.
 
 ## Bridal Skincare Routine: 30-Day Plan | Mirc Glow
 URL: https://mircglow.com/bridal-skincare-routine-30-days/
@@ -4525,6 +4525,24 @@ A: Wipe or rinse gently a few times a day, cover your face with a scarf in dusty
 Q: Can I sleep with makeup on a train?
 A: It is better not to. Wipe it off and apply a thin layer of cream before you lie down.
 
+## Skin Care for Bangalore Weather: Season Guide | Mirc Glow
+URL: https://mircglow.com/skin-care-for-bangalore-weather/
+Short answer: Bangalore feels mild, so the two big needs are daily sunscreen, even on cool or cloudy days, and moisture in the dry December to February months. Use a gentle face wash, a light moisturiser and sunscreen in the morning, and a slightly richer night cream when the air turns dry.
+- Bengaluru is about 900 m above sea level, so it rarely feels hot
+- Clear days can still tan skin on the commute
+- Air is driest from December to February
+- Hard borewell or tanker water can leave skin tight
+Q: Do I need sunscreen in Bangalore?
+A: Yes. The air feels cool, but the sun on clear days can still tan skin, especially if you commute on a two-wheeler or walk a lot.
+Q: Which moisturiser suits Bangalore weather?
+A: A light cream or gel in the day for most skin types, and a slightly richer night cream from December to February when the air is dry.
+Q: Why is my skin dry in Bangalore winter?
+A: Cool, dry air, AC offices, hot showers and hard water together pull moisture from skin. Moisturise on damp skin and keep showers lukewarm.
+Q: Is Bangalore water bad for skin?
+A: Hard borewell or tanker water can leave skin feeling tight. Use lukewarm water, a mild face wash and moisturise straight after.
+Q: Can I use night cream every night in Bangalore?
+A: Yes, most people can. Use a pea-sized amount, less if your skin is oily, and wear sunscreen the next morning.
+
 ## Skin Care for a Goa Beach Trip: Kit & Routine | Mirc Glow
 URL: https://mircglow.com/skin-care-for-goa-beach-trip/
 Short answer: On a Goa beach trip, wear water-resistant SPF 30+ sunscreen and reapply it every 2 hours and after every swim or towel-dry. Use a hat, sunglasses and midday shade. At night, rinse off salt and sand and use a light, soothing moisturiser instead of strong actives.
@@ -4650,6 +4668,24 @@ Q: Is it bad for skin to run in smog?
 A: Smog leaves grime on the skin, but the bigger worry is breathing it. On very poor AQI days, run indoors or shorten the run.
 Q: Can I use night cream before a morning run?
 A: A heavy night cream under sunscreen can feel greasy with sweat. Use a thin, light moisturiser in the morning and keep richer creams for night.
+
+## Skin Care for Teachers: Simple School-Day Routine | Mirc Glow
+URL: https://mircglow.com/skin-care-for-teachers/
+Short answer: Teachers mainly need a hand cream for chalk-dried fingers, sunscreen before school for assembly and duty, a lip balm for long talking hours, and a short night routine. Wash, moisturise and apply sunscreen in the morning; cleanse, apply night cream, hand cream and lip balm at night.
+- Chalk dust mostly dries the skin on fingers
+- Assembly and ground duty add up to real sun exposure
+- Talking for hours dries the lips
+- A 3-step night routine is enough on busy nights
+Q: Is chalk dust bad for skin?
+A: Chalk dust mostly dries skin, especially on the fingers. Washing it off gently and using hand cream after usually keeps hands comfortable.
+Q: How can teachers stop dry, cracked hands?
+A: Tap off chalk, wash with mild soap and lukewarm water, apply hand cream every time, and use a thick layer at night on cracked fingertips.
+Q: Do teachers need sunscreen if they teach indoors?
+A: Yes, if you do assembly, ground duty or commute in daylight. Apply SPF 30+ before school and again before outdoor duty.
+Q: What is a quick skincare routine for teachers?
+A: Face wash, light moisturiser and sunscreen in the morning; cleanse, night cream, hand cream and lip balm at night.
+Q: Why are my lips always dry after teaching?
+A: Talking for hours and not drinking enough water dry them out. Keep lip balm and a water bottle on your table.
 
 ## Skin Care While Wearing a Face Mask All Day | Mirc Glow
 URL: https://mircglow.com/skin-care-while-wearing-face-mask/
@@ -5206,7 +5242,7 @@ Short answer: Mirc Glow has 9 guides on skincare ingredients, written in plain E
 
 ## Skincare Routines - Skincare Guides | Mirc Glow
 URL: https://mircglow.com/category/skincare-routines/
-Short answer: Mirc Glow has 52 guides on skincare routines, written in plain English by founder Mohammed Nihal and reviewed for Indian skin and weather. Start with: Dry Skin Around the Nose: Causes and Gentle Care in Winter and Colds; Skin Care for Runners in India: Sun, Sweat, Smog and Winter Runs; Skin Care for a Rajasthan Desert Trip: Pack, Protect, Moisturise.
+Short answer: Mirc Glow has 54 guides on skincare routines, written in plain English by founder Mohammed Nihal and reviewed for Indian skin and weather. Start with: Skin Care for Teachers: Chalk Dust, Sun Duty and Dry Hands; Skin Care for Bangalore Weather: A Simple Routine for Every Season; Dry Skin Around the Nose: Causes and Gentle Care in Winter and Colds.
 
 ## Combos and Kits - Mirc Glow
 URL: https://mircglow.com/product-category/combos/
