@@ -1287,7 +1287,7 @@ Short answer: सबसे अच्छी नाइट क्रीम वह�
 
 ## Skincare Blog: Night Cream, Glutathione and Glass Skin Guides
 URL: https://mircglow.com/blog/
-Short answer: The Mirc Glow journal has 196 free skincare guides for Indian skin and weather, on night creams, avocado cream, glutathione, kojic acid, dark spots and glass skin routines, plus Hindi guides. Each guide opens with a short answer and is written by founder Mohammed Nihal.
+Short answer: The Mirc Glow journal has 198 free skincare guides for Indian skin and weather, on night creams, avocado cream, glutathione, kojic acid, dark spots and glass skin routines, plus Hindi guides. Each guide opens with a short answer and is written by founder Mohammed Nihal.
 
 ## Bridal Skincare Routine: 30-Day Plan | Mirc Glow
 URL: https://mircglow.com/bridal-skincare-routine-30-days/
@@ -4543,6 +4543,24 @@ A: Hard borewell or tanker water can leave skin feeling tight. Use lukewarm wate
 Q: Can I use night cream every night in Bangalore?
 A: Yes, most people can. Use a pea-sized amount, less if your skin is oily, and wear sunscreen the next morning.
 
+## Skin Care for Chennai Weather: Humid-Climate Guide | Mirc Glow
+URL: https://mircglow.com/skin-care-for-chennai-weather/
+Short answer: Chennai is hot and humid most of the year, so skin needs a light moisturiser instead of heavy creams, a broad-spectrum sunscreen every morning even on rainy days, and a proper cleanse at night to remove sweat. Use a thin layer of night cream and keep the T-zone light.
+- Chennai's main rains come with the northeast monsoon, roughly October to December
+- The city rarely has a real winter
+- Cloudy days still let much of the UV through
+- Oily skin can still be dehydrated
+Q: Which moisturiser is best for Chennai weather?
+A: A light gel or thin cream that absorbs quickly usually suits Chennai's humid weather best; heavy, oily creams tend to feel sticky and may clog pores.
+Q: Do I need sunscreen in Chennai during the monsoon?
+A: Yes. Clouds let much of the UV through, so apply a broad-spectrum SPF 30 or higher every morning, even on rainy days.
+Q: Can I use night cream in Chennai's heat?
+A: Yes, in a thin layer on clean skin. Oily skin can use half a pea-sized amount and keep it light on the T-zone.
+Q: Why is my skin oily and dry at the same time in Chennai?
+A: Humid heat increases shine, while harsh washing and AC dry the surface. Gentle cleansing and a light moisturiser usually balance this.
+Q: Does Chennai have a winter skin season?
+A: Not really. January and February are milder, and only some people need a slightly richer cream, mostly because of AC rooms.
+
 ## Skin Care for a Goa Beach Trip: Kit & Routine | Mirc Glow
 URL: https://mircglow.com/skin-care-for-goa-beach-trip/
 Short answer: On a Goa beach trip, wear water-resistant SPF 30+ sunscreen and reapply it every 2 hours and after every swim or towel-dry. Use a hat, sunglasses and midday shade. At night, rinse off salt and sand and use a light, soothing moisturiser instead of strong actives.
@@ -4560,6 +4578,24 @@ Q: Can I use my kojic acid night cream during a beach holiday?
 A: Yes if your skin feels fine and you use sunscreen every day. If your skin is red or stinging from the sun, pause it and use a plain soothing cream for a few nights.
 Q: Is aloe vera good after a beach day?
 A: Aloe vera gel feels cooling and helps skin feel comfortable after sun. Patch test first, and see a doctor for blistering or very painful sunburn.
+
+## Skin Care for Gym Goers: Simple Workout Routine | Mirc Glow
+URL: https://mircglow.com/skin-care-for-gym-goers/
+Short answer: Work out with a clean face, use your own towel and pat sweat away, then wash your face and change out of sweaty clothes within about 30 minutes. Moisturise lightly afterwards, add sunscreen if you are going out in daylight, and keep rich creams for bedtime.
+- Sweat drying on skin with oil and dust is a common cause of gym bumps
+- Makeup under sweat can clog pores
+- Damp gym clothes often trigger back and chest breakouts
+- Indoor workouts do not need sunscreen during the session
+Q: Should I wash my face before going to the gym?
+A: Yes, if you are wearing makeup, heavy cream or sunscreen from earlier. A clean face lets sweat leave the skin without mixing with product.
+Q: Can I wear makeup to the gym?
+A: It is better not to. Foundation and heavy makeup mixed with sweat can clog pores and cause small bumps.
+Q: How soon should I wash my face after a workout?
+A: Try to wash within about 30 minutes, and change out of sweaty clothes as soon as you can.
+Q: Do I need sunscreen for an indoor gym?
+A: Not during the workout itself, but apply it afterwards if you are going out in daylight.
+Q: Is it okay to apply night cream after an evening workout?
+A: Yes. Cleanse first, let your face cool down, then apply a thin layer before bed.
 
 ## Skin Care for a Hill Station Trip: Pack & Routine | Mirc Glow
 URL: https://mircglow.com/skin-care-for-hill-station-trip/
@@ -5242,7 +5278,7 @@ Short answer: Mirc Glow has 9 guides on skincare ingredients, written in plain E
 
 ## Skincare Routines - Skincare Guides | Mirc Glow
 URL: https://mircglow.com/category/skincare-routines/
-Short answer: Mirc Glow has 54 guides on skincare routines, written in plain English by founder Mohammed Nihal and reviewed for Indian skin and weather. Start with: Skin Care for Teachers: Chalk Dust, Sun Duty and Dry Hands; Skin Care for Bangalore Weather: A Simple Routine for Every Season; Dry Skin Around the Nose: Causes and Gentle Care in Winter and Colds.
+Short answer: Mirc Glow has 56 guides on skincare routines, written in plain English by founder Mohammed Nihal and reviewed for Indian skin and weather. Start with: Skin Care for Gym Goers: Before, During and After Your Workout; Skin Care for Chennai Weather: A Light Routine for Heat, Humidity and Rain; Skin Care for Teachers: Chalk Dust, Sun Duty and Dry Hands.
 
 ## Combos and Kits - Mirc Glow
 URL: https://mircglow.com/product-category/combos/
