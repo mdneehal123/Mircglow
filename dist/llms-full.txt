@@ -1293,7 +1293,7 @@ Short answer: सबसे अच्छी नाइट क्रीम वह�
 
 ## Skincare Blog: Night Cream, Glutathione and Glass Skin Guides
 URL: https://mircglow.com/blog/
-Short answer: The Mirc Glow journal has 200 free skincare guides for Indian skin and weather, on night creams, avocado cream, glutathione, kojic acid, dark spots and glass skin routines, plus Hindi guides. Each guide opens with a short answer and is written by founder Mohammed Nihal.
+Short answer: The Mirc Glow journal has 202 free skincare guides for Indian skin and weather, on night creams, avocado cream, glutathione, kojic acid, dark spots and glass skin routines, plus Hindi guides. Each guide opens with a short answer and is written by founder Mohammed Nihal.
 
 ## Bridal Skincare Routine: 30-Day Plan | Mirc Glow
 URL: https://mircglow.com/bridal-skincare-routine-30-days/
@@ -4639,6 +4639,24 @@ A: Yes, products you already know are the safest choice. Just use it on slightly
 Q: Why is my skin flaky after a hill station trip?
 A: Cold, dry air, wind and hot showers dry the top layer of skin. Moisturise twice a day, avoid scrubbing and it usually settles within a few days.
 
+## Skin Care for Hyderabad Weather: Dry-Heat Routine | Mirc Glow
+URL: https://mircglow.com/skin-care-for-hyderabad-weather/
+Short answer: Hyderabad's air is drier than coastal cities for much of the year, with very hot summers and cool, dry winters. Skin usually does best with a gentle face wash, a moisturiser on slightly damp skin, a broad-spectrum sunscreen every morning and a little more night cream in winter.
+- Hyderabad sits on the Deccan plateau, so the air is mostly dry
+- Summers (March to May) are very hot
+- Many homes use hard borewell or tanker water
+- Winter mornings are cool and dry
+Q: Which moisturiser is best for Hyderabad weather?
+A: A light cream that absorbs well suits most of the year; in the dry winter months, a slightly richer night cream on the cheeks usually feels better.
+Q: Is Hyderabad weather dry or humid?
+A: Mostly dry, apart from the monsoon months. That is why skin can feel tight here even if it gets oily on the forehead and nose.
+Q: Do I need sunscreen every day in Hyderabad?
+A: Yes. The sun is strong for most of the year, so use a broad-spectrum SPF 30 or higher every morning and reapply when you go out again.
+Q: Does borewell water affect skin?
+A: Hard borewell water can leave skin feeling tight or rough. A gentle face wash, quick moisturising and a final rinse with filtered water can help.
+Q: How do I protect my face on a bike in Hyderabad?
+A: Wear sunscreen, cover your face with a clean cotton cloth, wash the cloth and helmet pads often and cleanse properly at night.
+
 ## Skin Care for Kitchen Heat: Daily Cooking Routine | Mirc Glow
 URL: https://mircglow.com/skin-care-for-kitchen-heat/
 Short answer: Cooking heat, steam and oil fumes leave the face sweaty, oily and dull-looking. Keep only a thin moisturiser on while cooking, tie hair back, pat sweat away instead of rubbing, rinse or gently wash the face afterwards and use a proper cream at night.
@@ -4656,6 +4674,24 @@ Q: Can kitchen heat cause dark spots?
 A: Heat can make existing pigmentation such as melasma look more noticeable. If brown patches keep getting darker, see a dermatologist.
 Q: Which cream is good for people who cook a lot?
 A: A light cream for the day and a proper night cream after washing at night. Choose a thinner layer for oily skin and a richer one for dry skin.
+
+## Skin Care for Kolkata Weather: Season-by-Season | Mirc Glow
+URL: https://mircglow.com/skin-care-for-kolkata-weather/
+Short answer: Kolkata is hot and humid from about March to October with a long monsoon, so skin does best with a light moisturiser, a broad-spectrum sunscreen every morning and a proper night cleanse. Add a little more cream only in the short, drier winter from about December to February.
+- Kolkata is humid for most of the year
+- The monsoon runs roughly June to September
+- Winter is short, cooler and drier, with hazy evenings
+- Sunscreen is needed on cloudy days too
+Q: Which moisturiser is best for Kolkata weather?
+A: A light gel or thin cream that absorbs quickly suits Kolkata's humid months; switch to a slightly richer cream only in the short winter if your cheeks feel tight.
+Q: Do I need sunscreen in Kolkata in the monsoon and winter?
+A: Yes. Clouds and haze still let much of the UV through, so apply a broad-spectrum SPF 30 or higher every morning.
+Q: Why does my skin get dry in Kolkata winter when it is oily all year?
+A: The winter air is cooler and drier, and hot baths add to it. Oily skin can still feel tight, so add a little cream only where it feels dry.
+Q: How should I care for skin during Durga Puja?
+A: Stick to your usual routine, wear sunscreen for daytime visits, blot instead of washing again and again, and always remove makeup before bed.
+Q: Can I use night cream in Kolkata's humidity?
+A: Yes, in a thin layer on clean skin. Oily skin can use half a pea-sized amount and keep the nose and forehead light.
 
 ## Skin Care for Lack of Sleep: Night & Morning Fixes | Mirc Glow
 URL: https://mircglow.com/skin-care-for-lack-of-sleep/
@@ -5320,7 +5356,7 @@ Short answer: Mirc Glow has 9 guides on skincare ingredients, written in plain E
 
 ## Skincare Routines - Skincare Guides | Mirc Glow
 URL: https://mircglow.com/category/skincare-routines/
-Short answer: Mirc Glow has 58 guides on skincare routines, written in plain English by founder Mohammed Nihal and reviewed for Indian skin and weather. Start with: Skin Care for Mumbai Weather: A Light Routine for Humidity, Monsoon and October Heat; Skin Care for Delhi Weather: A Season-by-Season Routine for Heat, Smog and Cold; Skin Care for Gym Goers: Before, During and After Your Workout.
+Short answer: Mirc Glow has 60 guides on skincare routines, written in plain English by founder Mohammed Nihal and reviewed for Indian skin and weather. Start with: Skin Care for Hyderabad Weather: A Routine for Dry Heat, Monsoon and Cool Winters; Skin Care for Kolkata Weather: A Light Routine for Humidity, Monsoon and a Short Winter; Skin Care for Mumbai Weather: A Light Routine for Humidity, Monsoon and October Heat.
 
 ## Combos and Kits - Mirc Glow
 URL: https://mircglow.com/product-category/combos/
