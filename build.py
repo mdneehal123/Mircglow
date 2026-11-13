@@ -45,6 +45,10 @@ PRODUCTS = [
  dict(id=66, slug="avocado-korean-night-cream", name="Avocado Korean Night Cream", size="25 g", grams=25,
       h1="MircGlow Avocado Korean Night Cream for Bright, Even-Looking Skin 25g",
       price=649, mrp=899, img=UP+"4ED0DC3B-11FA-4903-87CC-21E1887C89E5.png", jars=["Avocado Night"],
+      more=[("/wp-content/uploads/2026/11/mirc-glow-avocado-korean-night-cream-premium-night-care.jpg", "Mirc Glow Avocado Korean Night Cream jar with gold lid on a stone stand beside a fresh avocado"),
+            ("/wp-content/uploads/2026/11/mirc-glow-avocado-korean-night-cream-rich-creamy-texture.jpg", "Avocado Korean Night Cream open jar showing the rich, creamy texture, with a swatch and avocado"),
+            ("/wp-content/uploads/2026/11/mirc-glow-avocado-korean-night-cream-with-avocado-aloe-vera.jpg", "Two Avocado Korean Night Cream jars with avocado, aloe vera slices and a cream swatch"),
+            ("/wp-content/uploads/2026/11/mirc-glow-avocado-korean-night-cream-jar-with-avocado.jpg", "Avocado Korean Night Cream 25g jar with avocado, vitamin B3 and kojic acid label")],
       ko="아보카도 나이트", tag="Signature", topic="avocado", when="Night",
       meta="For a glass-skin evening", best="Most skin types; a softer, more even-looking complexion",
       bg="linear-gradient(160deg,#FFF7F8,#F4D6DD)", cats=["night-creams","avocado-night-creams"],
@@ -436,6 +440,22 @@ def photo(p, cls="tile", eager=False, alt=None):
     return (f'<div class="ph {cls}" style="background:{p["bg"]}">'
             f'<picture>{webp_src(p["img"])}<img src="{p["img"]}" alt="{a}" width="800" height="800" {load} decoding="async" onerror="this.closest(\'.ph\').classList.add(\'noimg\');this.parentNode.remove()"></picture>{fb}</div>')
 
+def gal_thumbs(p):
+    """Extra product photos under the main image; tapping one shows it in the main box."""
+    more = p.get("more") or []
+    if not more: return ""
+    items = [(p["img"], strip_tags(p["h1"]))] + list(more)
+    out = []
+    for i, (src, alt) in enumerate(items):
+        w = re.sub(r"\.(png|jpe?g)$", ".mg.webp", src)
+        has_w = os.path.exists(os.path.join(ROOT, w.lstrip("/")))
+        thumb = w if has_w else src
+        out.append(f'<button type="button" class="gal-th{" on" if i == 0 else ""}" data-full="{thumb}" aria-label="Show photo {i + 1}"><img src="{thumb}" alt="{esc(alt)}" width="120" height="120" loading="lazy" decoding="async"></button>')
+    js = ("<script>document.querySelectorAll('.gal-th').forEach(function(b){b.addEventListener('click',function(){var box=document.querySelector('.gal-box');"
+          "var im=box.querySelector('img');var s=box.querySelector('source');if(s)s.remove();im.src=b.dataset.full;im.alt=b.querySelector('img').alt;"
+          "document.querySelectorAll('.gal-th').forEach(function(x){x.classList.remove('on')});b.classList.add('on');});});</script>")
+    return '<div class="gal-thumbs">' + "".join(out) + '</div>' + js
+
 def webp_src(img):
     """Light WebP copy for browsers; the original file stays at its WordPress address."""
     if img.endswith(".png") and os.path.exists(os.path.join(ROOT, img.lstrip("/")[:-4] + ".mg.webp")):
@@ -552,7 +572,8 @@ def product_ld(p, url):
     try:
         extra = re.findall(r'<img[^>]*src="(/wp-content/[^"]+)"', read(os.path.join(SRC, "products", p["slug"] + ".html")))
     except Exception: extra = []
-    d["image"] = [SITE + p["img"]] + [SITE + x for x in extra if x != p["img"]][:4]
+    extra = [m[0] for m in p.get("more", [])] + extra
+    d["image"] = [SITE + p["img"]] + [SITE + x for x in extra if x != p["img"]][:6]
     d["mpn"] = f"MG-{p['id']}"
     d["weight"] = {"@type":"QuantitativeValue","value":p["grams"],"unitCode":"GRM"}
     d["countryOfOrigin"] = {"@type":"Country","name":"India"}
@@ -1289,7 +1310,7 @@ def build_product(p):
     out += header("/shop/")
     out += f'''<main id="main">{crumbs_html(crumbs)}
 <div class="w pdp">
-<div class="gallery"><div class="gal-box">{photo(p, "", eager=True, alt=strip_tags(p["h1"]))}<span class="pc-off">{pct}% off</span></div></div>
+<div class="gallery"><div class="gal-box">{photo(p, "", eager=True, alt=strip_tags(p["h1"]))}<span class="pc-off">{pct}% off</span></div>{gal_thumbs(p)}</div>
 <div class="buy" id="buy">
 <span class="eyebrow">Mirc Glow · {esc(p["tag"])}</span>
 <h1 class="pdp-t">{esc(p["h1"])}</h1>

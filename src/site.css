@@ -1156,3 +1156,8 @@ h1,h2,h3,h4,.fk-h,.az-h,.fk-st b,.fk-intro h1{font-family:var(--display)!importa
 .fk-intro{text-align:center}.fk-intro>*:not(h1):not(p:first-of-type){text-align:left}
 .fk-intro>div,.fk-intro aside,.fk-intro .fk-short{max-width:720px;margin:24px auto 0;text-align:left!important}
 .hdr .btn-wa,.hdr a[href*="wa.me"],.hdr .wa-btn{background:var(--forest)!important;color:#fff!important;border-radius:0!important;letter-spacing:.16em;font-size:.64rem;text-transform:uppercase}
+.gal-thumbs{display:flex;gap:8px;margin-top:10px;overflow-x:auto;padding-bottom:4px}
+.gal-th{flex:0 0 auto;width:72px;height:72px;padding:0;border:2px solid transparent;border-radius:10px;overflow:hidden;background:#fff;cursor:pointer}
+.gal-th.on{border-color:var(--sale,#d6336c)}
+.gal-th img{width:100%;height:100%;object-fit:cover;display:block}
+.pdp .gallery{aspect-ratio:auto;overflow:visible}.pdp .gal-box{aspect-ratio:1}
