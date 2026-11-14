@@ -1249,6 +1249,16 @@ PLAN_QUICK = {m["slug"]: (m["quick"], m.get("facts", [])) for m in PLAN if m.get
 PAGE_QUICK.update(PLAN_QUICK)
 
 REVIEWS = [r for r in json.load(open(os.path.join(SRC, "reviews.json"), encoding="utf-8"))["reviews"] if r.get("text") and 1 <= int(r.get("rating", 0)) <= 5]
+# Reviews customers post on the website: approved ones come from Order Desk (owner approves each one there).
+DESK_REVIEWS_URL = "https://www.skinday.shop/api/reviews-public?site=mircglow.com"
+def _desk_reviews():
+    try:
+        import urllib.request
+        with urllib.request.urlopen(urllib.request.Request(DESK_REVIEWS_URL, headers={"User-Agent": "mircglow-build"}), timeout=8) as r:
+            return [x for x in json.loads(r.read().decode("utf-8")).get("reviews", []) if x.get("text") and 1 <= int(x.get("rating", 0)) <= 5]
+    except Exception as e:
+        print("note: website reviews not loaded:", str(e)[:80]); return []
+REVIEWS += _desk_reviews()
 
 def reviews_for(p):
     slugs = {p["slug"]} | set(p.get("parts", []))
@@ -1258,18 +1268,31 @@ def stars(n):
     full = int(n + 0.5)
     return f'<span class="rv-st" aria-label="{n:.1f} out of 5 stars">' + "★" * full + "☆" * (5 - full) + "</span>"
 
+def review_form(p):
+    """On-site review form. Reviews go to Order Desk as 'pending' and show here only after the owner approves them."""
+    st = "".join(f'<input type="radio" name="rating" id="rv{p["slug"]}{i}" value="{i}"{" required" if i == 5 else ""}><label for="rv{p["slug"]}{i}" title="{i} star{"s" if i > 1 else ""}">★</label>' for i in range(5, 0, -1))
+    return (f'<details class="rvf"><summary class="yb yb-line rv-btn">✍️ Write a review</summary>'
+            f'<form class="rvf-f" data-rv-form="{p["slug"]}" novalidate><p class="rvf-l">Your rating</p><div class="rvf-st" role="radiogroup" aria-label="Star rating">{st}</div>'
+            f'<label>Your review<textarea name="text" rows="4" maxlength="1200" required placeholder="How does your skin feel? How is the texture? How long have you used it?"></textarea></label>'
+            f'<div class="rvf-2"><label>First name<input name="name" maxlength="40" required autocomplete="given-name"></label><label>City<input name="city" maxlength="40" autocomplete="address-level2"></label></div>'
+            f'<label>Mobile number (optional, never shown)<input name="phone" inputmode="numeric" maxlength="14" placeholder="Used only to mark you as a verified buyer"></label>'
+            f'<input name="website" tabindex="-1" autocomplete="off" class="rvf-hp" aria-hidden="true">'
+            f'<button class="yb yb-fill" type="submit">Submit review</button><p class="rvf-msg" role="status"></p>'
+            f'<p class="rvf-note">Reviews appear after a quick check. We publish honest reviews, good or bad, exactly as written.</p></form></details>')
+
 def reviews_html(p):
     rs = reviews_for(p)
     msg = (f"Hi Mirc Glow, here is my review of the {p['name']} ({p['size']}):\n\nRating (1 to 5 stars): \nMy review: \n"
            "First name and city (shown with the review): ")
-    btn = f'<a class="yb yb-line rv-btn" href="{wa(msg)}" target="_blank" rel="noopener">{WA_SVG}<span>Write a review on WhatsApp</span></a>'
+    wa_link = f'<p class="rvf-wa">Prefer WhatsApp? <a href="{wa(msg)}" target="_blank" rel="noopener">Send your review on WhatsApp</a></p>'
+    form = review_form(p) + wa_link
     if not rs:
-        return (f'<section class="w rv" aria-labelledby="h-rv"><h2 id="h-rv" class="az-h">Customer reviews</h2>'
-                f'<div class="rv-empty"><p>No reviews yet for the {esc(p["name"])}. Bought it? Tell us how your skin feels: your review helps other shoppers.</p>{btn}</div></section>')
+        return (f'<section class="w rv" id="reviews" aria-labelledby="h-rv"><h2 id="h-rv" class="az-h">Customer reviews</h2>'
+                f'<div class="rv-empty"><p>No reviews yet for the {esc(p["name"])}. Bought it? Tell us how your skin feels: your review helps other shoppers.</p>{form}</div></section>')
     avg = sum(int(r["rating"]) for r in rs) / len(rs)
-    items = "".join(f'<article class="rv-i">{stars(int(r["rating"]))}<p>{esc(r["text"])}</p><span class="rv-by">{esc(r["name"])}, {esc(r.get("city",""))} · {fmt_date(r["date"])}</span></article>' for r in sorted(rs, key=lambda r: r["date"], reverse=True)[:20])
-    return (f'<section class="w rv" aria-labelledby="h-rv"><h2 id="h-rv" class="az-h">Customer reviews</h2>'
-            f'<div class="rv-sum">{stars(avg)} <b>{avg:.1f} out of 5</b> · {len(rs)} review{"s" if len(rs) > 1 else ""}</div><div class="rv-list">{items}</div>{btn}</section>')
+    items = "".join(f'<article class="rv-i">{stars(int(r["rating"]))}{" <span class=rv-ver>✔ Verified buyer</span>" if r.get("verified") else ""}<p>{esc(r["text"])}</p><span class="rv-by">{esc(r["name"])}{", " + esc(r["city"]) if r.get("city") else ""} · {fmt_date(r["date"])}</span></article>' for r in sorted(rs, key=lambda r: r["date"], reverse=True)[:20])
+    return (f'<section class="w rv" id="reviews" aria-labelledby="h-rv"><h2 id="h-rv" class="az-h">Customer reviews</h2>'
+            f'<div class="rv-sum">{stars(avg)} <b>{avg:.1f} out of 5</b> · {len(rs)} review{"s" if len(rs) > 1 else ""}</div><div class="rv-list">{items}</div>{form}</section>')
 
 def reviews_ld(p, d):
     rs = reviews_for(p)

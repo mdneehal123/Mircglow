@@ -145,3 +145,7 @@ Monthly freshness updater. Do not refresh the same page again within 3 months of
 
 ## 2026-11-14: Bigger, clearer buy buttons (all product pages)
 - Buy Now: large orange button with price + "Free delivery", gentle shine; Add to Cart: bold outlined with cart icon; WhatsApp: solid green; trust line (secure checkout, COD, 7-day returns) under the buttons; sticky bar Buy Now matches. Same data-cart-add hooks, so checkout behaviour is unchanged.
+
+## 2026-11-14: On-site reviews
+- Product pages: "Write a review" form (stars, review, first name, city, optional mobile for a Verified buyer badge). api/review.js checks it and sends it to Order Desk as pending. Nothing is published until approved in Order Desk > Reviews.
+- Approved reviews: loaded at build (SEO stars + schema) and fetched live on the page, so a newly approved review shows within minutes. WhatsApp review link kept as a fallback.
