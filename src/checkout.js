@@ -83,7 +83,7 @@ function mgCheckout() {
   function setBusy(b) { busy = b; var g = $("[data-co-go]"); g.disabled = b; if (b) g.textContent = "Please wait…"; else render(); }
   function summary(c, t, extra) {
     return Object.assign({ name: c.name, phone: c.phone, city: c.city, pin: c.pin, total: t.total,
-      items: cart().map(function (l) { return { n: P[l.id].name, q: l.qty, p: P[l.id].price }; }) }, extra);
+      items: cart().map(function (l) { return { id: l.id, n: P[l.id].name, q: l.qty, p: P[l.id].price }; }) }, extra);
   }
 
   function payOnline(c) {
@@ -200,3 +200,15 @@ function mgCheckout() {
 }
 // runs after every deferred script (site.js provides MGCart)
 if (window.MGCart) mgCheckout(); else document.addEventListener("DOMContentLoaded", mgCheckout);
+(function () {
+  function ic() {
+    try {
+      var D = JSON.parse(document.getElementById("co-data").textContent), P = D.products;
+      var c = (window.MGCart ? MGCart.get() : []).filter(function (l) { return P[l.id] && l.qty > 0; });
+      if (!c.length || !window.fbq) return;
+      fbq("track", "InitiateCheckout", { content_ids: c.map(function (l) { return l.id; }), content_type: "product",
+        num_items: c.reduce(function (a, l) { return a + l.qty; }, 0), value: c.reduce(function (a, l) { return a + P[l.id].price * l.qty; }, 0), currency: "INR" });
+    } catch (x) {}
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", ic); else ic();
+})();

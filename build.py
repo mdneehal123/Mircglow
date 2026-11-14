@@ -13,6 +13,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 SRC = os.path.join(ROOT, "content")
 DIST = os.path.join(ROOT, "dist")
 SITE = "https://mircglow.com"
+META_PIXEL = "1011352351298585"  # Meta Pixel (Mirc Glow)
 BRAND = "Mirc Glow"
 PHONE = "+91 99808 81230"
 WA_NUM = "919980881230"
@@ -478,7 +479,7 @@ def buy_btn(p, label="Buy Now", cls="yb yb-fill", go=True):
     """Website checkout button: adds the product (and the chosen quantity) to the cart; Buy Now goes straight to checkout."""
     label = label.replace(" on WhatsApp", "")
     go_attr = ' data-go="1"' if go else ""
-    return f'<button type="button" class="{cls}" data-cart-add="{p["slug"]}"{go_attr}>{label}</button>'
+    return f'<button type="button" class="{cls}" data-cart-add="{p["slug"]}" data-price="{p["price"]}"{go_attr}>{label}</button>'
 
 CART_SVG = ('<svg class="ic-cart" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'
             '<circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2.5 3h2.6l2.4 12.2a1.6 1.6 0 0 0 1.6 1.3h8.7a1.6 1.6 0 0 0 1.6-1.2L21.5 7H6"/></svg>')
@@ -661,9 +662,11 @@ def head(title, desc, url, *, lang="en", og_type="website", image=None, canonica
 <link rel="stylesheet" href="{CSS_HREF}">
 <link rel="alternate" type="application/rss+xml" title="{BRAND} Journal" href="{SITE}/feed/">
 <script>addEventListener("error",function(e){{var t=e.target;if(t&&t.tagName==="IMG"&&!t.onerror)t.classList.add("broken")}},true)</script>
+<script>!function(f,b,e,v,n,t,s){{if(f.fbq)return;n=f.fbq=function(){{n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)}};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version="2.0";n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");fbq("init","{META_PIXEL}");fbq("track","PageView");</script>
 {extra}
 </head>
 <body>
+<noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id={META_PIXEL}&amp;ev=PageView&amp;noscript=1"></noscript>
 <a class="skip" href="#main">Skip to content</a>
 '''
 
@@ -1366,7 +1369,7 @@ def build_product(p):
     nodes = [ORG, reviews_ld(p, product_ld(p, url)), crumbs_ld(crumbs)] + ([video_ld(url)] if url in VIDEO_ON else [])
     if faqs: nodes.append(faq_ld(faqs))
     out = head(p["rt"], p["rd"], url, og_type="product", image=p["img"],
-               extra=f'<meta property="product:price:amount" content="{p["price"]}"><meta property="product:price:currency" content="INR"><meta property="product:availability" content="in stock"><link rel="preload" as="image" href="{p["img"][:-4]}.mg.webp" type="image/webp" fetchpriority="high">' + ld(*nodes))
+               extra=f'<meta property="product:price:amount" content="{p["price"]}"><meta property="product:price:currency" content="INR"><meta property="product:availability" content="in stock"><link rel="preload" as="image" href="{p["img"][:-4]}.mg.webp" type="image/webp" fetchpriority="high"><script>fbq("track","ViewContent",{{content_ids:["{p["slug"]}"],content_type:"product",content_name:{json.dumps(p["name"])},value:{p["price"]},currency:"INR"}});</script>' + ld(*nodes))
     out += header("/shop/")
     out += f'''<main id="main">{crumbs_html(crumbs)}
 <div class="w pdp">
@@ -1554,7 +1557,7 @@ var e=function(s){{return String(s).replace(/[&<>"]/g,function(c){{return{{"&":"
 var h='<div class="co-card"><p><b>Order number:</b> '+e(o.ref)+'</p><p><b>Payment:</b> '+(o.pay==="online"?"Paid online"+(o.amount?" · "+r(o.amount):""):"Cash on Delivery · pay "+r(o.total)+" when it arrives")+'</p>'+
 '<ul>'+o.items.map(function(i){{return"<li>"+i.q+" × "+e(i.n)+"</li>"}}).join("")+'</ul><p><b>Delivering to:</b> '+e(o.name)+', '+e(o.city)+' '+e(o.pin)+'</p>'+
 (o.awb?'<p><b>Courier:</b> Delhivery · <a target="_blank" rel="noopener" data-track>track '+e(o.awb)+'</a></p>':'<p>We will WhatsApp you the tracking number once it is shipped.</p>')+'</div>';
-document.querySelector("[data-done]").innerHTML=h;var t=document.querySelector("[data-track]");if(t&&/^https:\\/\\/www\\.delhivery\\.com\\//.test(o.trackUrl))t.setAttribute("href",o.trackUrl);}})();</script>'''
+document.querySelector("[data-done]").innerHTML=h;try{{if(window.fbq&&!sessionStorage.getItem("mg_px_"+o.ref)){{fbq("track","Purchase",{{content_ids:o.items.map(function(i){{return i.id}}).filter(Boolean),content_type:"product",num_items:o.items.reduce(function(a,i){{return a+i.q}},0),value:Number(o.pay==="online"&&o.amount?o.amount:o.total)||0,currency:"INR"}},{{eventID:String(o.ref)}});sessionStorage.setItem("mg_px_"+o.ref,"1")}}}}catch(x){{}}var t=document.querySelector("[data-track]");if(t&&/^https:\\/\\/www\\.delhivery\\.com\\//.test(o.trackUrl))t.setAttribute("href",o.trackUrl);}})();</script>'''
     out += footer(bar=False)
     write("/order-success/", out)
 

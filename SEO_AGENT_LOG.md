@@ -149,3 +149,7 @@ Monthly freshness updater. Do not refresh the same page again within 3 months of
 ## 2026-11-14: On-site reviews
 - Product pages: "Write a review" form (stars, review, first name, city, optional mobile for a Verified buyer badge). api/review.js checks it and sends it to Order Desk as pending. Nothing is published until approved in Order Desk > Reviews.
 - Approved reviews: loaded at build (SEO stars + schema) and fetched live on the page, so a newly approved review shows within minutes. WhatsApp review link kept as a fallback.
+
+## 2026-11-14: Meta Pixel installed
+- Pixel 1011352351298585 in every page head (PageView) + noscript fallback.
+- ViewContent on product pages; AddToCart (Add to Cart / Buy Now); InitiateCheckout on /checkout/; Purchase on /order-success/ (eventID = order ref, fires once per order); Contact on any WhatsApp tap.

@@ -116,6 +116,7 @@
     var box = b.closest(".panel, .buy"); var q = box && box.querySelector(".qty input");
     var n = q ? parseInt(q.value, 10) || 1 : 1;
     add(b.getAttribute("data-cart-add"), n);
+    try { if (window.fbq) fbq("track", "AddToCart", { content_ids: [b.getAttribute("data-cart-add")], content_type: "product", value: (parseFloat(b.getAttribute("data-price")) || 0) * n, currency: "INR", num_items: n }); } catch (x) {}
     if (b.hasAttribute("data-go")) { location.href = "/checkout/"; return; }
     toast('Added to cart · <a href="/checkout/">View cart &amp; checkout</a>');
   });
@@ -161,3 +162,9 @@
       sec.querySelector("h2").insertAdjacentHTML("afterend", html);
     }).catch(function () {});
 })();
+
+/* Meta Pixel: WhatsApp taps count as Contact */
+document.addEventListener("click", function (e) {
+  var a = e.target.closest('a[href*="wa.me/"]'); if (!a || !window.fbq) return;
+  try { fbq("track", "Contact", { content_name: "WhatsApp" }); } catch (x) {}
+}, true);
