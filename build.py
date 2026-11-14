@@ -1685,6 +1685,7 @@ def build_vercel():
         R("/product_cat-sitemap.xml", "/sitemap.xml"), R("/category-sitemap.xml", "/sitemap.xml"), R("/local-sitemap.xml", "/sitemap.xml"),
         R("/wp-sitemap.xml", "/sitemap.xml"),
         R("/feed/(.+)", "/feed/"), R("/comments/feed/", "/feed/"),
+        {"source": "/review/", "destination": "https://wa.me/919980881230?text=Hi%20Mirc%20Glow%2C%20here%20is%20my%20review%20of%20the%20Avocado%20Korean%20Night%20Cream%20%2825%20g%29%3A%0A%0ARating%20%281%20to%205%20stars%29%3A%20%0AMy%20review%3A%20%0AFirst%20name%20and%20city%20%28shown%20with%20the%20review%29%3A%20", "permanent": False},
     ]
     sec = [{"key":"X-Content-Type-Options","value":"nosniff"},{"key":"Referrer-Policy","value":"strict-origin-when-cross-origin"},
            {"key":"X-Frame-Options","value":"SAMEORIGIN"},{"key":"Permissions-Policy","value":"camera=(), microphone=(), geolocation=()"},
