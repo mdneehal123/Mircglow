@@ -45,7 +45,9 @@ PRODUCTS = [
  dict(id=66, slug="avocado-korean-night-cream", name="Avocado Korean Night Cream", size="25 g", grams=25,
       h1="MircGlow Avocado Korean Night Cream for Bright, Even-Looking Skin 25g",
       price=649, mrp=899, img=UP+"4ED0DC3B-11FA-4903-87CC-21E1887C89E5.png", jars=["Avocado Night"],
-      more=[("/wp-content/uploads/2026/11/mirc-glow-avocado-korean-night-cream-premium-night-care.jpg", "Mirc Glow Avocado Korean Night Cream jar with gold lid on a stone stand beside a fresh avocado"),
+      more=[("/wp-content/uploads/2026/11/mirc-glow-avocado-korean-night-cream-in-hand-swatch.jpg", "Hand holding an open jar of Mirc Glow Avocado Korean Night Cream with a cream swatch on the skin"),
+            ("/wp-content/uploads/2026/11/mirc-glow-avocado-korean-night-cream-night-swatch-photo.jpg", "Open Mirc Glow Avocado Korean Night Cream jar resting on a hand beside a creamy swatch, night background"),
+            ("/wp-content/uploads/2026/11/mirc-glow-avocado-korean-night-cream-premium-night-care.jpg", "Mirc Glow Avocado Korean Night Cream jar with gold lid on a stone stand beside a fresh avocado"),
             ("/wp-content/uploads/2026/11/mirc-glow-avocado-korean-night-cream-rich-creamy-texture.jpg", "Avocado Korean Night Cream open jar showing the rich, creamy texture, with a swatch and avocado"),
             ("/wp-content/uploads/2026/11/mirc-glow-avocado-korean-night-cream-with-avocado-aloe-vera.jpg", "Two Avocado Korean Night Cream jars with avocado, aloe vera slices and a cream swatch"),
             ("/wp-content/uploads/2026/11/mirc-glow-avocado-korean-night-cream-jar-with-avocado.jpg", "Avocado Korean Night Cream 25g jar with avocado, vitamin B3 and kojic acid label")],
@@ -508,6 +510,41 @@ BANNERS = {
  "korean-glass-skin-kit": dict(tone="lilac", eb="3 creams · full routine", h="Your complete Korean glass-skin kit",
      c=[("✨","Glutathione Cream"),("🥑","Avocado Korean Night Cream"),("☀️","Avocado Glow for mornings")]),
 }
+
+
+# ---------------------------------------------------------------- A+ content (ads landing): looping videos, ingredient cards, real photo, 3 steps
+APLUS = {
+ "avocado-korean-night-cream": dict(
+   ko="부드러워요", h="Rich, creamy and never greasy",
+   vids=[("real-swatch","Real swatch, no filter"),("night-swatch","Melts in at night"),("night-routine","Your Korean night step")],
+   ing=[("🥑","Avocado","A nourishing, conditioning feel for soft skin overnight"),("🌿","Aloe vera","A hydrated, comfortable feel"),
+        ("✨","Vitamin B3","Niacinamide, for a smoother, more even-looking tone"),("🌙","Kojic acid","Helps uneven-looking skin look brighter with regular use")],
+   photo=("night-swatch-photo","Open Mirc Glow Avocado Korean Night Cream jar on a hand beside a creamy swatch"),
+   why=[("Rich but light","Creamy texture that sinks in, so skin feels cushioned, not sticky."),
+        ("Made for Indian weather","Full layer for dry or AC-dry skin; a thinner layer on humid nights."),
+        ("Honest skincare","No whitening or overnight-miracle promises. Just a consistent night step.")],
+   steps=[("Cleanse","Wash with a gentle cleanser and pat dry."),("Apply","A pea-sized amount on face and neck, avoiding the eye area."),("Sleep","Leave it on overnight. Sunscreen every morning.")]),
+}
+def aplus_html(p):
+    a = APLUS.get(p["slug"])
+    if not a: return ""
+    base = "/wp-content/uploads/2026/11/mirc-glow-" + p["slug"] + "-"
+    vids = "".join(f'<figure class="ap-v"><video muted loop playsinline preload="none" width="720" height="1280" poster="{base}{k}-poster.jpg" data-src="{base}{k}.mp4" aria-label="{esc(c)}"></video><figcaption>{esc(c)}</figcaption></figure>' for k, c in a["vids"])
+    ing = "".join(f'<div class="ap-i"><span aria-hidden="true">{e}</span><b>{esc(n)}</b><small>{esc(t)}</small></div>' for e, n, t in a["ing"])
+    why = "".join(f'<li><b>{esc(h)}</b>{esc(t)}</li>' for h, t in a["why"])
+    st = "".join(f'<li><span>{i+1}</span><b>{esc(h)}</b><small>{esc(t)}</small></li>' for i, (h, t) in enumerate(a["steps"]))
+    ph = base + a["photo"][0]
+    return (f'<section class="ap" aria-labelledby="h-ap"><div class="w">'
+            f'<div class="ap-hd"><span class="ap-ko" lang="ko">{a["ko"]}</span><h2 class="sh" id="h-ap">{esc(a["h"])}</h2><p class="muted">Real texture, filmed and photographed by Mirc Glow.</p></div>'
+            f'<div class="ap-vids">{vids}</div>'
+            f'<h3 class="ap-st">4 ingredients, one jar</h3><div class="ap-ing">{ing}</div>'
+            f'<div class="ap-split"><picture><source srcset="{ph}.mg.webp" type="image/webp"><img src="{ph}.jpg" alt="{esc(a["photo"][1])}" width="1000" height="1000" loading="lazy" decoding="async"></picture>'
+            f'<div><h3 class="ap-st">Why people pick it</h3><ul class="ap-why">{why}</ul></div></div>'
+            f'<h3 class="ap-st">How to use in 3 steps</h3><ol class="ap-steps">{st}</ol>'
+            f'<p class="ap-cta"><a class="yb yb-fill" href="#buy">Get yours: {inr(p["price"])} with free delivery</a></p>'
+            f'</div></section>'
+            '<script>(function(){var v=document.querySelectorAll(".ap-v video");if(!("IntersectionObserver" in window)){v.forEach(function(x){x.src=x.dataset.src;x.play&&x.play()});return}'
+            'var o=new IntersectionObserver(function(es){es.forEach(function(e){var x=e.target;if(e.isIntersecting){if(!x.src)x.src=x.dataset.src;var p=x.play();p&&p.catch(function(){})}else{x.pause()}})},{rootMargin:"200px"});v.forEach(function(x){o.observe(x)})})();</script>')
 
 def banner(p, h="p"):
     b = BANNERS[p["slug"]]
@@ -1330,6 +1367,7 @@ def build_product(p):
 <p class="fine">Cosmetic product. Patch test before first use. Results vary from person to person. Does not change your natural skin tone.</p>
 </div>
 </div>
+{aplus_html(p)}
 <section class="w" aria-label="Benefits">{banner(p)}</section>
 {fbt_html(p)}
 <section class="w" aria-label="Video">{video_html(url)}</section>

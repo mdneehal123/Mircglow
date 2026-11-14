@@ -8,8 +8,7 @@
   "dur": "PT30S",
   "pages": [
    "/product/avocado-night-cream/",
-   "/is-avocado-night-cream-good/",
-   "/product/avocado-korean-night-cream/"
+   "/is-avocado-night-cream-good/"
   ]
  },
  {
@@ -98,6 +97,17 @@
   "dur": "PT30S",
   "pages": [
    "/product/korean-glass-skin-kit/"
+  ]
+ },
+ {
+  "name": "Avocado Korean Night Cream: Texture and Ingredients",
+  "description": "A 16-second look at Mirc Glow Avocado Korean Night Cream: the real cream texture up close (soft, creamy, non-greasy) and its four key ingredients: avocado, aloe vera, vitamin B3 and kojic acid.",
+  "src": "/wp-content/uploads/2026/11/mirc-glow-avocado-korean-night-cream-texture-ingredients.mp4",
+  "thumb": "/wp-content/uploads/2026/11/mirc-glow-avocado-korean-night-cream-texture-ingredients-thumb.jpg",
+  "date": "2026-11-14T18:30:00+05:30",
+  "dur": "PT16S",
+  "pages": [
+   "/product/avocado-korean-night-cream/"
   ]
  }
 ]

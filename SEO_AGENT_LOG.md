@@ -136,3 +136,9 @@ Monthly freshness updater. Do not refresh the same page again within 3 months of
 ## 2026-11-13: Avocado Korean Night Cream photo gallery
 - 4 new owner-supplied photos (cropped so no price shows; site price stays ₹649 / MRP ₹899) added as a thumbnail gallery under the main photo on /product/avocado-korean-night-cream/. Tapping a thumbnail shows it in the main box.
 - Generic: any product can now take more=[(src, alt), ...] in PRODUCTS; the photos are also listed in the Product schema "image".
+
+## 2026-11-14: Avocado Korean Night Cream A+ content (ads landing page)
+- New A+ section under the buy box (APLUS dict + aplus_html in build.py): 3 silent looping videos (real swatch, night swatch, Korean night step) that load and play only when scrolled into view, 4 ingredient cards, real photo + "Why people pick it", 3-step how to use, and a "Get yours" button back to the buy box.
+- Gallery: 2 real MIRC GLOW label photos (in-hand swatch, night swatch) added first.
+- Page video replaced: new 16 s "Texture and Ingredients" VideoObject (videos.json); this page no longer reuses the Avocado Night Cream video.
+- No price inside any image or video; claims stay cosmetic (no whitening/fairness).
