@@ -568,7 +568,7 @@ def card_html(p, h="h3"):
             f'<div class="pc-b"><{h} class="pc-t"><a href="/product/{p["slug"]}/">{esc(p["name"])}</a></{h}>'
             f'<p class="pc-m">{esc(p["meta"])} · {p["size"]}</p>'
             f'<p class="pc-pr"><b>{inr(p["price"])}</b> <s><span class="sr">MRP </span>{inr(p["mrp"])}</s></p>'
-            f'{buy_btn(p, "Buy Now", "yb yb-fill yb-sm")}</div></article>')
+            f'{buy_btn(p, "⚡ Buy Now", "yb yb-fill yb-sm yb-buy")}</div></article>')
 
 def post_card(p, lead=False):
     t = TOPICS[p["topic"]][0]
@@ -1357,8 +1357,9 @@ def build_product(p):
 <p class="az-del" data-del><b>FREE delivery</b> in 3–7 days across India · Cash on Delivery available</p>
 <p class="lead2">{esc(p["lead"])}</p>
 {qty_box(p["slug"])}
-<div class="buy2">{buy_btn(p, "Buy Now")}{buy_btn(p, "Add to Cart", "yb yb-line", go=False)}</div>
-{wa_btn(p, "Order on WhatsApp instead")}
+<div class="buy2 cta3">{buy_btn(p, '<span class="bn-ic" aria-hidden="true">⚡</span><span>Buy Now</span><small>' + inr(p["price"]) + ' · Free delivery</small>', "yb yb-fill yb-buy")}{buy_btn(p, CART_SVG + "<span>Add to Cart</span>", "yb yb-line yb-cart", go=False)}</div>
+<p class="cta-safe"><span>🔒 Secure checkout</span><span>💵 Cash on Delivery</span><span>↩️ 7-day returns</span></p>
+{wa_btn(p, "Order on WhatsApp", "yb yb-wa3")}
 <p class="howpay">Pay online with UPI or card ({PREPAID_PCT}% off), or choose Cash on Delivery at checkout. First order? Use code <b>GLOW10</b> for 10% off. Questions? <a href="{wa("Hi Mirc Glow, I have a question about the " + p["name"] + ".")}" target="_blank" rel="noopener">Ask us on WhatsApp</a>.</p>
 {PAY_CHIPS}
 <ul class="ticks">{pts}</ul>

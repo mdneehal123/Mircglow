@@ -142,3 +142,6 @@ Monthly freshness updater. Do not refresh the same page again within 3 months of
 - Gallery: 2 real MIRC GLOW label photos (in-hand swatch, night swatch) added first.
 - Page video replaced: new 16 s "Texture and Ingredients" VideoObject (videos.json); this page no longer reuses the Avocado Night Cream video.
 - No price inside any image or video; claims stay cosmetic (no whitening/fairness).
+
+## 2026-11-14: Bigger, clearer buy buttons (all product pages)
+- Buy Now: large orange button with price + "Free delivery", gentle shine; Add to Cart: bold outlined with cart icon; WhatsApp: solid green; trust line (secure checkout, COD, 7-day returns) under the buttons; sticky bar Buy Now matches. Same data-cart-add hooks, so checkout behaviour is unchanged.

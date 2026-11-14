@@ -1085,4 +1085,27 @@ h1,h2,h3,h4,.fk-h,.az-h,.fk-st b,.fk-intro h1{font-family:var(--display)!importa
 .ap-cta{text-align:center;margin-top:26px}
 @media(max-width:760px){.ap-vids{grid-template-columns:repeat(3,72%);overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px}.ap-v{scroll-snap-align:center}
 .ap-ing{grid-template-columns:1fr 1fr}.ap-split{grid-template-columns:1fr}.ap-steps{grid-template-columns:1fr}}
+.buy2.cta3{grid-template-columns:1fr;gap:12px;margin-top:16px}
+.pdp .yb.yb-buy,.pbar .yb.yb-buy{position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+background:linear-gradient(180deg,#ffb238 0%,#ff8a00 100%);color:#2a1600;border:0;border-radius:16px;
+font-family:inherit;text-transform:none;letter-spacing:.01em;font-weight:800;font-size:1.25rem;padding:16px 20px;min-height:66px;
+box-shadow:0 10px 22px -10px rgba(230,110,0,.9),inset 0 -3px 0 rgba(0,0,0,.12);transition:transform .12s,box-shadow .2s}
+.pdp .yb.yb-buy small{font-size:.8rem;font-weight:600;opacity:.85;letter-spacing:0}
+.pdp .yb.yb-buy .bn-ic{position:absolute;left:22px;top:50%;transform:translateY(-50%);font-size:1.4rem}
+.pdp .yb.yb-buy:hover,.pbar .yb.yb-buy:hover{background:linear-gradient(180deg,#ffbf55 0%,#ff9612 100%);box-shadow:0 14px 26px -10px rgba(230,110,0,.95),inset 0 -3px 0 rgba(0,0,0,.12)}
+.pdp .yb.yb-buy:active,.pbar .yb.yb-buy:active{transform:translateY(2px)}
+.pdp .yb.yb-buy::after,.pbar .yb.yb-buy::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;
+background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);animation:ybShine 3.2s ease-in-out infinite}
+@keyframes ybShine{0%,60%{left:-60%}100%{left:130%}}
+@media (prefers-reduced-motion:reduce){.pdp .yb.yb-buy::after,.pbar .yb.yb-buy::after{animation:none;display:none}}
+.pdp .yb.yb-cart{display:flex;align-items:center;justify-content:center;gap:10px;background:#fff;color:#1f3a1a;border:2px solid #1f3a1a;border-radius:16px;
+font-family:inherit;text-transform:none;letter-spacing:.01em;font-weight:700;font-size:1.08rem;padding:14px 18px;min-height:56px;margin-top:0}
+.pdp .yb.yb-cart:hover{background:#1f3a1a;color:#fff}
+.pdp .yb.yb-cart .ic-cart{width:22px;height:22px}
+.cta-safe{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 14px;margin:10px 0 0;font-size:.82rem;color:#4b5545}
+.pdp .yb.yb-wa3{display:flex;align-items:center;justify-content:center;gap:10px;background:#25d366;color:#fff;border:0;border-radius:16px;
+font-family:inherit;text-transform:none;letter-spacing:.01em;font-weight:700;font-size:1.05rem;padding:14px 18px;min-height:54px;margin-top:12px;box-shadow:0 8px 18px -12px rgba(18,140,70,.9)}
+.pdp .yb.yb-wa3:hover{background:#1ebe5b}
+.pdp .yb.yb-wa3 .ic-wa{width:22px;height:22px}
+.pbar .yb.yb-buy{flex-direction:row;font-size:1.02rem;min-height:48px;padding:12px 22px;border-radius:14px}
 .sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
