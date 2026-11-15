@@ -24,6 +24,13 @@
   if (bar && buy && "IntersectionObserver" in window) {
     new IntersectionObserver(function (es) { var r = es[0]; bar.hidden = r.isIntersecting || r.boundingClientRect.top > 0; }).observe(buy);
   }
+  // sticky buy bar on guides: appears after the reader scrolls past the first screen, hides over the footer
+  if (bar && bar.hasAttribute("data-guide")) {
+    var foot = document.querySelector("footer"), footIn = false;
+    if (foot && "IntersectionObserver" in window) new IntersectionObserver(function (es) { footIn = es[0].isIntersecting; tick(); }).observe(foot);
+    function tick() { bar.hidden = footIn || window.scrollY < window.innerHeight * 1.1; }
+    window.addEventListener("scroll", function () { requestAnimationFrame(tick); }, { passive: true }); tick();
+  }
   // guide slider
   document.querySelectorAll("[data-slider]").forEach(function (s) {
     var nav = s.nextElementSibling; if (!nav) return;

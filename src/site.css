@@ -1228,3 +1228,5 @@ h1,h2,h3,h4,.fk-h,.az-h,.fk-st b,.fk-intro h1{font-family:var(--display)!importa
 .rvf-done{margin:0;font-weight:700;color:#1f3a1a;font-size:1.05rem}
 .rv-ver{font-size:.78rem;font-weight:700;color:#1d7a36;background:#e8f6ec;border-radius:20px;padding:2px 8px;margin-left:6px}
 @media(max-width:560px){.rvf-2{grid-template-columns:1fr}}
+.gbar small{font-weight:500;color:#5f6b66;font-size:.85em}
+.gbar b small{font-weight:600}

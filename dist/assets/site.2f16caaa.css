@@ -1127,4 +1127,6 @@ font-family:inherit;text-transform:none;letter-spacing:.01em;font-weight:700;fon
 .rvf-done{margin:0;font-weight:700;color:#1f3a1a;font-size:1.05rem}
 .rv-ver{font-size:.78rem;font-weight:700;color:#1d7a36;background:#e8f6ec;border-radius:20px;padding:2px 8px;margin-left:6px}
 @media(max-width:560px){.rvf-2{grid-template-columns:1fr}}
+.gbar small{font-weight:500;color:#5f6b66;font-size:.85em}
+.gbar b small{font-weight:600}
 .sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}

@@ -305,16 +305,39 @@ for _m in PLAN:
         CITY.add(_m["slug"])
 POST_BY = {p["slug"]: p for p in POSTS}
 LIVE_POSTS = [p for p in POSTS if p["slug"] not in HUB]
+POST_TOPIC = {p["slug"]: p["topic"] for p in POSTS}
+GUIDE_SKIP = ("in-kg", "wholesale", "bulk", "supplier", "reseller", "start-a-skincare-brand", "privacy", "terms", "about", "editorial", "returns", "shipping", "contact")
+GUIDE_SLUGS = {p["slug"] for p in LIVE_POSTS} | {g["slug"] for g in PAGES if g.get("lang") != "en"} | {"avocado-cream", "korean-night-cream", "skincare-ingredient-glossary"}
+GUIDE_SLUGS = {s for s in GUIDE_SLUGS if not any(k in s for k in GUIDE_SKIP)}
 
 # ---------------------------------------------------------------- helpers
 def read(path):
     with open(path, encoding="utf-8") as f: return f.read()
+
+# ---------------------------------------------------------------- sticky buy bar on guides (blog posts, Hindi and regional pages)
+# Readers arrive on guides from Google; this keeps one matching product one tap away on mobile.
+def guide_product(slug):
+    s = slug
+    if "glass" in s: return "glass-glow-cream"
+    if "glutathione" in s: return "glutathione-cream"
+    if any(k in s for k in ("oily", "humid", "monsoon", "summer", "acne", "under-500", "teen")): return "avocado-glow-cream-15g"
+    if any(k in s for k in ("dry", "winter", "avocado-night", "rough", "flaky")): return "avocado-night-cream"
+    if any(k in s for k in ("korean", "kojic", "niacinamide", "dark-spot", "pigment", "uneven", "combination", "tanned", "tan-")): return "avocado-korean-night-cream"
+    if "avocado" in s: return "avocado-night-cream"
+    t = POST_TOPIC.get(slug)
+    return TOPICS[t][1] if t in TOPICS else "avocado-korean-night-cream"
+def guide_bar(slug):
+    p = PBY[guide_product(slug)]
+    return (f'<div class="pbar gbar" id="pbar" data-guide hidden><div><b>{esc(p["name"])} <small>{esc(p["size"])}</small></b>'
+            f'<span>{inr(p["price"])} <small>· COD · Free delivery</small></span></div>{buy_btn(p, "Buy Now", "yb yb-fill yb-sm")}</div>')
 
 def write(urlpath, content):
     if UNPUBLISHED and isinstance(content, str) and "<a " in content:
         # links to scheduled pages that are not out yet show as plain text until their release day
         content = re.sub(r'<a [^>]*href="(?:https://mircglow\.com)?/(%s)/"[^>]*>(.*?)</a>' % "|".join(map(re.escape, UNPUBLISHED)), r"\2", content, flags=re.S)
     rel = urlpath.strip("/")
+    if isinstance(content, str) and rel in GUIDE_SLUGS and 'id="pbar"' not in content and "</body>" in content:
+        content = content.replace("</body>", guide_bar(rel) + "</body>", 1)
     out = os.path.join(DIST, rel, "index.html") if not rel.endswith((".xml",".txt",".html",".json")) else os.path.join(DIST, rel)
     os.makedirs(os.path.dirname(out), exist_ok=True)
     with open(out, "w", encoding="utf-8") as f: f.write(content)

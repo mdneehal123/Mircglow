@@ -169,3 +169,6 @@ Site: 139 clicks, ~20k impressions, CTR ~1%, impressions rising to ~800/day. Mob
 ## 2026-11-16 (round 3) — query gaps from the GSC export
 - New page /best-night-moisturiser-for-face/ for the uncovered cluster "best night moisturizer" (102 impressions at 24.7) plus night moisturiser for oily/combination/Korean (~180 more). 4 product cards, skin-type table, 6 short answers. Linked from 7 related guides and the night cream hub group.
 - Title/answer changes for dry-skin, vitamin C and "how to choose night cream" searches: see TITLE_CHANGES.md.
+
+## 2026-11-16 — conversion: sticky buy bar on guides
+Owner: "getting clicks but no buy". Guides had an in-text buy box near the top only. Added a mobile sticky bar (product, price, COD · Free delivery, Buy Now → checkout) to 265 guide pages (blog posts, Hindi/regional pages, avocado/Korean hubs, glossary); product picked by slug topic (oily → Avocado Glow 15g, dry/avocado → Avocado Night Cream, glutathione → Glutathione Cream, glass → Glass Glow, kojic/niacinamide/spots → Avocado Korean). Skips bulk/kg, policy and about pages. Shows after the first screen, hides over the footer. Buy Now fires the existing Meta Pixel AddToCart.
