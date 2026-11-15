@@ -160,3 +160,8 @@ Site: 139 clicks, ~20k impressions, CTR ~1%, impressions rising to ~800/day. Mob
 - CTR rewrites for pages at 5–11 with few clicks: glutathione-vs-alpha-arbutin, glutathione-vs-niacinamide, night-cream-for-teenagers, niacinamide-and-kojic-acid-together, sunscreen-aur-night-cream-kaise-use-kare. Details in content/plan/TITLE_CHANGES.md.
 - Not touched (changed 13 Nov, still settling): avocado-night-cream-benefits-hindi, night-cream-kab-lagana-chahiye, kojic-acid-cream-ke-nuksan, night-cream-in-your-20s, kojic-acid-vs-glutathione.
 - Review on ~2026-12-10: compare position/CTR for the 7 pages above against this export.
+
+## 2026-11-16 (round 2) — cannibalization fix
+- Found the sitewide footer linked to /is-avocado-cream-good-for-the-face/ (343 pages), a page that only canonicalises to /is-avocado-cream-good-for-your-skin/. Google kept showing both (172 and 287 impressions, both ~16.5). Footer now links the hub directly.
+- Turned all 8 HUB (canonical-only) consolidations into 301 redirects in vercel.json, so their signals merge into the hub pages. Fixed 1 in-content link to a consolidated page.
+- /best-night-cream-for-glowing-skin/: 2 short answers for "best night cream for dry skin in india" (112 impressions at 8.7) and "best night cream for glowing skin in india" (140 at 9.2).
