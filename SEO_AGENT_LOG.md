@@ -153,3 +153,10 @@ Monthly freshness updater. Do not refresh the same page again within 3 months of
 ## 2026-11-14: Meta Pixel installed
 - Pixel 1011352351298585 in every page head (PageView) + noscript fallback.
 - ViewContent on product pages; AddToCart (Add to Cart / Buy Now); InitiateCheckout on /checkout/; Purchase on /order-success/ (eventID = order ref, fires once per order); Contact on any WhatsApp tap.
+
+## 2026-11-16 — GSC 3-month review (owner export)
+Site: 139 clicks, ~20k impressions, CTR ~1%, impressions rising to ~800/day. Mobile avg position 10.6, desktop 26.
+- Head-term pages stuck at 17–25 (/night-cream-for-oily-skin/, /night-cream-for-combination-skin/): titles now lead with "best", added quick-pick product cards near the top (matches the list-style results Google shows for "best night cream for ..."), exact-query short answers, and 10 new contextual links into the combination page.
+- CTR rewrites for pages at 5–11 with few clicks: glutathione-vs-alpha-arbutin, glutathione-vs-niacinamide, night-cream-for-teenagers, niacinamide-and-kojic-acid-together, sunscreen-aur-night-cream-kaise-use-kare. Details in content/plan/TITLE_CHANGES.md.
+- Not touched (changed 13 Nov, still settling): avocado-night-cream-benefits-hindi, night-cream-kab-lagana-chahiye, kojic-acid-cream-ke-nuksan, night-cream-in-your-20s, kojic-acid-vs-glutathione.
+- Review on ~2026-12-10: compare position/CTR for the 7 pages above against this export.
