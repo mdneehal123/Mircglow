@@ -318,7 +318,7 @@ def read(path):
 # Readers arrive on guides from Google; this keeps one matching product one tap away on mobile.
 def guide_product(slug):
     s = slug
-    if "glass" in s: return "glass-glow-cream"
+    if any(k in s for k in ("glass", "arbutin", "hyaluronic", "centella", "cica")): return "glass-glow-cream"
     if "glutathione" in s: return "glutathione-cream"
     if any(k in s for k in ("oily", "humid", "monsoon", "summer", "acne", "under-500", "teen")): return "avocado-glow-cream-15g"
     if any(k in s for k in ("dry", "winter", "avocado-night", "rough", "flaky")): return "avocado-night-cream"

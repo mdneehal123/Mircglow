@@ -172,3 +172,10 @@ Site: 139 clicks, ~20k impressions, CTR ~1%, impressions rising to ~800/day. Mob
 
 ## 2026-11-16 — conversion: sticky buy bar on guides
 Owner: "getting clicks but no buy". Guides had an in-text buy box near the top only. Added a mobile sticky bar (product, price, COD · Free delivery, Buy Now → checkout) to 265 guide pages (blog posts, Hindi/regional pages, avocado/Korean hubs, glossary); product picked by slug topic (oily → Avocado Glow 15g, dry/avocado → Avocado Night Cream, glutathione → Glutathione Cream, glass → Glass Glow, kojic/niacinamide/spots → Avocado Korean). Skips bulk/kg, policy and about pages. Shows after the first screen, hides over the footer. Buy Now fires the existing Meta Pixel AddToCart.
+
+## 2026-11-16 — low-competition keyword batch (scheduled)
+SERP checks: Hindi/Hinglish how-to and ingredient searches return pharmacy product pages and English brand blogs, no Hindi articles. 11 Hindi pages + 1 English page, one release per morning via schedule.json:
+- 16 Nov: kojic-acid-cream-kaise-lagaye, alpha-arbutin-ke-fayde, night-cream-kitne-din-me-asar-karti-hai
+- 17 niacinamide-cream-kaise-use-kare · 18 glutathione-cream-kitne-din-me-asar-karti-hai · 19 hyaluronic-acid-ke-fayde · 20 centella-ke-fayde · 21 kis-umar-me-night-cream-lagani-chahiye · 22 night-cream-aur-moisturizer-me-antar · 23 kojic-acid-aur-niacinamide-ek-saath · 24 pimple-wali-skin-ke-liye-night-cream · 25 night-cream-for-all-skin-types (GSC 8 impr at 22.5)
+- Added "Is it pigmentation? An 8-week skincare plan" section to /skincare-routine-for-pigmentation/ (GSC "pigmentation, 8 week skincare plan" 35 impr at ~7).
+- Guide buy bar: arbutin/hyaluronic/centella pages now show Glass Glow Cream.
