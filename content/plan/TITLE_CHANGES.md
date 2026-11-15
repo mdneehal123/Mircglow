@@ -59,3 +59,6 @@
 - 2026-11-16 /night-cream-for-teenagers/: was "Night Cream for Teenagers: When to Start | Mirc Glow" (GSC: 355 impressions at 5.9, low CTR; title now promises the age answer plus routine)
 - 2026-11-16 /niacinamide-and-kojic-acid-together/: was "Niacinamide and Kojic Acid Together? | Mirc Glow" (GSC: 176 impressions at 10.7, 0 clicks; title now answers the yes/no question)
 - 2026-11-16 /sunscreen-aur-night-cream-kaise-use-kare/: was "Sunscreen Aur Night Cream Kaise Use Kare | Mirc Glow" (GSC: 157 impressions at 9.6, 0 clicks; added 'सही क्रम' to the title)
+- 2026-11-16 /night-cream-for-dry-skin-in-winter/: was "Best Night Cream for Dry Skin in Winter (India)" (GSC 3 months: "best night cream for dry skin" 103 impressions at 24.8, "best night face cream for dry skin" 85 at 26.4, "...in india" 112 at 8.7; title now leads with the exact search, winter kept as the angle)
+- 2026-11-16 /night-cream-with-vitamin-c/: was "Vitamin C Night Cream for Face: Benefits & How to Use" (GSC: "vitamin c night cream" 66 at 31.8, "best vitamin c night cream" 44 at 37.9, "...in india" 15 at 39.5; added 2 short answers)
+- 2026-11-16 /best-night-cream-for-glowing-skin/: title unchanged; H2 "7 things to check before you buy" now "How to choose a night cream: 7 things to check" (GSC: "how to choose night cream" 95 at 34.5)

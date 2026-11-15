@@ -165,3 +165,7 @@ Site: 139 clicks, ~20k impressions, CTR ~1%, impressions rising to ~800/day. Mob
 - Found the sitewide footer linked to /is-avocado-cream-good-for-the-face/ (343 pages), a page that only canonicalises to /is-avocado-cream-good-for-your-skin/. Google kept showing both (172 and 287 impressions, both ~16.5). Footer now links the hub directly.
 - Turned all 8 HUB (canonical-only) consolidations into 301 redirects in vercel.json, so their signals merge into the hub pages. Fixed 1 in-content link to a consolidated page.
 - /best-night-cream-for-glowing-skin/: 2 short answers for "best night cream for dry skin in india" (112 impressions at 8.7) and "best night cream for glowing skin in india" (140 at 9.2).
+
+## 2026-11-16 (round 3) — query gaps from the GSC export
+- New page /best-night-moisturiser-for-face/ for the uncovered cluster "best night moisturizer" (102 impressions at 24.7) plus night moisturiser for oily/combination/Korean (~180 more). 4 product cards, skin-type table, 6 short answers. Linked from 7 related guides and the night cream hub group.
+- Title/answer changes for dry-skin, vitamin C and "how to choose night cream" searches: see TITLE_CHANGES.md.
