@@ -136,38 +136,54 @@
   var esc = function (s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); };
   var MON = ["January","February","March","April","May","June","July","August","September","October","November","December"];
   var fd = function (d) { var p = String(d || "").split("-"); return p.length === 3 ? (+p[2]) + " " + MON[+p[1] - 1] + " " + p[0] : ""; };
+  var sec = document.querySelector("section.rv");
+  var key = function (t) { return String(t || "").toLowerCase().replace(/\s+/g, " ").trim().slice(0, 60); };
+  var card = function (r) { return '<article class="rv-i rv-new" data-r="' + r.rating + '" data-k="' + esc(key(r.text)) + '"><span class="rv-st">' + stars(r.rating) + '</span>' + (r.verified ? ' <span class="rv-ver">✔ Verified buyer</span>' : "") + '<p>' + esc(r.text) + '</p><span class="rv-by">' + esc(r.name) + (r.city ? ", " + esc(r.city) : "") + " · " + fd(r.date) + '</span></article>'; };
+  var resum = function () {
+    if (!sec) return; var items = sec.querySelectorAll(".rv-list .rv-i[data-r]"); if (!items.length) return;
+    var sum = 0; items.forEach(function (el) { sum += +el.getAttribute("data-r") || 0; }); var avg = sum / items.length;
+    var html = '<span class="rv-st">' + stars(Math.round(avg)) + '</span> <b>' + avg.toFixed(1) + ' out of 5</b> · ' + items.length + ' review' + (items.length > 1 ? "s" : "");
+    var s0 = sec.querySelector(".rv-sum"); if (s0) s0.innerHTML = html; else sec.querySelector("h2").insertAdjacentHTML("afterend", '<div class="rv-sum">' + html + '</div>');
+  };
+  var addLive = function (list) {
+    if (!sec || !list.length) return 0;
+    var box = sec.querySelector(".rv-list");
+    if (!box) { var e0 = sec.querySelector(".rv-empty > p"); if (e0) e0.remove(); sec.querySelector("h2").insertAdjacentHTML("afterend", '<div class="rv-list"></div>'); box = sec.querySelector(".rv-list"); }
+    var have = {}; box.querySelectorAll(".rv-i").forEach(function (el) { have[el.getAttribute("data-k") || key((el.querySelector("p") || {}).textContent)] = 1; });
+    var added = 0; list.slice().reverse().forEach(function (r) { var k = key(r.text); if (have[k]) return; have[k] = 1; box.insertAdjacentHTML("afterbegin", card(r)); added++; });
+    if (added) resum(); return added;
+  };
   document.querySelectorAll("[data-rv-form]").forEach(function (f) {
     var slug = f.getAttribute("data-rv-form");
     f.addEventListener("submit", function (e) {
       e.preventDefault();
       var msg = f.querySelector(".rvf-msg"), btn = f.querySelector("button[type=submit]");
       var r = f.querySelector("input[name=rating]:checked");
-      var data = { product: slug, rating: r ? +r.value : 0, text: f.text.value, name: f.name.value, city: f.city.value, phone: f.phone.value, website: f.website.value };
+      var data = { product: slug, rating: r ? +r.value : 0, text: f.text.value, name: f.name.value, phone: f.phone.value, website: f.website.value };
+      var ph = String(data.phone).replace(/\D/g, "").slice(-10);
       if (!data.rating) { msg.textContent = "Please choose a star rating."; return; }
+      if (data.name.trim().length < 2) { msg.textContent = "Please add your name."; return; }
+      if (!/^[6-9]\d{9}$/.test(ph)) { msg.textContent = "Please enter a valid 10-digit mobile number."; return; }
       if (data.text.trim().length < 10) { msg.textContent = "Please write a few more words."; return; }
-      if (data.name.trim().length < 2) { msg.textContent = "Please add your first name."; return; }
-      btn.disabled = true; msg.textContent = "Sending…";
+      btn.disabled = true; msg.textContent = "Posting…";
       fetch("/api/review", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) })
         .then(function (x) { return x.json(); })
         .then(function (j) {
-          if (j.ok) { f.innerHTML = '<p class="rvf-done">💚 Thank you, ' + esc(data.name.split(" ")[0]) + '! Your review was sent and will appear here after a quick check.</p>'; }
-          else { btn.disabled = false; msg.textContent = j.error || "Could not send. Please try again."; }
+          if (!j.ok) { btn.disabled = false; msg.textContent = j.error || "Could not send. Please try again."; return; }
+          var first = esc(data.name.trim().split(" ")[0]);
+          if (j.live) {
+            addLive([{ rating: data.rating, text: data.text.trim(), name: data.name.trim(), date: new Date().toISOString().slice(0, 10), verified: j.verified }]);
+            f.innerHTML = '<p class="rvf-done">💚 Thank you, ' + first + '! Your review is now live on this page.</p>';
+            var nw = sec && sec.querySelector(".rv-new"); if (nw && nw.scrollIntoView) nw.scrollIntoView({ behavior: "smooth", block: "center" });
+          } else { f.innerHTML = '<p class="rvf-done">💚 Thank you, ' + first + '! Your review was received and will appear after a quick check.</p>'; }
         }).catch(function () { btn.disabled = false; msg.textContent = "Could not send. Please check your internet and try again."; });
     });
   });
-  var sec = document.querySelector("section.rv"), form = document.querySelector("[data-rv-form]");
+  var form = document.querySelector("[data-rv-form]");
   if (!sec || !form || !window.fetch) return;
-  var slug = form.getAttribute("data-rv-form"), shown = sec.querySelectorAll(".rv-i").length;
-  fetch("https://www.skinday.shop/api/reviews-public?site=mircglow.com&product=" + encodeURIComponent(slug))
-    .then(function (x) { return x.json(); }).then(function (j) {
-      var L = (j && j.reviews) || []; if (L.length <= shown) return;
-      var avg = L.reduce(function (a, r) { return a + r.rating; }, 0) / L.length;
-      var html = '<div class="rv-sum"><span class="rv-st">' + stars(Math.round(avg)) + '</span> <b>' + avg.toFixed(1) + ' out of 5</b> · ' + L.length + ' review' + (L.length > 1 ? "s" : "") + '</div><div class="rv-list">' +
-        L.slice(0, 20).map(function (r) { return '<article class="rv-i"><span class="rv-st">' + stars(r.rating) + '</span>' + (r.verified ? ' <span class="rv-ver">✔ Verified buyer</span>' : "") + '<p>' + esc(r.text) + '</p><span class="rv-by">' + esc(r.name) + (r.city ? ", " + esc(r.city) : "") + " · " + fd(r.date) + '</span></article>'; }).join("") + '</div>';
-      var old = sec.querySelector(".rv-sum"); if (old) old.remove(); var ol = sec.querySelector(".rv-list"); if (ol) ol.remove();
-      var empty = sec.querySelector(".rv-empty > p"); if (empty) empty.remove();
-      sec.querySelector("h2").insertAdjacentHTML("afterend", html);
-    }).catch(function () {});
+  var slug = form.getAttribute("data-rv-form");
+  fetch("https://www.skinday.shop/api/reviews-public?site=mircglow.com&product=" + encodeURIComponent(slug), { cache: "no-store" })
+    .then(function (x) { return x.json(); }).then(function (j) { addLive((j && j.reviews) || []); }).catch(function () {});
 })();
 
 /* Meta Pixel: WhatsApp taps count as Contact */

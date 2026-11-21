@@ -189,3 +189,7 @@ SERP checks: Hindi/Hinglish how-to and ingredient searches return pharmacy produ
 - 17 niacinamide-cream-kaise-use-kare · 18 glutathione-cream-kitne-din-me-asar-karti-hai · 19 hyaluronic-acid-ke-fayde · 20 centella-ke-fayde · 21 kis-umar-me-night-cream-lagani-chahiye · 22 night-cream-aur-moisturizer-me-antar · 23 kojic-acid-aur-niacinamide-ek-saath · 24 pimple-wali-skin-ke-liye-night-cream · 25 night-cream-for-all-skin-types (GSC 8 impr at 22.5)
 - Added "Is it pigmentation? An 8-week skincare plan" section to /skincare-routine-for-pigmentation/ (GSC "pigmentation, 8 week skincare plan" 35 impr at ~7).
 - Guide buy bar: arbutin/hyaluronic/centella pages now show Glass Glow Cream.
+
+## 2026-11-21: Instant customer reviews (no login)
+- Review form: stars, name, 10-digit mobile (never shown), review text. Posts go live immediately via Order Desk (auto-approved; links/abuse/phone numbers held as pending). Owner can hide/delete in Order Desk > Reviews.
+- Page shows the new review instantly after posting and merges live reviews on every load; summary (average + count) recalculates.

@@ -1230,3 +1230,5 @@ h1,h2,h3,h4,.fk-h,.az-h,.fk-st b,.fk-intro h1{font-family:var(--display)!importa
 @media(max-width:560px){.rvf-2{grid-template-columns:1fr}}
 .gbar small{font-weight:500;color:#5f6b66;font-size:.85em}
 .gbar b small{font-weight:600}
+
+.rv-new{animation:rvIn .6s ease both;border-left:4px solid #3aa66a}@keyframes rvIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}

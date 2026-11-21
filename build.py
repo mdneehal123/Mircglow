@@ -1295,16 +1295,15 @@ def stars(n):
     return f'<span class="rv-st" aria-label="{n:.1f} out of 5 stars">' + "★" * full + "☆" * (5 - full) + "</span>"
 
 def review_form(p):
-    """On-site review form. Reviews go to Order Desk as 'pending' and show here only after the owner approves them."""
+    """On-site review form, no login: stars, name, mobile, review. Goes live at once via Order Desk (owner can hide/delete)."""
     st = "".join(f'<input type="radio" name="rating" id="rv{p["slug"]}{i}" value="{i}"{" required" if i == 5 else ""}><label for="rv{p["slug"]}{i}" title="{i} star{"s" if i > 1 else ""}">★</label>' for i in range(5, 0, -1))
     return (f'<details class="rvf"><summary class="yb yb-line rv-btn">✍️ Write a review</summary>'
             f'<form class="rvf-f" data-rv-form="{p["slug"]}" novalidate><p class="rvf-l">Your rating</p><div class="rvf-st" role="radiogroup" aria-label="Star rating">{st}</div>'
+            f'<div class="rvf-2"><label>Your name<input name="name" maxlength="40" required autocomplete="name"></label><label>Mobile number<input name="phone" type="tel" inputmode="numeric" maxlength="14" required autocomplete="tel" placeholder="10-digit mobile"></label></div>'
             f'<label>Your review<textarea name="text" rows="4" maxlength="1200" required placeholder="How does your skin feel? How is the texture? How long have you used it?"></textarea></label>'
-            f'<div class="rvf-2"><label>First name<input name="name" maxlength="40" required autocomplete="given-name"></label><label>City<input name="city" maxlength="40" autocomplete="address-level2"></label></div>'
-            f'<label>Mobile number (optional, never shown)<input name="phone" inputmode="numeric" maxlength="14" placeholder="Used only to mark you as a verified buyer"></label>'
             f'<input name="website" tabindex="-1" autocomplete="off" class="rvf-hp" aria-hidden="true">'
-            f'<button class="yb yb-fill" type="submit">Submit review</button><p class="rvf-msg" role="status"></p>'
-            f'<p class="rvf-note">Reviews appear after a quick check. We publish honest reviews, good or bad, exactly as written.</p></form></details>')
+            f'<button class="yb yb-fill" type="submit">Post my review</button><p class="rvf-msg" role="status"></p>'
+            f'<p class="rvf-note">No login needed. Your review goes live right away. Your mobile number is never shown; it only marks you as a verified buyer if you ordered from us.</p></form></details>')
 
 def reviews_html(p):
     rs = reviews_for(p)
@@ -1316,7 +1315,7 @@ def reviews_html(p):
         return (f'<section class="w rv" id="reviews" aria-labelledby="h-rv"><h2 id="h-rv" class="az-h">Customer reviews</h2>'
                 f'<div class="rv-empty"><p>No reviews yet for the {esc(p["name"])}. Bought it? Tell us how your skin feels: your review helps other shoppers.</p>{form}</div></section>')
     avg = sum(int(r["rating"]) for r in rs) / len(rs)
-    items = "".join(f'<article class="rv-i">{stars(int(r["rating"]))}{" <span class=rv-ver>✔ Verified buyer</span>" if r.get("verified") else ""}<p>{esc(r["text"])}</p><span class="rv-by">{esc(r["name"])}{", " + esc(r["city"]) if r.get("city") else ""} · {fmt_date(r["date"])}</span></article>' for r in sorted(rs, key=lambda r: r["date"], reverse=True)[:20])
+    items = "".join(f'<article class="rv-i" data-r="{int(r["rating"])}">{stars(int(r["rating"]))}{" <span class=rv-ver>✔ Verified buyer</span>" if r.get("verified") else ""}<p>{esc(r["text"])}</p><span class="rv-by">{esc(r["name"])}{", " + esc(r["city"]) if r.get("city") else ""} · {fmt_date(r["date"])}</span></article>' for r in sorted(rs, key=lambda r: r["date"], reverse=True)[:20])
     return (f'<section class="w rv" id="reviews" aria-labelledby="h-rv"><h2 id="h-rv" class="az-h">Customer reviews</h2>'
             f'<div class="rv-sum">{stars(avg)} <b>{avg:.1f} out of 5</b> · {len(rs)} review{"s" if len(rs) > 1 else ""}</div><div class="rv-list">{items}</div>{form}</section>')
 
@@ -1340,7 +1339,7 @@ AMZ_REVIEWS = [  # copied word for word from verified-purchase reviews on Amazon
 
 def amazon_reviews_html(p):
     if p["slug"] not in AMZ_FOR: return ""
-    items = "".join(f'<article class="rv-i">{stars(r)}<b class="rv-t">{esc(t)}</b><p>{esc(x)}</p><span class="rv-by">{esc(n)} · Verified purchase on Amazon.in · {d}</span></article>' for n, r, d, t, x in AMZ_REVIEWS)
+    items = "".join(f'<article class="rv-i" data-r="{int(r)}">{stars(r)}<b class="rv-t">{esc(t)}</b><p>{esc(x)}</p><span class="rv-by">{esc(n)} · Verified purchase on Amazon.in · {d}</span></article>' for n, r, d, t, x in AMZ_REVIEWS)
     return (f'<section class="w rv rv-amz" aria-labelledby="h-amz"><h2 id="h-amz" class="az-h">Reviews from Amazon.in</h2>'
             f'<p class="rv-note">Our avocado night cream is also sold on Amazon.in under our sister label <b>Magical Touch</b> (Avocado Korean Night Cream, same formula: avocado, aloe vera, vitamin B3 and kojic acid). '
             f'Below is a selection of recent verified-purchase reviews from there, including a critical one, copied word for word. Results vary from person to person.</p>'

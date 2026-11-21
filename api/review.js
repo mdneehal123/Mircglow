@@ -1,5 +1,5 @@
-// A customer review from the product page form. Checked here, then sent to the private Order Desk,
-// where it waits as "pending" until the owner approves it. Nothing is published automatically.
+// A customer review from the product page form (no login). Checked here, then sent to the private Order Desk,
+// which publishes it at once (owner can hide or delete it there). Suspicious text waits as "pending".
 const seen = new Map(); let globalHits = [];
 const clean = (v, n) => String(v == null ? "" : v).replace(/[\u0000-\u001f\u007f]/g, " ").replace(/\s+/g, " ").trim().slice(0, n);
 const catalog = require("./_catalog.json");
@@ -9,11 +9,13 @@ module.exports = async (req, res) => {
   let b = req.body || {}; if (typeof b === "string") { try { b = JSON.parse(b); } catch (e) { b = {}; } }
   if (b.website) return res.status(200).json({ ok: true }); // honeypot
   const rating = Math.round(Number(b.rating)), text = clean(b.text, 1200), name = clean(b.name, 40), city = clean(b.city, 40);
+  const phone = String(b.phone || "").replace(/\D/g, "").slice(-10);
   const product = clean(b.product, 80).replace(/[^a-z0-9-]/g, "");
   const item = (catalog.products || {})[product];
   if (!(rating >= 1 && rating <= 5)) return res.status(400).json({ ok: false, error: "Please choose a star rating." });
   if (text.length < 10) return res.status(400).json({ ok: false, error: "Please write a few more words (at least 10 letters)." });
-  if (name.length < 2) return res.status(400).json({ ok: false, error: "Please add your first name." });
+  if (name.length < 2) return res.status(400).json({ ok: false, error: "Please add your name." });
+  if (!/^[6-9]\d{9}$/.test(phone)) return res.status(400).json({ ok: false, error: "Please enter a valid 10-digit mobile number." });
   if (!item) return res.status(400).json({ ok: false, error: "Unknown product." });
   if (/https?:\/\/|www\./i.test(text)) return res.status(400).json({ ok: false, error: "Please remove links from your review." });
   const ip = String(req.headers["x-forwarded-for"] || "").split(",")[0].trim() || "x";
@@ -25,9 +27,9 @@ module.exports = async (req, res) => {
   const desk = (process.env.ORDERDESK_URL || "https://www.skinday.shop").replace(/\/+$/, "");
   try {
     const r = await fetch(desk + "/api/web-order", { method: "POST", headers: { "Content-Type": "application/json", "x-web-order-key": key },
-      body: JSON.stringify({ review: true, site: "mircglow.com", product, productName: item.name || product, rating, text, name, city, phone: String(b.phone || "").replace(/\D/g, "").slice(-10) }) });
+      body: JSON.stringify({ review: true, site: "mircglow.com", product, productName: item.name || product, rating, text, name, city, phone }) });
     const j = await r.json().catch(() => ({}));
     if (!r.ok || !j.ok) return res.status(502).json({ ok: false, error: "Could not send your review. Please try again." });
-    return res.status(200).json({ ok: true });
+    return res.status(200).json({ ok: true, live: j.live !== false, verified: Boolean(j.verified) });
   } catch (e) { return res.status(502).json({ ok: false, error: "Could not send your review. Please try again." }); }
 };
