@@ -33,7 +33,7 @@ def footer(bar=True):
 <footer class="ftr"><div class="w">
 <div class="f-brand"><span class="word">MIRC<b>GLOW</b></span>
 <p>Korean-inspired avocado and glutathione creams, made in Bhatkal, Karnataka.</p>
-<p>Azad Nagar 4th Cross, Bhatkal,<br>Karnataka 581320, India<br>Phone &amp; WhatsApp <a href="tel:+919980881230">{PHONE}</a></p>
+<p>Bhatkal,<br>Karnataka, India<br>Phone &amp; WhatsApp <a href="tel:+919980881230">{PHONE}</a></p>
 <a class="yb yb-wa yb-sm" href="{WA_HELLO}" target="_blank" rel="noopener">{WA_SVG}<span>Chat on WhatsApp</span></a></div>
 <div><h2>Shop</h2><ul><li><a href="/shop/">All creams</a></li><li><a href="/product-category/night-creams/">Night creams</a></li><li><a href="/product-category/night-creams/avocado-night-creams/">Avocado creams</a></li><li><a href="/product-category/combos/">Combos and kits</a></li><li><a href="/skincare-gift-sets/">Gift sets</a></li><li><a href="/bulk-night-cream/">Bulk orders (kg)</a></li></ul></div>
 <div><h2>Guides</h2><ul><li><a href="/blog/">Skincare guides</a></li><li><a href="/avocado-cream/">Avocado cream guide</a></li><li><a href="/korean-night-cream/">Korean night cream guide</a></li><li><a href="/skin-quiz/">Skin quiz</a></li><li><a href="/skincare-routine-builder/">Routine builder</a></li><li><a href="/skincare-ingredient-glossary/">Ingredient glossary</a></li></ul></div>

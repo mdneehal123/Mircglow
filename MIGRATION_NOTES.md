@@ -24,7 +24,7 @@ Shop flows (static site has no cart):
 - 95 /glutathione-in-skincare-what-it-is-and-how-it-fits-into-a-routine/ -> /glutathione-cream-benefits/
 
 ## Schema to add in static build
-- Organization/LocalBusiness: Mirc Glow, Azad Nagar 4th Cross, Bhatkal, Karnataka 581320, IN, +91 99808 81230
+- Organization/LocalBusiness: Mirc Glow, Bhatkal, Karnataka, IN, +91 99808 81230
 - Product + Offer (INR, InStock), OfferShippingDetails (free, IN, 3-7 days), MerchantReturnPolicy (7 days, sealed)
 - BreadcrumbList, Article (datePublished/dateModified)
 - hreflang: /avocado-cream/ <-> /avocado-cream-hindi/ ; /korean-night-cream/ <-> /korean-night-cream-hindi/

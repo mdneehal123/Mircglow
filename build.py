@@ -271,7 +271,7 @@ PAGES = [
  G("about","About","About Mirc Glow | Korean-Inspired Skincare from Karnataka","Mirc Glow is a skincare brand from Bhatkal, Karnataka, making avocado and glutathione creams with aloe vera, vitamin B3 and kojic acid. Meet the brand.","legacy",crumb="About us"),
  G("ingredients","Ingredients","Our Ingredients: Glutathione, Kojic Acid and Avocado | Mirc Glow","The ingredients in Mirc Glow creams, glutathione, kojic acid, vitamin C, vitamin B3, avocado and aloe vera, and what each one does for how skin looks and feels.","legacy"),
  G("faq","FAQ","FAQ: Orders, Delivery, Returns and Using Our Creams | Mirc Glow","Answers to common questions about Mirc Glow: Cash on Delivery, free shipping, 7-day returns, which cream to choose and how to use it safely.","legacy"),
- G("contact","Contact","Contact Mirc Glow | WhatsApp +91 99808 81230","Contact Mirc Glow for order help, product advice or bulk orders. WhatsApp or call +91 99808 81230. Azad Nagar, Bhatkal, Karnataka.","legacy"),
+ G("contact","Contact","Contact Mirc Glow | WhatsApp +91 99808 81230","Contact Mirc Glow for order help, product advice or bulk orders. WhatsApp or call +91 99808 81230. Bhatkal, Karnataka.","legacy"),
  G("about-the-author","About the Author","About the Author: Mohammed Nihal, Founder | Mirc Glow","Mohammed Nihal runs Mirc Glow from Bhatkal, Karnataka, and writes guides on night creams, avocado skincare, glutathione and kojic acid, and how they are made.","plain",crumb="About the author"),
  G("editorial-policy","Editorial Policy","Editorial Policy: How We Write Our Skincare Guides | Mirc Glow","How Mirc Glow writes, fact-checks and updates its skincare guides, who writes them, and the claims we will never make about our creams.","plain"),
  G("track-order","Track Your Order","Track Your Order | Mirc Glow","Track your Mirc Glow order. Find your tracking number, check your delivery status, and get help on WhatsApp if your parcel is delayed.","plain"),
@@ -606,7 +606,7 @@ SHIPPING = {"@type":"OfferShippingDetails","shippingRate":{"@type":"MonetaryAmou
             "deliveryTime":{"@type":"ShippingDeliveryTime","handlingTime":{"@type":"QuantitativeValue","minValue":0,"maxValue":2,"unitCode":"DAY"},"transitTime":{"@type":"QuantitativeValue","minValue":3,"maxValue":7,"unitCode":"DAY"}}}
 ORG = {"@type":"OnlineStore","@id":ORG_ID,"name":BRAND,"url":SITE+"/","logo":SITE+"/assets/logo.png",
        "description":"Korean-inspired skincare brand from Bhatkal, Karnataka, India, making avocado night creams, glutathione cream and the Glass Glow Cream, and supplying night cream and avocado cream in kg for salons and resellers.",
-       "telephone":PHONE.replace(" ",""),"address":{"@type":"PostalAddress","streetAddress":"Azad Nagar 4th Cross","addressLocality":"Bhatkal","addressRegion":"Karnataka","postalCode":"581320","addressCountry":"IN"},
+       "telephone":PHONE.replace(" ",""),"address":{"@type":"PostalAddress","addressLocality":"Bhatkal","addressRegion":"Karnataka","addressCountry":"IN"},
        "areaServed":{"@type":"Country","name":"India"},"currenciesAccepted":"INR","paymentAccepted":"Cash on Delivery, UPI, card",
        "contactPoint":{"@type":"ContactPoint","telephone":PHONE.replace(" ",""),"contactType":"customer service","areaServed":"IN","availableLanguage":["English","Hindi"]},
        "hasMerchantReturnPolicy":RETURN_POLICY,"foundingLocation":{"@type":"Place","name":"Bhatkal, Karnataka, India"},
@@ -728,7 +728,7 @@ def footer(bar=True):
 <footer class="ftr"><div class="w">
 <div class="f-brand"><span class="word">MIRC<b>GLOW</b></span>
 <p>Korean-inspired avocado and glutathione creams, made in Bhatkal, Karnataka.</p>
-<p>Azad Nagar 4th Cross, Bhatkal,<br>Karnataka 581320, India<br>Phone &amp; WhatsApp <a href="tel:+919980881230">{PHONE}</a></p>
+<p>Bhatkal,<br>Karnataka, India<br>Phone &amp; WhatsApp <a href="tel:+919980881230">{PHONE}</a></p>
 <a class="yb yb-wa yb-sm" href="{WA_HELLO}" target="_blank" rel="noopener">{WA_SVG}<span>Chat on WhatsApp</span></a></div>
 <div><h2>Shop</h2><ul><li><a href="/shop/">All creams</a></li><li><a href="/product-category/night-creams/">Night creams</a></li><li><a href="/product-category/night-creams/avocado-night-creams/">Avocado creams</a></li><li><a href="/product-category/combos/">Combos and kits</a></li><li><a href="/skincare-gift-sets/">Gift sets</a></li><li><a href="/bulk-night-cream/">Bulk orders (kg)</a></li><li><a href="/avocado-cream-in-kg/">Avocado cream in kg</a></li></ul></div>
 <div><h2>Guides</h2><ul><li><a href="/blog/">Skincare guides</a></li><li><a href="/avocado-cream/">Avocado cream guide</a></li><li><a href="/korean-night-cream/">Korean night cream guide</a></li><li><a href="/skin-quiz/">Skin quiz</a></li><li><a href="/skincare-routine-builder/">Routine builder</a></li><li><a href="/skincare-ingredient-glossary/">Ingredient glossary</a></li><li><a href="/best-night-cream-for-glowing-skin/">Best night cream in India</a></li><li><a href="/night-cream-for-oily-skin/">Night cream for oily skin</a></li><li><a href="/night-cream-for-combination-skin/">Night cream for combination skin</a></li><li><a href="/is-avocado-cream-good-for-your-skin/">Is avocado cream good for the face?</a></li><li><a href="/avocado-night-cream-benefits-hindi/" lang="hi">एवोकाडो नाइट क्रीम के फायदे</a></li><li><a href="/night-cream-kab-lagana-chahiye/" lang="hi">नाइट क्रीम कब लगाएं</a></li></ul></div>
@@ -1258,7 +1258,7 @@ PAGE_QUICK.update({
  "faq": ("Mirc Glow ships free across India in about 3 to 7 days, accepts Cash on Delivery or an online payment link, and takes back sealed jars within 7 days. You order by tapping Buy Now, which opens WhatsApp with your order written; most creams are used as the last step at night, with sunscreen every morning.", []),
  "shipping-policy": ("Shipping is free on every Mirc Glow order within India. Most orders arrive in 3 to 7 days, and you get a tracking number on WhatsApp or SMS when the parcel is dispatched. Cash on Delivery is available. We do not ship outside India.", []),
  "returns-refunds": ("Unopened, sealed Mirc Glow jars can be returned within 7 days of delivery. Damaged, wrong or expired items are replaced or refunded; tell us on WhatsApp with a photo. Refunds are made within 5 to 7 working days after the return is checked. Opened jars cannot be returned for hygiene reasons.", []),
- "contact": ("Contact Mirc Glow on WhatsApp or phone at +91 99808 81230, or write to us at Azad Nagar 4th Cross, Bhatkal, Karnataka 581320, India. WhatsApp is the fastest way to order, ask about a cream or get a bulk quote.", []),
+ "contact": ("Contact Mirc Glow on WhatsApp or phone at +91 99808 81230, or write to us at Bhatkal, Karnataka, India. WhatsApp is the fastest way to order, ask about a cream or get a bulk quote.", []),
  "track-order": ("To track a Mirc Glow order, use the tracking number we send on WhatsApp or SMS when your parcel is dispatched, or message +91 99808 81230 with your name and order details. Most orders arrive in 3 to 7 days.", []),
  "skin-quiz": ("The Mirc Glow skin quiz asks four quick questions about your skin type, main concern and routine, then suggests one cream. It takes under a minute and needs no sign-up.", []),
  "skincare-ingredient-glossary": ("This glossary explains 15 common skincare ingredients in plain English, including avocado, aloe vera, niacinamide (vitamin B3), kojic acid, glutathione, vitamin C, alpha arbutin, hyaluronic acid and centella asiatica, with what each does and who it suits.", []),
@@ -1684,7 +1684,7 @@ def build_llms():
           f"- [How to order]({SITE}/shop/): tap Order on a product, send the prefilled WhatsApp message with your address; pay by Cash on Delivery or an online link.",
           f"- [Shipping policy]({SITE}/shipping-policy/): free shipping across India, usually 3 to 7 days.",
           f"- [Returns and refunds]({SITE}/returns-refunds/): unopened sealed jars within 7 days of delivery; damaged, wrong or expired items replaced or refunded.",
-          f"- [Track your order]({SITE}/track-order/)", f"- [Contact]({SITE}/contact/): WhatsApp or phone {PHONE}; Azad Nagar 4th Cross, Bhatkal, Karnataka 581320.",
+          f"- [Track your order]({SITE}/track-order/)", f"- [Contact]({SITE}/contact/): WhatsApp or phone {PHONE}; Bhatkal, Karnataka.",
           f"- [Bulk night cream in kg]({SITE}/bulk-night-cream/): wholesale supply for salons, resellers and brands.",
           f"- [Avocado cream in kg]({SITE}/avocado-cream-in-kg/): avocado cream and avocado night cream by the kilo (from 1 kg) for salons, parlours and resellers; price per kg on WhatsApp +91 99808 81230.",
           "", "## Buying guides and tools",
