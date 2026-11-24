@@ -1351,7 +1351,7 @@ A: No. A moisturiser helps skin look softer, smoother and more even, but it does
 
 ## Skincare Blog: Night Cream, Glutathione and Glass Skin Guides
 URL: https://mircglow.com/blog/
-Short answer: The Mirc Glow journal has 225 free skincare guides for Indian skin and weather, on night creams, avocado cream, glutathione, kojic acid, dark spots and glass skin routines, plus Hindi guides. Each guide opens with a short answer and is written by founder Mohammed Nihal.
+Short answer: The Mirc Glow journal has 227 free skincare guides for Indian skin and weather, on night creams, avocado cream, glutathione, kojic acid, dark spots and glass skin routines, plus Hindi guides. Each guide opens with a short answer and is written by founder Mohammed Nihal.
 
 ## Bridal Skincare Routine: 30-Day Plan | Mirc Glow
 URL: https://mircglow.com/bridal-skincare-routine-30-days/
@@ -4529,6 +4529,16 @@ A: नींबू, टूथपेस्ट और बेकिंग सोड
 Q: क्या इससे त्वचा का रंग बदलेगा?
 A: नहीं। क्रीम दाग का लुक कम करने और चेहरे को ज़्यादा एक-सा दिखाने में मदद करती है। कोई भी क्रीम त्वचा का प्राकृतिक रंग नहीं बदलती। यह जानकारी सामान्य स्किनकेयर के लिए है, मेडिकल सलाह नहीं। हर नए प्रोडक्ट का पहले पैच टेस्ट करें, और कोई स्किन समस्या हो तो डर्मेटोलॉजिस्ट से सलाह लें।
 
+## Pimple Wali Skin Ke Liye Night Cream: कैसे चुनें, कैसे लगाएं
+URL: https://mircglow.com/pimple-wali-skin-ke-liye-night-cream/
+Short answer: पिंपल वाली स्किन को भी नाइट क्रीम चाहिए, बस हल्की। जल्दी सोखने वाली, कम खुशबू वाली क्रीम चुनें जिसमें नियासिनामाइड या एलोवेरा हो। आधे मटर जितनी मात्रा काफ़ी है। बार-बार होने वाले या दर्द वाले पिंपल के लिए डर्मेटोलॉजिस्ट को दिखाएं।
+Q: क्या ऑयली और पिंपल वाली स्किन पर नाइट क्रीम से पिंपल बढ़ेंगे?
+A: सही, हल्की क्रीम और कम मात्रा से आमतौर पर नहीं। भारी क्रीम या ज़्यादा मात्रा से बढ़ सकते हैं।
+Q: क्या पिंपल पर सीधे नाइट क्रीम लगा सकते हैं?
+A: बहुत पतली परत ठीक है। खुले या दर्द वाले पिंपल पर कुछ न लगाएं।
+Q: पिंपल के दाग कितने दिन में जाते हैं?
+A: हल्के दाग आमतौर पर 2–3 महीने में, सनस्क्रीन के साथ, हल्के दिखने लगते हैं। गहरे दाग में ज़्यादा समय लगता है। यह सामान्य स्किनकेयर जानकारी है, डॉक्टर की सलाह नहीं। किसी स्किन समस्या, प्रेगनेंसी या स्तनपान के दौरान डॉक्टर से पूछें। और पढ़ें: ऑयली स्किन के लिए नाइट क्रीम · अंग्रेज़ी में: Night cream for oily, acne-prone skin
+
 ## Privacy Policy | Mirc Glow
 URL: https://mircglow.com/privacy/
 Short answer: Mirc Glow collects only what it needs to deliver and support your order: your name, address, phone number, email if you share it, and what you ordered. Online payments go through a secure payment gateway, so we never see your card or UPI details. We share details only with couriers, payment gateways, our service providers and authorities where the law requires, and we do not sell your personal information. The site needs no account or login.
@@ -5125,6 +5135,24 @@ A: Often yes. Use about half a pea-sized amount in the humid months and a full p
 Q: How do I protect my skin from loo in Lucknow?
 A: Cover your face and arms outdoors, reapply sunscreen, rinse off dust with cool water and keep night care light.
 
+## Skin Care for Madurai Weather: Seasonal Routine | Mirc Glow
+URL: https://mircglow.com/skin-care-for-madurai-weather/
+Short answer: Madurai is hot and dry for much of the year, gets only light rain from June to September and most of its rain from October to December. A gentle face wash, daily broad-spectrum sunscreen, a light moisturiser and a thin night cream, a little richer from January, suit most skin.
+- Madurai is an inland city in southern Tamil Nadu
+- March to June is the hottest stretch
+- Most rain comes with the northeast monsoon, October to December
+- Late December to February is pleasant and drier
+Q: What is the best skin care routine for Madurai weather?
+A: A gentle face wash, broad-spectrum sunscreen every morning, a light moisturiser and a thin night cream. Use a little more moisture from January when the air turns drier.
+Q: Why does my skin feel tight in Madurai summer?
+A: The heat is often dry, so skin loses water quickly. Use a light gel or lotion moisturiser instead of skipping it.
+Q: When is the rainy season in Madurai?
+A: Most rain comes with the northeast monsoon, roughly October to December, with only light showers in the southwest monsoon months.
+Q: How much night cream should I use in Madurai?
+A: About half a pea-sized amount on hot or humid nights, and a full pea-sized amount in the drier weeks from January.
+Q: Do I need sunscreen in Madurai every day?
+A: Yes. Strong sun is the biggest skin stress in Madurai, so use SPF 30 or higher every morning, even on cloudy days.
+
 ## Skin Care for Mangalore Weather: Coastal Routine | Mirc Glow
 URL: https://mircglow.com/skin-care-for-mangalore-weather/
 Short answer: Mangalore is hot and humid almost all year and gets a very heavy southwest monsoon from June to September. A gentle face wash, a thin moisturiser, broad-spectrum sunscreen every morning and a small amount of night cream suit most people, with a little more moisture in December and January.
@@ -5160,6 +5188,24 @@ Q: Why is my skin oily in October in Mumbai?
 A: The October heat brings strong sun and humidity together, so skin sweats and shines more. Gentle cleansing, light layers and blotting usually help.
 Q: Does Mumbai have a winter skin season?
 A: Only a short, mild one from about November to February. Most people just need a little extra cream on tight areas, mainly because of AC.
+
+## Skin Care for Mysore Weather by Season | Mirc Glow
+URL: https://mircglow.com/skin-care-for-mysore-weather/
+Short answer: Mysuru is pleasant for much of the year, hot and dry from March to May, moderately rainy from June to November and cool and dry from December to February. Use a gentle face wash, daily broad-spectrum sunscreen, a light moisturiser and a thin night cream, a little richer in winter.
+- Mysuru is on the Deccan plateau in southern Karnataka
+- It is often a little warmer and drier than Bengaluru
+- Mysuru Dasara usually falls in September or October
+- Winter mornings are cool and the air is dry
+Q: What is the best skin care routine for Mysore weather?
+A: A gentle face wash, broad-spectrum sunscreen every morning, a light moisturiser and a thin night cream, a little richer from December to February.
+Q: Is Mysore weather dry or humid?
+A: Mostly mild and fairly dry, with hot dry afternoons in summer and humid spells only in the rainy months.
+Q: Do I need sunscreen in Mysore in winter?
+A: Yes. Winter days are sunny even when mornings are cool, so use SPF 30 or higher every morning.
+Q: How should I care for my skin during Mysore Dasara?
+A: Wear sunscreen for daytime events, use a thin moisturiser under makeup and remove all makeup gently the same night.
+Q: How much night cream should I use in Mysore?
+A: About half a pea-sized amount on warm, humid nights and a full pea-sized amount in the cool, dry months.
 
 ## Skin Care for Nagpur Weather: Seasonal Routine | Mirc Glow
 URL: https://mircglow.com/skin-care-for-nagpur-weather/
@@ -5932,7 +5978,7 @@ Short answer: Mirc Glow has 9 guides on skincare ingredients, written in plain E
 
 ## Skincare Routines - Skincare Guides | Mirc Glow
 URL: https://mircglow.com/category/skincare-routines/
-Short answer: Mirc Glow has 82 guides on skincare routines, written in plain English by founder Mohammed Nihal and reviewed for Indian skin and weather. Start with: Skin Care for Ranchi Weather: A Routine for Bright Summers, Long Monsoons and Cold Dry Winters; Skin Care for Patna Weather: A Routine for Hot Dusty Summers, Humid Monsoons and Foggy Winters; Skin Care for Bhubaneswar Weather: A Routine for Fierce Summers, Humid Monsoons and Mild Winters.
+Short answer: Mirc Glow has 84 guides on skincare routines, written in plain English by founder Mohammed Nihal and reviewed for Indian skin and weather. Start with: Skin Care for Mysore Weather: A Routine for Sunny Summers, Dasara Season and Cool Dry Winters; Skin Care for Madurai Weather: A Routine for Strong Sun, Dry Heat and the October Rains; Skin Care for Ranchi Weather: A Routine for Bright Summers, Long Monsoons and Cold Dry Winters.
 
 ## Combos and Kits - Mirc Glow
 URL: https://mircglow.com/product-category/combos/
